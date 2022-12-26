@@ -1,0 +1,104 @@
+
+<html class="bg-secondary">
+<body class="bg-secondary">
+
+<app-header></app-header>
+<div *ngIf="news" class="container col-md-3 mt-lg-5 mb-lg-5">
+  <div class="card spacer-margin border-0 bg-secondary">
+    <div class="col">
+      <div class="card border-0 bg-light">
+
+        <h5 class="text-center">Detail de l'email</h5>
+
+        <div class="spacer-margin">
+          <h5 style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">ID</h5>
+          <div class="card-body">
+            <p class="card-text">
+              {{news.id}}
+            </p>
+          </div>
+        </div>
+
+        <div class="spacer-margin">
+          <h5 style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Date de création</h5>
+          <div class="card-body">
+            <p class="card-text">
+              {{news.createdAt | date: 'EEEE d MMMM yyyy , à HH:mm:ss'}}
+            </p>
+          </div>
+        </div>
+
+
+        <div class="spacer-margin">
+          <h5 style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Sujet</h5>
+          <div class="card-body">
+            <p class="card-text">
+              {{news.subject}}
+            </p>
+          </div>
+        </div>
+
+        <div class="spacer-margin">
+          <h5 style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Texte en français</h5>
+          <div class="card-body">
+            <p class="card-text">
+              {{news.frenchContent}}
+            </p>
+          </div>
+        </div>
+
+        <div class="spacer-margin">
+          <h5 style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Texte en anglais</h5>
+          <div class="card-body">
+            <p class="card-text">
+              {{news.englishContent}}
+            </p>
+          </div>
+        </div>
+
+
+        <div class="spacer-margin">
+          <h5 style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Date d'envoi</h5>
+          <div class="card-body">
+            <p class="card-text">
+              {{news.sendingDate | date: 'EEEE d MMMM yyyy , à HH:mm:ss'}}
+            </p>
+          </div>
+        </div>
+
+
+        <div class="spacer-margin">
+          <h5 style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid"> Initiateur</h5>
+          <div class="card-body">
+            <p class="card-text">
+              {{news.username}}
+            </p>
+          </div>
+        </div>
+
+        <div class="spacer-margin">
+          <h5 style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Date de mise à jour</h5>
+          <div class="card-body">
+            <p class="card-text">
+              {{news.updatedAt| date: 'EEEE d MMMM yyyy , à HH:mm:ss'}}
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <div class="spacer-top"></div>
+
+    <span class="text-center"><a routerLink="/listNews" class="btn btn-success"><i class="bi bi-arrow-left"></i>&nbsp;Back</a></span>&nbsp;
+
+  </div>
+
+</div>
+<app-footer></app-footer>
+
+</body>
+</html>
+

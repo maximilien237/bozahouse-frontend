@@ -1,0 +1,57 @@
+<html class="bg-secondary">
+<body class="bg-secondary">
+
+<app-header></app-header>
+<div class="container mt-5">
+  <div class="col-md-6 offset-md-3">
+    <div class="card bg-dark text-light">
+      <h5 class="text-center text-warning spacer">Creation d'un email programmé...</h5>
+
+      <div class="card-body">
+        <form [formGroup]="newEmailFormGroup" (ngSubmit)="handleSaveEmail()">
+
+          <div class="mb-3">
+            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Object</label>
+            <input type="text" class="form-control" formControlName = "subject" placeholder="Bozahouse news" required>
+            <small *ngIf="newEmailFormGroup.controls['subject'].errors && newEmailFormGroup.controls['subject'].touched" class="text-danger">{{getErrorMessage('subject', newEmailFormGroup.controls['subject'].errors)}}</small>
+
+          </div>
+
+
+          <div class="mb-3">
+            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Texte en français</label>
+            <textarea type="text" class="form-control" formControlName = "frenchContent" aria-label="With textarea"  required ></textarea>
+            <small *ngIf="newEmailFormGroup.controls['frenchContent'].errors && newEmailFormGroup.controls['frenchContent'].touched" class="text-danger">{{getErrorMessage('frenchContent', newEmailFormGroup.controls['frenchContent'].errors)}}</small>
+
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Texte en anglais</label>
+            <textarea type="text" class="form-control" formControlName = "englishContent" aria-label="With textarea"  required ></textarea>
+            <small *ngIf="newEmailFormGroup.controls['englishContent'].errors && newEmailFormGroup.controls['englishContent'].touched" class="text-danger">{{getErrorMessage('englishContent', newEmailFormGroup.controls['englishContent'].errors)}}</small>
+
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Date d'envoi </label>
+            <input type="date" formControlName = "sendingDate" class="form-control">
+            <small *ngIf="newEmailFormGroup.controls['sendingDate'].errors && newEmailFormGroup.controls['sendingDate'].touched" class="text-danger">{{getErrorMessage('sendingDate', newEmailFormGroup.controls['sendingDate'].errors)}}</small>
+
+          </div>
+
+          <div class="text-center">
+            <button [disabled] = "!newEmailFormGroup.valid" class="btn btn-warning" type="submit">Save</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<app-footer></app-footer>
+
+</body>
+</html>

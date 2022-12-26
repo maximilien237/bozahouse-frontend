@@ -1,0 +1,392 @@
+<html class="bg-secondary">
+<body class="bg-secondary">
+<app-navbar></app-navbar>
+
+
+<div *ngIf="currentUser.account=='enterprise' && isUser || isAdmin" class="container">
+    <div class="row">
+
+
+      <div class=" col-md-6 bg-secondary">
+        <h5 class="text-center">Abonnement NORMAL </h5>
+        <div class="card-body">
+          <div class="card-text">
+
+            <div class="table-responsive">
+              <table class="table table-striped bg-dark table-sm">
+                <thead class="text-light">
+                <tr class="text-light">
+                  <th scope="col">Période</th>
+                  <th scope="col">Montant</th>
+                  <th scope="col">Montant / jour</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="text-warning">
+                  <td>1 mois</td>
+                  <td>2 000 FCFA</td>
+                  <td>66,66 FCFA</td>
+                </tr>
+                <tr class="text-warning">
+                  <td>1 an</td>
+                  <td>23 000 FCFA</td>
+                  <td>63 FCFA</td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card spacer col-md-5 bg-dark mb-4 ">
+        <h5 class="text-center pb-2 border-bottom text-warning">Notice </h5>
+        <div class="b-example-divider"></div>
+        <div class="card-body">
+          <div class="card-text">
+
+        <p class="text-white-50">
+          Avec cet abonnement, vous pouvez consulter tout en ayant la possibilité de voir les informations complètes de tous les talents.
+        </p>
+            <p class="text-white-50">
+              Pour souscrire,
+            </p>
+              <h5 class="text-light" style=" font-size: 16px; border-bottom-width: 1px; border-bottom-style: solid">Contactez notre argent commercial </h5>
+
+            <span ><a class="text-warning" [href]= "'mailto:info@bozahouse.net'" style="font-size: 20px;"><i class="bi bi-envelope-fill"></i> </a></span>&nbsp;&nbsp;
+            <span ><a class="text-warning" [href]= " 'https://wa.me/656832062'" style="font-size: 20px;"><i class="bi bi-whatsapp"></i> </a></span>&nbsp;&nbsp;
+            <span ><a class="text-warning" [href]= " 'https://wa.me/656832062'" style="font-size: 20px;"><i class="bi bi-telegram"></i> </a></span>&nbsp;&nbsp;
+            <span ><a class="text-warning" [href]="'tel:656832062' " style="font-size: 20px;"> <i class="bi bi-telephone-fill"></i></a> </span>&nbsp;&nbsp;
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class=" mt-4  col-md-6 bg-secondary">
+        <h5 class="text-center">Abonnement HOST </h5>
+        <div class="card-body">
+          <div class="card-text">
+
+            <div class="table-responsive">
+              <table class="table table-striped bg-dark table-sm">
+                <thead>
+                <tr class="text-light">
+                  <th scope="col">Période</th>
+                  <th scope="col">Montant</th>
+                  <th scope="col">Montant / jour</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="text-warning">
+                  <td>1 mois</td>
+                  <td>1 000 FCFA</td>
+                  <td>33,33 FCFA</td>
+                </tr>
+                <tr class="text-warning">
+                  <td>1 an</td>
+                  <td>11 500 FCFA</td>
+                  <td>31,50 FCFA</td>
+
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card spacer col-md-5 bg-dark mb-4">
+        <h5 class="text-center pb-2 border-bottom text-warning">Notice </h5>
+        <div class="b-example-divider"></div>
+        <div class="card-body">
+          <div class="card-text">
+
+            <p class="text-white-50">
+              Avec cet abonnement, vous  pouvez publier une offre d'emploi.
+            </p>
+
+            <p class="text-white-50">
+              Pour souscrire,
+            </p>
+            <h5 class="text-light" style=" font-size: 16px; border-bottom-width: 1px; border-bottom-style: solid">Contactez notre argent commercial </h5>
+
+            <span ><a class="text-warning" [href]= "'mailto:info@bozahouse.net'" style="font-size: 20px;"><i class="bi bi-envelope-fill"></i> </a></span>&nbsp;&nbsp;
+            <span ><a class="text-warning" [href]= " 'https://wa.me/656832062'" style="font-size: 20px;"><i class="bi bi-whatsapp"></i> </a></span>&nbsp;&nbsp;
+            <span ><a class="text-warning" [href]= " 'https://wa.me/656832062'" style="font-size: 20px;"><i class="bi bi-telegram"></i> </a></span>&nbsp;&nbsp;
+            <span ><a class="text-warning" [href]="'tel:656832062' " style="font-size: 20px;"> <i class="bi bi-telephone-fill"></i></a> </span>&nbsp;&nbsp;
+
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+</div>
+
+<div *ngIf="currentUser.account=='employer' && isUser || isAdmin" class="container">
+  <div class="row">
+
+
+    <div class=" col-md-6 bg-secondary">
+      <h5 class="text-center">Abonnement NORMAL </h5>
+      <div class="card-body">
+        <div class="card-text">
+
+          <div class="table-responsive">
+            <table class="table table-striped bg-dark table-sm">
+              <thead>
+              <tr class="text-light">
+                <th scope="col">Période</th>
+                <th scope="col">Montant</th>
+                <th scope="col">Montant / jour</th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="text-warning">
+                <td>1 mois</td>
+                <td>1 500 FCFA</td>
+                <td>50 FCFA</td>
+              </tr>
+              <tr class="text-warning">
+                <td>1 an</td>
+                <td>17 000 FCFA</td>
+                <td>46,57 FCFA</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card spacer col-md-5 bg-dark mb-4">
+      <h5 class="text-center pb-2 border-bottom text-warning">Notice </h5>
+      <div class="b-example-divider"></div>
+      <div class="card-body">
+        <div class="card-text">
+
+          <p class="text-white-50">
+            Avec cet abonnement, vous pouvez consulter tout en ayant la possibilité de voir les informations complètes de tous les talents.
+          </p>
+          <p class="text-white-50">
+            Pour souscrire,
+          </p>
+          <h5 class="text-light" style=" font-size: 16px; border-bottom-width: 1px; border-bottom-style: solid">Contactez notre argent commercial </h5>
+
+          <span ><a class="text-warning" [href]= "'mailto:info@bozahouse.net'" style="font-size: 20px;"><i class="bi bi-envelope-fill"></i> </a></span>&nbsp;&nbsp;
+          <span ><a class="text-warning" [href]= " 'https://wa.me/656832062'" style="font-size: 20px;"><i class="bi bi-whatsapp"></i> </a></span>&nbsp;&nbsp;
+          <span ><a class="text-warning" [href]= " 'https://wa.me/656832062'" style="font-size: 20px;"><i class="bi bi-telegram"></i> </a></span>&nbsp;&nbsp;
+          <span ><a class="text-warning" [href]="'tel:656832062' " style="font-size: 20px;"> <i class="bi bi-telephone-fill"></i></a> </span>&nbsp;&nbsp;
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class=" mt-4  col-md-6 bg-secondary">
+      <h5 class="text-center">Abonnement HOST </h5>
+      <div class="card-body">
+        <div class="card-text">
+
+          <div class="table-responsive">
+            <table class="table table-striped bg-dark table-sm">
+              <thead>
+              <tr class="text-light">
+                <th scope="col">Période</th>
+                <th scope="col">Montant</th>
+                <th scope="col">Montant / jour</th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="text-warning">
+                <td>1 mois</td>
+                <td>450 FCFA</td>
+                <td>15 FCFA</td>
+              </tr>
+              <tr class="text-warning">
+                <td>1 an</td>
+                <td>5 000 FCFA</td>
+                <td>13,69 FCFA</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card spacer col-md-5 bg-dark mb-4">
+      <h5 class="text-center pb-2 border-bottom text-warning">Notice </h5>
+      <div class="b-example-divider"></div>
+      <div class="card-body">
+        <div class="card-text">
+
+          <p class="text-white-50">
+            Avec cet abonnement, vous  pouvez publier une offre d'emploi.
+          </p>
+          <p class="text-white-50">
+            Pour souscrire,
+          </p>
+          <h5 class="text-light" style=" font-size: 16px; border-bottom-width: 1px; border-bottom-style: solid">Contactez notre argent commercial </h5>
+
+          <span ><a class="text-warning" [href]= "'mailto:info@bozahouse.net'" style="font-size: 20px;"><i class="bi bi-envelope-fill"></i> </a></span>&nbsp;&nbsp;
+          <span ><a class="text-warning" [href]= " 'https://wa.me/656832062'" style="font-size: 20px;"><i class="bi bi-whatsapp"></i> </a></span>&nbsp;&nbsp;
+          <span ><a class="text-warning" [href]= " 'https://wa.me/656832062'" style="font-size: 20px;"><i class="bi bi-telegram"></i> </a></span>&nbsp;&nbsp;
+          <span ><a class="text-warning" [href]="'tel:656832062' " style="font-size: 20px;"> <i class="bi bi-telephone-fill"></i></a> </span>&nbsp;&nbsp;
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+<div *ngIf="currentUser.account=='talent' && isUser || isAdmin" class="container">
+  <div class="row">
+
+
+    <div class=" col-md-6 bg-secondary">
+      <h5 class="text-center">Abonnement NORMAL </h5>
+      <div class="card-body">
+        <div class="card-text">
+
+          <div class="table-responsive">
+            <table class="table table-striped bg-dark table-sm">
+              <thead>
+              <tr class="text-light">
+                <th scope="col">Période</th>
+                <th scope="col">Montant</th>
+                <th scope="col">Montant / jour</th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="text-warning">
+                <td>1 mois</td>
+                <td>1 000 FCFA</td>
+                <td>33,33 FCFA</td>
+              </tr>
+              <tr class="text-warning">
+                <td>1 an</td>
+                <td>11 500 FCFA</td>
+                <td>31,50 FCFA</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card spacer col-md-5 bg-dark mb-4">
+      <h5 class="text-center pb-2 border-bottom text-warning">Notice </h5>
+      <div class="b-example-divider"></div>
+      <div class="card-body">
+        <div class="card-text">
+
+          <p class="text-white-50">
+            Avec cet abonnement, vous pouvez consulter tout en ayant la possibilité de voir les informations complètes de tous les offres d'emploi.
+          </p>
+
+          <p class="text-white-50">
+            Pour souscrire,
+          </p>
+          <h5 class="text-light" style=" font-size: 16px; border-bottom-width: 1px; border-bottom-style: solid">Contactez notre argent commercial </h5>
+
+          <span ><a class="text-warning" [href]= "'mailto:info@bozahouse.net'" style="font-size: 20px;"><i class="bi bi-envelope-fill"></i> </a></span>&nbsp;&nbsp;
+          <span ><a class="text-warning" [href]= " 'https://wa.me/656832062'" style="font-size: 20px;"><i class="bi bi-whatsapp"></i> </a></span>&nbsp;&nbsp;
+          <span ><a class="text-warning" [href]= " 'https://wa.me/656832062'" style="font-size: 20px;"><i class="bi bi-telegram"></i> </a></span>&nbsp;&nbsp;
+          <span ><a class="text-warning" [href]="'tel:656832062' " style="font-size: 20px;"> <i class="bi bi-telephone-fill"></i></a> </span>&nbsp;&nbsp;
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class=" mt-4  col-md-6 bg-secondary">
+      <h5 class="text-center">Abonnement HOST </h5>
+      <div class="card-body">
+        <div class="card-text">
+
+          <div class="table-responsive">
+            <table class="table table-striped bg-dark table-sm">
+              <thead class="text-light">
+              <tr>
+                <th scope="col">Période</th>
+                <th scope="col">Montant</th>
+                <th scope="col">Montant / jour</th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="text-warning">
+                <td>1 mois</td>
+                <td>350 FCFA</td>
+                <td>11,66 FCFA</td>
+              </tr>
+              <tr class="text-warning">
+                <td>1 an</td>
+                <td>4 000 FCFA</td>
+                <td>10,95 FCFA</td>
+
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card spacer col-md-5 bg-dark mb-4">
+      <h5 class="text-center pb-2 border-bottom text-warning">Notice </h5>
+      <div class="b-example-divider"></div>
+      <div class="card-body">
+        <div class="card-text">
+
+          <p class="text-white-50">
+            Avec cet abonnement, vous  pouvez publier un ou plusieurs profil.
+          </p>
+
+          <p class="text-white-50">
+            Pour souscrire,
+          </p>
+          <h5 class="text-light" style=" font-size: 16px; border-bottom-width: 1px; border-bottom-style: solid">Contactez notre argent commercial </h5>
+
+          <span ><a class="text-warning" [href]= "'mailto:info@bozahouse.net'" style="font-size: 20px;"><i class="bi bi-envelope-fill"></i> </a></span>&nbsp;&nbsp;
+          <span ><a class="text-warning" [href]= " 'https://wa.me/656832062'" style="font-size: 20px;"><i class="bi bi-whatsapp"></i> </a></span>&nbsp;&nbsp;
+          <span ><a class="text-warning" [href]= " 'https://wa.me/656832062'" style="font-size: 20px;"><i class="bi bi-telegram"></i> </a></span>&nbsp;&nbsp;
+          <span ><a class="text-warning" [href]="'tel:656832062' " style="font-size: 20px;"> <i class="bi bi-telephone-fill"></i></a> </span>&nbsp;&nbsp;
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+<app-footer></app-footer>
+</body>
+</html>

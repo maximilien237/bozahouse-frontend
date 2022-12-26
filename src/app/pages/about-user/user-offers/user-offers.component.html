@@ -1,0 +1,148 @@
+<html class="bg-secondary">
+<body class="bg-secondary">
+<app-navbar></app-navbar>
+
+<div class="container spacer  ">
+  <div class="text-center">
+
+    <ng-container *ngIf="currentUser">
+      <ng-container *ngIf="currentUser.account == 'employer' && currentUser.activatedHostSubscription
+      || currentUser.account == 'enterprise' && currentUser.activatedHostSubscription || isAdmin">
+      <span style="font-size: 20px;">
+      <a routerLink="/addOffer" class="hide-underline-link btn btn-dark text-warning">
+      <i class="bi bi-plus "></i> publier une offre
+      </a>
+    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </ng-container>
+    </ng-container>
+
+
+
+
+
+  </div><br>
+  <div class="card bg-secondary border-0">
+
+    <h5 class="text-center mt-2"><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i> <i class="bi bi-dash text-success w-100" ></i>&nbsp;Mes offres d'emploi &nbsp;<i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i></h5>
+
+    <div class="row">
+
+      <ng-container>
+        <ng-container *ngIf="userOffers | async as listOffer; else failureOrLoading">
+          <div  *ngFor="let offer of userOffers | async"  class="col-md-4 ">
+            <div class="card  spacer-margin bg-dark">
+
+              <div class="card-header">
+
+                <a (click)="handleUpdateOffer(offer.id)" class="btn btn-warning">
+                  <i class="bi bi-pencil"></i>
+                </a> &nbsp;&nbsp;&nbsp;&nbsp;
+
+                <a (click)="handleDeleteOffer(offer)" class="btn btn-danger">
+                  <i class="bi bi-trash"></i>
+                </a>
+
+              </div>
+              <div class="card-body text-center" >
+                <span class="text-warning" style="font-size: 35px;">{{offer.title}}</span><br>
+                <span class="text-light">[ {{offer.type}} ]</span><br>
+                <span class="text-white-50" style=" font-size: 15px"><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{offer.address}}</span><br />
+                <span class="text-white-50" style="font-size: 15px"><i class="bi bi-book-fill">&nbsp;</i>{{offer.contract}}</span> &nbsp;&nbsp; <span class="text-white-50" style="font-size: 15px" ><i class="bi bi-wifi"></i> {{offer.workMode}} </span><br />
+
+
+                <span *ngIf="offer.salary ==''; else other">
+        <span style="color: #bb2d3b; font-size: 20px"> Salaire à définir avec l'employeur </span><br />
+      </span>
+
+                <ng-template #other>
+                  <span style="color: #bb2d3b; font-size: 20px"> {{offer.salary | number: '1.0-0'}} FCFA</span><br />
+                </ng-template>
+
+
+                <div class="text-muted">
+                  <span ><i class="bi bi-calendar"></i>&nbsp;<span>{{offer.publishedAt | date : 'd MMM y'}}</span></span>&nbsp;-- <span ><i class="bi bi-lock-fill"></i> <span>{{offer.endOffer | date : 'd MMM y'}}</span></span>
+                </div><br>
+
+                <span><a (click)="handleDetailOffer(offer.id)" class="btn btn-warning rounded-pill">Voir l'offre</a></span><br>
+
+              </div>
+              <span class="text-muted card-footer btn" style=" font-size: 18px" (click)="shared()">partager &nbsp;<i class="bi bi-share-fill"></i></span>
+
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-template #failureOrLoading>
+          <ng-container *ngIf="errorMessageOffer; else loading">
+            <div class="text-warning text-center spacer-margin">
+              <strong><span>Oups ! une erreur est survenue.</span><br /></strong>
+
+            </div>
+
+            <div class="spacer-bottom text-center spacer-top" >
+              <span><a class="btn btn-warning" (click)="goToPreviousPageOffer()"> Revenir</a> </span>
+            </div>
+          </ng-container>
+
+          <ng-template #loading>
+
+            <div class="d-flex justify-content-center spacer-margin" >
+              <div class=" spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </ng-template>
+
+        </ng-template>
+      </ng-container>
+
+
+    </div>
+
+    <ul class=" nav nav-pills spacer-left spacer-bottom">
+      <ng-container *ngIf="currentPage > 0">
+        <li >
+          <a class="page-link btn ms-1" (click)="goToPage(currentPage - 1)" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      </ng-container>
+
+      <!-- "[A-Za-z0-9.%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{3,4}" -->
+
+      <li *ngFor="let item of [].constructor(totalPages); let page = index" >
+        <a [ngClass]="page==currentPage?'btn-warning':'btn-outline-warning'" (click)="goToPage(page)" class="btn ms-1"  >{{page}}</a>
+      </li>
+      <ng-container *ngIf="currentPage < totalPages-1">
+        <li >
+          <a class="page-link btn ms-1" (click)="goToPage(currentPage + 1)" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ng-container>
+
+    </ul>
+
+  </div >
+
+
+</div>
+
+
+<div class="spacer-bottom text-center">
+  <span><a class="btn btn-warning" routerLink="/account"> Retour</a> </span>
+</div>
+
+<app-footer>
+
+</app-footer>
+</body>
+</html>
+
+<!--<html class="bg-secondary">
+<body class="bg-secondary">
+
+</body>
+</html>-->
+
+

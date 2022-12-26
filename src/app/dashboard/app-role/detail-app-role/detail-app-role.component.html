@@ -1,0 +1,30 @@
+<html class="bg-secondary">
+
+<body class="bg-secondary">
+
+
+<app-header></app-header>
+
+<div class="container mt-5">
+  <div class="card bg-dark col-md-2 offset-5">
+    <div class="card-header text-warning text-center">Detail du role</div>
+    <div class="card-body">
+      <div class="card-text text-white-50">
+        Id : {{role.id}}
+      </div>
+      <div class="card-text text-white-50">
+        Role : {{role.name}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="spacer-bottom text-center spacer-top">
+  <span><a class="btn btn-warning" routerLink="/listRole"> Retour</a> </span>
+</div>
+
+<app-footer></app-footer>
+
+</body>
+
+</html>

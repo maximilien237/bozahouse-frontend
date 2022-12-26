@@ -1,0 +1,362 @@
+<html class="bg-secondary">
+<body class="bg-secondary">
+
+<app-header></app-header>
+
+<div class="container mt-lg-5 spacer-bottom">
+  <!--  <div class="card bg-secondary">-->
+  <div class="row">
+    <!-- list subscriptionStatistics -->
+
+    <ng-container>
+      <ng-container *ngIf="subscriptionStatistics | async as listSubscriptionStatistic; else failureSubOrLoadingSub">
+        <div class="card spacer-top bg-dark" style="margin-right: 10px;">
+        <h5 class="card-header text-center text-warning">Statistiques des abonnements</h5>
+        <div class="card-body">
+
+        <table class="table table-responsive ">
+          <thead class="text-light">
+          <tr>
+
+            <th>Date</th>
+            <th>DailyAmount</th>
+            <th>TotalAmount</th>
+            <th>SubscriptionPerDay</th>
+            <th>TotalNumberSubscription</th>
+            <th>TotalSubscription</th>
+
+
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr class="text-white-50" *ngFor="let stat of subscriptionStatistics | async">
+
+            <td>{{stat.createdAt | date: 'd MMM yyyy HH:mm'}}</td>
+            <td>{{stat.totalDailyAmount | number: '1.0-0'}}</td>
+            <td>{{stat.totalAmount | number: '1.0-0'}}</td>
+            <td>{{stat.numberOfSubscriptionPerDay | number: '1.0-0'}}</td>
+            <td>{{stat.totalNumberOfSubscription | number: '1.0-0'}}</td>
+            <td>{{stat.totalSubscription | number: '1.0-0'}}</td>
+          </tr>
+          </tbody>
+
+        </table>
+
+        <ul class=" nav nav-pills spacer-left spacer-bottom">
+          <ng-container *ngIf="currentPageSubscription > 0">
+            <li >
+              <a class="page-link btn ms-1" (click)="goToPreviousPageSubscriptionStatistics()" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+          </ng-container>
+
+          <li *ngFor="let item of [].constructor(totalPagesSubscription); let page = index" >
+            <a [ngClass]="page==currentPageSubscription?'btn-warning':'btn-outline-warning'" (click)="goToPageSubscription(page)" class="btn ms-1"  >{{page}}</a>
+          </li>
+          <ng-container *ngIf="currentPageSubscription < totalPagesSubscription - 1">
+            <li >
+              <a class="page-link btn ms-1" (click)="goToNextPageSubscriptionStatistics()" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ng-container>
+
+        </ul>
+        </div>
+        </div>
+      </ng-container>
+
+      <ng-template #failureSubOrLoadingSub>
+
+        <ng-container *ngIf="errorMessageSubscription; else loadingSub">
+          <div class="text-warning text-center spacer-margin">
+            <span>Oups ! une erreur est survenue</span>
+
+          </div>
+
+          <div class="spacer-bottom text-center spacer-top" >
+            <span><a class="btn btn-success" (click)="goToPreviousPageSubscriptionStatistics()"> <i class="bi bi-arrow-left"></i> Back</a> </span>
+          </div>
+        </ng-container>
+
+        <ng-template #loadingSub>
+
+          <div class="d-flex justify-content-center spacer-margin" >
+            <div class=" spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </ng-template>
+
+      </ng-template>
+    </ng-container>
+
+    <ng-container>
+      <ng-container *ngIf="offerStatistics | async as listOfferStatistics; else failureOfOrLoadingOf">
+
+        <div class="card spacer-top bg-dark" style="margin-right: 10px;">
+          <h5 class="card-header text-center text-warning">Statistiques des offres d'emploi</h5>
+          <div class="card-body">
+
+            <table class="table table-responsive ">
+              <thead class="text-light">
+          <tr>
+
+            <th>Date</th>
+            <th>totalOffer</th>
+            <th>totalOfferPerDay</th>
+            <th>totalOfferValid</th>
+            <th>totalOfferNotValid</th>
+
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr class="text-white-50" *ngFor="let stat of offerStatistics | async">
+
+            <td>{{stat.createdAt | date: 'd MMM yyyy HH:mm'}}</td>
+            <td>{{stat.totalOffer | number: '1.0-0'}}</td>
+            <td>{{stat.totalOfferPerDay | number: '1.0-0'}}</td>
+            <td>{{stat.totalOfferValid | number: '1.0-0'}}</td>
+            <td>{{stat.totalOfferNotValid | number: '1.0-0'}}</td>
+          </tr>
+          </tbody>
+
+        </table>
+        <ul class=" nav nav-pills spacer-left spacer-bottom">
+          <ng-container *ngIf="currentPageOffer > 0">
+            <li >
+              <a class="page-link btn ms-1" (click)="goToPreviousPageOfferStatistics()" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+          </ng-container>
+
+          <li *ngFor="let item of [].constructor(totalPagesOffer); let page = index" >
+            <a [ngClass]="page==currentPageOffer?'btn-warning':'btn-outline-warning'" (click)="goToPageOffer(page)" class="btn ms-1"  >{{page}}</a>
+          </li>
+          <ng-container *ngIf="currentPageOffer < totalPagesOffer - 1">
+            <li >
+              <a class="page-link btn ms-1" (click)="goToNextPageOfferStatistics()" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ng-container>
+
+        </ul>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #failureOfOrLoadingOf>
+        <ng-container *ngIf="errorMessageOffer; else loadingOf">
+          <div class="text-warning text-center spacer-margin">
+            <span>Oups ! une erreur est survenue</span>
+
+          </div>
+
+          <div class="spacer-bottom text-center spacer-top" >
+            <span><a class="btn btn-success" (click)="goToPreviousPageOfferStatistics()"> <i class="bi bi-arrow-left"></i> Back</a> </span>
+          </div>
+        </ng-container>
+
+        <ng-template #loadingOf>
+
+          <div class="d-flex justify-content-center spacer-margin" >
+            <div class=" spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </ng-template>
+
+      </ng-template>
+    </ng-container>
+
+    <ng-container>
+      <ng-container *ngIf="talentStatistics | async as listTalentStatistics; else failureTalOrLoadingTal">
+        <div class="card spacer-top bg-dark" style="margin-right: 10px;">
+          <h5 class="card-header text-center text-warning">Statistiques des talents</h5>
+          <div class="card-body">
+
+            <table class="table table-responsive ">
+              <thead class="text-light">
+          <tr>
+
+            <th>Date</th>
+            <th>totalTalent</th>
+            <th>totalTalentPerDay</th>
+            <th>totalTalentValid</th>
+            <th>totalTalentNotValid</th>
+
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr class="text-white-50" *ngFor="let stat of talentStatistics | async">
+
+            <td>{{stat.createdAt | date: 'd MMM yyyy HH:mm'}}</td>
+            <td>{{stat.totalTalent | number: '1.0-0'}}</td>
+            <td>{{stat.totalTalentPerDay | number: '1.0-0'}}</td>
+            <td>{{stat.totalTalentValid | number: '1.0-0'}}</td>
+            <td>{{stat.totalTalentNotValid | number: '1.0-0'}}</td>
+          </tr>
+          </tbody>
+
+        </table>
+        <ul class=" nav nav-pills spacer-left spacer-bottom">
+          <ng-container *ngIf="currentPageTalent > 0">
+            <li >
+              <a class="page-link btn ms-1" (click)="goToPreviousPageTalentStatistics()" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+          </ng-container>
+
+          <li *ngFor="let item of [].constructor(totalPagesTalent); let page = index" >
+            <a [ngClass]="page==currentPageTalent?'btn-warning':'btn-outline-warning'" (click)="goToPageTalent(page)" class="btn ms-1"  >{{page}}</a>
+          </li>
+          <ng-container *ngIf="currentPageTalent < totalPagesTalent - 1">
+            <li >
+              <a class="page-link btn ms-1" (click)="goToNextPageTalentStatistics()" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ng-container>
+
+        </ul>
+
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #failureTalOrLoadingTal>
+        <ng-container *ngIf="errorMessageTalent; else loadingTal">
+          <div class="text-warning text-center spacer-margin">
+            <span>Oups ! une erreur est survenue</span>
+
+          </div>
+
+          <div class="spacer-bottom text-center spacer-top" >
+            <span><a class="btn btn-success" (click)="goToPreviousPageTalentStatistics()"> <i class="bi bi-arrow-left"></i> Back</a> </span>
+          </div>
+        </ng-container>
+
+        <ng-template #loadingTal>
+
+          <div class="d-flex justify-content-center spacer-margin" >
+            <div class=" spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </ng-template>
+
+      </ng-template>
+    </ng-container>
+
+    <ng-container>
+
+      <ng-container *ngIf="appUserStatistics | async as listAppUserStatistics; else failureUserOrLoadingUser">
+
+        <div class="card spacer-top bg-dark" style="margin-right: 10px;">
+          <h5 class="card-header text-center text-warning">Statistiques des utilisateurs</h5>
+          <div class="card-body">
+
+            <table class="table table-responsive ">
+              <thead class="text-light">
+          <tr>
+
+            <th>Date</th>
+            <th>totalAppUser</th>
+            <th>totalAppUserPerDay</th>
+            <th>totalAppUserActivated</th>
+            <th>totalAppUserDisabled</th>
+            <th>totalAppUserHostSubscription</th>
+            <th>totalAppUserNormalSubscription</th>
+
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr class="text-white-50" *ngFor="let stat of appUserStatistics | async">
+
+            <td>{{stat.createdAt | date: 'd MMM yyyy HH:mm'}}</td>
+            <td>{{stat.totalAppUser | number: '1.0-0'}}</td>
+            <td>{{stat.totalAppUserPerDay | number: '1.0-0'}}</td>
+            <td>{{stat.totalAppUserActivated | number: '1.0-0'}}</td>
+            <td>{{stat.totalAppUserDisabled | number: '1.0-0'}}</td>
+            <td>{{stat.totalAppUserHostSubscription | number: '1.0-0'}}</td>
+            <td>{{stat.totalAppUserNormalSubscription | number: '1.0-0'}}</td>
+          </tr>
+          </tbody>
+
+        </table>
+        <ul class=" nav nav-pills spacer-left spacer-bottom">
+          <ng-container *ngIf="currentPageUser > 0">
+            <li >
+              <a class="page-link btn ms-1" (click)="goToPreviousPageAppUserStatistics()" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+          </ng-container>
+
+          <li *ngFor="let item of [].constructor(totalPagesUser); let page = index" >
+            <a [ngClass]="page==currentPageUser?'btn-warning':'btn-outline-warning'" (click)="goToPageAppUser(page)" class="btn ms-1"  >{{page}}</a>
+          </li>
+          <ng-container *ngIf="currentPageUser < totalPagesUser - 2">
+            <li >
+              <a class="page-link btn ms-1" (click)="goToNextPageAppUserStatistics()" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ng-container>
+
+        </ul>
+
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #failureUserOrLoadingUser>
+
+        <ng-container *ngIf="errorMessageUser; else loadingUser">
+          <div class="text-warning text-center spacer-margin">
+            <span>Oups ! une erreur est survenue</span>
+
+          </div>
+
+          <div class="spacer-bottom text-center spacer-top" >
+            <span><a class="btn btn-success" (click)="goToPreviousPageAppUserStatistics()"> <i class="bi bi-arrow-left"></i> Back</a> </span>
+          </div>
+        </ng-container>
+
+        <ng-template #loadingUser>
+
+          <div class="d-flex justify-content-center spacer-margin" >
+            <div class=" spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </ng-template>
+
+      </ng-template>
+    </ng-container>
+
+    <!-- -->
+
+  </div>
+
+  <!--  </div>-->
+</div>
+
+<div class="mb-lg-5"></div>
+
+<app-footer></app-footer>
+
+
+</body>
+</html>
+
+
+

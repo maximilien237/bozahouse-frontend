@@ -1,0 +1,108 @@
+<html class="bg-secondary">
+<body class="bg-secondary">
+
+<app-navbar></app-navbar>
+
+<div class="container  mt-lg-5 mb-lg-5 ">
+  <ng-container *ngIf="userSubscriptions | async as listSubscriptions; else failureOrLoading">
+    <div class="card col-md-12 bg-secondary border-0">
+      <h5 class="text-center text-dark mt-2">L'historique de mes abonnements</h5>
+
+      <div class="card-body">
+        <!--
+
+                <div class="col-md-6" *ngIf="searchFormGroup">
+                  <form [formGroup]="searchFormGroup" (ngSubmit)="ha()">
+                    <div class="input-group">
+                      <label class="form-label">Keyword :</label>
+                      <input type="text" formControlName = "keyword" class="form-control">
+                      <button class="btn btn-info"><i class="bi bi-search"></i> </button>
+                    </div>
+                  </form>
+                </div>
+        -->
+
+        <div class="row">
+          <div  *ngFor="let subscription of userSubscriptions | async" class="col-md-4" >
+
+            <div class="card  spacer-margin bg-dark">
+
+              <div class="card-body text-center" >
+
+                <p *ngIf="subscription.type =='host'" class="text-white" style="font-size: 25px">Abonnement {{subscription.type}} activé avec succès. Cela vous a coûté {{subscription.initAmount | number: '1.0'}} FCFA
+                  et est valable jusqu'au {{subscription.endSubscription | date: 'd MMM yyyy, à HH:mm'}}</p>
+
+                <p *ngIf="subscription.type =='normal'" class="text-white" style="font-size: 25px">Abonnement {{subscription.type}} activé avec succès. Cela vous a coûté {{subscription.initAmount | number: '1.0'}} FCFA
+                  et est valable jusqu'au {{subscription.endSubscription | date: 'd MMM yyyy, à HH:mm'}}</p>
+
+                <span *ngIf="isAdmin">  <a (click)="handleDetailSubscription(subscription.id)" class="btn btn-warning">Détails </a> </span>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <ul class=" nav nav-pills spacer-left spacer-bottom">
+          <ng-container *ngIf="currentPage > 0">
+            <li >
+              <a class="page-link btn ms-1" (click)="goToPage(currentPage - 1)" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+          </ng-container>
+
+          <!-- "[A-Za-z0-9.%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{3,4}" -->
+
+          <li *ngFor="let item of [].constructor(totalPages); let page = index" >
+            <a [ngClass]="page==currentPage?'btn-warning':'btn-outline-warning'" (click)="goToPage(page)" class="btn ms-1"  >{{page}}</a>
+          </li>
+          <ng-container *ngIf="currentPage < totalPages - 1">
+            <li >
+              <a class="page-link btn ms-1" (click)="goToPage(currentPage + 1)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ng-container>
+
+        </ul>
+
+
+      </div>
+
+
+
+
+    </div>
+  </ng-container>
+
+  <ng-template #failureOrLoading>
+    <ng-container *ngIf="errorMessage; else loading">
+      <div class="text-center ">
+        <span class="text-warning">Oups! une erreur est survevenue</span><br />
+        <span><a class="btn btn-warning" (click)="goToPreviousPage()"> Revenir</a> </span>
+      </div>
+    </ng-container>
+
+    <ng-template #loading>
+
+      <div class="d-flex justify-content-center spacer-margin" >
+        <div class=" spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </ng-template>
+
+  </ng-template>
+
+</div>
+
+<div class="spacer-bottom text-center spacer-top">
+  <span><a class="btn btn-warning" routerLink="/account"> Retour</a> </span>
+</div>
+
+<app-footer></app-footer>
+
+</body>
+</html>

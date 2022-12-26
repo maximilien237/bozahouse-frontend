@@ -1,0 +1,52 @@
+<html class="bg-secondary">
+<body class="bg-secondary">
+
+<app-header></app-header>
+
+
+<div class="container mt-lg-5 spacer-bottom">
+
+  <div class="card bg-secondary border-0">
+    <div class="row">
+
+      <!-- update role -->
+
+      <div class="container col-md-3 mt-3" >
+        <div class="card  bg-dark">
+
+          <div class="card-header text-center text-warning"> update role</div>
+          <div class="card-body">
+            <form [formGroup] = "updateRoleFormGroup" (ngSubmit)="handleUpdateRole()">
+
+              <div class="mb-3 text-light">
+                <label class="form-label">Quel est le role ?</label>
+                <input type="text" formControlName = "name" class="form-control">
+              </div>
+
+              <div class="text-center">
+                <button [disabled] = "!updateRoleFormGroup.valid" class="btn btn-warning">Valider</button>
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- -->
+
+    </div>
+
+  </div>
+</div>
+
+<div class="spacer-margin text-center">
+  <a class="btn btn-warning" routerLink="/listRole">Retour </a>
+</div>
+
+<app-footer></app-footer>
+
+
+</body>
+</html>
+

@@ -1,0 +1,836 @@
+<!--
+
+<div class="container mt-5">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <h5 class="text-center text-warning spacer">BOZAHOUSE</h5>
+      <h5 class="text-center text-muted">la maison des bozayeurs ! </h5>
+
+      <div class="card-body">
+        <form [formGroup]="registerFormGroup" (ngSubmit)="handleRegister()">
+
+          <div class="mb-3">
+            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de compte</label>
+            <select class="form-select" formControlName = "account"  required>
+              <option [ngValue]="null" selected disabled hidden>Type de compte</option>
+              <option value="talent">Talent</option>
+              <option value="employer">Employeur</option>
+              <option value="enterprise">Entreprise</option>
+            </select>
+          </div>
+
+
+          <div class="mb-3">
+            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Comment avez vous connu Bozahouse ?</label>
+            <select class="form-select" formControlName = "howKnowUs"  required>
+              <option [ngValue]="null" selected disabled hidden>Comment avez vous connu Bozahouse ?</option>
+              <option value="friend">Amis</option>
+              <option value="facebook">Facebook</option>
+              <option value="whatsapp">Whatsapp</option>
+              <option value="linkedin">LinkedIn</option>
+              <option value="youtube">Youtube</option>
+              <option value="twitter">Twitter</option>
+              <option value="other">Autre</option>
+            </select>
+          </div>
+
+
+          <div class="mb-3">
+            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom </label>
+            <input type="text" formControlName = "lastname" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Prénom </label>
+            <input type="text" formControlName = "firstname" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email </label>
+            <input type="email" formControlName = "email" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom d'utilisateur </label>
+            <input type="text" formControlName = "username" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe </label>
+            <input type="password" formControlName = "password" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmez le mot de passe </label>
+            <input type="password" formControlName = "confirmPassword" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date d'anniversaire </label>
+            <input type="date" formControlName = "birthday" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">code de parrainage </label>
+            <input type="text" formControlName = "referralCode" class="form-control">
+          </div>
+
+          <button class="btn btn-primary" type="submit">SignUp</button> &nbsp;&nbsp;
+          <span style="font-size: 20px">Déjà un compte ? | <a class="hide-underline-link" routerLink="/login"><span class="text-danger">Connectez vous</span></a></span>
+        </form>
+      </div>
+      <span class="text-muted text-center"> les champs marqués par <i class="text-danger">*</i> sont obligatoires</span>
+    </div>
+  </div>
+</div>
+
+-->
+
+
+<!--
+<div class="container col-md-10">
+
+  <div class="card bg-dark col-md-7 offset-md-3 mt-xxl-5 mb-xxl-5">
+    <h5 class="text-center text-warning spacer">BOZAHOUSE</h5>
+    <h5 class="text-center text-muted">la maison des bozayeurs ! </h5>
+
+    <div class="card-body">
+      <form [formGroup] = "registerFormGroup" (ngSubmit)="handleRegister()">
+
+
+        <div class="mb-3">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de compte</label>
+          <select class="form-select" formControlName = "account"  required>
+            <option value="talent">Talent</option>
+            <option value="employer">Employeur</option>
+            <option value="enterprise">Entreprise</option>
+          </select>
+          <small *ngIf="registerFormGroup.controls['account'].errors && registerFormGroup.controls['account'].touched" class="text-danger">{{getErrorMessage('account', registerFormGroup.controls['account'].errors)}}</small>
+
+        </div>
+
+
+        <div class="mb-3">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Comment avez vous connu Bozahouse ?</label>
+          <select class="form-select" formControlName = "howKnowUs"  required>
+            <option value="friend">Amis</option>
+            <option value="facebook">Facebook</option>
+            <option value="whatsapp">Whatsapp</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="youtube">Youtube</option>
+            <option value="twitter">Twitter</option>
+            <option value="other">Autre</option>
+          </select>
+          <small *ngIf="registerFormGroup.controls['howKnowUs'].errors && registerFormGroup.controls['howKnowUs'].touched" class="text-danger">{{getErrorMessage('howKnowUs', registerFormGroup.controls['howKnowUs'].errors)}}</small>
+
+        </div>
+
+        <div class="mb-3 mt-2">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom</label>
+          <input type="text" formControlName = "lastname" class="form-control">
+          <small *ngIf="registerFormGroup.controls['lastname'].errors && registerFormGroup.controls['lastname'].touched" class="text-danger">{{getErrorMessage('lastname', registerFormGroup.controls['lastname'].errors)}}</small>
+
+        </div>
+
+        <div class="mb-3 mt-2">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Prénom</label>
+          <input type="text" formControlName = "firstname" class="form-control">
+          <small *ngIf="registerFormGroup.controls['firstname'].errors && registerFormGroup.controls['firstname'].touched" class="text-danger">{{getErrorMessage('firstname', registerFormGroup.controls['firstname'].errors)}}</small>
+
+        </div>
+
+        <div class="mb-3 mt-2">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Sexe</label>
+          <select class="form-select" formControlName = "sex" required>
+            <option value="" disabled>Choose...</option>
+            <option value="Homme">Homme</option>
+            <option value="Femme">Femme</option>
+          </select>
+          <small *ngIf="registerFormGroup.controls['sex'].errors && registerFormGroup.controls['sex'].touched" class="text-danger">{{getErrorMessage('sex', registerFormGroup.controls['sex'].errors)}}</small>
+
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
+          <input type="email" formControlName = "email" class="form-control">
+          <small *ngIf="registerFormGroup.controls['email'].errors && registerFormGroup.controls['email'].touched" class="text-danger">{{getErrorMessage('email', registerFormGroup.controls['email'].errors)}}</small>
+
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom d'utilisateur</label>
+          <input type="text" formControlName = "username" class="form-control">
+          <small *ngIf="registerFormGroup.controls['username'].errors && registerFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', registerFormGroup.controls['username'].errors)}}</small>
+
+        </div>
+
+        <div class="mb-3 mt-2">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
+          <input type="password" formControlName = "password" class="form-control">
+          <small *ngIf="registerFormGroup.controls['password'].errors && registerFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessage('password', registerFormGroup.controls['password'].errors)}}</small>
+
+        </div>
+
+        <div class="mb-3 mt-2">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du mot de passe</label>
+          <input type="password" formControlName = "confirmPassword" class="form-control">
+          <small *ngIf="registerFormGroup.controls['confirmPassword'].errors && registerFormGroup.controls['confirmPassword'].touched" class="text-danger">{{getErrorMessage('confirmPassword', registerFormGroup.controls['confirmPassword'].errors)}}</small>
+
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date d'anniversaire</label>
+          <input type="date" formControlName = "birthday" class="form-control">
+          <small *ngIf="registerFormGroup.controls['birthday'].errors && registerFormGroup.controls['birthday'].touched" class="text-danger">{{getErrorMessage('birthday', registerFormGroup.controls['birthday'].errors)}}</small>
+
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-white">Code de parrainage</label>
+          <input type="text" formControlName = "referralCode" class="form-control">
+          <small *ngIf="registerFormGroup.controls['referralCode'].errors && registerFormGroup.controls['referralCode'].touched" class="text-danger">{{getErrorMessage('referralCode', registerFormGroup.controls['referralCode'].errors)}}</small>
+
+        </div>
+
+
+        <span class="text-secondary" style="font-size: 17px">Déjà un compte ? | <a class="hide-underline-link" routerLink="/login"><span class="text-light">Connectez vous</span></a></span>
+
+        <div class="text-center text-white">
+          <button [disabled] = "!registerFormGroup.valid" class="btn btn-primary w-100 mb-xxl-2 mt-lg-1" type="submit">Inscription</button>
+        </div>
+
+      </form>
+      <span class="text-muted text-center"> les champs marqués par <i class="text-danger">*</i> sont obligatoires</span>
+    </div>
+  </div>
+</div>
+
+-->
+
+
+<!doctype html>
+<html lang="en" >
+<head>
+
+
+  <title></title></head>
+<body class="d-flex  text-white bg-secondary">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="mb-auto">
+    <div>
+
+    </div>
+  </header>
+
+  <main >
+
+    <div class="container col-md-10">
+
+      <div class="card bg-dark col-md-7 offset-md-3 mt-xxl-5 mb-xxl-5">
+        <h5 class="text-center text-warning spacer">BOZAHOUSE</h5>
+        <h5 class="text-center text-muted">la maison des bozayeurs ! </h5>
+
+        <div class="card-body">
+          <form  >
+
+
+            <div class="mb-3">
+              <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de compte</label>
+             <p class="text-white-50">Le choix du type de compte est fonction de ce que vous voulez faire dans l'application</p>
+
+            </div>
+
+
+            <div class="mb-3">
+              <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Comment avez vous connu Bozahouse ?</label>
+          <p>ici vous devez ttout simplement choisir une option parmi ceux proposé, tout en dévoilant comment vous nous avez connu</p>
+
+            </div>
+
+            <div class="mb-3 mt-2">
+              <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom</label>
+              <input type="text" formControlName = "lastname" class="form-control">
+
+            </div>
+
+            <div class="mb-3 mt-2">
+              <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Prénom</label>
+              <input type="text" formControlName = "firstname" class="form-control">
+
+            </div>
+
+            <div class="mb-3 mt-2">
+              <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Sexe</label>
+              <select class="form-select" formControlName = "sex" required>
+                <option value="" disabled>Choose...</option>
+                <option value="Homme">Homme</option>
+                <option value="Femme">Femme</option>
+              </select>
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
+              <input type="email" formControlName = "email" class="form-control">
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom d'utilisateur</label>
+              <input type="text" formControlName = "username" class="form-control">
+
+            </div>
+
+            <div class="mb-3 mt-2">
+              <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
+              <input type="password" formControlName = "password" class="form-control">
+
+            </div>
+
+            <div class="mb-3 mt-2">
+              <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du mot de passe</label>
+              <input type="password" formControlName = "confirmPassword" class="form-control">
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date d'anniversaire</label>
+              <input type="date" formControlName = "birthday" class="form-control">
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-white">Code de parrainage</label>
+              <input type="text" formControlName = "referralCode" class="form-control">
+
+            </div>
+
+
+            <span class="text-secondary" style="font-size: 17px">Déjà un compte ? | <a class="hide-underline-link" routerLink="/login"><span class="text-warning">Connectez vous</span></a></span>
+
+            <div class="text-center text-white">
+              <button  class="btn btn-warning w-30 mb-xxl-2 mt-lg-1" type="submit">Inscription</button>
+            </div>
+
+          </form>
+          <span class="text-muted text-center"> les champs marqués par <i class="text-danger">*</i> sont obligatoires</span>
+        </div>
+      </div>
+    </div>
+
+
+  </main>
+
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+
+  <main>
+    <div>
+      <p>
+
+      </p>
+    </div>
+
+    <div>
+      <p>
+
+      </p>
+    </div>
+  </main>
+
+
+
+
+
+</div>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

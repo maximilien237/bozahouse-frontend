@@ -1,0 +1,191 @@
+<html class="bg-secondary">
+<body class="bg-secondary">
+
+<app-navbar></app-navbar>
+
+
+<div class="container mt-lg-5 mb-lg-5 col-md-6 " >
+  <div class="card offset-md-3 bg-dark">
+    <div class="col">
+
+      <div class="card bg-dark">
+        <h5 class="card-header text-light">NOM</h5>
+        <div class="card-body">
+          <span class="card-text text-white-50">
+            {{user.lastname}}
+          </span>
+        </div>
+      </div>
+
+      <div class="card bg-dark">
+        <h5 class="card-header text-light">PRENOM</h5>
+        <div class="card-body">
+          <span class="card-text text-white-50">
+            {{user.firstname}}
+          </span>
+        </div>
+      </div>
+
+
+      <div class="card bg-dark">
+        <h5 class="card-header text-light">PSEUDO</h5>
+        <div class="card-body">
+            <span class="card-text text-white-50">
+            {{user.username}}
+          </span>
+        </div>
+      </div>
+
+      <div class="card bg-dark">
+        <h5 class="card-header text-light">DATE DE NAISSANCE</h5>
+        <div class="card-body">
+              <span class="card-text text-danger">
+            {{user.birthday | date: 'd MMMM y'}}
+          </span>
+        </div>
+      </div>
+
+      <div class="card bg-dark">
+        <h5 class="card-header text-light">EMAIL</h5>
+        <div class="card-body">
+          <span class="card-text text-warning">
+            {{user.email}}
+          </span>
+        </div>
+      </div>
+
+      <div class="card bg-dark">
+        <h5 class="card-header text-light">COMPTE</h5>
+        <div class="card-body">
+          <span class="card-text text-white-50">
+            {{user.account}}
+          </span>
+        </div>
+      </div>
+
+      <div class="card bg-dark">
+        <h5 class="card-header text-light">CODE PROMO</h5>
+        <div class="card-body">
+           <span class="card-text text-warning">
+            {{user.promoCode}}
+          </span>
+        </div>
+      </div>
+
+            <div class="card bg-dark">
+              <h5 class="card-header text-light">CODE DE PARAINAGE</h5>
+              <div class="card-body">
+                <span class="card-text text-warning">
+                  {{user.referralCode}}
+                </span>
+              </div>
+            </div>
+
+      <div class="card bg-dark">
+        <h5 class="card-header text-light">Date Création</h5>
+        <div class="card-body">
+                <span class="card-text text-white-50">
+                  {{user.createdAt | date: 'd MMMM y HH:mm:ss'}}
+                </span>
+        </div>
+      </div>
+
+      <div class="card bg-dark">
+        <h5 class="card-header text-light">DERNIERE CONNEXION</h5>
+        <div class="card-body">
+                <span class="card-text text-white-50">
+                  {{user.lastConnexion | date: 'd MMMM y HH:mm:ss'}}
+                </span>
+        </div>
+      </div>
+
+      <div class="card bg-dark">
+        <h5 class="card-header text-light">PREMIERE CONNEXION</h5>
+        <div class="card-body">
+                <span class="card-text text-white-50">
+                  {{user.firstConnexion.toString()}}
+                </span>
+        </div>
+      </div>
+
+      <div class="card bg-dark">
+        <h5 class="card-header text-light">DATE DE BONUS</h5>
+        <div class="card-body">
+                <span class="card-text text-white-50">
+                  {{user.discountDate | date: 'd MMMM y HH:mm:ss'}}
+                </span>
+        </div>
+      </div>
+
+
+      <div class="card bg-dark">
+        <h5 class="card-header text-light">COMMENT IL NOUS A CONNU</h5>
+        <div class="card-body">
+                <span class="card-text text-white-50">
+                  {{user.howKnowUs}}
+                </span>
+        </div>
+      </div>
+      <div class="card bg-dark">
+        <h5 class="card-header text-light">NOMBRE DE CONNEXION</h5>
+        <div class="card-body">
+                <span class="card-text text-white-50">
+                  {{user.countConnexion}}
+                </span>
+        </div>
+      </div>
+
+<!--      <div class="card">
+        <h5 class="card-header"></h5>
+        <div class="card-body">
+                <span class="card-text">
+                  {{}}
+                </span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h5 class="card-header"></h5>
+        <div class="card-body">
+                <span class="card-text">
+                  {{}}
+                </span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h5 class="card-header"></h5>
+        <div class="card-body">
+                <span class="card-text">
+                  {{}}
+                </span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h5 class="card-header"></h5>
+        <div class="card-body">
+                <span class="card-text">
+                  {{}}
+                </span>
+        </div>
+      </div>-->
+
+    </div>
+    <div class="card-footer text-center">
+      <span ><a class="text-warning" [href]= "'mailto:'+ user.email" style="font-size: 25px;"><i class="bi bi-envelope-fill"></i> </a></span>
+    </div>
+
+  </div>
+
+  <div class="text-center spacer-margin">
+
+    <span><a routerLink="/users" class="btn btn-warning">Retour</a></span>
+  </div>
+
+</div>
+
+<app-footer></app-footer>
+
+</body>
+</html>

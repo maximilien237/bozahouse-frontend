@@ -1,0 +1,116 @@
+<html class="bg-secondary">
+<body class="bg-secondary">
+
+<app-navbar></app-navbar>
+<div class="container col-md-7 mt-2">
+  <div class="card spacer-margin border-0 bg-secondary">
+    <div class="col">
+      <div class="card border-0 bg-dark">
+
+        <h5 class="text-center card-title mt-2">{{talent.title}}</h5>
+        <span class="text-center text-warning " style="font-size: 14px"><span >Publié par {{talent.firstname + ' ' + talent.lastname}} le </span>
+          {{talent.publishedAt | date: 'd MMM y'}} à {{talent.publishedAt | date: 'HH:mm:ss'}}</span>
+        <span class="text-center text-white-50">[ {{talent.reference}} ]</span>
+
+
+        <div class="spacer-margin">
+          <h5 class="text-light" style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Compétences</h5>
+          <div class="card-body">
+            <p class="card-text text-white-50" style="font-size: 19px;">
+              {{talent.skills}}
+            </p>
+          </div>
+        </div>
+
+
+      <!--  <div class="spacer-margin">
+          <h5 style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Compétences techniques</h5>
+          <div class="card-body">
+            <p class="card-text">
+              {{talent.skills}}
+            </p>
+          </div>
+        </div>
+-->
+
+
+        <div class="spacer-margin">
+          <h5 class="text-light" style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Infos complémentaires</h5>
+          <div class="card-body">
+            <p class="card-text text-white-50">
+              <ng-container *ngIf="talent.type == 'simple'; else other0">
+                <span><span>Talent : </span>Simple</span><br>
+              </ng-container>
+
+              <ng-template #other0>
+                <span ><span>Talent : </span>Professionnelle</span><br />
+              </ng-template>
+
+              <span>Domaine : {{talent.domain}}</span><br>
+
+              <span style="font-size: 15px">Contract : {{talent.contract}}</span><br />
+              <span style=" font-size: 15px" >Mode de travail : {{talent.workMode}} </span><br />
+
+              <span *ngIf="!talent.salary.endsWith('0'); else other">
+        <span > {{talent.salary}} </span><br />
+      </span>
+
+              <ng-template #other>
+                <span > Salaire :  {{talent.salary | number: '1.0-0'}} FCFA / mois</span><br />
+              </ng-template>
+              <span>Expérience : {{talent.experience}}</span> <br />
+
+
+
+            </p>
+
+
+
+          </div>
+        </div>
+
+        <div class="spacer-margin">
+          <h5 class="text-light" style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Localisation</h5>
+          <div class="card-body ">
+            <p class="card-text text-white-50" *ngFor="let item of [].constructor(talent.address.split(','));">
+              <i class="bi bi-flag-fill" style="font-size: 20px;"></i>&nbsp; : &nbsp;<span style="font-size: 15px">{{item[2]}} </span><br />
+              <i class="bi bi-building" style="font-size: 20px;"></i>&nbsp; : &nbsp;<span style="font-size: 15px">{{item[1]}} </span><br />
+              <span style="font-size: 15px"><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{talent.address}}</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="spacer-margin">
+          <h5  class="text-light" style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Contactez le talent <i class="bi bi-arrow-down"></i> </h5>
+          <div class="card-body">
+      <span>
+        <span  *ngIf="talent.email"><a class="text-warning" [href]= "'mailto:'+ talent.email" style="font-size: 20px;"><i class="bi bi-envelope-fill"></i> </a></span>&nbsp;&nbsp;
+        <span  *ngIf="talent.github"><a class="text-warning" [href]= "talent.github" style="font-size: 20px;"><i class="bi bi-github"></i> </a></span>&nbsp;&nbsp;
+        <span  *ngIf="talent.linkedin"><a class="text-warning" [href]= "talent.linkedin" style="font-size: 20px; "><i class="bi bi-linkedin"></i> </a></span>&nbsp;&nbsp;
+        <span  *ngIf="talent.whatsAppNumber"><a class="text-warning" [href]= " 'https://wa.me/' + talent.whatsAppNumber" style="font-size: 20px;"><i class="bi bi-whatsapp"></i> </a></span>&nbsp;&nbsp;
+        <span *ngIf="talent.phone"><a class="text-warning" [href]="'tel:' + talent.phone " style="font-size: 20px; "> <i class="bi bi-telephone-fill"></i></a> </span>&nbsp;&nbsp;
+      </span>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+    <div class="spacer-top"></div>
+
+    <span class="text-center"><a routerLink="/talents" class="btn btn-warning">Back</a></span><br>
+
+  </div>
+
+</div>
+<app-footer></app-footer>
+
+</body>
+</html>
+
+
+

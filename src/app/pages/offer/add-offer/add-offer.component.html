@@ -1,0 +1,323 @@
+<html class="bg-secondary">
+<app-navbar></app-navbar>
+
+<body class="bg-secondary">
+
+<div class="container col-md-10 ">
+
+  <div class="spacer-bottom text-center spacer-top">
+    <span><a class="btn btn-warning" routerLink="/jobs">Retour</a> </span>
+  </div>
+
+  <div class="card col-md-7 offset-md-3 spacer bg-dark">
+    <h5 class="text-center spacer text-warning">Entrez les informations de votre offre</h5>
+
+
+    <form (ngSubmit)="handleSaveOffer()" [formGroup]="newOfferFormGroup">
+
+
+      <div class="card bg-dark spacer-margin">
+        <div class="card-body">
+          <h5 class="text-light">Informations sur l'employeur</h5>
+          <div class="card-text text-muted">
+            <div class="mb-3">
+              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type d'employeur</label>
+              <select class="form-select" formControlName="type" >
+                <option [ngValue]="null" disabled hidden selected>choose...</option>
+                <option value="particular">Particulier</option>
+                <option value="enterprise">Entreprise</option>
+              </select>
+              <small *ngIf="newOfferFormGroup.controls['type'].errors && newOfferFormGroup.controls['type'].touched" class="text-danger">{{getErrorMessage('type', newOfferFormGroup.controls['type'].errors)}}</small>
+
+              <span *ngIf="newOfferFormGroup.controls['type'].value == 'enterprise'">
+
+    <div class="mb-3">
+      <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom de l'entreprise</label>
+      <input class="form-control" formControlName="name"  type="text">
+          <small *ngIf="newOfferFormGroup.controls['name'].errors && newOfferFormGroup.controls['name'].touched" class="text-danger">{{getErrorMessage('name', newOfferFormGroup.controls['name'].errors)}}</small>
+
+    </div>
+
+                  <div class="mb-3">
+      <label class="form-label">L'url de votre page facebook</label>
+                      <input class="form-control" formControlName="fcb" placeholder="example : https://www.facebook.com/example/"  type="text">
+           <small *ngIf="newOfferFormGroup.controls['fcb'].errors && newOfferFormGroup.controls['fcb'].touched" class="text-danger">{{getErrorMessage('fcb', newOfferFormGroup.controls['fcb'].errors)}}</small>
+
+                  </div>
+
+                  <div class="mb-3">
+      <label class="form-label">L'url de votre page linkedin</label>
+                      <input class="form-control" formControlName="linkedin" placeholder="example : https://www.linkedin.com/example/"  type="text">
+    <small *ngIf="newOfferFormGroup.controls['linkedin'].errors && newOfferFormGroup.controls['linkedin'].touched" class="text-danger">{{getErrorMessage('Linkedin', newOfferFormGroup.controls['linkedin'].errors)}}</small>
+
+                  </div>
+
+                  <div class="mb-3">
+      <label class="form-label">L'url de votre site web</label>
+      <input class="form-control" formControlName="web" placeholder="example : https://www.monsite.com/example/"  type="text">
+     <small *ngIf="newOfferFormGroup.controls['web'].errors && newOfferFormGroup.controls['web'].touched" class="text-danger">{{getErrorMessage('web', newOfferFormGroup.controls['web'].errors)}}</small>
+
+                  </div>
+
+
+
+      </span>
+
+
+              <div class="mb-3 mt-3">
+                <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Pays</label>
+                <select class="form-select" formControlName="countryCode" >
+                  <option value="+27" >Afrique du Sud</option>
+                  <option value="+213" >Algérie</option>
+                  <option value="+244" >Angola</option>
+                  <option value="+229" >Bénin</option>
+                  <option value="+267" >Botswana</option>
+                  <option value="+226" >Burkina Faso</option>
+                  <option value="+257" >Burundi</option>
+                  <option value="+237" >Cameroun</option>
+                  <option value="+238" >Cap-Vert</option>
+                  <option value="+236" >République centrafricaine</option>
+                  <option value="+269" >Comores</option>
+                  <option value="+242" >République du Congo</option>
+                  <option value="+243" >République démocratique du Congo</option>
+                  <option value="+225" >Côte d'Ivoire</option>
+                  <option value="+253" >Djibouti</option>
+                  <option value="+20" >Egypte</option>
+                  <option value="+291" >Erythrée</option>
+                  <option value="+251" >Ethiopie</option>
+                  <option value="+241" >Gabon</option>
+                  <option value="+220" >Gambie</option>
+                  <option value="+233" >Ghana</option>
+                  <option value="+224" >Guinée</option>
+                  <option value="+245" >Guinée-Bissau</option>
+                  <option value="+240" >Guinée équatoriale</option>
+                  <option value="+254" >Kenya</option>
+                  <option value="+266" >Lesotho</option>
+                  <option value="+231" >Libéria</option>
+                  <option value="+218" >Libye</option>
+                  <option value="+261" >Madagascar</option>
+                  <option value="+265" >Malawi</option>
+                  <option value="+223" >Mali</option>
+                  <option value="+212" >Maroc</option>
+                  <option value="+230" >Maurice</option>
+                  <option value="+222" >Mauritanie</option>
+                  <option value="+258" >Mozambique</option>
+                  <option value="+264" >Namibie</option>
+                  <option value="+227" >Niger</option>
+                  <option value="+234" >Nigeria</option>
+                  <option value="+256" >Ouganda</option>
+                  <option value="+250" >Rwanda</option>
+                  <option value="+239" >Sao Tomé-et-Principe</option>
+                  <option value="+221" >Sénégal</option>
+                  <option value="+248" >Seychelles</option>
+                  <option value="+232" >Siera Leone</option>
+                  <option value="+252" >Somalie</option>
+                  <option value="+249" >Soudan</option>
+                  <option value="+211" >Soudan du Sud</option>
+                  <option value="+268" >Swaziland</option>
+                  <option value="+255" >Tanzanie</option>
+                  <option value="+235" >Tchad</option>
+                  <option value="+228" >Togo</option>
+                  <option value="+216" >Tunisie</option>
+                  <option value="+260" >Zambie</option>
+                  <option value="+263" >Zimbabwe</option>
+                </select>
+                <small *ngIf="newOfferFormGroup.controls['countryCode'].errors && newOfferFormGroup.controls['countryCode'].touched" class="text-danger">{{getErrorMessage('countryCode', newOfferFormGroup.controls['countryCode'].errors)}}</small>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Contact</label>
+                <input type="text" class="form-control" formControlName="tel" placeholder="6********" >
+                <small *ngIf="newOfferFormGroup.controls['tel'].errors && newOfferFormGroup.controls['tel'].touched" class="text-danger">{{getErrorMessage('tel', newOfferFormGroup.controls['tel'].errors)}}</small>
+              </div>
+
+<!--              <div class="mb-3">
+                <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Contact</label>
+                <input class="form-control" formControlName="tel" placeholder="6********" type="text">
+                <small *ngIf="newOfferFormGroup.controls['tel'].errors && newOfferFormGroup.controls['tel'].touched" class="text-danger">{{getErrorMessage('tel', newOfferFormGroup.controls['tel'].errors)}}</small>
+
+              </div>-->
+
+              <div class="mb-3">
+                <label class="form-label">Numéro WhatsApp</label>
+                <input class="form-control" formControlName="whatsAppNumber" placeholder="6********" type="text">
+                <small *ngIf="newOfferFormGroup.controls['whatsAppNumber'].errors && newOfferFormGroup.controls['whatsAppNumber'].touched" class="text-danger">{{getErrorMessage('whatsAppNumber', newOfferFormGroup.controls['whatsAppNumber'].errors)}}</small>
+
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Email <span class="text-muted"></span></label>
+                <input class="form-control" formControlName="email" placeholder="you@example.com" type="text">
+                <small *ngIf="newOfferFormGroup.controls['email'].errors && newOfferFormGroup.controls['email'].touched" class="text-danger">{{getErrorMessage('email', newOfferFormGroup.controls['email'].errors)}}</small>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-dark spacer-margin">
+        <div class="card-body">
+          <h5 class="text-light">Besoin de l'employeur</h5>
+          <div class="card-text text-muted">
+
+            <div class="mb-3">
+              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Domaine</label>
+              <input class="form-control" formControlName="domain" placeholder="ssi,srt,..." type="text">
+              <small *ngIf="newOfferFormGroup.controls['domain'].errors && newOfferFormGroup.controls['domain'].touched" class="text-danger">{{getErrorMessage('domain', newOfferFormGroup.controls['domain'].errors)}}</small>
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Intitulé du poste</label>
+              <input class="form-control" formControlName="title" placeholder="infimier"  type="text">
+              <small *ngIf="newOfferFormGroup.controls['title'].errors && newOfferFormGroup.controls['title'].touched" class="text-danger">{{getErrorMessage('title', newOfferFormGroup.controls['title'].errors)}}</small>
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nombre de poste</label>
+              <input class="form-control" formControlName="needPeople"  type="text">
+              <small *ngIf="newOfferFormGroup.controls['needPeople'].errors && newOfferFormGroup.controls['needPeople'].touched" class="text-danger">{{getErrorMessage('needPeople', newOfferFormGroup.controls['needPeople'].errors)}}</small>
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mission du poste</label>
+              <textarea aria-label="With textarea" class="form-control" formControlName="mission" type="text"></textarea>
+              <small *ngIf="newOfferFormGroup.controls['mission'].errors && newOfferFormGroup.controls['mission'].touched" class="text-danger">{{getErrorMessage('mission', newOfferFormGroup.controls['mission'].errors)}}</small>
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Compétences réquises</label>
+              <textarea aria-label="With textarea" class="form-control" formControlName="skills" type="text"></textarea>
+              <small *ngIf="newOfferFormGroup.controls['skills'].errors && newOfferFormGroup.controls['skills'].touched" class="text-danger">{{getErrorMessage('skills', newOfferFormGroup.controls['skills'].errors)}}</small>
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Profil recherché</label>
+              <textarea aria-label="With textarea" class="form-control" formControlName="profile" type="text"></textarea>
+              <small *ngIf="newOfferFormGroup.controls['profile'].errors && newOfferFormGroup.controls['profile'].touched" class="text-danger">{{getErrorMessage('profile', newOfferFormGroup.controls['profile'].errors)}}</small>
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mode de travail</label>
+              <select class="form-select" formControlName="workMode" >
+                <option [ngValue]="null" disabled hidden selected>Mode de travail</option>
+                <option value="Sur site">Sur site</option>
+                <option value="A distance">A distance</option>
+              </select>
+              <small *ngIf="newOfferFormGroup.controls['workMode'].errors && newOfferFormGroup.controls['workMode'].touched" class="text-danger">{{getErrorMessage('workMode', newOfferFormGroup.controls['workMode'].errors)}}</small>
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Experience</label>
+              <select class="form-select" formControlName="experience" >
+                <option [ngValue]="null" disabled hidden selected>Experience</option>
+                <option value="Aucune">Aucune</option>
+                <option value="Jeune diplomé">Jeune diplomé</option>
+                <option value="1-2 ans">1-2 ans</option>
+                <option value="3-5 ans">3-5 ans</option>
+                <option value="6-10 ans">6-10 ans</option>
+                <option value="11-20 ans">11-20 ans</option>
+                <option value="+20 ans">plus de 20 ans</option>
+              </select>
+              <small *ngIf="newOfferFormGroup.controls['experience'].errors && newOfferFormGroup.controls['experience'].touched" class="text-danger">{{getErrorMessage('experience', newOfferFormGroup.controls['experience'].errors)}}</small>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-dark spacer-margin">
+        <div class="card-body">
+          <h5 class="text-light">Localisation</h5>
+          <div class="card-text text-muted">
+
+            <div class="mb-3">
+              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Address</label>
+              <input class="form-control" formControlName="address" placeholder="Simbok,Yaoundé,Cameroun" type="text">
+              <small *ngIf="newOfferFormGroup.controls['address'].errors && newOfferFormGroup.controls['address'].touched" class="text-danger">{{getErrorMessage('address', newOfferFormGroup.controls['address'].errors)}}</small>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-dark spacer-margin">
+        <div class="card-body">
+          <h5 class="text-light">Autres informations</h5>
+          <div class="card-text text-muted">
+
+            <div class="mb-3">
+              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Contract</label>
+              <select class="form-select" formControlName="contract" >
+                <option [ngValue]="null" disabled hidden selected>Choose....</option>
+                <option value="CDI">CDI</option>
+                <option value="CDD">CDD</option>
+                <option value="FREELANCE">Freelance</option>
+                <option value="INTERIM">Intérim</option>
+                <option value="ASSOCIE">Associé(e)</option>
+                <option value="ALTERNANCE">Alternance</option>
+                <option value="FRANCHISE">Franchise</option>
+                <option value="STAGE ACADEMIC">Stage academic</option>
+                <option value="STAGE PROFESSIONNELLE">Stage professionnelle</option>
+                <option value="TOUT">Tout</option>
+              </select>
+              <small *ngIf="newOfferFormGroup.controls['contract'].errors && newOfferFormGroup.controls['contract'].touched" class="text-danger">{{getErrorMessage('contract', newOfferFormGroup.controls['contract'].errors)}}</small>
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Salaire</label>
+              <select class="form-select" formControlName="salaryChoice" >
+                <option [ngValue]="null" disabled hidden selected>Salaire</option>
+                <option value="Salaire à définir avec l'employeur">Salaire à définir avec l'employeur</option>
+                <option value="amount">Entrer un montant</option>
+              </select>
+              <small *ngIf="newOfferFormGroup.controls['salaryChoice'].errors && newOfferFormGroup.controls['salaryChoice'].touched" class="text-danger">{{getErrorMessage('salaryChoice', newOfferFormGroup.controls['salaryChoice'].errors)}}</small>
+
+              <span *ngIf="newOfferFormGroup.controls['salaryChoice'].value=='amount'">
+
+               <div class="mb-3 mt-2">
+              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Montant</label>
+              <input type="text" class="form-control" formControlName="salary"  >
+              <small *ngIf="newOfferFormGroup.controls['salary'].errors && newOfferFormGroup.controls['salary'].touched" class="text-danger">{{getErrorMessage('salary', newOfferFormGroup.controls['salary'].errors)}}</small>
+
+            </div>
+
+          </span>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date D'expiration</label>
+              <input class="form-control" formControlName="endOffer" type="date">
+              <small *ngIf="newOfferFormGroup.controls['endOffer'].errors && newOfferFormGroup.controls['endOffer'].touched" class="text-danger">{{getErrorMessage('endOffer', newOfferFormGroup.controls['endOffer'].errors)}}</small>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-warning spacer-margin" type="submit">Valider</button>&nbsp;<span class="text-muted">les champs marqués par <i class="text-danger">*</i> sont obligatoires </span>
+
+    </form>
+  </div>
+
+  <div class="spacer-bottom text-center spacer-top">
+    <span><a class="btn btn-warning" routerLink="/jobs"> Retour</a> </span>
+  </div>
+
+</div>
+
+
+</body>
+
+<app-footer></app-footer>
+</html>
+

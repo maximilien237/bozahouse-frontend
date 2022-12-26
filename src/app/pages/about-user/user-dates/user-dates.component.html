@@ -1,0 +1,135 @@
+<html class="bg-secondary">
+<body class="bg-secondary">
+
+<app-header></app-header>
+
+<!--<div class="container">
+  <div class="card offset-3 mt-2">
+
+    <div class="card-title"> <span class="text-center"> {{}} </span></div>
+    <div class="card-body">
+  <div class="card-text">
+    <span> {{}} </span>
+  </div>
+      <div class="card-text"></div>
+    </div>
+    <div class="card-footer">
+      <span class="text-muted text-center"><i class="bi bi-calendar"></i> {{}} </span>
+    </div>
+  </div>
+</div>-->
+
+<div class="container mt-lg-5 spacer-bottom">
+  <!--  <div class="card bg-secondary">-->
+    <!-- list users -->
+    <ng-container *ngIf="userDates | async as listUserDates; else failureOrLoading">
+      <div class="card spacer-top bg-dark" style="margin-right: 10px;">
+        <div class="text-center text-warning mt-2"><span style="font-size: 20px; font-weight: bold">nombre de connexion [ {{connexionNumber}} ]</span></div>
+        <div class="card-body">
+
+          <table class="table table-responsive mt-2">
+            <thead class="text-light">
+            <tr>
+
+              <th>Username</th>
+              <th>Dates de connexion</th>
+              <th>Actions</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr class="text-white-50" *ngFor="let user of userDates | async">
+
+              <td>{{user.username}}</td>
+              <td>{{user.lastConnexion | date: 'd MMM y HH:mm:ss'}}</td>
+              <td>
+                <a (click)="handleDeleteAppUserDates(user)" class="btn btn-danger">
+                  <i class="bi bi-trash"></i>
+                </a>
+              </td>
+
+            </tr>
+            </tbody>
+
+          </table>
+          <!--   <ul class="nav nav-pills">
+               <li *ngFor="let item of [].constructor(totalPages); let page = index">
+                 <a [ngClass]="page==currentPage?'btn-info':'btn-outline-info'" (click)="goToPage(page)" class="btn ms-1 mt-1"  >{{page}}</a>
+               </li>
+             </ul>
+-->
+          <ul class=" nav nav-pills spacer-left spacer-bottom">
+            <ng-container *ngIf="currentPage > 0">
+              <li >
+                <a class="page-link btn ms-1" (click)="goToPage(currentPage - 1)" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+            </ng-container>
+
+            <!-- "[A-Za-z0-9.%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{3,4}" -->
+
+            <li *ngFor="let item of [].constructor(totalPages); let page = index" >
+              <a [ngClass]="page==currentPage?'btn-warning':'btn-outline-warning'" (click)="goToPage(page)" class="btn ms-1"  >{{page}}</a>
+            </li>
+            <ng-container *ngIf=" currentPage < totalPages - 1">
+              <li >
+                <a class="page-link btn ms-1" (click)="goToPage(currentPage + 1)" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ng-container>
+
+          </ul>
+
+
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #failureOrLoading>
+
+      <ng-container *ngIf="errorMessage; else loading">
+        <div class="text-warning text-center spacer-margin">
+          <strong><span>Oups ! une erreur est survenue.</span><br /></strong>
+
+        </div>
+
+        <div class="spacer-bottom text-center spacer-top" >
+          <span><a class="btn btn-warning" (click)="reloadPage()"> <i class="bi bi-arrow-counterclockwise"></i> Revenir</a> </span>
+        </div>
+      </ng-container>
+
+      <ng-template #loading>
+
+        <div class="d-flex justify-content-center spacer-margin" >
+          <div class=" spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </ng-template>
+
+    </ng-template>
+
+    <!-- -->
+
+
+  <!--  </div>-->
+
+  <div class="text-center mt-2"><a class="btn btn-warning" routerLink="/users">Retour</a></div>
+
+</div>
+
+<div class="mb-lg-5"></div>
+
+<app-footer></app-footer>
+
+
+</body>
+</html>
+
+
+
+
+

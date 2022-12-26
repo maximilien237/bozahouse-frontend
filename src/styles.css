@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+@import "assets/icons-main/font/bootstrap-icons.css";
+
+@import "assets/css/bootstrap.min.css";
+
+/*@import "tailwindcss/base.css";*/
+/*@import "tailwindcss/components.css";*/
+/*@import "tailwindcss/utilities.css";*/
+
+
+
+.spacer{
+  margin-top: 30px;
+}
+
+.spacer-top{
+  margin-top: 30px;
+}
+
+.spacer-bottom{
+  margin-bottom: 30px;
+}
+
+.spacer-right{
+  margin-right: 30px;
+}
+
+.spacer-left{
+  margin-left: 30px;
+}
+
+.spacer-margin{
+  margin: 30px;
+}
+
+.hide-underline-link{
+  text-decoration: none;
+}
+
+.clickable{
+  cursor: pointer;
+}
+
+
+
+/*@import'~tailwindcss/base.css';
+@import "node_modules/tailwindcss/utilities.css";
+@import "node_modules/tailwindcss/components.css";*/

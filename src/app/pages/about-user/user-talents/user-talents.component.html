@@ -1,0 +1,148 @@
+<html class="bg-secondary">
+<body class="bg-secondary">
+<app-navbar></app-navbar>
+
+<div class="container spacer  ">
+  <div class="text-center">
+
+    <ng-container *ngIf="currentUser">
+      <ng-container *ngIf="currentUser.account == 'talent' && currentUser.activatedHostSubscription || isAdmin">
+      <span style="font-size: 20px;">
+      <a routerLink="/addTalent" class="hide-underline-link btn btn-dark text-warning">
+      <i class="bi bi-plus "></i> publier un profil
+      </a>
+    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </ng-container>
+    </ng-container>
+
+
+
+  </div><br>
+  <div class="card bg-secondary border-0">
+
+    <h5 class="text-center mt-2"><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i> <i class="bi bi-dash text-success w-100" ></i>&nbsp;Mes profiles &nbsp;<i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i></h5>
+
+    <div class="row">
+
+      <ng-container>
+        <ng-container *ngIf="userTalents | async as listTalent; else failureOrLoading">
+          <div  *ngFor="let talent of userTalents | async"  class="col-md-4 ">
+            <div class="card  spacer-margin bg-dark">
+
+              <div class="card-header">
+
+                <a *ngIf="isAdmin" routerLink="/addTalent" class="btn btn-secondary">
+                  <i class="bi bi-plus-circle"></i>
+                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <a (click)="handleUpdateTalent(talent.id)" class="btn btn-warning">
+                  <i class="bi bi-pencil"></i>
+                </a> &nbsp;&nbsp;&nbsp;&nbsp;
+
+                <a (click)="handleDeleteTalent(talent)" class="btn btn-danger">
+                  <i class="bi bi-trash"></i>
+                </a>
+
+
+              </div>
+              <div class="card-body text-center" >
+                <span class="text-warning" style="font-size: 35px;">{{talent.firstname}}</span><br>
+                <span class="text-light">[{{talent.title}}]</span><br>
+                <span class="text-white-50" style=" font-size: 15px"><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{talent.address}}</span><br />
+                <span class="text-white-50" style="font-size: 15px"><i class="bi bi-book-fill">&nbsp;</i>{{talent.contract}}</span> &nbsp;&nbsp; <span class="text-white-50" style="font-size: 15px" ><i class="bi bi-wifi"></i> {{talent.workMode}} </span><br />
+
+
+                <span *ngIf="talent.salary==''; else other">
+        <span style="color: #bb2d3b; font-size: 20px"> Salaire à définir avec l'employeur </span><br />
+      </span>
+
+                <ng-template #other>
+                  <span *ngIf="talent.salary" style="color: #bb2d3b; font-size: 20px"> {{talent.salary | number: '1.0-0'}} FCFA</span><br />
+                </ng-template>
+
+
+                <div class="text-muted">
+                  <span ><i class="bi bi-book-fill"></i>&nbsp;<span>{{talent.contract}}</span></span>
+                </div><br>
+
+                <span><a (click)="handleDetailTalent(talent.id)" class="btn btn-warning rounded-pill">Voir plus</a></span><br>
+
+
+              </div>
+              <span class="text-muted card-footer btn" style=" font-size: 18px" (click)="shared()">partager &nbsp;<i class="bi bi-share-fill"></i></span>
+
+            </div>
+          </div>
+
+        </ng-container>
+        <ng-template #failureOrLoading>
+          <ng-container *ngIf="errorMessage; else Loading">
+            <div class="text-danger">
+              {{errorMessage}}
+            </div>
+          </ng-container>
+
+          <ng-template #Loading>
+
+            <div class="d-flex justify-content-center spacer-margin" >
+              <div class=" spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </ng-template>
+
+        </ng-template>
+      </ng-container>
+
+
+    </div>
+
+    <ul class=" nav nav-pills spacer-left spacer-bottom">
+      <ng-container *ngIf="currentPage > 0 && currentPage != 0">
+        <li >
+          <a class="page-link btn ms-1" (click)="goToPage(currentPage - 1)" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      </ng-container>
+
+      <!-- "[A-Za-z0-9.%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{3,4}" -->
+
+      <li *ngFor="let item of [].constructor(totalPages); let page = index" >
+        <a [ngClass]="page==currentPage?'btn-warning':'btn-outline-warning'" (click)="goToPage(page)" class="btn ms-1"  >{{page}}</a>
+      </li>
+      <ng-container *ngIf="currentPage != totalPages - 1 && currentPage>0">
+        <li >
+          <a class="page-link btn ms-1" (click)="goToPage(currentPage + 1)" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ng-container>
+
+    </ul>
+
+  </div >
+
+
+</div>
+
+
+<div class="spacer"></div>
+
+<div class="spacer-bottom text-center spacer-top">
+  <span><a class="btn btn-warning" routerLink="/account"> Retour</a> </span>
+</div>
+
+<app-footer>
+
+</app-footer>
+</body>
+</html>
+
+<!--<html class="bg-secondary">
+<body class="bg-secondary">
+
+</body>
+</html>-->
+
+
