@@ -98,6 +98,10 @@ export class AccountComponent implements OnInit {
     this.router.navigate(['userTalents', id]);
   }
 
+  handleListAppUserTestimony(id: string) {
+    this.router.navigate(['userTestimonies', id]);
+  }
+
   handleCurrentAppUser(){
     this.userService.getAccount().subscribe({
       next: value => {

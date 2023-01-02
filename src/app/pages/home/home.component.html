@@ -42,7 +42,15 @@
               <span class="text-light0">Auteur : [ Entreprise ]</span>
             </ng-template>
             <span class="text-white-50" style="font-size: 15px"><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{offer.address}}</span><br />
-            <span class="text-white-50" style=" font-size: 15px"><i class="bi bi-book-fill">&nbsp;</i>{{offer.contract}}</span> &nbsp;&nbsp; <span class="text-white-50" style=" font-size: 15px" ><i class="bi bi-wifi"></i> {{offer.workMode}} </span><br />
+            <span class="text-white-50" style=" font-size: 15px"><i class="bi bi-book-fill">&nbsp;</i>{{offer.contract}}</span> &nbsp;&nbsp;
+
+            <ng-container *ngIf="offer.workMode == 'Sur site'">
+              <span class="text-muted" style="font-size: 15px" ><i class="bi bi-house-fill"></i> {{offer.workMode}} </span><br />
+            </ng-container>
+
+            <ng-container *ngIf="offer.workMode == 'A distance'">
+              <span class="text-muted" style="font-size: 15px" ><i class="bi bi-wifi"></i> {{offer.workMode}} </span><br />
+            </ng-container>
 
 
             <span *ngIf="offer.salary == ''; else other">
@@ -99,7 +107,7 @@
         <ng-template #loading>
 
           <div class="d-flex justify-content-center spacer-margin" >
-            <div class=" spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
+            <div class=" spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
           </div>
@@ -214,7 +222,7 @@
         <ng-template #loading>
 
           <div class="d-flex justify-content-center spacer-margin" >
-            <div class=" spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
+            <div class=" spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
           </div>

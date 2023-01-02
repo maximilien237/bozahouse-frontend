@@ -1,0 +1,38 @@
+<html class="bg-secondary">
+<body class="bg-secondary">
+
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <div class="col-md-6 offset-md-3">
+    <div class="card bg-dark text-light">
+      <h5 class="text-center text-warning spacer">Laissez un avis</h5>
+
+      <div class="card-body">
+        <form [formGroup]="newTestimonyFormGroup" (ngSubmit)="handleSaveTestimony()">
+
+          <div class="mb-3">
+            <label class="form-label text-white-50"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Décrivez votre expérience</label>
+            <textarea class="form-control bg-secondary" formControlName="message" type="text"  style="height: 150px" ></textarea>
+            <small *ngIf="newTestimonyFormGroup.controls['message'].errors && newTestimonyFormGroup.controls['message'].touched" class="text-danger">{{getErrorMessage('message', newTestimonyFormGroup.controls['message'].errors)}}</small>
+
+          </div>
+
+          <div class="text-center">
+            <button [disabled] = "!newTestimonyFormGroup.valid" class="btn btn-warning" type="submit">Submit</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mb-3 spacer-left mt-3">
+  <span><a routerLink="/testimonies" class="hide-underline-link btn btn-dark text-warning">Retour</a> </span>
+
+</div>
+
+<app-footer></app-footer>
+
+</body>
+</html>

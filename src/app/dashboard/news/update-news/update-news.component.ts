@@ -33,8 +33,8 @@ export class UpdateNewsComponent implements OnInit {
           this.updateEmailFormGroup = this.fb.group({
 
             subject : this.fb.control(this.email.subject, [Validators.required,Validators.pattern("[A-Z][a-z0-9-çèéàê()+:!',. ]+")]),
-            frenchContent: this.fb.control(this.email.frenchContent, [Validators.required,Validators.pattern("[A-Z][a-z0-9-çèéàê()+:!',. ]+")]),
-            englishContent : this.fb.control(this.email.englishContent, [Validators.required,Validators.pattern("[A-Z][a-z0-9-çèéàê()+:!',. ]+")]),
+            frenchContent: this.fb.control(this.email.frenchContent, [Validators.required,Validators.pattern("[A-Za-z0-9-çèéàê()+:!',. ]+")]),
+            englishContent : this.fb.control(this.email.englishContent, [Validators.required,Validators.pattern("[A-Za-z0-9-çèéàê()+:!',. ]+")]),
             sendingDate: this.fb.control(formatDate(this.email.sendingDate, 'yyyy-MM-dd', 'en'),[Validators.required])
            // sendingDate: [formatDate(this.email.sendingDate, 'yyyy-MM-dd', 'en'),[Validators.required]]
 

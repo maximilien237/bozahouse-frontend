@@ -25,8 +25,8 @@ export class AddNewsComponent implements OnInit {
   ngOnInit(): void {
     this.newEmailFormGroup = this.fb.group({
       subject : this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z0-9-çèéàê()+:!',. ]+")]),
-      frenchContent: this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z0-9-çèéàê()+:!',. ]+")]),
-      englishContent : this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z0-9-çèéàê()+:!',. ]+")]),
+      frenchContent: this.fb.control("", [Validators.required,Validators.pattern("[A-Za-z0-9-çèéàê()+:!',. ]+")]),
+      englishContent : this.fb.control("", [Validators.required,Validators.pattern("[A-Za-z0-9-çèéàê()+:!',. ]+")]),
       sendingDate: this.fb.control('')
 
     });

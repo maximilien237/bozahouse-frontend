@@ -5,8 +5,8 @@
 
 <div class="container col-md-10 ">
 
-  <div class="spacer-bottom text-center spacer-top">
-    <span><a class="btn btn-warning" routerLink="/jobs">Retour</a> </span>
+  <div class="spacer-left mt-2">
+    <span><a routerLink="/jobs" class="hide-underline-link btn btn-dark text-warning">Retour</a> </span>
   </div>
 
   <div class="card col-md-7 offset-md-3 spacer bg-dark">
@@ -41,21 +41,21 @@
                   <div class="mb-3">
       <label class="form-label">L'url de votre page facebook</label>
                       <input class="form-control" formControlName="fcb" placeholder="example : https://www.facebook.com/example/"  type="text">
-           <small *ngIf="newOfferFormGroup.controls['fcb'].errors && newOfferFormGroup.controls['fcb'].touched" class="text-danger">{{getErrorMessage('fcb', newOfferFormGroup.controls['fcb'].errors)}}</small>
+           <small *ngIf="newOfferFormGroup.controls['fcb'].errors && newOfferFormGroup.controls['fcb'].touched" class="text-danger">{{getErrorMessageUrl('fcb', newOfferFormGroup.controls['fcb'].errors)}}</small>
 
                   </div>
 
                   <div class="mb-3">
       <label class="form-label">L'url de votre page linkedin</label>
                       <input class="form-control" formControlName="linkedin" placeholder="example : https://www.linkedin.com/example/"  type="text">
-    <small *ngIf="newOfferFormGroup.controls['linkedin'].errors && newOfferFormGroup.controls['linkedin'].touched" class="text-danger">{{getErrorMessage('Linkedin', newOfferFormGroup.controls['linkedin'].errors)}}</small>
+    <small *ngIf="newOfferFormGroup.controls['linkedin'].errors && newOfferFormGroup.controls['linkedin'].touched" class="text-danger">{{getErrorMessageUrl('Linkedin', newOfferFormGroup.controls['linkedin'].errors)}}</small>
 
                   </div>
 
                   <div class="mb-3">
       <label class="form-label">L'url de votre site web</label>
       <input class="form-control" formControlName="web" placeholder="example : https://www.monsite.com/example/"  type="text">
-     <small *ngIf="newOfferFormGroup.controls['web'].errors && newOfferFormGroup.controls['web'].touched" class="text-danger">{{getErrorMessage('web', newOfferFormGroup.controls['web'].errors)}}</small>
+     <small *ngIf="newOfferFormGroup.controls['web'].errors && newOfferFormGroup.controls['web'].touched" class="text-danger">{{getErrorMessageUrl('web', newOfferFormGroup.controls['web'].errors)}}</small>
 
                   </div>
 
@@ -64,7 +64,7 @@
       </span>
 
 
-              <div class="mb-3 mt-3">
+      <!--        <div class="mb-3 mt-3">
                 <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Pays</label>
                 <select class="form-select" formControlName="countryCode" >
                   <option value="+27" >Afrique du Sud</option>
@@ -123,12 +123,12 @@
                   <option value="+263" >Zimbabwe</option>
                 </select>
                 <small *ngIf="newOfferFormGroup.controls['countryCode'].errors && newOfferFormGroup.controls['countryCode'].touched" class="text-danger">{{getErrorMessage('countryCode', newOfferFormGroup.controls['countryCode'].errors)}}</small>
-              </div>
+              </div>-->
 
               <div class="mb-3">
                 <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Contact</label>
                 <input type="text" class="form-control" formControlName="tel" placeholder="6********" >
-                <small *ngIf="newOfferFormGroup.controls['tel'].errors && newOfferFormGroup.controls['tel'].touched" class="text-danger">{{getErrorMessage('tel', newOfferFormGroup.controls['tel'].errors)}}</small>
+                <small *ngIf="newOfferFormGroup.controls['tel'].errors && newOfferFormGroup.controls['tel'].touched" class="text-danger">{{getErrorMessageTel('tel', newOfferFormGroup.controls['tel'].errors)}}</small>
               </div>
 
 <!--              <div class="mb-3">
@@ -141,14 +141,14 @@
               <div class="mb-3">
                 <label class="form-label">Numéro WhatsApp</label>
                 <input class="form-control" formControlName="whatsAppNumber" placeholder="6********" type="text">
-                <small *ngIf="newOfferFormGroup.controls['whatsAppNumber'].errors && newOfferFormGroup.controls['whatsAppNumber'].touched" class="text-danger">{{getErrorMessage('whatsAppNumber', newOfferFormGroup.controls['whatsAppNumber'].errors)}}</small>
+                <small *ngIf="newOfferFormGroup.controls['whatsAppNumber'].errors && newOfferFormGroup.controls['whatsAppNumber'].touched" class="text-danger">{{getErrorMessageTel('whatsAppNumber', newOfferFormGroup.controls['whatsAppNumber'].errors)}}</small>
 
               </div>
 
               <div class="mb-3">
                 <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Email <span class="text-muted"></span></label>
                 <input class="form-control" formControlName="email" placeholder="you@example.com" type="text">
-                <small *ngIf="newOfferFormGroup.controls['email'].errors && newOfferFormGroup.controls['email'].touched" class="text-danger">{{getErrorMessage('email', newOfferFormGroup.controls['email'].errors)}}</small>
+                <small *ngIf="newOfferFormGroup.controls['email'].errors && newOfferFormGroup.controls['email'].touched" class="text-danger">{{getErrorMessageEmail('email', newOfferFormGroup.controls['email'].errors)}}</small>
 
               </div>
 
@@ -185,21 +185,21 @@
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mission du poste</label>
-              <textarea aria-label="With textarea" class="form-control" formControlName="mission" type="text"></textarea>
+              <textarea aria-label="With textarea" class="form-control" formControlName="mission" type="text" style="height: 150px"></textarea>
               <small *ngIf="newOfferFormGroup.controls['mission'].errors && newOfferFormGroup.controls['mission'].touched" class="text-danger">{{getErrorMessage('mission', newOfferFormGroup.controls['mission'].errors)}}</small>
 
             </div>
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Compétences réquises</label>
-              <textarea aria-label="With textarea" class="form-control" formControlName="skills" type="text"></textarea>
+              <textarea aria-label="With textarea" class="form-control" formControlName="skills" type="text" style="height: 150px" ></textarea>
               <small *ngIf="newOfferFormGroup.controls['skills'].errors && newOfferFormGroup.controls['skills'].touched" class="text-danger">{{getErrorMessage('skills', newOfferFormGroup.controls['skills'].errors)}}</small>
 
             </div>
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Profil recherché</label>
-              <textarea aria-label="With textarea" class="form-control" formControlName="profile" type="text"></textarea>
+              <textarea aria-label="With textarea" class="form-control" formControlName="profile" type="text" style="height: 150px" ></textarea>
               <small *ngIf="newOfferFormGroup.controls['profile'].errors && newOfferFormGroup.controls['profile'].touched" class="text-danger">{{getErrorMessage('profile', newOfferFormGroup.controls['profile'].errors)}}</small>
 
             </div>
@@ -242,7 +242,7 @@
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Address</label>
               <input class="form-control" formControlName="address" placeholder="Simbok,Yaoundé,Cameroun" type="text">
-              <small *ngIf="newOfferFormGroup.controls['address'].errors && newOfferFormGroup.controls['address'].touched" class="text-danger">{{getErrorMessage('address', newOfferFormGroup.controls['address'].errors)}}</small>
+              <small *ngIf="newOfferFormGroup.controls['address'].errors && newOfferFormGroup.controls['address'].touched" class="text-danger">{{getErrorMessageAdress('address', newOfferFormGroup.controls['address'].errors)}}</small>
 
             </div>
           </div>
@@ -287,7 +287,7 @@
                <div class="mb-3 mt-2">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Montant</label>
               <input type="text" class="form-control" formControlName="salary"  >
-              <small *ngIf="newOfferFormGroup.controls['salary'].errors && newOfferFormGroup.controls['salary'].touched" class="text-danger">{{getErrorMessage('salary', newOfferFormGroup.controls['salary'].errors)}}</small>
+              <small *ngIf="newOfferFormGroup.controls['salary'].errors && newOfferFormGroup.controls['salary'].touched" class="text-danger">{{getErrorMessageSalary('salary', newOfferFormGroup.controls['salary'].errors)}}</small>
 
             </div>
 
@@ -304,20 +304,20 @@
         </div>
       </div>
 
-      <button class="btn btn-warning spacer-margin" type="submit">Valider</button>&nbsp;<span class="text-muted">les champs marqués par <i class="text-danger">*</i> sont obligatoires </span>
+      <button [disabled] = "!newOfferFormGroup.valid" class="btn btn-warning spacer-margin" type="submit">Valider</button>&nbsp;<span class="text-muted">les champs marqués par <i class="text-danger">*</i> sont obligatoires </span>
 
     </form>
   </div>
 
-  <div class="spacer-bottom text-center spacer-top">
-    <span><a class="btn btn-warning" routerLink="/jobs"> Retour</a> </span>
-  </div>
-
 </div>
 
+<div class="mb-3 spacer-left mt-3">
+  <span><a routerLink="/jobs" class="hide-underline-link btn btn-dark text-warning">Retour</a> </span>
+</div>
+
+<app-footer></app-footer>
 
 </body>
 
-<app-footer></app-footer>
 </html>
 

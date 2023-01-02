@@ -18,7 +18,6 @@ import { DetailAppUserComponent } from './dashboard/app-user/detail-app-user/det
 import { UpdateAppUserComponent } from './dashboard/app-user/update-app-user/update-app-user.component';
 import { AddAppUserComponent } from './dashboard/app-user/add-app-user/add-app-user.component';
 
-import { SliderComponent } from './pages/fragments/slider/slider.component';
 import {NavbarComponent} from "./pages/fragments/navbar/navbar.component";
 import { ListTalentComponent } from './pages/talent/list-talent/list-talent.component';
 import { ListOfferComponent } from './pages/offer/list-offer/list-offer.component';
@@ -49,7 +48,6 @@ import {RegisterComponent} from "./pages/register/register.component";
 
 
 import { AccountComponent } from './pages/account/account/account.component';
-import { SidebarComponent } from './pages/fragments/sidebar/sidebar.component';
 import { AdminComponent } from './dashboard/admin/admin.component';
 import {AuthInterceptor} from "./services/interceptor/AuthInterceptor";
 import { ForfaitComponent } from './pages/forfait/forfait.component';
@@ -61,6 +59,11 @@ import {registerLocaleData} from "@angular/common";
 import * as fr from '@angular/common/locales/fr';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { InfoComponent } from './pages/info/info.component';
+import { UserTestimoniesComponent } from './pages/about-user/user-testimonies/user-testimonies.component';
+import { AddTestimonyComponent } from './pages/testimony/add-testimony/add-testimony.component';
+import { ListTestimonyComponent } from './pages/testimony/list-testimony/list-testimony.component';
+import { UpdateTestimonyComponent } from './pages/testimony/update-testimony/update-testimony.component';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +79,6 @@ import { InfoComponent } from './pages/info/info.component';
     UpdateAppUserComponent,
     AddAppUserComponent,
     NavbarComponent,
-    SliderComponent,
     ListTalentComponent,
     ListOfferComponent,
     DetailNewsComponent,
@@ -98,7 +100,6 @@ import { InfoComponent } from './pages/info/info.component';
     UpdateAppRoleComponent,
     ListAppRoleComponent,
     AccountComponent,
-    SidebarComponent,
     AdminComponent,
     ForfaitComponent,
     UserDatesComponent,
@@ -106,7 +107,12 @@ import { InfoComponent } from './pages/info/info.component';
     UserOffersComponent,
     UserSubscriptionsComponent,
     ForgotPasswordComponent,
-    InfoComponent
+    InfoComponent,
+    UserTestimoniesComponent,
+    AddTestimonyComponent,
+    ListTestimonyComponent,
+    UpdateTestimonyComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,

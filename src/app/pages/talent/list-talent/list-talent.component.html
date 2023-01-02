@@ -135,7 +135,7 @@
 
     </ng-container>
 
-
+<!--    <span><a *ngIf="currentUser.hostSubscriptionCounter >= 1 || currentUser.normalSubscriptionCounter >=1" routerLink="/addTestimony" class="hide-underline-link btn btn-dark text-warning">Rédiger un avis</a> </span>-->
 
     <!-- sidebar right -->
     <!--
@@ -246,16 +246,16 @@
           </div>
         </ng-container>
         <ng-template #failureOrLoading>
-          <ng-container *ngIf="errorMessageTalent; else Loading">
+          <ng-container *ngIf="errorMessageTalent; else loading">
             <div class="text-warning text-center spacer-margin">
               <span>Oups ! pas de données pour le moment</span>
             </div>
           </ng-container>
 
-          <ng-template #Loading>
+          <ng-template #loading>
 
             <div class="d-flex justify-content-center spacer-margin" >
-              <div class=" spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
+              <div class=" spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
             </div>
@@ -296,8 +296,10 @@
 
 </div>
 
+<div class="text-end mb-3 spacer-right">
+  <span><a routerLink="/addTestimony" class="hide-underline-link btn btn-dark text-warning">Rédiger un avis</a> </span>
 
-<div class="spacer"></div>
+</div>
 
 <app-footer>
 

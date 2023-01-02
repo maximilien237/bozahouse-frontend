@@ -3,6 +3,11 @@
 
 <body class="bg-secondary">
 
+<div class="mt-2 spacer-left">
+  <span><a routerLink="/talents" class="hide-underline-link btn btn-dark text-warning">Retour</a> </span>
+
+</div>
+
 <div class="container col-md-10 ">
 
   <div class="card col-md-7 offset-md-3 spacer bg-dark">
@@ -47,14 +52,14 @@
                 <div class="mb-3">
                   <label  class="form-label">L'url de ton profil Linkedin</label>
                   <input type="text" class="form-control" formControlName = "linkedin"  placeholder="example : https://www.linkedin.com/example/">
-                  <small *ngIf="updateTalentFormGroup.controls['linkedin'].errors && updateTalentFormGroup.controls['linkedin'].touched" class="text-danger">{{getErrorMessage('Linkedin', updateTalentFormGroup.controls['linkedin'].errors)}}</small>
+                  <small *ngIf="updateTalentFormGroup.controls['linkedin'].errors && updateTalentFormGroup.controls['linkedin'].touched" class="text-danger">{{getErrorMessageUrl('Linkedin', updateTalentFormGroup.controls['linkedin'].errors)}}</small>
 
                 </div>
 
                 <div class="mb-3">
                   <label  class="form-label">L'url de ton repo github</label>
                   <input type="text" class="form-control" formControlName = "github"  placeholder="example : https://www.github.com/example/">
-                  <small *ngIf="updateTalentFormGroup.controls['github'].errors && updateTalentFormGroup.controls['github'].touched" class="text-danger">{{getErrorMessage('Github', updateTalentFormGroup.controls['github'].errors)}}</small>
+                  <small *ngIf="updateTalentFormGroup.controls['github'].errors && updateTalentFormGroup.controls['github'].touched" class="text-danger">{{getErrorMessageUrl('Github', updateTalentFormGroup.controls['github'].errors)}}</small>
 
                 </div>
 
@@ -62,7 +67,7 @@
                   <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Email <span class="text-muted"></span></label>
                   <input type="email" class="form-control" formControlName = "email" placeholder="you@example.com">
                   <small *ngIf="updateTalentFormGroup.controls['email'].errors && updateTalentFormGroup.controls['email'].touched " class="text-danger">
-                    {{getErrorMessage('Email', updateTalentFormGroup.controls['email'].errors)}}</small>
+                    {{getErrorMessageEmail('Email', updateTalentFormGroup.controls['email'].errors)}}</small>
 
                 </div>
 
@@ -115,7 +120,7 @@
               </ng-template>
 
 
-              <div class="mb-3 mt-3">
+             <!-- <div class="mb-3 mt-3">
 
                 <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Pays</label>
                 <select class="form-select" formControlName="countryCode" >
@@ -175,12 +180,12 @@
                   <option value="+263" >Zimbabwe</option>
                 </select>
                 <small *ngIf="updateTalentFormGroup.controls['countryCode'].errors && updateTalentFormGroup.controls['countryCode'].touched" class="text-danger">{{getErrorMessage('countryCode', updateTalentFormGroup.controls['countryCode'].errors)}}</small>
-              </div>
+              </div>-->
 
               <div class="mb-3">
                 <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Contact</label>
                 <input type="text" class="form-control" formControlName="tel" placeholder="6********" >
-                <small *ngIf="updateTalentFormGroup.controls['tel'].errors && updateTalentFormGroup.controls['tel'].touched" class="text-danger">{{getErrorMessage('tel', updateTalentFormGroup.controls['tel'].errors)}}</small>
+                <small *ngIf="updateTalentFormGroup.controls['tel'].errors && updateTalentFormGroup.controls['tel'].touched" class="text-danger">{{getErrorMessageTel('tel', updateTalentFormGroup.controls['tel'].errors)}}</small>
 
               </div>
 
@@ -189,7 +194,7 @@
                 <label class="form-label">Numéro WhatsApp</label>
                 <input class="form-control" formControlName="whatsAppNumber" placeholder="6********" type="text">
                 <small *ngIf="updateTalentFormGroup.controls['whatsAppNumber'].errors && updateTalentFormGroup.controls['whatsAppNumber'].touched " class="text-danger">
-                  {{getErrorMessage('whatsAppNumber', updateTalentFormGroup.controls['whatsAppNumber'].errors)}}</small>
+                  {{getErrorMessageTel('whatsAppNumber', updateTalentFormGroup.controls['whatsAppNumber'].errors)}}</small>
 
               </div>
 
@@ -222,7 +227,7 @@
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Compétences</label>
-              <textarea class="form-control" formControlName = "skills" aria-label="With textarea"></textarea>
+              <textarea class="form-control" formControlName = "skills" aria-label="With textarea" style="height: 150px" ></textarea>
               <small *ngIf="updateTalentFormGroup.controls['skills'].errors && updateTalentFormGroup.controls['skills'].touched " class="text-danger">
                 {{getErrorMessage('Skills', updateTalentFormGroup.controls['skills'].errors)}}</small>
 
@@ -270,7 +275,7 @@
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Address</label>
               <input class="form-control" formControlName="address" placeholder="Simbok,Yaoundé,Cameroun" required type="text">
-              <small *ngIf="updateTalentFormGroup.controls['address'].errors && updateTalentFormGroup.controls['address'].touched" class="text-danger">{{getErrorMessage('Address', updateTalentFormGroup.controls['address'].errors)}}</small>
+              <small *ngIf="updateTalentFormGroup.controls['address'].errors && updateTalentFormGroup.controls['address'].touched" class="text-danger">{{getErrorMessageAdress('Address', updateTalentFormGroup.controls['address'].errors)}}</small>
 
             </div>
           </div>
@@ -318,7 +323,7 @@
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Montant</label>
               <input type="text" class="form-control" formControlName="salary">
                <small *ngIf="updateTalentFormGroup.controls['salary'].errors && updateTalentFormGroup.controls['salary'].touched " class="text-danger">
-                {{getErrorMessage('Salary', updateTalentFormGroup.controls['salary'].errors)}}</small>
+                {{getErrorMessageSalary('Salary', updateTalentFormGroup.controls['salary'].errors)}}</small>
 
             </div>
 
@@ -332,21 +337,21 @@
       </div>
 
 
-      <button class="btn btn-warning spacer-margin" type="submit">Valider</button>&nbsp;<span class="text-muted">les champs marqués par <i class="text-danger">*</i> sont obligatoires </span>
+      <button [disabled] = "!updateTalentFormGroup.valid" class="btn btn-warning spacer-margin" type="submit">Valider</button>&nbsp;<span class="text-muted">les champs marqués par <i class="text-danger">*</i> sont obligatoires </span>
 
     </form>
   </div>
 
-  <div class="spacer-bottom text-center spacer-top">
-    <span><a class="btn btn-warning" routerLink="/talents">Retour</a> </span>
-  </div>
+</div>
+
+<div class="mb-3 spacer-left mt-3">
+  <span><a routerLink="/talents" class="hide-underline-link btn btn-dark text-warning">Retour</a> </span>
 
 </div>
 
-
+<app-footer></app-footer>
 </body>
 
-<app-footer></app-footer>
 </html>
 
 

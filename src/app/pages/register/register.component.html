@@ -1,219 +1,6 @@
-<!--
-
-<div class="container mt-5">
-  <div class="col-md-6 offset-md-3">
-    <div class="card">
-      <h5 class="text-center text-warning spacer">BOZAHOUSE</h5>
-      <h5 class="text-center text-muted">la maison des bozayeurs ! </h5>
-
-      <div class="card-body">
-        <form [formGroup]="registerFormGroup" (ngSubmit)="handleRegister()">
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de compte</label>
-            <select class="form-select" formControlName = "account"  required>
-              <option [ngValue]="null" selected disabled hidden>Type de compte</option>
-              <option value="talent">Talent</option>
-              <option value="employer">Employeur</option>
-              <option value="enterprise">Entreprise</option>
-            </select>
-          </div>
-
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Comment avez vous connu Bozahouse ?</label>
-            <select class="form-select" formControlName = "howKnowUs"  required>
-              <option [ngValue]="null" selected disabled hidden>Comment avez vous connu Bozahouse ?</option>
-              <option value="friend">Amis</option>
-              <option value="facebook">Facebook</option>
-              <option value="whatsapp">Whatsapp</option>
-              <option value="linkedin">LinkedIn</option>
-              <option value="youtube">Youtube</option>
-              <option value="twitter">Twitter</option>
-              <option value="other">Autre</option>
-            </select>
-          </div>
-
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom </label>
-            <input type="text" formControlName = "lastname" class="form-control">
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Prénom </label>
-            <input type="text" formControlName = "firstname" class="form-control">
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email </label>
-            <input type="email" formControlName = "email" class="form-control">
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom d'utilisateur </label>
-            <input type="text" formControlName = "username" class="form-control">
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe </label>
-            <input type="password" formControlName = "password" class="form-control">
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmez le mot de passe </label>
-            <input type="password" formControlName = "confirmPassword" class="form-control">
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date d'anniversaire </label>
-            <input type="date" formControlName = "birthday" class="form-control">
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">code de parrainage </label>
-            <input type="text" formControlName = "referralCode" class="form-control">
-          </div>
-
-          <button class="btn btn-primary" type="submit">SignUp</button> &nbsp;&nbsp;
-          <span style="font-size: 20px">Déjà un compte ? | <a class="hide-underline-link" routerLink="/login"><span class="text-danger">Connectez vous</span></a></span>
-        </form>
-      </div>
-      <span class="text-muted text-center"> les champs marqués par <i class="text-danger">*</i> sont obligatoires</span>
-    </div>
-  </div>
-</div>
-
--->
-
-
-<!--
-<div class="container col-md-10">
-
-  <div class="card bg-dark col-md-7 offset-md-3 mt-xxl-5 mb-xxl-5">
-    <h5 class="text-center text-warning spacer">BOZAHOUSE</h5>
-    <h5 class="text-center text-muted">la maison des bozayeurs ! </h5>
-
-    <div class="card-body">
-      <form [formGroup] = "registerFormGroup" (ngSubmit)="handleRegister()">
-
-
-        <div class="mb-3">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de compte</label>
-          <select class="form-select" formControlName = "account"  required>
-            <option value="talent">Talent</option>
-            <option value="employer">Employeur</option>
-            <option value="enterprise">Entreprise</option>
-          </select>
-          <small *ngIf="registerFormGroup.controls['account'].errors && registerFormGroup.controls['account'].touched" class="text-danger">{{getErrorMessage('account', registerFormGroup.controls['account'].errors)}}</small>
-
-        </div>
-
-
-        <div class="mb-3">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Comment avez vous connu Bozahouse ?</label>
-          <select class="form-select" formControlName = "howKnowUs"  required>
-            <option value="friend">Amis</option>
-            <option value="facebook">Facebook</option>
-            <option value="whatsapp">Whatsapp</option>
-            <option value="linkedin">LinkedIn</option>
-            <option value="youtube">Youtube</option>
-            <option value="twitter">Twitter</option>
-            <option value="other">Autre</option>
-          </select>
-          <small *ngIf="registerFormGroup.controls['howKnowUs'].errors && registerFormGroup.controls['howKnowUs'].touched" class="text-danger">{{getErrorMessage('howKnowUs', registerFormGroup.controls['howKnowUs'].errors)}}</small>
-
-        </div>
-
-        <div class="mb-3 mt-2">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom</label>
-          <input type="text" formControlName = "lastname" class="form-control">
-          <small *ngIf="registerFormGroup.controls['lastname'].errors && registerFormGroup.controls['lastname'].touched" class="text-danger">{{getErrorMessage('lastname', registerFormGroup.controls['lastname'].errors)}}</small>
-
-        </div>
-
-        <div class="mb-3 mt-2">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Prénom</label>
-          <input type="text" formControlName = "firstname" class="form-control">
-          <small *ngIf="registerFormGroup.controls['firstname'].errors && registerFormGroup.controls['firstname'].touched" class="text-danger">{{getErrorMessage('firstname', registerFormGroup.controls['firstname'].errors)}}</small>
-
-        </div>
-
-        <div class="mb-3 mt-2">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Sexe</label>
-          <select class="form-select" formControlName = "sex" required>
-            <option value="" disabled>Choose...</option>
-            <option value="Homme">Homme</option>
-            <option value="Femme">Femme</option>
-          </select>
-          <small *ngIf="registerFormGroup.controls['sex'].errors && registerFormGroup.controls['sex'].touched" class="text-danger">{{getErrorMessage('sex', registerFormGroup.controls['sex'].errors)}}</small>
-
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
-          <input type="email" formControlName = "email" class="form-control">
-          <small *ngIf="registerFormGroup.controls['email'].errors && registerFormGroup.controls['email'].touched" class="text-danger">{{getErrorMessage('email', registerFormGroup.controls['email'].errors)}}</small>
-
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom d'utilisateur</label>
-          <input type="text" formControlName = "username" class="form-control">
-          <small *ngIf="registerFormGroup.controls['username'].errors && registerFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', registerFormGroup.controls['username'].errors)}}</small>
-
-        </div>
-
-        <div class="mb-3 mt-2">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
-          <input type="password" formControlName = "password" class="form-control">
-          <small *ngIf="registerFormGroup.controls['password'].errors && registerFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessage('password', registerFormGroup.controls['password'].errors)}}</small>
-
-        </div>
-
-        <div class="mb-3 mt-2">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du mot de passe</label>
-          <input type="password" formControlName = "confirmPassword" class="form-control">
-          <small *ngIf="registerFormGroup.controls['confirmPassword'].errors && registerFormGroup.controls['confirmPassword'].touched" class="text-danger">{{getErrorMessage('confirmPassword', registerFormGroup.controls['confirmPassword'].errors)}}</small>
-
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date d'anniversaire</label>
-          <input type="date" formControlName = "birthday" class="form-control">
-          <small *ngIf="registerFormGroup.controls['birthday'].errors && registerFormGroup.controls['birthday'].touched" class="text-danger">{{getErrorMessage('birthday', registerFormGroup.controls['birthday'].errors)}}</small>
-
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label text-white">Code de parrainage</label>
-          <input type="text" formControlName = "referralCode" class="form-control">
-          <small *ngIf="registerFormGroup.controls['referralCode'].errors && registerFormGroup.controls['referralCode'].touched" class="text-danger">{{getErrorMessage('referralCode', registerFormGroup.controls['referralCode'].errors)}}</small>
-
-        </div>
-
-
-        <span class="text-secondary" style="font-size: 17px">Déjà un compte ? | <a class="hide-underline-link" routerLink="/login"><span class="text-light">Connectez vous</span></a></span>
-
-        <div class="text-center text-white">
-          <button [disabled] = "!registerFormGroup.valid" class="btn btn-primary w-100 mb-xxl-2 mt-lg-1" type="submit">Inscription</button>
-        </div>
-
-      </form>
-      <span class="text-muted text-center"> les champs marqués par <i class="text-danger">*</i> sont obligatoires</span>
-    </div>
-  </div>
-</div>
-
--->
-
-
 <!doctype html>
-<html lang="en" >
-<head>
+<html lang="en" class="bg-secondary">
 
-
-  <title></title></head>
 <body class="d-flex  text-white bg-secondary">
 
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -230,7 +17,7 @@
       <div class="card bg-dark col-md-7 offset-md-3 mt-xxl-5 mb-xxl-5">
         <h5 class="text-center text-warning spacer">BOZAHOUSE</h5>
         <h5 class="text-center text-muted">la maison des bozayeurs ! </h5>
-        <h5 class="text-center text-white-50">besoin d'aide ? <a class="text-warning text-decoration-none" routerLink="/info">Cliquez ici</a></h5>
+        <h5 class="text-center text-white-50" style="font-size: 14px">besoin d'aide ? <a class="text-warning text-decoration-none" routerLink="/info" style="font-size: 12px">Cliquez ici</a></h5>
 
         <div class="card-body">
           <form [formGroup] = "registerFormGroup" (ngSubmit)="handleRegister()">
@@ -266,14 +53,14 @@
             <div class="mb-3 mt-2">
               <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom</label>
               <input type="text" formControlName = "lastname" class="form-control">
-              <small *ngIf="registerFormGroup.controls['lastname'].errors && registerFormGroup.controls['lastname'].touched" class="text-danger">{{getErrorMessage('lastname', registerFormGroup.controls['lastname'].errors)}}</small>
+              <small *ngIf="registerFormGroup.controls['lastname'].errors && registerFormGroup.controls['lastname'].touched" class="text-danger">{{getErrorMessageName('lastname', registerFormGroup.controls['lastname'].errors)}}</small>
 
             </div>
 
             <div class="mb-3 mt-2">
               <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Prénom</label>
               <input type="text" formControlName = "firstname" class="form-control">
-              <small *ngIf="registerFormGroup.controls['firstname'].errors && registerFormGroup.controls['firstname'].touched" class="text-danger">{{getErrorMessage('firstname', registerFormGroup.controls['firstname'].errors)}}</small>
+              <small *ngIf="registerFormGroup.controls['firstname'].errors && registerFormGroup.controls['firstname'].touched" class="text-danger">{{getErrorMessageName('firstname', registerFormGroup.controls['firstname'].errors)}}</small>
 
             </div>
 
@@ -290,30 +77,30 @@
 
             <div class="mb-3">
               <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
-              <input type="email" formControlName = "email" class="form-control">
-              <small *ngIf="registerFormGroup.controls['email'].errors && registerFormGroup.controls['email'].touched" class="text-danger">{{getErrorMessage('email', registerFormGroup.controls['email'].errors)}}</small>
+              <input (keydown.space)="$event.preventDefault()" type="email" formControlName = "email" class="form-control" placeholder="ex : youremail@gmail.com">
+              <small *ngIf="registerFormGroup.controls['email'].errors && registerFormGroup.controls['email'].touched" class="text-danger">{{getErrorMessageEmail('email', registerFormGroup.controls['email'].errors)}}</small>
 
             </div>
 
             <div class="mb-3">
               <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom d'utilisateur</label>
-              <input type="text" formControlName = "username" class="form-control">
+              <input (keydown.space)="$event.preventDefault()" type="text" formControlName = "username" class="form-control">
               <small *ngIf="registerFormGroup.controls['username'].errors && registerFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', registerFormGroup.controls['username'].errors)}}</small>
 
             </div>
 
             <div class="mb-3 mt-2">
               <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
-              <input type="password" formControlName = "password" class="form-control">
+              <input type="password" formControlName = "password" class="form-control" id="pwd">
+              <input type="checkbox" onclick="showAndHidePassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
               <small *ngIf="registerFormGroup.controls['password'].errors && registerFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessage('password', registerFormGroup.controls['password'].errors)}}</small>
-
             </div>
 
             <div class="mb-3 mt-2">
               <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du mot de passe</label>
-              <input type="password" formControlName = "confirmPassword" class="form-control">
+              <input type="password" formControlName = "confirmPassword" class="form-control" id="confPwd">
+              <input type="checkbox" onclick="showAndHideConfPassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
               <small *ngIf="registerFormGroup.controls['confirmPassword'].errors && registerFormGroup.controls['confirmPassword'].touched" class="text-danger">{{getErrorMessage('confirmPassword', registerFormGroup.controls['confirmPassword'].errors)}}</small>
-
             </div>
 
             <div class="mb-3">
@@ -323,13 +110,18 @@
 
             </div>
 
-            <div class="mb-3">
+       <!--     <div class="mb-3">
               <label class="form-label text-white">Code de parrainage</label>
               <input type="text" formControlName = "referralCode" class="form-control">
               <small *ngIf="registerFormGroup.controls['referralCode'].errors && registerFormGroup.controls['referralCode'].touched" class="text-danger">{{getErrorMessage('referralCode', registerFormGroup.controls['referralCode'].errors)}}</small>
+            </div>-->
+
+            <div class="mb-3 form-check">
+              <label class="form-label text-white-50"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>j'ai lu et approuvé les <a class="hide-underline-link text-warning" routerLink="/privacyOut">termes</a></label>&nbsp;
+              <input type="checkbox" formControlName = "acceptTerms" class="form-check-input">
+              <small *ngIf="registerFormGroup.controls['acceptTerms'].errors && registerFormGroup.controls['acceptTerms'].touched" class="text-danger">{{getErrorMessageTerms('acceptTerms', registerFormGroup.controls['acceptTerms'].errors)}}</small>
 
             </div>
-
 
             <span class="text-secondary" style="font-size: 17px">Déjà un compte ? | <a class="hide-underline-link" routerLink="/login"><span class="text-warning">Connectez vous</span></a></span>
 
@@ -343,569 +135,11 @@
       </div>
     </div>
 
-
   </main>
-
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-
-  <main>
-    <div>
-      <p>
-
-      </p>
-    </div>
-
-    <div>
-      <p>
-
-      </p>
-    </div>
-  </main>
-
-
-
-
-
-</div>
-
-
-
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-
-<html class="bg-secondary">
-<body class="bg-secondary mt-xxl-5 mb-xxl-5">
-
-<div class="container">
-
-  <div class="card bg-dark col-md-6 offset-md-3">
-    <h5 class="text-center text-warning spacer">BOZAHOUSE</h5>
-    <h5 class="text-center text-muted">la maison des bozayeurs ! </h5>
-
-    <div class="card-body">
-
-      <form [formGroup]="loginFormGroup" (ngSubmit)="handleLogin()">
-        <div class="mb-3">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i> Username</label>
-          <input type="text" formControlName="username" class="form-control">
-          <small *ngIf="loginFormGroup.controls['username'].errors && loginFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', loginFormGroup.controls['username'].errors)}}</small>
-
-        </div>
-
-
-        <div class="mb-3">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Password</label>
-          <input type="text" formControlName="password" class="form-control">
-          <small *ngIf="loginFormGroup.controls['password'].errors && loginFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessage('password', loginFormGroup.controls['password'].errors)}}</small>
-
-        </div>
-
-
-        <span class="text-secondary" style="font-size: 17px">Pas de compte ? | <a class="hide-underline-link" routerLink="/register"><span class="text-light">Inscrivez vous</span></a></span>&nbsp;
-        <span class="text-white"  style="font-size: 17px"> | <a class="hide-underline-link" routerLink="/register"><span style="font-size: 17px" class="text-warning">Mot de passe oublié ?</span></a></span><br>
-
-        <div class="text-center text-white">
-          <button class="btn btn-primary w-100 mb-xxl-5 mt-lg-5" type="submit">Connexion</button>
-        </div>
-
-      </form>
-    </div>
-  </div>
-
-</div>
-
-<div class="bg-secondary">
 
 </div>
 
 </body>
 </html>
--->
+
+

@@ -23,22 +23,22 @@ export class AddOfferComponent implements OnInit {
   ngOnInit(): void {
 
     this.newOfferFormGroup = this.fb.group({
-      type: this.fb.control('particular', [Validators.required]),
-      title: this.fb.control('jardinier', [Validators.pattern("[A-Z][a-z0-9-']+"),Validators.required,Validators.minLength(6),Validators.maxLength(30)]),
-      mission: this.fb.control("", [Validators.pattern("[A-Z][a-z0-9-çèéàê()+:!',. ]+"),Validators.minLength(50),Validators.maxLength(1000),Validators.required]),
-      domain: this.fb.control('Agriculture', [Validators.pattern("[A-Z][a-z-çèéàê' ]+"),Validators.minLength(6),Validators.maxLength(30)]),
-      countryCode: this.fb.control("", [Validators.required]),
-      profile: this.fb.control("", [Validators.pattern("[A-Z][a-z0-9-çèéàê()+:!',. ]+"),Validators.minLength(50),Validators.maxLength(1000)]),
-      address: this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z-0-9-çèéàê'-]+,[A-Z][a-z-çèéà]+,[A-Z][a-z-çèéà]{4,30}")]),
+      type: this.fb.control('', [Validators.required]),
+      title: this.fb.control('', [Validators.pattern("[A-Za-z0-9-çèéàêô' -]+"),Validators.required,Validators.minLength(6),Validators.maxLength(30)]),
+      mission: this.fb.control("", [Validators.pattern("[A-Za-z0-9-çèéàêô()+:!',. ]+"),Validators.required]),
+      domain: this.fb.control('', [Validators.pattern("[A-Z][a-z-çèéàêô' ]+"),Validators.minLength(6),Validators.maxLength(30)]),
+      // countryCode: this.fb.control("", [Validators.required]),
+      profile: this.fb.control("", [Validators.pattern("[A-Za-z0-9-çèéàêô()+:!',. ]+")]),
+      address: this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z-0-9-çèéàêô'-]+,[A-Z][a-z-çèéàô]+,[A-Z][a-z-çèéàô]{4,30}")]),
       tel: this.fb.control("", [Validators.pattern("[0-9]+"),Validators.required,Validators.minLength(9),Validators.maxLength(9)]),
       whatsAppNumber: this.fb.control("", [Validators.pattern("[0-9]+"),Validators.minLength(9),Validators.maxLength(9)]),
-      experience: this.fb.control('aucune', [Validators.required]),
+      experience: this.fb.control('', [Validators.required]),
       salary: this.fb.control("", [Validators.pattern("[0-9]+")]),
       salaryChoice: this.fb.control("", [Validators.required]),
       endOffer: this.fb.control(null, [Validators.required]),
       needPeople: this.fb.control(1, [Validators.required,Validators.pattern("[0-9]+")]),
-      name: this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z0-9-çèéàê()+:!',. ]+"),Validators.minLength(6),Validators.maxLength(30)]),
-      skills: this.fb.control("", [Validators.pattern("[A-Z][a-z0-9-çèéàê()+:!',. ]+"),Validators.required,Validators.minLength(50),Validators.maxLength(1000)]),
+      name: this.fb.control("", [Validators.pattern("[A-Za-z0-9-çèéàêô()+:!',. ]+"),Validators.minLength(6),Validators.maxLength(30)]),
+      skills: this.fb.control("", [Validators.pattern("[A-Za-z0-9-çèéàêô()+:!',. ]+"),Validators.required]),
       fcb: this.fb.control("", [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
       web:  this.fb.control("", [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
       linkedin: this.fb.control("", [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
@@ -61,7 +61,7 @@ export class AddOfferComponent implements OnInit {
         console.log(value);
         alert("offer has been successfully saved");
         //this.newUserFormGroup.reset();
-        //this.router.navigateByUrl("/listEntOffer");
+        this.router.navigateByUrl("/jobs");
       },
       error: err => {
         console.log(err);
@@ -72,17 +72,57 @@ export class AddOfferComponent implements OnInit {
 
   getErrorMessage(fieldName: string, error: ValidationErrors) {
     if (error['required']){
-      return fieldName + "  "+ " is required";
+      return "Vous devez remplir ce champs !";
     }else if (error['minlength']){
-      return fieldName + "  "+ "should have at least" + " "+ error['minlength']['requiredLength'] + "  "+ "characters";
+      return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  "+ "caractères";
     }else if (error['maxlength']){
-      return fieldName + "  "+ "should have at the most" + "  " + error['maxlength']['requiredLength'] + "  " + "characters";
+      return "ce champs doit comporter au plus" + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
     }else if (error['pattern']) {
-      return fieldName + "  "+ "required this pattern" + error['pattern']['requiredPattern'] ;
-    }else if (error['email']) {
-      return fieldName + "  " + "address is not valid "+ "  "+ error['email']['requiredEmail'];
+      return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres, ou un mélange des trois";
     }else return "";
 
+  }
+
+  getErrorMessageEmail(fieldName: string, error: ValidationErrors) {
+    if (error['required']){
+      return "vous devez remplir champs !";
+    }else if (error['pattern']) {
+      return "exemple d\'un mail valide : youremail@gmail.com" ;
+    }else if (error['email']) {
+      return "Entrez une adresse email valide !";
+    }else return "";
+  }
+
+  getErrorMessageUrl(fieldName: string, error: ValidationErrors) {
+    if (error['pattern']) {
+      return "exemple d\'une url valide : https://www.monsite.com ou https://wwww.facebook.com/username" ;
+    }else return "";
+  }
+
+  getErrorMessageTel(fieldName: string, error: ValidationErrors) {
+    if (error['required']){
+      return "vous devez remplir champs !";
+    }else if (error['pattern']) {
+      return "exemple d\'un numéro valide : 6511232XX" ;
+    }else if (error['minlength']){
+      return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  "+ "nombres";
+    }else if (error['maxlength']){
+      return "ce champs doit comporter au plus" + "  " + error['maxlength']['requiredLength'] + "  " + "nombres";
+    }else return "";
+  }
+
+  getErrorMessageAdress(fieldName: string, error: ValidationErrors) {
+    if (error['required']){
+      return "vous devez remplir champs !";
+    }else if (error['pattern']) {
+      return "exemple d\'une adresse valide : Simbock,Yaoundé,Cameroun" ;
+    }else return "";
+  }
+
+  getErrorMessageSalary(salary: string, error: ValidationErrors) {
+    if (error['pattern']) {
+      return "exemple d\'un salaire valide : 100000" ;
+    }else return "";
   }
 
 }

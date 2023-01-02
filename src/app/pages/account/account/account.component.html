@@ -88,6 +88,10 @@
             Mes  profils
             </a>&nbsp;&nbsp;&nbsp;&nbsp;
 
+            <a (click)="handleListAppUserTestimony(currentUser.id)" class="btn btn-outline-light">
+              Mes  avis
+            </a>&nbsp;&nbsp;&nbsp;&nbsp;
+
             <a *ngIf="currentUser.account == 'talent' || currentUser.account == 'employer' || currentUser.account == 'enterprise' || isAdmin" (click)="handleListAppUserSubscription(currentUser.id)" class="btn btn-outline-light">
              Mes abonnements
             </a>

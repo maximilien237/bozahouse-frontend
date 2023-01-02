@@ -1,4 +1,3 @@
-import {AppUser} from "./app-user.models";
 
 export interface News {
   id:            number;
@@ -8,7 +7,6 @@ export interface News {
   sendingDate: Date;
   createdAt: Date;
   updatedAt: Date;
-  user: AppUser;
   username: string;
   currentPage: number;
   totalPages: number;

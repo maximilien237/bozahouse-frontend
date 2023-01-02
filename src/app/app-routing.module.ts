@@ -44,6 +44,11 @@ import {IsAdminGuard} from "./services/guards/is-admin.guard";
 import {IsEditorGuard} from "./services/guards/is-editor.guard";
 import {ForgotPasswordComponent} from "./pages/forgot-password/forgot-password.component";
 import {InfoComponent} from "./pages/info/info.component";
+import {UserTestimoniesComponent} from "./pages/about-user/user-testimonies/user-testimonies.component";
+import {ListTestimonyComponent} from "./pages/testimony/list-testimony/list-testimony.component";
+import {UpdateTestimonyComponent} from "./pages/testimony/update-testimony/update-testimony.component";
+import {AddTestimonyComponent} from "./pages/testimony/add-testimony/add-testimony.component";
+import {PrivacyComponent} from "./pages/privacy/privacy.component";
 
 
 
@@ -63,9 +68,15 @@ const routes: Routes = [
   { path: "updateTalent/:id", component: UpdateTalentComponent, canActivate: [AuthenticationGuard]},
   { path: "talents", component: ListTalentComponent, canActivate: [AuthenticationGuard] },
 
+  { path: "addTestimony", component: AddTestimonyComponent, canActivate: [AuthenticationGuard] },
+  { path: "updateTestimony/:id", component: UpdateTestimonyComponent, canActivate: [AuthenticationGuard]},
+  { path: "testimonies", component: ListTestimonyComponent, canActivate: [AuthenticationGuard] },
+
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "info", component: InfoComponent },
+  { path: "privacy", component: PrivacyComponent, canActivate: [AuthenticationGuard]  },
+  { path: "privacyOut", component: PrivacyComponent },
   { path: "forgotPassword", component: ForgotPasswordComponent },
 
   { path: "admin", component: AdminComponent, canActivate: [AuthenticationGuard, IsAdminGuard]},
@@ -94,6 +105,7 @@ const routes: Routes = [
   { path: "userSubscriptions/:id", component: UserSubscriptionsComponent, canActivate: [AuthenticationGuard]},
   { path: "userOffers/:id", component: UserOffersComponent, canActivate: [AuthenticationGuard]},
   { path: "userTalents/:id", component: UserTalentsComponent, canActivate: [AuthenticationGuard]},
+  { path: "userTestimonies/:id", component: UserTestimoniesComponent, canActivate: [AuthenticationGuard]},
 
 
   { path: "", component: LoginComponent }

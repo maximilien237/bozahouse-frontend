@@ -93,9 +93,8 @@
               "src/styles.css"
             ],
             "scripts": [
-              "assets/js/cheatsheet.js",
-              "assets/js/sidebars.js",
-              "assets/js/form-validation.js"
+
+              "assets/js/showHidePwd.js"
             ]
           }
         }

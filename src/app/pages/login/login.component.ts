@@ -10,11 +10,6 @@ import {Login} from "../../models/login.models";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
 import {Router} from "@angular/router";
 
-
-
-const TOKEN_KEY = 'auth-token';
-const USER_KEY = 'auth-user';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -33,8 +28,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginFormGroup = this.fb.group({
 
-      username: this.fb.control(null,[Validators.required,Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.minLength(4), Validators.maxLength(12)]),
-      password: this.fb.control(null,[ Validators.required, Validators.pattern("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$"), Validators.minLength(4), Validators.maxLength(8)])
+      username: this.fb.control("",[Validators.required,Validators.pattern("[A-Za-z0-9]+"),Validators.minLength(4), Validators.maxLength(12)]),
+      password: this.fb.control("",[ Validators.required, Validators.pattern("[A-Za-z0-9]+"), Validators.minLength(4), Validators.maxLength(8)])
     })
 
     if (this.authenticationService.getToken()) {
@@ -72,15 +67,13 @@ export class LoginComponent implements OnInit {
 
   getErrorMessage(fieldName: string, error: ValidationErrors) {
     if (error['required']){
-      return fieldName + "  "+ " is required";
+      return "vous devez remplir ce champs !";
     }else if (error['minlength']){
-      return fieldName + "  "+ "should have at least" + " "+ error['minlength']['requiredLength'] + "  "+ "characters";
+      return "ce champs doit comporter au moins" + "  "+ error['minlength']['requiredLength'] + "  "+ "caractères";
     }else if (error['maxlength']){
-      return fieldName + "  "+ "should have at the most" + "  " + error['maxlength']['requiredLength'] + "  " + "characters";
+      return "ce champs doit comporter au plus" + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
     }else if (error['pattern']) {
-      return fieldName + "  "+ "required this pattern" + error['pattern']['requiredPattern'] ;
-    }else if (error['email']) {
-      return fieldName + "  " + "address is not valid "+ "  "+ error['email']['requiredEmail'];
+      return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres, ou un mélange des trois" ;
     }else return "";
 
   }

@@ -21,6 +21,7 @@ export interface AppUser {
   countConnexion: number;
   activatedHostSubscription: boolean;
   activatedNormalSubscription: boolean;
+  acceptTerms: boolean;
   hostSubscriptionCounter: number;
   normalSubscriptionCounter: number;
   isLock: boolean;
