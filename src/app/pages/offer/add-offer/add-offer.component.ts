@@ -24,9 +24,9 @@ export class AddOfferComponent implements OnInit {
 
     this.newOfferFormGroup = this.fb.group({
       type: this.fb.control('', [Validators.required]),
-      title: this.fb.control('', [Validators.pattern("[A-Za-z0-9-çèéàêô' -]+"),Validators.required,Validators.minLength(6),Validators.maxLength(30)]),
+      title: this.fb.control('', [Validators.pattern("[A-Za-z0-9-çèéàêô' ]+"),Validators.required,Validators.minLength(6),Validators.maxLength(30)]),
       mission: this.fb.control("", [Validators.pattern("[A-Za-z0-9-çèéàêô()+:!',. ]+"),Validators.required]),
-      domain: this.fb.control('', [Validators.pattern("[A-Z][a-z-çèéàêô' ]+"),Validators.minLength(6),Validators.maxLength(30)]),
+      domain: this.fb.control('', [Validators.pattern("[A-Za-z-çèéàêô' ]+"),Validators.minLength(6),Validators.maxLength(30)]),
       // countryCode: this.fb.control("", [Validators.required]),
       profile: this.fb.control("", [Validators.pattern("[A-Za-z0-9-çèéàêô()+:!',. ]+")]),
       address: this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z-0-9-çèéàêô'-]+,[A-Z][a-z-çèéàô]+,[A-Z][a-z-çèéàô]{4,30}")]),

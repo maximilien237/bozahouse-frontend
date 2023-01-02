@@ -43,6 +43,9 @@
                   <i class="bi bi-trash"></i>
                 </a>
 
+                <a (click)="handleDisableTalent(talent)" class="btn btn-success">
+                  <i class="bi bi-trash"></i>
+                </a>
 
               </div>
               <div class="card-body text-center" >
@@ -77,8 +80,8 @@
         </ng-container>
         <ng-template #failureOrLoading>
           <ng-container *ngIf="errorMessage; else Loading">
-            <div class="text-danger">
-              {{errorMessage}}
+            <div class="text-warning text-center">
+              Oups, plus de données !
             </div>
           </ng-container>
 

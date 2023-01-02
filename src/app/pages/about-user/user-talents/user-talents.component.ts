@@ -8,6 +8,7 @@ import {Talent} from "../../../models/talent.models";
 import {AppUser} from "../../../models/app-user.models";
 import {AppUserService} from "../../../services/app-user/app-user.service";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
+import {Offer} from "../../../models/offer.models";
 
 @Component({
   selector: 'app-user-talents',
@@ -89,29 +90,51 @@ export class UserTalentsComponent implements OnInit {
     this.router.navigate(['updateTalent', id]);
   }
 
-  handleEnableTalent(talent: Talent){
+
+
+  handleEnableTalent(talent: Talent) {
+    let conf = confirm("Are you sure ?");
+    if (!conf) return;
     this.talentService.enableTalent(talent.id).subscribe({
       next: value => {
         console.log(value);
+        this.userTalents = this.userTalents.pipe(
+          map(data=>{
+            let index = data.indexOf(talent)
+            data.slice(index,1)
+            return data;
+          }))
+
       },
       error: err => {
         console.log(err);
       }
     })
+
   }
 
 
-  handleSetDisable(talent: Talent){
+
+  handleDisableTalent(talent: Talent) {
+    let conf = confirm("Are you sure ?");
+    if (!conf) return;
     this.talentService.disableTalent(talent.id).subscribe({
       next: value => {
         console.log(value);
+        this.userTalents = this.userTalents.pipe(
+          map(data=>{
+            let index = data.indexOf(talent)
+            data.slice(index,1)
+            return data;
+          }))
+
       },
       error: err => {
         console.log(err);
       }
     })
-  }
 
+  }
 
   goToPage(page: number) {
     this.currentPage = page;

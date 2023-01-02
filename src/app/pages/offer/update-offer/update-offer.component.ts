@@ -29,11 +29,11 @@ export class UpdateOfferComponent implements OnInit {
         this.updateOfferFormGroup = this.fb.group({
 
           type: this.fb.control(this.offer.type, [Validators.required]),
-          title: this.fb.control(this.offer.title, [Validators.pattern("[A-Za-z0-9-çèéàêô' -]+"),Validators.required,Validators.minLength(6),Validators.maxLength(30)]),
+          title: this.fb.control(this.offer.title, [Validators.pattern("[A-Za-z0-9-çèéàêô' ]+"),Validators.required,Validators.minLength(6),Validators.maxLength(30)]),
           mission: this.fb.control(this.offer.mission, [Validators.pattern("[A-Za-z0-9-çèéàêô()+:!',. ]+"),Validators.required]),
-          domain: this.fb.control(this.offer.domain, [Validators.pattern("[A-Z][a-z-çèéàêô' ]+"),Validators.minLength(6),Validators.maxLength(30)]),
+          domain: this.fb.control(this.offer.domain, [Validators.pattern("[A-Za-z-çèéàêô' ]+"),Validators.minLength(6),Validators.maxLength(30)]),
           profile: this.fb.control(this.offer.profile, [Validators.pattern("[A-Za-z0-9-çèéàêô()+:!',. ]+")]),
-          address: this.fb.control(this.offer.address, [Validators.required,Validators.pattern("[A-Z][a-z-0-9-çèéàêô'-]+,[A-Z][a-z-çèéàô]+,[A-Z][a-z-çèéàô]{4,30}")]),
+          address: this.fb.control(this.offer.address, [Validators.required,Validators.pattern("[A-Z][a-z-0-9-çèéàêô']+,[A-Z][a-z-çèéàô]+,[A-Z][a-z-çèéàô]{4,30}")]),
           tel: this.fb.control(this.offer.tel, [Validators.pattern("[0-9]+"),Validators.required,Validators.minLength(9),Validators.maxLength(9)]),
           whatsAppNumber: this.fb.control(this.offer.whatsAppNumber, [Validators.pattern("[0-9]+"),Validators.minLength(9),Validators.maxLength(9)]),
           experience: this.fb.control(this.offer.experience, [Validators.required]),

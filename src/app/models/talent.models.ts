@@ -10,7 +10,6 @@ export interface Talent {
   salaryChoice: string;
   tel: string;
   countryCode: string;
-  phone: string;
   workMode: string;
   whatsAppNumber: string;
   address: string;

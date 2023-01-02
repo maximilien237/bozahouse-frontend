@@ -10,7 +10,6 @@ export interface Offer {
   address: string;
   tel: string;
   countryCode: string;
-  phone: string;
   whatsAppNumber: string;
   experience: string;
   email: string;
