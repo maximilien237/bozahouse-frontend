@@ -80,11 +80,11 @@
         <h5 class="text-light" style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Votre activité</h5>
         <div class="card-body">
           <p class="card-text text-white-50">
-            <a *ngIf="currentUser.account == 'employer' || currentUser.account == 'enterprise' || isAdmin" (click)="handleListAppUserOffer(currentUser.id)" class="btn btn-outline-light">
+            <a *ngIf="currentUser.account == 'employer' || currentUser.account == 'enterprise'" (click)="handleListAppUserOffer(currentUser.id)" class="btn btn-outline-light">
               Mes offres
             </a>&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <a *ngIf="isAdmin || currentUser.account == 'talent' " (click)="handleListAppUserTalent(currentUser.id)" class="btn btn-outline-light">
+            <a *ngIf="currentUser.account == 'talent' " (click)="handleListAppUserTalent(currentUser.id)" class="btn btn-outline-light">
             Mes  profils
             </a>&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -92,7 +92,7 @@
               Mes  avis
             </a>&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <a *ngIf="currentUser.account == 'talent' || currentUser.account == 'employer' || currentUser.account == 'enterprise' || isAdmin" (click)="handleListAppUserSubscription(currentUser.id)" class="btn btn-outline-light">
+            <a *ngIf="currentUser.account == 'talent' || currentUser.account == 'employer' || currentUser.account == 'enterprise'" (click)="handleListAppUserSubscription(currentUser.id)" class="btn btn-outline-light">
              Mes abonnements
             </a>
           </p>

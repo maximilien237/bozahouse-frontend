@@ -88,6 +88,49 @@ export class HomeComponent implements OnInit {
       );
     }
 
+  handleDisableTalent(talent: Talent) {
+    let conf = confirm("Are you sure ?");
+    if (!conf) return;
+    this.talentService.disableTalent(talent.id).subscribe({
+      next: value => {
+        console.log(value);
+        this.threeTalents = this.threeTalents.pipe(
+          map(data=>{
+            let index = data.indexOf(talent)
+            data.slice(index,1)
+            return data;
+          }))
+
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+
+  }
+
+
+  handleDisableOffer(offer: Offer) {
+    let conf = confirm("Are you sure ?");
+    if (!conf) return;
+    this.offerService.disableOffer(offer.id).subscribe({
+      next: value => {
+        console.log(value);
+        this.threeOffers = this.threeOffers.pipe(
+          map(data=>{
+            let index = data.indexOf(offer)
+            data.slice(index,1)
+            return data;
+          }))
+
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+
+  }
+
     handleDeleteOffer(offer: Offer) {
       let conf = confirm("Are you sure ?");
       if (!conf) return;

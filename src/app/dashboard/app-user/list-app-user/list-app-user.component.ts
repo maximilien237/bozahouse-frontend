@@ -34,7 +34,7 @@ export class ListAppUserComponent implements OnInit {
   pageSize: number = 5;
   addRoleToUserFormGroup!: FormGroup;
   removeRoleToUserFormGroup!: FormGroup;
-
+  appUserSize: number = 0;
 
   constructor(private authenticationService: AuthenticationService,private userService: AppUserService,private roleService: AppRoleService, private fb: FormBuilder, private router: Router, private subscriptionService: SubscriptionService) { }
 
@@ -63,7 +63,7 @@ export class ListAppUserComponent implements OnInit {
       roleName: this.fb.control("", [Validators.required])
     });
 
-    this.listAppUsers();
+    this.handleSearchAppUserByUsername();
 
     this.getTotalPageAppUser();
 
@@ -86,9 +86,9 @@ export class ListAppUserComponent implements OnInit {
   }
 
 
-  handleSearchUsers() {
+  handleSearchAppUserByUsername() {
     let kw = this.searchFormGroup?.value.keyword;
-    this.users =  this.userService.searchAppUsers(kw,this.currentPage, this.pageSize).pipe(
+    this.users =  this.userService.searchAppUserByUsername(kw,this.currentPage, this.pageSize).pipe(
       catchError(err => {
         this.errorMessage = err.message;
         return throwError(err);
@@ -96,26 +96,50 @@ export class ListAppUserComponent implements OnInit {
     );
   }
 
-  listAppUsers(){
+/*  listAppUsers(){
     this.users = this.userService.listAppUser(this.currentPage, this.pageSize).pipe(
       catchError(err => {
         this.errorMessage = err.message;
         return throwError(err);
       })
     );
-  }
+  }*/
 
 
 
    getTotalPageAppUser(){
-    this.users1 = this.userService.listAppUser(this.currentPage, this.pageSize).subscribe({
+     let kw = this.searchFormGroup?.value.keyword;
+    this.users1 = this.userService.searchAppUserByUsername(kw,this.currentPage, this.pageSize).subscribe({
       next: value => {
+        this.appUserSize = value.length;
         this.totalPages = value[0].totalPages;
       },
       error: err => {
         console.log(err);
       }
     });
+  }
+
+
+  handleDisableAppUser(appUser: AppUser) {
+    let conf = confirm("Are you sure ?");
+    if (!conf) return;
+    this.userService.disableAppUser(appUser.id).subscribe({
+      next: value => {
+        console.log(value);
+        this.users = this.users.pipe(
+          map(data=>{
+            let index = data.indexOf(appUser)
+            data.slice(index,1)
+            return data;
+          }))
+
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+
   }
 
   handleDeleteUser(user: AppUser) {
@@ -167,9 +191,9 @@ export class ListAppUserComponent implements OnInit {
     this.subscriptionService.saveSubscription(subscription).subscribe({
       next: value => {
         console.log(value);
-        alert("Subscription has been successfully saved");
-        //this.newUserFormGroup.reset();
-        this.router.navigateByUrl("/listUser");
+        alert("Abonnement crée avec succès !");
+        //this.newSubscriptionFormGroup.reset();
+        this.router.navigateByUrl("/users");
       },
       error: err => {
         console.log(err);
@@ -180,22 +204,22 @@ export class ListAppUserComponent implements OnInit {
 
   goToPage(page: number) {
     this.currentPage = page;
-    this.listAppUsers();
+    this.handleSearchAppUserByUsername();
   }
 
   goToPreviousPage() {
     this.currentPage = this.currentPage - 1;
-    this.listAppUsers();
+    this.handleSearchAppUserByUsername();
   }
 
   goToNextPage() {
     this.currentPage = this.currentPage + 1;
-    this.listAppUsers();
+    this.handleSearchAppUserByUsername();
   }
 
   reloadPage(page: number) {
     this.currentPage = page - 1;
-    this.listAppUsers();
+    this.handleSearchAppUserByUsername();
   }
 
   handleAddRoleToUser() {
@@ -203,7 +227,7 @@ export class ListAppUserComponent implements OnInit {
     this.userService.addRoleToUser(username, roleName).subscribe({
       next: value => {
         console.log(value);
-        alert("role has been successfully added to user");
+        alert("role ajouté à l\'utilisateur avec succès !");
         this.addRoleToUserFormGroup.reset();
       },
       error: err => {
@@ -219,7 +243,7 @@ export class ListAppUserComponent implements OnInit {
     this.userService.removeRoleToUser(username, roleName).subscribe({
       next: value => {
         console.log(value);
-        alert("role has been successfully removed to user");
+        alert("role retiré à l\'utilisateur avec succès !");
         this.removeRoleToUserFormGroup.reset();
       },
       error: err => {
@@ -230,15 +254,13 @@ export class ListAppUserComponent implements OnInit {
 
   getErrorMessage(fieldName: string, error: ValidationErrors) {
     if (error['required']){
-      return fieldName + "  "+ " is required";
+      return "Vous devez remplir ce champs !";
     }else if (error['minlength']){
-      return fieldName + "  "+ "should have at least" + " "+ error['minlength']['requiredLength'] + "  "+ "characters";
+      return "Ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  "+ "caractères";
     }else if (error['maxlength']){
-      return fieldName + "  "+ "should have at the most" + "  " + error['maxlength']['requiredLength'] + "  " + "characters";
+      return "Ce champs doit comporter au plus" + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
     }else if (error['pattern']) {
-      return fieldName + "  "+ "required this pattern" + error['pattern']['requiredPattern'] ;
-    }else if (error['email']) {
-      return fieldName + "  " + "address is not valid "+ "  "+ error['email']['requiredEmail'];
+      return "Ce champs doit comporter uniquement des minuscules" ;
     }else return "";
 
   }

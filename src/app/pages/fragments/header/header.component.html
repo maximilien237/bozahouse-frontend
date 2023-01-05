@@ -33,7 +33,16 @@
 
         <li class="nav-item"><a routerLink="/listSubscription" routerLinkActive="active" class="nav-link">Abonnements</a></li>
 
-
+        <li *ngIf="isAdmin" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Disabled
+          </a>
+          <ul class="dropdown-menu bg-secondary text-dark" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item bg-secondary" routerLink="/usersDisabled" >users</a></li>
+            <li><a class="dropdown-item bg-secondary" routerLink="/offersDisabled" >offers</a></li>
+            <li><a class="dropdown-item bg-secondary" routerLink="/talentsDisabled" >talents</a></li>
+          </ul>
+        </li>
 
       </ul>
 

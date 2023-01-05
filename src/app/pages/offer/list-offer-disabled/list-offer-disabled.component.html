@@ -1,6 +1,6 @@
-<html class="bg-secondary" xmlns="http://www.w3.org/1999/html">
+<html class="bg-secondary">
 <body class="bg-secondary">
-<app-navbar></app-navbar>
+<app-header></app-header>
 
 <div class="container spacer  ">
   <div class="text-center">
@@ -9,25 +9,25 @@
 
     <div class="offcanvas offcanvas-start col-md-4 bg-dark" style="background-color: ghostwhite" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel "><span class="text-light"> Filter les talents</span></h5>
+        <h5 class="offcanvas-title text-light" id="offcanvasWithBothOptionsLabel">Filter les offres</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
 
-        <div class="card" style="font-size: 15px;">
-<!--          <h5 class="card-header bg-dark text-warning"><i class="bi bi-search"></i>Rechercher </h5>-->
-          <div class="card-body bg-dark text-white-50" >
+        <div class="card bg-dark" style="font-size: 15px;">
+          <!--          <h5 class="card-header text-warning"><i class="bi bi-search"></i>Rechercher </h5>-->
+          <div class="card-body bg-dark" >
 
-            <form  *ngIf="talentFormGroup" [formGroup] = "talentFormGroup" (ngSubmit)="handleSearchTalents()" >
+            <form class="text-light" [formGroup] = "offerFormGroup" (ngSubmit)="handleSearchOffersNotValid()" >
 
               <div class="mb-3 mt-2">
-                <label class="form-label">Métier</label>
-                <input type="text" class="form-control" formControlName = "title" placeholder="métier du talent, ex: infimier">
+                <label class="form-label">Métier </label>
+                <input type="text" class="form-control" formControlName = "title" placeholder="Infimier">
               </div>
 
 
               <div class="mb-3 mt-2">
-                <label class="form-label">Contract</label>
+                <label class="form-label">Contract </label>
                 <select class="form-select" formControlName = "contract" >
                   <option value="" disabled selected>Contract</option>
                   <option value="CDI">CDI</option>
@@ -44,7 +44,7 @@
 
 
               <div class="mb-3 mt-2">
-                <label class="form-label">Mode de Travail</label>
+                <label class="form-label">Mode de travail </label>
                 <select class="form-select" formControlName = "workMode">
                   <option value="" disabled selected >Mode de travail</option>
                   <option value="Sur site">Sur site</option>
@@ -53,27 +53,12 @@
               </div>
 
               <div class="mb-3 mt-2">
-                <label class="form-label">Adresse</label>
-                <input type="text" class="form-control" formControlName = "address" placeholder="Address, ex: Simbok,Yaoundé,Cameroun" >
+                <label class="form-label">Adress </label>
+                <input type="text" class="form-control" formControlName = "address" placeholder="Simbok,Yaoundé,Cameroun" >
               </div>
 
-              <!--              <div class="mb-3 mt-2">
-                              <input type="text" class="form-control" formControlName = "countryName"  placeholder="Pays, ex: Cameroun">
-                            </div>
-
-
-                            <div class="mb-3 mt-2">
-                              <input type="text" class="form-control" formControlName = "cityName"  placeholder="Ville, ex: Bertoua">
-                            </div>-->
-
-              <!--     <div class="mb-3">
-                     <label class="form-label">Salaire</label>
-                     <input type="text" class="form-control" formControlName = "salary" value="A définir avec l'employeur" required>
-                   </div>
-         -->
-
               <div class="mb-3 mt-2">
-                <label class="form-label">Experience</label>
+                <label class="form-label">Expérience </label>
                 <select class="form-select" formControlName = "experience" >
                   <option value="" disabled selected>Experience</option>
                   <option value="Aucune">Aucune</option>
@@ -88,54 +73,44 @@
 
 
               <div class="mb-3">
-                <label class="form-label">Type de talent</label>
+                <label class="form-label">Type d'employeur</label>
                 <select class="form-select" formControlName = "type" >
-                  <option value=""  selected disabled>Type de talent</option>
-                  <option value="simple">Simple</option>
-                  <option value="professional">Professionnelle</option>
+                  <option value=""  selected disabled>Type d'employeur</option>
+                  <option value="particular">Particulier</option>
+                  <option value="enterprise">Entreprise</option>
                 </select>
               </div>
 
               <div class="mb-3 mt-2">
-                <label class="form-label">Domaine</label>
-                <input type="text" class="form-control" formControlName = "domain"  placeholder="Domaine, ex: informatique">
+                <label class="form-label">Domaine </label>
+                <input type="text" class="form-control" formControlName = "domain"  placeholder="Informatique">
               </div>
 
-      <!--        <div class="mb-3 mt-2">
-                <label class="form-label">Date de début</label>
-                <input type="date" class="form-control" formControlName = "startDate" >
+              <div class="text-center">
+                <button class="btn btn-outline-light" type="submit">rechercher&nbsp;<i class="bi bi-search"></i> </button>&nbsp;&nbsp;&nbsp;
+                <span class="btn btn-outline-danger" (click)="handleSetOfferFormGroup()">reset</span>
               </div>
 
-              <div class="mb-3 mt-2 mb-2">
-                <label class="form-label">Date de fin</label>
-                <input type="date" class="form-control" formControlName = "endDate" >
-              </div>-->
-
-
-
-              <button   class="btn btn-outline-light text-warning" type="submit">rechercher&nbsp;<i class="bi bi-search"></i> </button>
-              <span class="btn btn-outline-danger spacer-left" (click)="handleSetSearchTalentForm()">reset</span>
             </form>
 
           </div>
         </div>
 
+
       </div>
     </div> &nbsp;&nbsp;&nbsp;&nbsp;
 
-
-    <ng-container *ngIf="currentUser">
-      <ng-container *ngIf="currentUser.account == 'talent' && currentUser.activatedHostSubscription || isAdmin">
+    <ng-container *ngIf="currentUser.account == 'employer' && currentUser.activatedHostSubscription
+      || currentUser.account == 'enterprise' && currentUser.activatedHostSubscription || isAdmin">
       <span style="font-size: 20px;">
-      <a routerLink="/addTalent" class="hide-underline-link btn btn-dark text-warning">
-      <i class="bi bi-plus "></i> publier un profil
+      <a routerLink="/addOffer" class="hide-underline-link btn btn-dark text-warning">
+      <i class="bi bi-plus "></i> publier une offre
       </a>
     </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </ng-container>
-
     </ng-container>
 
-<!--    <span><a *ngIf="currentUser.hostSubscriptionCounter >= 1 || currentUser.normalSubscriptionCounter >=1" routerLink="/addTestimony" class="hide-underline-link btn btn-dark text-warning">Rédiger un avis</a> </span>-->
+    <!--    <span><a *ngIf="currentUser.hostSubscriptionCounter >= 1 || currentUser.normalSubscriptionCounter >=1" routerLink="/addTestimony" class="hide-underline-link btn btn-dark text-warning">Rédiger un avis</a> </span>-->
+
 
     <!-- sidebar right -->
     <!--
@@ -163,55 +138,67 @@
   </div><br>
   <div class="card bg-secondary border-0">
 
-    <h5 class="text-center mt-2"><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i> <i class="bi bi-dash text-success w-100" ></i>&nbsp;Vos derniers talents &nbsp;<i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i></h5>
+    <h5 class="text-center mt-2">Les offres d'emplois désactivées [ {{offerSize}} ] </h5>
 
     <div class="row">
 
       <ng-container>
-        <ng-container *ngIf="talents | async as listTalent; else failureOrLoading">
-          <div  *ngFor="let talent of talents | async"  class="col-md-4 ">
+        <ng-container *ngIf="offers | async as listOffer; else failureOrLoading">
+          <div  *ngFor="let offer of offers | async"  class="col-md-4 ">
             <div class="card  spacer-margin bg-dark">
 
               <div *ngIf="isAdmin" class="card-header">
 
-                <a (click)="handleDisableTalent(talent)" class="btn btn-outline-secondary">
-                  <i class="bi bi-arrow-down"></i>
+
+                <a (click)="handleEnableOffer(offer)" class="btn btn-outline-secondary">
+                  <i class="bi bi-arrow-up"></i>
                 </a>&nbsp;&nbsp;&nbsp;&nbsp;
 
-                <a (click)="handleUpdateTalent(talent.id)" class="btn btn-warning">
+                <a (click)="handleUpdateOffer(offer.id)" class="btn btn-warning">
                   <i class="bi bi-pencil"></i>
                 </a> &nbsp;&nbsp;&nbsp;&nbsp;
 
-                <a (click)="handleDeleteTalent(talent)" class="btn btn-danger">
+                <a (click)="handleDeleteOffer(offer)" class="btn btn-danger">
                   <i class="bi bi-trash"></i>
                 </a>
 
-
               </div>
               <div class="card-body text-center" >
-                <span class="text-warning" style="font-size: 35px;">{{talent.firstname}}</span><br>
-                <span class="text-light">[ {{talent.title}} ]</span><br>
-                <span class="text-white-50" style=" font-size: 15px"><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{talent.address}}</span><br />
-                <span class="text-white-50" style=" font-size: 15px"><i class="bi bi-person-fill">&nbsp;</i>{{talent.sex}}</span> &nbsp;&nbsp; <span class="text-white-50" style=" font-size: 15px" ><i class="bi bi-hourglass-split"></i> {{talent.experience}} </span><br />
+                <span class="text-warning" style="font-size: 35px;">{{offer.title}}</span><br>
+                <span class="text-muted" *ngIf="offer.type=='particular' else ent">Auteur : [ Particulier ]</span><br>
+                <ng-template #ent>
+                  <span class="text-muted">Auteur : [ Entreprise ]</span>
+                </ng-template>
+                <span class="text-muted" style=" font-size: 15px"><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{offer.address}}</span><br />
+                <span class="text-muted" style="font-size: 15px"><i class="bi bi-book-fill">&nbsp;</i>{{offer.contract}}</span> &nbsp;&nbsp;
+                <ng-container *ngIf="offer.workMode == 'Sur site'">
+                  <span class="text-muted" style="font-size: 15px" ><i class="bi bi-house-fill"></i> {{offer.workMode}} </span><br />
+                </ng-container>
+
+                <ng-container *ngIf="offer.workMode == 'A distance'">
+                  <span class="text-muted" style="font-size: 15px" ><i class="bi bi-wifi"></i> {{offer.workMode}} </span><br />
+                </ng-container>
 
 
-                <span *ngIf="talent.salary==''; else other">
+
+                <span *ngIf="offer.salary == ''; else other">
         <span style="color: #bb2d3b; font-size: 20px"> Salaire à définir avec l'employeur </span><br />
       </span>
 
                 <ng-template #other>
-                  <span *ngIf="talent.salary" style="color: #bb2d3b; font-size: 20px"> {{talent.salary | number: '1.0-0'}} FCFA</span><br />
+                  <span style="color: #bb2d3b; font-size: 20px"> {{offer.salary | number: '1.0-0'}} FCFA</span><br />
                 </ng-template>
 
-                <div class="text-muted mb-1">
-                  <span class="text-white-50"><i class="bi bi-book-fill"></i>&nbsp;<span>{{talent.contract}}</span></span>
-                </div>
+
+                <div class="text-muted">
+                  <span ><i class="bi bi-calendar"></i>&nbsp;<span>{{offer.publishedAt | date : 'd MMM y'}}</span></span>&nbsp;-- <span ><i class="bi bi-lock-fill"></i> <span>{{offer.endOffer | date : 'd MMM y'}}</span></span>
+                </div><br>
 
                 <ng-container>
-                  <ng-container *ngIf="currentUser.account == 'employer' && currentUser.activatedNormalSubscription
-        || currentUser.account == 'enterprise' && currentUser.activatedNormalSubscription
-        || currentUser.account == 'talent' && currentUser.activatedHostSubscription || isAdmin; else other2">
-                    <span><a (click)="handleDetailTalent(talent.id)" class="btn btn-warning rounded-pill">Voir plus</a></span><br>
+                  <ng-container *ngIf="currentUser.account == 'employer' && currentUser.activatedHostSubscription
+        || currentUser.account == 'enterprise' && currentUser.activatedHostSubscription
+        || currentUser.account == 'talent' && currentUser.activatedNormalSubscription || isAdmin; else other2">
+                    <span><a (click)="handleDetailOffer(offer.id)" class="btn btn-warning rounded-pill">Voir l'offre</a></span><br>
                   </ng-container>
 
                   <ng-template #other2>
@@ -219,7 +206,7 @@
 
 
 
-                    <span class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Voir le talent</span>
+                    <span class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Voir l'offre</span>
 
                     <div class="card offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
                       <div class="offcanvas-header">
@@ -241,13 +228,13 @@
           </div>
         </ng-container>
         <ng-template #failureOrLoading>
-          <ng-container *ngIf="errorMessageTalent; else loading">
+          <ng-container *ngIf="errorMessageOffer; else Loading">
             <div class="text-warning text-center spacer-margin">
               <span>Oups ! pas de données pour le moment</span>
             </div>
           </ng-container>
 
-          <ng-template #loading>
+          <ng-template #Loading>
 
             <div class="d-flex justify-content-center spacer-margin" >
               <div class=" spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
@@ -259,11 +246,10 @@
         </ng-template>
       </ng-container>
 
-
     </div>
 
     <ul class=" nav nav-pills spacer-left spacer-bottom">
-      <ng-container *ngIf="currentPage > 0 && currentPage != 0">
+      <ng-container *ngIf="currentPage > 0">
         <li >
           <a class="page-link btn ms-1" (click)="goToPage(currentPage - 1)" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
@@ -276,7 +262,7 @@
       <li *ngFor="let item of [].constructor(totalPages); let page = index" >
         <a [ngClass]="page==currentPage?'btn-warning':'btn-outline-warning'" (click)="goToPage(page)" class="btn ms-1"  >{{page}}</a>
       </li>
-      <ng-container *ngIf="currentPage != totalPages - 1 && currentPage>0">
+      <ng-container *ngIf="currentPage < totalPages - 1">
         <li >
           <a class="page-link btn ms-1" (click)="goToPage(currentPage + 1)" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
@@ -286,10 +272,12 @@
 
     </ul>
 
+
   </div >
 
 
 </div>
+
 
 <div class="text-end mb-3 spacer-right">
   <span><a routerLink="/addTestimony" class="hide-underline-link btn btn-dark text-warning">Rédiger un avis</a> </span>

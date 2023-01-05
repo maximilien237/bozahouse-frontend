@@ -1,30 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {catchError, map, Observable, throwError} from "rxjs";
 import {Offer} from "../../../models/offer.models";
-import {
-  FormBuilder,
-  FormGroup,
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  ValidationErrors,
-  Validators
-} from "@angular/forms";
-import {OfferService} from "../../../services/offer/offer.service";
-import {Router} from "@angular/router";
-import {AuthenticationService} from "../../../services/authentication/authentication.service";
-
-import {Subscription} from "../../../models/subscription.models";
-import {FilterOffer} from "../../../models/filterOffer.models";
+import {FormBuilder, FormGroup, UntypedFormGroup} from "@angular/forms";
 import {AppUser} from "../../../models/app-user.models";
+import {AuthenticationService} from "../../../services/authentication/authentication.service";
+import {OfferService} from "../../../services/offer/offer.service";
 import {AppUserService} from "../../../services/app-user/app-user.service";
-
+import {Router} from "@angular/router";
+import {FilterOffer} from "../../../models/filterOffer.models";
 
 @Component({
-  selector: 'app-list-offer',
-  templateUrl: './list-offer.component.html',
-  styleUrls: ['./list-offer.component.css']
+  selector: 'app-list-offer-disabled',
+  templateUrl: './list-offer-disabled.component.html',
+  styleUrls: ['./list-offer-disabled.component.css']
 })
-export class ListOfferComponent implements OnInit {
+export class ListOfferDisabledComponent implements OnInit {
 
   roles: string[] = [];
   isLoggedIn = false;
@@ -41,14 +31,13 @@ export class ListOfferComponent implements OnInit {
   totalPages!: number;
   pageSize: number = 5;
   offers1!: any;
-
   offerSize : number = 0;
   constructor(private authenticationService: AuthenticationService, private offerService: OfferService,private userService: AppUserService,
               private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.handleCurrentAppUser();
-    this.datesCompare();
+
 
 
     //this.listCityByCountry();
@@ -61,16 +50,11 @@ export class ListOfferComponent implements OnInit {
       experience: this.fb.control(""),
       type: this.fb.control(""),
       domain: this.fb.control("")
-/*
-      startDate: this.fb.control(moment().subtract(7,'days').format('YYYY-MM-DD'),[Validators.required]),
-      endDate: this.fb.control(moment().format('YYYY-MM-DD'), [Validators.required])
-*/
-
 
     });
     //this.listOffer();
-    this.handleSearchOffers();
-    this.handleFilterOffers();
+    this.handleSearchOffersNotValid();
+    this.handleFilterOffersNotValid();
 
 
     this.isLoggedIn = !!this.authenticationService.getToken();
@@ -96,10 +80,10 @@ export class ListOfferComponent implements OnInit {
 
 
 
-  handleSearchOffers() {
+  handleSearchOffersNotValid() {
     //  let kw = this.searchFormGroup?.value.keyword;
     let filterOffer: FilterOffer = this.offerFormGroup.value;
-    this.offers =  this.offerService.filterOffer(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain, this.currentPage, this.pageSize).pipe(
+    this.offers =  this.offerService.filterOfferNotValid(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain, this.currentPage, this.pageSize).pipe(
       catchError(err => {
         this.errorMessageOffer = err.message;
         return throwError(err);
@@ -107,12 +91,13 @@ export class ListOfferComponent implements OnInit {
     );
   }
 
-  handleFilterOffers() {
+  handleFilterOffersNotValid() {
     //  let kw = this.searchFormGroup?.value.keyword;
     let filterOffer: FilterOffer = this.offerFormGroup.value;
-    this.offers1 =  this.offerService.filterOffer(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain,this.currentPage, this.pageSize)
+    this.offers1 =  this.offerService.filterOfferNotValid(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain,this.currentPage, this.pageSize)
       .subscribe({
         next: value => {
+          this.offerSize = value.length;
           console.log(value);
           this.totalPages = value[0].totalPages;
         },
@@ -122,48 +107,6 @@ export class ListOfferComponent implements OnInit {
       });
   }
 
-  datesCompare() {
-    let dateBefore  = this.offerFormGroup?.value.startDate;
-    let dateAfter  = this.offerFormGroup?.value.endDate;
-  }
-
-/*
-    handleSearchOffers() {
-    //  let kw = this.searchFormGroup?.value.keyword;
-      let filterOffer: FilterOffer = this.offerFormGroup.value;
-      this.offers =  this.offerService.filterOffer(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain, this.currentPage, this.pageSize).pipe(
-        catchError(err => {
-          this.errorMessage = err.message;
-          return throwError(err);
-        })
-      );
-    }
-
-  handleFilterOffers() {
-    //  let kw = this.searchFormGroup?.value.keyword;
-    let filterOffer: FilterOffer = this.offerFormGroup.value;
-    this.offers1 =  this.offerService.filterOffer(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain,this.currentPage, this.pageSize)
-     .subscribe({
-      next: value => {
-        console.log(value);
-        this.totalPages = value[0].totalPages;
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
-  }*/
-
-
-
-  listOffer(){
-    this.offers = this.offerService.listOffer().pipe(
-      catchError(err => {
-        this.errorMessage = err.message;
-        return throwError(err);
-      })
-    );
-  }
 
   handleDeleteOffer(offer: Offer) {
     let conf = confirm("Are you sure ?");
@@ -244,7 +187,7 @@ export class ListOfferComponent implements OnInit {
 
   goToPage(page: number){
     this.currentPage = page;
-    this.handleSearchOffers();
+    this.handleSearchOffersNotValid();
   }
 
 
@@ -273,24 +216,4 @@ export class ListOfferComponent implements OnInit {
     }
   }
 
-
-  getErrorMessage(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return fieldName + "  "+ " is required";
-    }else if (error['minlength']){
-      return fieldName + "  "+ "should have at least" + " "+ error['minlength']['requiredLength'] + "  "+ "characters";
-    }else if (error['maxlength']){
-      return fieldName + "  "+ "should have at the most" + "  " + error['maxlength']['requiredLength'] + "  " + "characters";
-    }else if (error['pattern']) {
-      return fieldName + "  "+ "required this pattern" + error['pattern']['requiredPattern'] ;
-    }else if (error['email']) {
-      return fieldName + "  " + "address is not valid "+ "  "+ error['email']['requiredEmail'];
-    }else return "";
-
-  }
-
 }
-
-
-
-

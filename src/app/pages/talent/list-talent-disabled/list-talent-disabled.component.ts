@@ -1,26 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {catchError, map, Observable, throwError} from "rxjs";
-
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-
-import {Router} from "@angular/router";
 import {Talent} from "../../../models/talent.models";
-import {TalentService} from "../../../services/talent/talent.service";
-import {FilterTalent} from "../../../models/filterTalent.models";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {AppUser} from "../../../models/app-user.models";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
 import {AppUserService} from "../../../services/app-user/app-user.service";
-
-import {AppUser} from "../../../models/app-user.models";
-
-
-
+import {Router} from "@angular/router";
+import {TalentService} from "../../../services/talent/talent.service";
+import {FilterTalent} from "../../../models/filterTalent.models";
 
 @Component({
-  selector: 'app-list-talent',
-  templateUrl: './list-talent.component.html',
-  styleUrls: ['./list-talent.component.css']
+  selector: 'app-list-talent-disabled',
+  templateUrl: './list-talent-disabled.component.html',
+  styleUrls: ['./list-talent-disabled.component.css']
 })
-export class ListTalentComponent implements OnInit {
+export class ListTalentDisabledComponent implements OnInit {
 
 
   roles: string[] = [];
@@ -55,9 +49,6 @@ export class ListTalentComponent implements OnInit {
       experience: this.fb.control(""),
       type: this.fb.control(""),
       domain: this.fb.control("")
-   /*   startDate: this.fb.control(moment().subtract(7,'days').format('YYYY-MM-DD'),[Validators.required]),
-      endDate: this.fb.control(moment().format('YYYY-MM-DD'), [Validators.required])
-*/
 
     });
 
@@ -92,7 +83,7 @@ export class ListTalentComponent implements OnInit {
 
   handleSearchTalents() {
     let filterTalent: FilterTalent = this.talentFormGroup?.value;
-    this.talents =  this.talentService.filterTalent(filterTalent.title, filterTalent.contract, filterTalent.workMode, filterTalent.address, filterTalent.experience, filterTalent.type, filterTalent.domain, this.currentPage, this.pageSize).pipe(
+    this.talents =  this.talentService.filterTalentValidFalse(filterTalent.title, filterTalent.contract, filterTalent.workMode, filterTalent.address, filterTalent.experience, filterTalent.type, filterTalent.domain, this.currentPage, this.pageSize).pipe(
       catchError(err => {
         this.errorMessageTalent = err.message;
         return throwError(err);
@@ -103,7 +94,7 @@ export class ListTalentComponent implements OnInit {
   handleFilterTalents() {
     //  let kw = this.searchFormGroup?.value.keyword;
     let filterTalent: FilterTalent = this.talentFormGroup?.value;
-    this.talents1 =  this.talentService.filterTalent(filterTalent?.title, filterTalent?.contract, filterTalent?.workMode, filterTalent?.address, filterTalent?.experience, filterTalent?.type, filterTalent?.domain,this.currentPage, this.pageSize)
+    this.talents1 =  this.talentService.filterTalentValidFalse(filterTalent?.title, filterTalent?.contract, filterTalent?.workMode, filterTalent?.address, filterTalent?.experience, filterTalent?.type, filterTalent?.domain,this.currentPage, this.pageSize)
       .subscribe({
         next: value => {
           this.talentSize = value.length;
@@ -116,41 +107,6 @@ export class ListTalentComponent implements OnInit {
       });
   }
 
-/*
-  handleSearchTalents() {
-    let filterTalent: FilterTalent = this.talentFormGroup?.value;
-    this.talents =  this.talentService.filterTalent(filterTalent?.title, filterTalent?.contract, filterTalent?.workMode, filterTalent?.address, filterTalent?.experience, filterTalent?.type, filterTalent?.domain, this.currentPage, this.pageSize).pipe(
-      catchError(err => {
-        this.errorMessageTalent = err.message;
-        return throwError(err);
-      })
-    );
-  }
-
-  handleFilterTalents() {
-    //  let kw = this.searchFormGroup?.value.keyword;
-    let filterTalent: FilterTalent = this.talentFormGroup?.value;
-    this.talents1 =  this.talentService.filterTalent(filterTalent?.title, filterTalent?.contract, filterTalent?.workMode, filterTalent?.address, filterTalent?.experience, filterTalent?.type, filterTalent?.domain,this.currentPage, this.pageSize)
-      .subscribe({
-        next: value => {
-          console.log(value);
-          this.totalPages = value[0].totalPages;
-        },
-        error: err => {
-          console.log(err);
-        }
-      });
-  }*/
-
-/*
-  listTalent(){
-    this.talentsData = this.talentService.listTalent(this.currentPage, this.pageSize).pipe(
-      catchError(err => {
-        this.errorMessage = err.message;
-        return throwError(err);
-      })
-    );
-  }*/
 
   handleDeleteTalent(talent: Talent) {
     let conf = confirm("Are you sure ?");

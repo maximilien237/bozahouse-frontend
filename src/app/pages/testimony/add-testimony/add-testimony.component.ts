@@ -19,7 +19,7 @@ export class AddTestimonyComponent implements OnInit {
 
   ngOnInit(): void {
     this.newTestimonyFormGroup = this.fb.group({
-   message: this.fb.control("", [Validators.required,Validators.minLength(4), Validators.maxLength(500),Validators.pattern("[A-Za-z0-9-çèéàêô()+:!',. ]+")])
+   message: this.fb.control("", [Validators.required,Validators.minLength(4), Validators.maxLength(500)])
 
     });
 

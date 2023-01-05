@@ -46,6 +46,11 @@ export class OfferService {
     return this.http.get<Array<Offer>>(environment.backendHostAppUser + "offers/filterDates?title=" + title + "&contract=" + contract + "&workMode=" +workMode + "&address="+ address + "&experience=" +experience  + "&type=" +type + "&domain=" +domain +"&startDate=" +startDate + "&endDate=" +endDate + "&page=" +page + "&size=" +size)
   }
 
+  public filterOfferNotValid(title: string, contract: string, workMode: string, address: string,
+                     experience: string, type: string, domain: string, page: number,size: number ): Observable<Array<Offer>> {
+    return this.http.get<Array<Offer>>(environment.backendHostAdmin + "offers/disabled/filter?title=" + title + "&contract=" + contract + "&workMode=" +workMode + "&address="+ address + "&experience=" +experience  + "&type=" +type + "&domain=" +domain + "&page=" +page + "&size=" +size)
+  }
+
   public searchOffers(keyword : string): Observable<Array<Offer>> {
     return this.http.get<Array<Offer>>(environment.backendHostAppUser  + "offers/search?keyword="+keyword)
   }

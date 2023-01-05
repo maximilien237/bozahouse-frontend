@@ -26,6 +26,10 @@
               <i class="bi bi-plus-circle"></i>
             </a>&nbsp;&nbsp;&nbsp;&nbsp;-->
 
+            <a (click)="handleDisableOffer(offer)" class="btn btn-outline-secondary">
+              <i class="bi bi-arrow-down"></i>
+            </a>&nbsp;&nbsp;&nbsp;&nbsp;
+
             <a (click)="handleUpdateOffer(offer.id)" class="btn btn-warning">
               <i class="bi bi-pencil"></i>
             </a> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -147,6 +151,10 @@
             <a routerLink="/addTalent" class="btn btn-primary">
               <i class="bi bi-plus-circle"></i>
             </a>&nbsp;&nbsp;&nbsp;&nbsp;-->
+
+            <a (click)="handleDisableTalent(talent)" class="btn btn-outline-secondary">
+              <i class="bi bi-arrow-down"></i>
+            </a>&nbsp;&nbsp;&nbsp;&nbsp;
 
             <a (click)="handleUpdateTalent(talent.id)" class="btn btn-warning">
               <i class="bi bi-pencil"></i>

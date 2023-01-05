@@ -29,10 +29,10 @@
 
               <div class="card-body text-center" >
 
-                <p *ngIf="subscription.type =='host'" class="text-white" style="font-size: 25px">Abonnement {{subscription.type}} activé avec succès. Cela vous a coûté {{subscription.initAmount | number: '1.0'}} FCFA
+                <p *ngIf="subscription.type =='host'" class="text-white-50" style="font-size: 25px">Abonnement {{subscription.type}} activé avec succès. Cela vous a coûté {{subscription.initAmount | number: '1.0'}} FCFA
                   et est valable jusqu'au {{subscription.endSubscription | date: 'd MMM yyyy, à HH:mm'}}</p>
 
-                <p *ngIf="subscription.type =='normal'" class="text-white" style="font-size: 25px">Abonnement {{subscription.type}} activé avec succès. Cela vous a coûté {{subscription.initAmount | number: '1.0'}} FCFA
+                <p *ngIf="subscription.type =='normal'" class="text-white-50" style="font-size: 25px">Abonnement {{subscription.type}} activé avec succès. Cela vous a coûté {{subscription.initAmount | number: '1.0'}} FCFA
                   et est valable jusqu'au {{subscription.endSubscription | date: 'd MMM yyyy, à HH:mm'}}</p>
 
                 <span *ngIf="isAdmin">  <a (click)="handleDetailSubscription(subscription.id)" class="btn btn-warning">Détails </a> </span>
@@ -100,7 +100,7 @@
 
 <div class="mb-3 spacer-left mt-3">
   <span><a class="hide-underline-link btn btn-dark text-warning" routerLink="/account"> Retour</a> </span>
-</div>>
+</div>
 
 <app-footer></app-footer>
 

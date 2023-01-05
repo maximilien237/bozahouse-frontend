@@ -1,6 +1,6 @@
 <html class="bg-secondary" xmlns="http://www.w3.org/1999/html">
 <body class="bg-secondary">
-<app-navbar></app-navbar>
+<app-header></app-header>
 
 <div class="container spacer  ">
   <div class="text-center">
@@ -15,7 +15,7 @@
       <div class="offcanvas-body">
 
         <div class="card" style="font-size: 15px;">
-<!--          <h5 class="card-header bg-dark text-warning"><i class="bi bi-search"></i>Rechercher </h5>-->
+          <!--          <h5 class="card-header bg-dark text-warning"><i class="bi bi-search"></i>Rechercher </h5>-->
           <div class="card-body bg-dark text-white-50" >
 
             <form  *ngIf="talentFormGroup" [formGroup] = "talentFormGroup" (ngSubmit)="handleSearchTalents()" >
@@ -101,15 +101,15 @@
                 <input type="text" class="form-control" formControlName = "domain"  placeholder="Domaine, ex: informatique">
               </div>
 
-      <!--        <div class="mb-3 mt-2">
-                <label class="form-label">Date de début</label>
-                <input type="date" class="form-control" formControlName = "startDate" >
-              </div>
+              <!--        <div class="mb-3 mt-2">
+                        <label class="form-label">Date de début</label>
+                        <input type="date" class="form-control" formControlName = "startDate" >
+                      </div>
 
-              <div class="mb-3 mt-2 mb-2">
-                <label class="form-label">Date de fin</label>
-                <input type="date" class="form-control" formControlName = "endDate" >
-              </div>-->
+                      <div class="mb-3 mt-2 mb-2">
+                        <label class="form-label">Date de fin</label>
+                        <input type="date" class="form-control" formControlName = "endDate" >
+                      </div>-->
 
 
 
@@ -135,7 +135,7 @@
 
     </ng-container>
 
-<!--    <span><a *ngIf="currentUser.hostSubscriptionCounter >= 1 || currentUser.normalSubscriptionCounter >=1" routerLink="/addTestimony" class="hide-underline-link btn btn-dark text-warning">Rédiger un avis</a> </span>-->
+    <!--    <span><a *ngIf="currentUser.hostSubscriptionCounter >= 1 || currentUser.normalSubscriptionCounter >=1" routerLink="/addTestimony" class="hide-underline-link btn btn-dark text-warning">Rédiger un avis</a> </span>-->
 
     <!-- sidebar right -->
     <!--
@@ -163,7 +163,7 @@
   </div><br>
   <div class="card bg-secondary border-0">
 
-    <h5 class="text-center mt-2"><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i> <i class="bi bi-dash text-success w-100" ></i>&nbsp;Vos derniers talents &nbsp;<i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i><i class="bi bi-dash text-success w-100" ></i></h5>
+    <h5 class="text-center mt-2">Les talents désactivés [ {{talentSize}} ]</h5>
 
     <div class="row">
 
@@ -174,8 +174,9 @@
 
               <div *ngIf="isAdmin" class="card-header">
 
-                <a (click)="handleDisableTalent(talent)" class="btn btn-outline-secondary">
-                  <i class="bi bi-arrow-down"></i>
+
+                <a (click)="handleEnableTalent(talent)" class="btn btn-outline-secondary">
+                  <i class="bi bi-arrow-up"></i>
                 </a>&nbsp;&nbsp;&nbsp;&nbsp;
 
                 <a (click)="handleUpdateTalent(talent.id)" class="btn btn-warning">
@@ -302,10 +303,6 @@
 </body>
 </html>
 
-<!--<html class="bg-secondary">
-<body class="bg-secondary">
 
-</body>
-</html>-->
 
 

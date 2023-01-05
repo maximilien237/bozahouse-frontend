@@ -124,7 +124,7 @@
               </div>-->
 
               <div class="text-center">
-                <button *ngIf="!resultDatesCompare"  class="btn btn-outline-light" type="submit">rechercher&nbsp;<i class="bi bi-search"></i> </button>&nbsp;&nbsp;&nbsp;
+                <button  class="btn btn-outline-light" type="submit">rechercher&nbsp;<i class="bi bi-search"></i> </button>&nbsp;&nbsp;&nbsp;
                 <span class="btn btn-outline-danger" (click)="handleSetOfferFormGroup()">reset</span>
               </div>
 
@@ -186,13 +186,8 @@
 
         <div *ngIf="isAdmin" class="card-header">
 
-
-          <a (click)="handleEnableOffer(offer)" class="btn btn-secondary">
-            E
-          </a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-          <a (click)="handleDisableOffer(offer)" class="btn btn-secondary">
-            D
+          <a (click)="handleDisableOffer(offer)" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-down"></i>
           </a>&nbsp;&nbsp;&nbsp;&nbsp;
 
           <a (click)="handleUpdateOffer(offer.id)" class="btn btn-warning">

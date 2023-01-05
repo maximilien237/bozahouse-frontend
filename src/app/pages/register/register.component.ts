@@ -27,11 +27,11 @@ export class RegisterComponent implements OnInit {
     this.registerFormGroup = this.fb.group({
       account : this.fb.control("", [Validators.required]),
       howKnowUs: this.fb.control("", [Validators.required]),
-      lastname : this.fb.control("", [Validators.pattern("[A-Za-z-çèéàê' -]+"),Validators.required, Validators.minLength(4),Validators.maxLength(30)]),
-      firstname: this.fb.control("",[Validators.pattern("[A-Za-z-çèéàê' -]+"),Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
+      lastname : this.fb.control("", [Validators.pattern("[A-Za-z-çèéàê' -]+"),Validators.required, Validators.minLength(3),Validators.maxLength(30)]),
+      firstname: this.fb.control("",[Validators.pattern("[A-Za-z-çèéàê' -]+"),Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
       sex: this.fb.control("",[Validators.required]),
       email: this.fb.control("",[Validators.pattern("^[a-z0-9_+&*-]+(?:\\.[a-z0-9_+&*-]+)*@(?:[a-z0-9-]+\\.)+[a-z]{2,15}$"),Validators.required, Validators.email]),
-      username : this.fb.control("",[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(4), Validators.maxLength(12)]),
+      username : this.fb.control("",[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
       password: this.fb.control("",[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
       confirmPassword: this.fb.control("",[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
       birthday: this.fb.control(null,[Validators.required]),
@@ -46,8 +46,8 @@ export class RegisterComponent implements OnInit {
     this.authenticationService.signUp(user).subscribe({
       next: value => {
         console.log(value);
-        alert("user has been successfully saved");
-        alert("consult your mailbox to validate you account");
+        alert("Compte crée avec succès !");
+        alert("Consultez votre boite mail pour activer votre compte !");
         this.router.navigateByUrl("/login");
         //this.newUserFormGroup.reset();
       },
@@ -76,7 +76,7 @@ export class RegisterComponent implements OnInit {
     if (error['required']){
       return "vous devez remplir champs !";
     }else if (error['pattern']) {
-      return "exemple d\'un mail valide : youremail@gmail.com" ;
+      return "exemple d\'un mail valide : john@example.com ou john.smith@example.com" ;
     }else if (error['email']) {
       return "Entrez une adresse email valide !";
     }else return "";

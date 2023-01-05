@@ -64,6 +64,9 @@ import { AddTestimonyComponent } from './pages/testimony/add-testimony/add-testi
 import { ListTestimonyComponent } from './pages/testimony/list-testimony/list-testimony.component';
 import { UpdateTestimonyComponent } from './pages/testimony/update-testimony/update-testimony.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
+import { ListAppUserDisabledComponent } from './dashboard/app-user/list-app-user-disabled/list-app-user-disabled.component';
+import { ListTalentDisabledComponent } from './pages/talent/list-talent-disabled/list-talent-disabled.component';
+import { ListOfferDisabledComponent } from './pages/offer/list-offer-disabled/list-offer-disabled.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +115,10 @@ import { PrivacyComponent } from './pages/privacy/privacy.component';
     AddTestimonyComponent,
     ListTestimonyComponent,
     UpdateTestimonyComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    ListAppUserDisabledComponent,
+    ListTalentDisabledComponent,
+    ListOfferDisabledComponent
   ],
   imports: [
     BrowserModule,

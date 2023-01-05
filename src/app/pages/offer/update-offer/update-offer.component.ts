@@ -29,11 +29,11 @@ export class UpdateOfferComponent implements OnInit {
         this.updateOfferFormGroup = this.fb.group({
 
           type: this.fb.control(this.offer.type, [Validators.required]),
-          title: this.fb.control(this.offer.title, [Validators.pattern("[A-Za-z0-9-çèéàêô' ]+"),Validators.required,Validators.minLength(6),Validators.maxLength(30)]),
-          mission: this.fb.control(this.offer.mission, [Validators.pattern("[A-Za-z0-9-çèéàêô()+:!',. ]+"),Validators.required]),
+          title: this.fb.control(this.offer.title, [Validators.pattern("[A-Za-z-çèéàêô' ]+"),Validators.required,Validators.minLength(6),Validators.maxLength(30)]),
+          mission: this.fb.control(this.offer.mission, [Validators.required]),
           domain: this.fb.control(this.offer.domain, [Validators.pattern("[A-Za-z-çèéàêô' ]+"),Validators.minLength(6),Validators.maxLength(30)]),
-          profile: this.fb.control(this.offer.profile, [Validators.pattern("[A-Za-z0-9-çèéàêô()+:!',. ]+")]),
-          address: this.fb.control(this.offer.address, [Validators.required,Validators.pattern("[A-Z][a-z-0-9-çèéàêô']+,[A-Z][a-z-çèéàô]+,[A-Z][a-z-çèéàô]{4,30}")]),
+          profile: this.fb.control(this.offer.profile, [Validators.required]),
+          address: this.fb.control(this.offer.address, [Validators.required,Validators.pattern("[A-Z][a-z-0-9-çèéàêô']+, [A-Z][a-z-çèéàô]+, [A-Z][a-z-çèéàô]{4,30}")]),
           tel: this.fb.control(this.offer.tel, [Validators.pattern("[0-9]+"),Validators.required,Validators.minLength(9),Validators.maxLength(9)]),
           whatsAppNumber: this.fb.control(this.offer.whatsAppNumber, [Validators.pattern("[0-9]+"),Validators.minLength(9),Validators.maxLength(9)]),
           experience: this.fb.control(this.offer.experience, [Validators.required]),
@@ -41,8 +41,8 @@ export class UpdateOfferComponent implements OnInit {
           salaryChoice: this.fb.control(this.offer.salaryChoice, [Validators.required]),
           endOffer: this.fb.control(formatDate(this.offer.endOffer, 'yyyy-MM-dd', 'en'), [Validators.required]),
           needPeople: this.fb.control(this.offer.needPeople, [Validators.required,Validators.pattern("[0-9]+")]),
-          name: this.fb.control(this.offer.name, [Validators.pattern("[A-Za-z0-9-çèéàêô()+:!',. ]+"),Validators.minLength(6),Validators.maxLength(30)]),
-          skills: this.fb.control(this.offer.skills, [Validators.pattern("[A-Za-z0-9-çèéàêô()+:!',. ]+"),Validators.required]),
+          name: this.fb.control(this.offer.name, [Validators.pattern("[A-Za-z0-9-çèéàêô' ]+"),Validators.minLength(4),Validators.maxLength(50)]),
+          skills: this.fb.control(this.offer.skills, [Validators.required]),
           fcb: this.fb.control(this.offer.fcb, [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
           web:  this.fb.control(this.offer.web, [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
           linkedin: this.fb.control(this.offer.linkedin, [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
@@ -64,7 +64,7 @@ export class UpdateOfferComponent implements OnInit {
     this.offerService.updateOffer(this.id, offer).subscribe({
       next: value => {
         console.log(value);
-        alert("offer has been successfully updated");
+        alert("Votre offre d\'emploi a été mise à jour avec succès !");
         //this.newUserFormGroup.reset();
         this.router.navigateByUrl("/jobs");
       },
@@ -91,7 +91,7 @@ export class UpdateOfferComponent implements OnInit {
     if (error['required']){
       return "vous devez remplir champs !";
     }else if (error['pattern']) {
-      return "exemple d\'un mail valide : youremail@gmail.com" ;
+      return "exemple d\'un mail valide : john@example.com ou john.smith@example.com" ;
     }else if (error['email']) {
       return "Entrez une adresse email valide !";
     }else return "";
@@ -119,7 +119,7 @@ export class UpdateOfferComponent implements OnInit {
     if (error['required']){
       return "vous devez remplir champs !";
     }else if (error['pattern']) {
-      return "exemple d\'une adresse valide : Simbock,Yaoundé,Cameroun" ;
+      return "exemple d\'une adresse valide : Simbock, Yaoundé, Cameroun" ;
     }else return "";
   }
 
@@ -128,4 +128,7 @@ export class UpdateOfferComponent implements OnInit {
       return "exemple d\'un salaire valide : 100000" ;
     }else return "";
   }
+
+
+
 }

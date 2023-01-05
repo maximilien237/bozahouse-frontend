@@ -2,18 +2,18 @@
 <body class="bg-secondary">
 
 
-<app-navbar></app-navbar>
+<app-header></app-header>
 <div class="container">
   <div class="card offset-3 mt-2 bg-dark">
 
-    <div class="card-header text-warning text-center"> Update user</div>
+    <div class="card-header text-warning text-center"> Mettre à jour cet utilisateur</div>
     <div class="card-body">
 
       <form class="text-white-50" [formGroup] = "updateUserFormGroup" (ngSubmit)="handleUpdateUser()">
 
 
         <div class="mb-3">
-          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de compte</label>
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de compte</label>
           <select class="form-select" formControlName = "account"  required>
             <option value="talent">Talent</option>
             <option value="employer">Employeur</option>
@@ -25,7 +25,7 @@
 
 
         <div class="mb-3">
-          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Comment avez vous connu Bozahouse ?</label>
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Comment avez vous connu Bozahouse ?</label>
           <select class="form-select" formControlName = "howKnowUs"  required>
             <option value="friend">Amis</option>
             <option value="facebook">Facebook</option>
@@ -39,26 +39,24 @@
 
         </div>
 
-        <div class="mb-3">
-          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom</label>
+        <div class="mb-3 mt-2">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom</label>
           <input type="text" formControlName = "lastname" class="form-control">
-          <small *ngIf="updateUserFormGroup.controls['lastname'].errors && updateUserFormGroup.controls['lastname'].touched" class="text-danger">{{getErrorMessage('lastname', updateUserFormGroup.controls['lastname'].errors)}}</small>
+          <small *ngIf="updateUserFormGroup.controls['lastname'].errors && updateUserFormGroup.controls['lastname'].touched" class="text-danger">{{getErrorMessageName('lastname', updateUserFormGroup.controls['lastname'].errors)}}</small>
 
         </div>
-
-
-        <div class="mb-3">
-          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Prénom</label>
-          <input type="text" formControlName = "firstname" class="form-control">
-          <small *ngIf="updateUserFormGroup.controls['firstname'].errors && updateUserFormGroup.controls['firstname'].touched" class="text-danger">{{getErrorMessage('firstname', updateUserFormGroup.controls['firstname'].errors)}}</small>
-
-        </div>
-
 
         <div class="mb-3 mt-2">
-          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Sexe</label>
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Prénom</label>
+          <input type="text" formControlName = "firstname" class="form-control">
+          <small *ngIf="updateUserFormGroup.controls['firstname'].errors && updateUserFormGroup.controls['firstname'].touched" class="text-danger">{{getErrorMessageName('firstname', updateUserFormGroup.controls['firstname'].errors)}}</small>
+
+        </div>
+
+        <div class="mb-3 mt-2">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Sexe</label>
           <select class="form-select" formControlName = "sex" required>
-            <option value="" disabled hidden>Choose...</option>
+            <option value="" disabled>Choose...</option>
             <option value="Homme">Homme</option>
             <option value="Femme">Femme</option>
           </select>
@@ -66,55 +64,58 @@
 
         </div>
 
-
         <div class="mb-3">
-          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
-          <input type="password" formControlName = "password" class="form-control">
-          <small *ngIf="updateUserFormGroup.controls['password'].errors && updateUserFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessage('password', updateUserFormGroup.controls['password'].errors)}}</small>
-
-        </div>
-
-
-        <div class="mb-3">
-          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du Mot de passe</label>
-          <input type="password" formControlName = "confirmPassword" class="form-control">
-          <small *ngIf="updateUserFormGroup.controls['confirmPassword'].errors && updateUserFormGroup.controls['confirmPassword'].touched" class="text-danger">{{getErrorMessage('confirmPassword', updateUserFormGroup.controls['confirmPassword'].errors)}}</small>
-
-        </div>
-
-
-
-        <div class="mb-3">
-          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
-          <input type="email" formControlName = "email" class="form-control">
-          <small *ngIf="updateUserFormGroup.controls['email'].errors && updateUserFormGroup.controls['email'].touched" class="text-danger">{{getErrorMessage('email', updateUserFormGroup.controls['email'].errors)}}</small>
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
+          <input (keydown.space)="$event.preventDefault()" type="email" formControlName = "email" class="form-control" placeholder="ex : youremail@gmail.com">
+          <small *ngIf="updateUserFormGroup.controls['email'].errors && updateUserFormGroup.controls['email'].touched" class="text-danger">{{getErrorMessageEmail('email', updateUserFormGroup.controls['email'].errors)}}</small>
 
         </div>
 
         <div class="mb-3">
-          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom d'utilisateur</label>
-          <input type="text" formControlName = "username" class="form-control">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom d'utilisateur</label>
+          <input (keydown.space)="$event.preventDefault()" type="text" formControlName = "username" class="form-control">
           <small *ngIf="updateUserFormGroup.controls['username'].errors && updateUserFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', updateUserFormGroup.controls['username'].errors)}}</small>
 
         </div>
 
+        <div class="mb-3 mt-2">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
+          <input type="password" formControlName = "password" class="form-control" id="pwd">
+          <input type="checkbox" onclick="showAndHidePassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
+          <small *ngIf="updateUserFormGroup.controls['password'].errors && updateUserFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessage('password', updateUserFormGroup.controls['password'].errors)}}</small>
+        </div>
+
+        <div class="mb-3 mt-2">
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du mot de passe</label>
+          <input type="password" formControlName = "confirmPassword" class="form-control" id="confPwd">
+          <input type="checkbox" onclick="showAndHideConfPassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
+          <small *ngIf="updateUserFormGroup.controls['confirmPassword'].errors && updateUserFormGroup.controls['confirmPassword'].touched" class="text-danger">{{getErrorMessage('confirmPassword', updateUserFormGroup.controls['confirmPassword'].errors)}}</small>
+        </div>
+
         <div class="mb-3">
-          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date d'anniversaire</label>
+          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date d'anniversaire</label>
           <input type="date" formControlName = "birthday" class="form-control">
           <small *ngIf="updateUserFormGroup.controls['birthday'].errors && updateUserFormGroup.controls['birthday'].touched" class="text-danger">{{getErrorMessage('birthday', updateUserFormGroup.controls['birthday'].errors)}}</small>
 
         </div>
 
-        <div class="mb-3">
-          <label class="form-label">Code de parrainage</label>
-          <input type="text" formControlName = "referralCode" class="form-control">
-          <small *ngIf="updateUserFormGroup.controls['referralCode'].errors && updateUserFormGroup.controls['referralCode'].touched" class="text-danger">{{getErrorMessage('referralCode', updateUserFormGroup.controls['referralCode'].errors)}}</small>
+        <!--     <div class="mb-3">
+               <label class="form-label text-white">Code de parrainage</label>
+               <input type="text" formControlName = "referralCode" class="form-control">
+               <small *ngIf="updateUserFormGroup.controls['referralCode'].errors && updateUserFormGroup.controls['referralCode'].touched" class="text-danger">{{getErrorMessage('referralCode', updateUserFormGroup.controls['referralCode'].errors)}}</small>
+             </div>-->
+
+        <div class="mb-3 form-check">
+          <label class="form-label text-white-50"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>j'ai lu et approuvé les <a class="hide-underline-link text-warning" routerLink="/privacyOut">termes</a></label>&nbsp;
+          <input type="checkbox" formControlName = "acceptTerms" class="form-check-input">
+          <small *ngIf="updateUserFormGroup.controls['acceptTerms'].errors && updateUserFormGroup.controls['acceptTerms'].touched" class="text-danger">{{getErrorMessageTerms('acceptTerms', updateUserFormGroup.controls['acceptTerms'].errors)}}</small>
 
         </div>
 
-        <div class="text-center mt-2">
+<!--        <span class="text-secondary" style="font-size: 17px">Déjà un compte ? | <a class="hide-underline-link" routerLink="/login"><span class="text-warning">Connectez vous</span></a></span>-->
 
-          <button [disabled] = "!updateUserFormGroup.valid" class="btn btn-warning">Valider</button>&nbsp;<span> les champs marqués par<i style="font-size: 20px" class="text-danger">*&nbsp;</i>&nbsp;sont obligatoires</span>
+        <div class="text-center text-white">
+          <button [disabled] = "!updateUserFormGroup.valid" class="btn btn-warning w-30 mb-xxl-2 mt-lg-1" type="submit">Inscription</button>
         </div>
 
       </form>
@@ -122,12 +123,10 @@
     </div>
   </div>
 
-  <div class="mt-5 mb-5">
-
-    <span><a routerLink="/users" class="btn btn-warning">Retour</a></span>
-
-  </div>
 </div>
+
+<div class="spacer-left mb-3 mt-3"><a class="btn btn-dark text-warning" routerLink="/users">Retour</a> </div>
+
 
 <app-footer>
 

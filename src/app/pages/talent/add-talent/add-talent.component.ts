@@ -31,16 +31,16 @@ export class AddTalentComponent implements OnInit {
       linkedin: this.fb.control("", [Validators.pattern("^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9a-f]{2}|[-()_.!~*';/?:@&=+$,a-z0-9])+)([).!';/?:,][[:blank:|:blank:]])?$")]),
       github: this.fb.control("", [Validators.pattern("^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9a-f]{2}|[-()_.!~*';/?:@&=+$,a-z0-9])+)([).!';/?:,][[:blank:|:blank:]])?$")]),
       level: this.fb.control("", [Validators.required]),
-      title: this.fb.control("", [Validators.pattern("[A-ZA-Za-z0-9-çèéàêâô()+:!',-. ]+"),Validators.required,Validators.minLength(6),Validators.maxLength(30)]),
-      domain: this.fb.control("", [Validators.pattern("[A-Za-z-çèéàêô' ]+"),Validators.required,Validators.minLength(6),Validators.maxLength(30)]),
-      address: this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z-0-9-çèéàê'-]+,[A-Z][a-z-çèéà]+,[A-Z][a-z-çèéà]{4,30}")]),
+      title: this.fb.control("", [Validators.pattern("[A-ZA-Za-z0-9-çèéàêâô' ]+"),Validators.required,Validators.minLength(4),Validators.maxLength(30)]),
+      domain: this.fb.control("", [Validators.pattern("[A-Za-z-çèéàêô' ]+"),Validators.required,Validators.minLength(4),Validators.maxLength(30)]),
+      address: this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z-0-9-çèéàê'-]+, [A-Z][a-z-çèéà]+, [A-Z][a-z-çèéà]{4,30}")]),
       tel: this.fb.control("", [Validators.pattern("[0-9]+"),Validators.required,Validators.minLength(9),Validators.maxLength(9)]),
       whatsAppNumber: this.fb.control("", [Validators.pattern("[0-9]+"),Validators.minLength(9),Validators.maxLength(9)]),
       // countryCode: this.fb.control("",[Validators.required]),
       experience: this.fb.control("", [Validators.required]),
       salary: this.fb.control("", [Validators.pattern("[0-9]+")]),
       salaryChoice: this.fb.control("", [Validators.required]),
-      skills: this.fb.control("", [Validators.pattern("[A-Za-z0-9-çèéàêâô()+:!',. ]+"),Validators.required]),
+      skills: this.fb.control("", [Validators.required]),
       workMode: this.fb.control("", [Validators.required])
 
     });
@@ -52,7 +52,7 @@ export class AddTalentComponent implements OnInit {
     this.talentService.saveTalent(talent).subscribe({
       next: value => {
         console.log(value);
-        alert("talent has been successfully saved");
+        alert("Votre profil a été crée avec succès !");
         //this.newUserFormGroup.reset();
         this.router.navigateByUrl("/talents");
       },
@@ -80,7 +80,7 @@ export class AddTalentComponent implements OnInit {
     if (error['required']){
       return "vous devez remplir champs !";
     }else if (error['pattern']) {
-      return "exemple d\'un mail valide : youremail@gmail.com" ;
+      return "exemple d\'un mail valide : john@example.com ou john.smith@example.com" ;
     }else if (error['email']) {
       return "Entrez une adresse email valide !";
     }else return "";
@@ -108,7 +108,7 @@ export class AddTalentComponent implements OnInit {
     if (error['required']){
       return "vous devez remplir champs !";
     }else if (error['pattern']) {
-      return "exemple d\'une adresse valide : Simbock,Yaoundé,Cameroun" ;
+      return "exemple d\'une adresse valide : Simbock, Yaoundé, Cameroun" ;
     }else return "";
   }
 

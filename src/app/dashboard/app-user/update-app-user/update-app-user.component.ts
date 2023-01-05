@@ -37,15 +37,16 @@ export class UpdateAppUserComponent implements OnInit {
 
             account : this.fb.control(this.appUser.account, [Validators.required]),
             howKnowUs: this.fb.control(this.appUser.howKnowUs, [Validators.required]),
-            lastname : this.fb.control(this.appUser.lastname, [Validators.pattern("[A-Z' -]+"),Validators.required, Validators.minLength(4),Validators.maxLength(30)]),
-            firstname: this.fb.control(this.appUser.firstname,[Validators.pattern("[A-Z][a-z' -]+"),Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
+            lastname : this.fb.control(this.appUser.lastname, [Validators.pattern("[A-Za-z-çèéàê' -]+"),Validators.required, Validators.minLength(3),Validators.maxLength(30)]),
+            firstname: this.fb.control(this.appUser.firstname,[Validators.pattern("[A-Za-z-çèéàê' -]+"),Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
             sex: this.fb.control(this.appUser.sex,[Validators.required]),
             email: this.fb.control(this.appUser.email,[Validators.pattern("^[a-z0-9_+&*-]+(?:\\.[a-z0-9_+&*-]+)*@(?:[a-z0-9-]+\\.)+[a-z]{2,15}$"),Validators.required, Validators.email]),
-            username : this.fb.control(this.appUser.username,[Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required, Validators.minLength(4), Validators.maxLength(12)]),
-            password: this.fb.control(this.appUser.password,[Validators.pattern("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
-            confirmPassword: this.fb.control(this.appUser.confirmPassword,[Validators.pattern("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
+            username : this.fb.control(this.appUser.username,[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
+            password: this.fb.control(this.appUser.password,[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
+            confirmPassword: this.fb.control(this.appUser.confirmPassword,[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
             birthday: this.fb.control(formatDate(this.appUser.birthday, 'yyyy-MM-dd', 'en'),[Validators.required]),
-            referralCode: this.fb.control(this.appUser.referralCode,[Validators.pattern("^(?=.*[a-z0-9]).{6,20}$"), Validators.minLength(6), Validators.maxLength(15)])
+            acceptTerms: this.fb.control(this.appUser.acceptTerms,[Validators.requiredTrue]),
+            referralCode: this.fb.control(this.appUser.referralCode,[Validators.pattern("[A-Za-z0-9]+"), Validators.minLength(6), Validators.maxLength(15)])
 
           });
         }, error: err => {
@@ -61,9 +62,9 @@ export class UpdateAppUserComponent implements OnInit {
     this.userService.updateAppUser(this.id, user).subscribe({
       next: value => {
         console.log(value);
-        alert("user has been successfully updated");
+        alert("Utilisateur modifié avec succès !");
         //this.newUserFormGroup.reset();
-        this.router.navigateByUrl("/listUser");
+        this.router.navigateByUrl("/users");
       },
       error: err => {
         console.log(err);
@@ -74,15 +75,45 @@ export class UpdateAppUserComponent implements OnInit {
 
   getErrorMessage(fieldName: string, error: ValidationErrors) {
     if (error['required']){
-      return fieldName + "  "+ " is required";
+      return "vous devez remplir champs !";
+    }else if (error['requiredTrue']) {
+      return "vous devez cocher cette case !" ;
     }else if (error['minlength']){
-      return fieldName + "  "+ "should have at least" + " "+ error['minlength']['requiredLength'] + "  "+ "characters";
+      return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  " + "caractères";
     }else if (error['maxlength']){
-      return fieldName + "  "+ "should have at the most" + "  " + error['maxlength']['requiredLength'] + "  " + "characters";
+      return "ce champs doit comporter au plus " + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
     }else if (error['pattern']) {
-      return fieldName + "  "+ "required this pattern" + error['pattern']['requiredPattern'] ;
+      return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres, ou un mélange des trois" ;
+    }else return "";
+
+  }
+
+  getErrorMessageEmail(fieldName: string, error: ValidationErrors) {
+    if (error['required']){
+      return "vous devez remplir champs !";
+    }else if (error['pattern']) {
+      return "exemple d\'un mail valide : john@example.com ou john.smith@example.com" ;
     }else if (error['email']) {
-      return fieldName + "  " + "address is not valid "+ "  "+ error['email']['requiredEmail'];
+      return "Entrez une adresse email valide !";
+    }else return "";
+  }
+
+  getErrorMessageName(fieldName: string, error: ValidationErrors) {
+    if (error['required']){
+      return "vous devez remplir champs !";
+    }else if (error['minlength']){
+      return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  " + "caractères";
+    }else if (error['maxlength']){
+      return "ce champs doit comporter au plus " + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
+    }else if (error['pattern']) {
+      return "ce champs doit comporter soit des majuscules, soit des minuscules, ou un mélange des deux" ;
+    }else return "";
+  }
+
+
+  getErrorMessageTerms(fieldName: string, error: ValidationErrors) {
+    if (error['required']){
+      return "vous devez cocher cette case !" ;
     }else return "";
 
   }

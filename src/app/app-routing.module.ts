@@ -49,6 +49,11 @@ import {ListTestimonyComponent} from "./pages/testimony/list-testimony/list-test
 import {UpdateTestimonyComponent} from "./pages/testimony/update-testimony/update-testimony.component";
 import {AddTestimonyComponent} from "./pages/testimony/add-testimony/add-testimony.component";
 import {PrivacyComponent} from "./pages/privacy/privacy.component";
+import {
+  ListAppUserDisabledComponent
+} from "./dashboard/app-user/list-app-user-disabled/list-app-user-disabled.component";
+import {ListOfferDisabledComponent} from "./pages/offer/list-offer-disabled/list-offer-disabled.component";
+import {ListTalentDisabledComponent} from "./pages/talent/list-talent-disabled/list-talent-disabled.component";
 
 
 
@@ -62,11 +67,13 @@ const routes: Routes = [
   { path: "detailOffer/:id", component: DetailOfferComponent, canActivate: [AuthenticationGuard] },
   { path: "updateOffer/:id", component: UpdateOfferComponent, canActivate: [AuthenticationGuard]},
   { path: "jobs", component: ListOfferComponent, canActivate: [AuthenticationGuard]},
+  { path: "offersDisabled", component: ListOfferDisabledComponent, canActivate: [AuthenticationGuard, IsAdminGuard]},
 
   { path: "addTalent", component: AddTalentComponent, canActivate: [AuthenticationGuard] },
   { path: "detailTalent/:id", component: DetailTalentComponent, canActivate: [AuthenticationGuard] },
   { path: "updateTalent/:id", component: UpdateTalentComponent, canActivate: [AuthenticationGuard]},
   { path: "talents", component: ListTalentComponent, canActivate: [AuthenticationGuard] },
+  { path: "talentsDisabled", component: ListTalentDisabledComponent, canActivate: [AuthenticationGuard, IsAdminGuard] },
 
   { path: "addTestimony", component: AddTestimonyComponent, canActivate: [AuthenticationGuard] },
   { path: "updateTestimony/:id", component: UpdateTestimonyComponent, canActivate: [AuthenticationGuard]},
@@ -100,6 +107,7 @@ const routes: Routes = [
   { path: "detailUser/:id", component: DetailAppUserComponent, canActivate: [AuthenticationGuard, IsAdminGuard] },
   { path: "updateUser/:id", component: UpdateAppUserComponent, canActivate: [AuthenticationGuard, IsAdminGuard]},
   { path: "users", component: ListAppUserComponent, canActivate: [AuthenticationGuard, IsEditorGuard] },
+  { path: "usersDisabled", component: ListAppUserDisabledComponent, canActivate: [AuthenticationGuard, IsAdminGuard] },
 
   { path: "userDates/:id", component: UserDatesComponent, canActivate: [AuthenticationGuard, IsAdminGuard]},
   { path: "userSubscriptions/:id", component: UserSubscriptionsComponent, canActivate: [AuthenticationGuard]},

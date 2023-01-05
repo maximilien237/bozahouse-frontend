@@ -29,7 +29,7 @@ export class UpdateTestimonyComponent implements OnInit {
           this.testimony = value;
           this.updateTestimonyFormGroup = this.fb.group({
 
-            message : this.fb.control(this.testimony.message, [Validators.required,Validators.minLength(4), Validators.maxLength(500),Validators.pattern("[A-Za-z0-9-çèéàêô()+:!',-. ]+")])
+            message : this.fb.control(this.testimony.message, [Validators.required,Validators.minLength(4), Validators.maxLength(500)])
 
           });
         }, error: err => {

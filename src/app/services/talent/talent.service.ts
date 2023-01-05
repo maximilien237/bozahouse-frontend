@@ -46,6 +46,12 @@ export class TalentService {
     return this.http.get<Array<Talent>>(environment.backendHostAppUser + "talents/filterDates?title=" + title + "&contract=" + contract + "&workMode=" +workMode + "&address="+ address + "&experience=" +experience  + "&type=" +type + "&domain=" +domain +"&startDate=" +startDate + "&endDate=" +endDate + "&page=" +page + "&size=" +size)
   }
 
+
+  public filterTalentValidFalse(title: string, contract: string, workMode: string, address: string,
+                      experience: string, type: string, domain: string, page: number,size: number ): Observable<Array<Talent>> {
+    return this.http.get<Array<Talent>>(environment.backendHostAdmin + "talents/disabled/filter?title=" + title + "&contract=" + contract + "&workMode=" +workMode + "&address="+ address + "&experience=" +experience  + "&type=" +type + "&domain=" +domain + "&page=" +page + "&size=" +size)
+  }
+
   public searchTalents(keyword : string): Observable<Array<Talent>> {
     return this.http.get<Array<Talent>>(environment.backendHostAppUser  + "talents/search?keyword="+keyword)
   }
