@@ -54,6 +54,7 @@ import {
 } from "./dashboard/app-user/list-app-user-disabled/list-app-user-disabled.component";
 import {ListOfferDisabledComponent} from "./pages/offer/list-offer-disabled/list-offer-disabled.component";
 import {ListTalentDisabledComponent} from "./pages/talent/list-talent-disabled/list-talent-disabled.component";
+import {PrivacyOutComponent} from "./pages/privacy-out/privacy-out.component";
 
 
 
@@ -83,7 +84,7 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: "info", component: InfoComponent },
   { path: "privacy", component: PrivacyComponent, canActivate: [AuthenticationGuard]  },
-  { path: "privacyOut", component: PrivacyComponent },
+  { path: "privacyOut", component: PrivacyOutComponent },
   { path: "forgotPassword", component: ForgotPasswordComponent },
 
   { path: "admin", component: AdminComponent, canActivate: [AuthenticationGuard, IsAdminGuard]},

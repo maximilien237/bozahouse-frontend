@@ -3,6 +3,14 @@
 
 <app-header></app-header>
 
+<div *ngIf="isAdmin" class="text-center mt-3" >
+      <span  style="font-size: 20px;">
+      <a routerLink="/addNews" class="hide-underline-link btn btn-dark text-warning">
+      <i class="bi bi-plus "></i> créer un email
+      </a>
+    </span>
+</div>
+
 <div class="container  mt-lg-5 mb-lg-5 ">
 
   <div class="spacer-margin" *ngIf="searchFormGroup">
@@ -16,14 +24,6 @@
 
   <ng-container *ngIf="newsData | async as listEmail; else failureOrLoading">
     <div class="card col-md-12 bg-secondary">
-
-      <div *ngIf="isAdmin" class="text-center mt-3" >
-      <span  style="font-size: 20px;">
-      <a routerLink="/addNews" class="hide-underline-link btn btn-dark text-warning">
-      <i class="bi bi-plus "></i> créer un email
-      </a>
-    </span>
-      </div>
 
       <div class="card-body">
 

@@ -24,9 +24,9 @@ export class AddNewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.newEmailFormGroup = this.fb.group({
-      subject : this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z0-9-çèéàê()+:!',. ]+")]),
-      frenchContent: this.fb.control("", [Validators.required,Validators.pattern("[A-Za-z0-9-çèéàê()+:!',. ]+")]),
-      englishContent : this.fb.control("", [Validators.required,Validators.pattern("[A-Za-z0-9-çèéàê()+:!',. ]+")]),
+      subject : this.fb.control("", [Validators.required]),
+      frenchContent: this.fb.control("", [Validators.required]),
+      englishContent : this.fb.control("", [Validators.required]),
       sendingDate: this.fb.control('')
 
     });
@@ -37,7 +37,7 @@ export class AddNewsComponent implements OnInit {
     let news: News = this.newEmailFormGroup.value;
     this.newsService.saveNews(news).subscribe({
       next: value => {
-        alert("email has been successfully saved");
+        alert("La newsletter a été crée avec succès !");
         //this.newUserFormGroup.reset();
         this.router.navigateByUrl("/listNews");
       },
@@ -49,15 +49,7 @@ export class AddNewsComponent implements OnInit {
 
   getErrorMessage(fieldName: string, error: ValidationErrors) {
     if (error['required']){
-      return fieldName + "  "+ " is required";
-    }else if (error['minlength']){
-      return fieldName + "  "+ "should have at least" + " "+ error['minlength']['requiredLength'] + "  "+ "characters";
-    }else if (error['maxlength']){
-      return fieldName + "  "+ "should have at the most" + "  " + error['maxlength']['requiredLength'] + "  " + "characters";
-    }else if (error['pattern']) {
-      return fieldName + "  "+ "required this pattern" + error['pattern']['requiredPattern'] ;
-    }else if (error['email']) {
-      return fieldName + "  " + "address is not valid "+ "  "+ error['email']['requiredEmail'];
+      return "Vous devez remplir ce champs !";
     }else return "";
 
   }

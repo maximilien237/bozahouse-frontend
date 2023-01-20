@@ -23,7 +23,7 @@
           <div class="card-text text-muted">
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de talent</label>
-              <select  class="form-select" formControlName = "type" >
+              <select  class="form-select bg-secondary" formControlName = "type" >
                 <option value="null" disabled>Choose...</option>
                 <option value="simple">Simple</option>
                 <option value="professional">Professionnel</option>
@@ -36,7 +36,7 @@
 
                 <div class="mb-3 mt-2">
                   <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Niveau</label>
-                  <select class="form-select" formControlName = "level" >
+                  <select class="form-select bg-secondary" formControlName = "level" >
                     <option value="">Choose...</option>
                     <option value="bac">BAC</option>
                     <option value="bac1">BAC+1</option>
@@ -54,21 +54,21 @@
 
                 <div class="mb-3">
                   <label  class="form-label">L'url de ton profil Linkedin</label>
-                  <input type="text" class="form-control" formControlName = "linkedin"  placeholder="example : https://www.linkedin.com/example/">
+                  <input type="text" class="form-control bg-secondary" formControlName = "linkedin"  placeholder="example : https://www.linkedin.com/example/">
                   <small *ngIf="newTalentFormGroup.controls['linkedin'].errors && newTalentFormGroup.controls['linkedin'].touched" class="text-danger">{{getErrorMessageUrl('Linkedin', newTalentFormGroup.controls['linkedin'].errors)}}</small>
 
                 </div>
 
                 <div class="mb-3">
                   <label  class="form-label">L'url de ton repo github</label>
-                  <input type="text" class="form-control" formControlName = "github"  placeholder="example : https://www.github.com/example/">
+                  <input type="text" class="form-control bg-secondary" formControlName = "github"  placeholder="example : https://www.github.com/example/">
                   <small *ngIf="newTalentFormGroup.controls['github'].errors && newTalentFormGroup.controls['github'].touched" class="text-danger">{{getErrorMessageUrl('Github', newTalentFormGroup.controls['github'].errors)}}</small>
 
                 </div>
 
             <div class="mb-3">
       <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Email <span class="text-muted"></span></label>
-      <input type="email" class="form-control" formControlName = "email" placeholder="you@example.com">
+      <input type="email" class="form-control bg-secondary" formControlName = "email" placeholder="you@example.com">
               <small *ngIf="newTalentFormGroup.controls['email'].errors && newTalentFormGroup.controls['email'].touched " class="text-danger">
                 {{getErrorMessageEmail('Email', newTalentFormGroup.controls['email'].errors)}}</small>
 
@@ -108,7 +108,7 @@
               <ng-template #simple>
                 <div class="mb-3">
                   <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Niveau</label>
-                  <select class="form-select" formControlName = "level" required>
+                  <select class="form-select bg-secondary" formControlName = "level" required>
                     <option value="">Choose...</option>
                     <option value="cepe">CEPE ou diplome équivalent</option>
                     <option value="bepc">BEPC ou diplome équivalent</option>
@@ -185,7 +185,7 @@
 
               <div class="mb-3">
                 <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Contact</label>
-                <input type="text" class="form-control" formControlName="tel" placeholder="6********" >
+                <input type="text" class="form-control bg-secondary" formControlName="tel" placeholder="6********" >
                 <small *ngIf="newTalentFormGroup.controls['tel'].errors && newTalentFormGroup.controls['tel'].touched" class="text-danger">{{getErrorMessageTel('tel', newTalentFormGroup.controls['tel'].errors)}}</small>
 
               </div>
@@ -200,7 +200,7 @@
 
               <div class="mb-3">
                 <label class="form-label">Numéro WhatsApp</label>
-                <input class="form-control" formControlName="whatsAppNumber" placeholder="6********" type="text">
+                <input class="form-control bg-secondary" formControlName="whatsAppNumber" placeholder="6********" type="text">
                 <small *ngIf="newTalentFormGroup.controls['whatsAppNumber'].errors && newTalentFormGroup.controls['whatsAppNumber'].touched " class="text-danger">
                   {{getErrorMessageTel('whatsAppNumber', newTalentFormGroup.controls['whatsAppNumber'].errors)}}</small>
 
@@ -219,7 +219,7 @@
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Métier</label>
-              <input type="text" class="form-control" formControlName = "title">
+              <input type="text" class="form-control bg-secondary" formControlName = "title">
               <small *ngIf="newTalentFormGroup.controls['title'].errors && newTalentFormGroup.controls['title'].touched" class="text-danger">
                 {{getErrorMessage('Title', newTalentFormGroup.controls['title'].errors)}}</small>
 
@@ -227,7 +227,7 @@
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Domaine</label>
-              <input class="form-control" formControlName="domain" placeholder="ssi,srt,..." type="text">
+              <input class="form-control bg-secondary" formControlName="domain" placeholder="ssi,srt,..." type="text">
               <small *ngIf="newTalentFormGroup.controls['domain'].errors && newTalentFormGroup.controls['domain'].touched" class="text-danger">
                 {{getErrorMessage('Domain', newTalentFormGroup.controls['domain'].errors)}}</small>
 
@@ -235,7 +235,7 @@
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Compétences</label>
-              <textarea class="form-control" formControlName = "skills" aria-label="With textarea" style="height: 150px" ></textarea>
+              <textarea class="form-control bg-secondary" formControlName = "skills" aria-label="With textarea" style="height: 150px" ></textarea>
               <small *ngIf="newTalentFormGroup.controls['skills'].errors && newTalentFormGroup.controls['skills'].touched " class="text-danger">
                 {{getErrorMessage('Skills', newTalentFormGroup.controls['skills'].errors)}}</small>
 
@@ -243,7 +243,7 @@
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mode de travail</label>
-              <select class="form-select" formControlName="workMode">
+              <select class="form-select bg-secondary" formControlName="workMode">
                 <option [ngValue]="null" disabled hidden selected>Mode de travail</option>
                 <option value="Sur site">Sur site</option>
                 <option value="A distance">A distance</option>
@@ -255,7 +255,7 @@
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Experience</label>
-              <select class="form-select" formControlName="experience">
+              <select class="form-select bg-secondary" formControlName="experience">
                 <option [ngValue]="null" disabled hidden selected>Experience</option>
                 <option value="Aucune">Aucune</option>
                 <option value="Jeune diplomé">Jeune diplomé</option>
@@ -283,7 +283,7 @@
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Address</label>
-              <input class="form-control" formControlName="address" placeholder="Simbok,Yaoundé,Cameroun" required type="text">
+              <input class="form-control bg-secondary" formControlName="address" placeholder="Simbok,Yaoundé,Cameroun" type="text">
               <small *ngIf="newTalentFormGroup.controls['address'].errors && newTalentFormGroup.controls['address'].touched" class="text-danger">{{getErrorMessageAdress('Address', newTalentFormGroup.controls['address'].errors)}}</small>
 
             </div>
@@ -298,7 +298,7 @@
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Contract</label>
-              <select class="form-select" formControlName="contract">
+              <select class="form-select bg-secondary" formControlName="contract">
                 <option [ngValue]="null" disabled hidden selected>Choose....</option>
                 <option value="CDI">CDI</option>
                 <option value="CDD">CDD</option>
@@ -318,7 +318,7 @@
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Salaire</label>
-              <select class="form-select" formControlName="salaryChoice">
+              <select class="form-select bg-secondary" formControlName="salaryChoice">
                 <option [ngValue]="null" disabled hidden selected>Salaire</option>
                 <option value="Salaire à définir avec l'employeur">Salaire à définir avec l'employeur</option>
                 <option value="amount">Entrer un montant</option>
@@ -330,7 +330,7 @@
 
                <div class="mb-3 mt-2">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Montant</label>
-              <input type="text" class="form-control" formControlName="salary">
+              <input type="text" class="form-control bg-secondary" formControlName="salary">
                <small *ngIf="newTalentFormGroup.controls['salary'].errors && newTalentFormGroup.controls['salary'].touched " class="text-danger">
                 {{getErrorMessageSalary('Salary', newTalentFormGroup.controls['salary'].errors)}}</small>
 

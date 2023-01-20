@@ -67,6 +67,7 @@ import { PrivacyComponent } from './pages/privacy/privacy.component';
 import { ListAppUserDisabledComponent } from './dashboard/app-user/list-app-user-disabled/list-app-user-disabled.component';
 import { ListTalentDisabledComponent } from './pages/talent/list-talent-disabled/list-talent-disabled.component';
 import { ListOfferDisabledComponent } from './pages/offer/list-offer-disabled/list-offer-disabled.component';
+import { PrivacyOutComponent } from './pages/privacy-out/privacy-out.component';
 
 @NgModule({
   declarations: [
@@ -118,7 +119,8 @@ import { ListOfferDisabledComponent } from './pages/offer/list-offer-disabled/li
     PrivacyComponent,
     ListAppUserDisabledComponent,
     ListTalentDisabledComponent,
-    ListOfferDisabledComponent
+    ListOfferDisabledComponent,
+    PrivacyOutComponent
   ],
   imports: [
     BrowserModule,

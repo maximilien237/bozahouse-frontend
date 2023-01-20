@@ -3,8 +3,8 @@
 
 
 <app-header></app-header>
-<div class="container">
-  <div class="card offset-3 mt-2 bg-dark">
+<div class="container mt-lg-5 mb-lg-5">
+  <div class="card mt-2 bg-dark">
 
     <div class="card-header text-warning text-center"> Mettre à jour cet utilisateur</div>
     <div class="card-body">
@@ -13,8 +13,8 @@
 
 
         <div class="mb-3">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de compte</label>
-          <select class="form-select" formControlName = "account"  required>
+          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de compte</label>
+          <select class="form-select bg-secondary" formControlName = "account" >
             <option value="talent">Talent</option>
             <option value="employer">Employeur</option>
             <option value="enterprise">Entreprise</option>
@@ -25,8 +25,8 @@
 
 
         <div class="mb-3">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Comment avez vous connu Bozahouse ?</label>
-          <select class="form-select" formControlName = "howKnowUs"  required>
+          <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Comment avez vous connu Bozahouse ?</label>
+          <select class="form-select bg-secondary" formControlName = "howKnowUs">
             <option value="friend">Amis</option>
             <option value="facebook">Facebook</option>
             <option value="whatsapp">Whatsapp</option>
@@ -40,22 +40,22 @@
         </div>
 
         <div class="mb-3 mt-2">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom</label>
-          <input type="text" formControlName = "lastname" class="form-control">
+          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom</label>
+          <input type="text" formControlName = "lastname" class="form-control bg-secondary">
           <small *ngIf="updateUserFormGroup.controls['lastname'].errors && updateUserFormGroup.controls['lastname'].touched" class="text-danger">{{getErrorMessageName('lastname', updateUserFormGroup.controls['lastname'].errors)}}</small>
 
         </div>
 
         <div class="mb-3 mt-2">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Prénom</label>
-          <input type="text" formControlName = "firstname" class="form-control">
+          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Prénom</label>
+          <input type="text" formControlName = "firstname" class="form-control bg-secondary">
           <small *ngIf="updateUserFormGroup.controls['firstname'].errors && updateUserFormGroup.controls['firstname'].touched" class="text-danger">{{getErrorMessageName('firstname', updateUserFormGroup.controls['firstname'].errors)}}</small>
 
         </div>
 
         <div class="mb-3 mt-2">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Sexe</label>
-          <select class="form-select" formControlName = "sex" required>
+          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Sexe</label>
+          <select class="form-select bg-secondary" formControlName = "sex">
             <option value="" disabled>Choose...</option>
             <option value="Homme">Homme</option>
             <option value="Femme">Femme</option>
@@ -65,49 +65,49 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
-          <input (keydown.space)="$event.preventDefault()" type="email" formControlName = "email" class="form-control" placeholder="ex : youremail@gmail.com">
+          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
+          <input (keydown.space)="$event.preventDefault()" type="email" formControlName = "email" class="form-control bg-secondary" placeholder="ex : youremail@gmail.com">
           <small *ngIf="updateUserFormGroup.controls['email'].errors && updateUserFormGroup.controls['email'].touched" class="text-danger">{{getErrorMessageEmail('email', updateUserFormGroup.controls['email'].errors)}}</small>
 
         </div>
 
         <div class="mb-3">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom d'utilisateur</label>
-          <input (keydown.space)="$event.preventDefault()" type="text" formControlName = "username" class="form-control">
+          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom d'utilisateur</label>
+          <input (keydown.space)="$event.preventDefault()" type="text" formControlName = "username" class="form-control bg-secondary">
           <small *ngIf="updateUserFormGroup.controls['username'].errors && updateUserFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', updateUserFormGroup.controls['username'].errors)}}</small>
 
         </div>
 
         <div class="mb-3 mt-2">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
-          <input type="password" formControlName = "password" class="form-control" id="pwd">
+          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
+          <input type="password" formControlName = "password" class="form-control bg-secondary" id="pwd">
           <input type="checkbox" onclick="showAndHidePassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
           <small *ngIf="updateUserFormGroup.controls['password'].errors && updateUserFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessage('password', updateUserFormGroup.controls['password'].errors)}}</small>
         </div>
 
         <div class="mb-3 mt-2">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du mot de passe</label>
-          <input type="password" formControlName = "confirmPassword" class="form-control" id="confPwd">
+          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du mot de passe</label>
+          <input type="password" formControlName = "confirmPassword" class="form-control bg-secondary" id="confPwd">
           <input type="checkbox" onclick="showAndHideConfPassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
           <small *ngIf="updateUserFormGroup.controls['confirmPassword'].errors && updateUserFormGroup.controls['confirmPassword'].touched" class="text-danger">{{getErrorMessage('confirmPassword', updateUserFormGroup.controls['confirmPassword'].errors)}}</small>
         </div>
 
         <div class="mb-3">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date d'anniversaire</label>
-          <input type="date" formControlName = "birthday" class="form-control">
+          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date d'anniversaire</label>
+          <input type="date" formControlName = "birthday" class="form-control bg-secondary">
           <small *ngIf="updateUserFormGroup.controls['birthday'].errors && updateUserFormGroup.controls['birthday'].touched" class="text-danger">{{getErrorMessage('birthday', updateUserFormGroup.controls['birthday'].errors)}}</small>
 
         </div>
 
         <!--     <div class="mb-3">
-               <label class="form-label text-white">Code de parrainage</label>
-               <input type="text" formControlName = "referralCode" class="form-control">
+               <label class="form-label">Code de parrainage</label>
+               <input type="text" formControlName = "referralCode" class="form-control bg-secondary">
                <small *ngIf="updateUserFormGroup.controls['referralCode'].errors && updateUserFormGroup.controls['referralCode'].touched" class="text-danger">{{getErrorMessage('referralCode', updateUserFormGroup.controls['referralCode'].errors)}}</small>
              </div>-->
 
         <div class="mb-3 form-check">
-          <label class="form-label text-white-50"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>j'ai lu et approuvé les <a class="hide-underline-link text-warning" routerLink="/privacyOut">termes</a></label>&nbsp;
-          <input type="checkbox" formControlName = "acceptTerms" class="form-check-input">
+          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>j'ai lu et approuvé les <a class="hide-underline-link text-warning" routerLink="/privacyOut">termes</a></label>&nbsp;
+          <input type="checkbox" formControlName = "acceptTerms" class="form-check-input bg-secondary">
           <small *ngIf="updateUserFormGroup.controls['acceptTerms'].errors && updateUserFormGroup.controls['acceptTerms'].touched" class="text-danger">{{getErrorMessageTerms('acceptTerms', updateUserFormGroup.controls['acceptTerms'].errors)}}</small>
 
         </div>
