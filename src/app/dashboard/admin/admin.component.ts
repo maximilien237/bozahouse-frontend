@@ -47,6 +47,10 @@ export class AdminComponent implements OnInit {
     this.listAppUserStatistics();
     this.listTalentStatistics();
     this.listOfferStatistics();
+    this.getTotalPageAppUser();
+    this.getTotalPageOffer();
+    this.getTotalPageSubscription();
+    this.getTotalPageTalent();
   }
 
 
@@ -148,6 +152,8 @@ export class AdminComponent implements OnInit {
     this.subscriptionStatistics1 = this.statisticService.listSubscriptionStatistics(this.currentPageSubscription, this.pageSizeSubscription).subscribe({
       next: value => {
         this.totalPagesSubscription = value[0].totalPages;
+        console.log(this.totalPagesSubscription);
+        console.log(value);
       },
       error: err => {
         console.log(err);

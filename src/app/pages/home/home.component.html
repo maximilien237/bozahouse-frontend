@@ -81,14 +81,25 @@
 
                 <span class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Voir l'offre</span>
 
-                <div class="card offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+                <div class="card offcanvas offcanvas-top bg-dark" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
                   <div class="offcanvas-header">
-                    <h5 id="offcanvasTopLabel">Vous n'avez aucun abonnement de type normal</h5>
+                    <h5 id="offcanvasTopLabel" class="text-danger">Vous n'avez aucun abonnement de type normal</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                   </div>
                   <div class="offcanvas-body">
-                    contactez l'un de ces commerciaux pour pouvoir créer un abonnement
-                    pour voir les détails de cet offre, vous devez souscrire à un abonnement
+               
+                    <p class="text-warning">
+                      Pour avoir accès à cette fonctionnalité, vous devez souscrire à un abonnement de type normal.
+                      Pour ce faire, contactez notre agent en cliquant sur l'un des boutons suivants<i class="bi-arrow-down"></i>
+                    
+                    </p>
+
+                    <ul class="nav list-unstyled text-small text-center ">
+                      <li><a [href]= "'mailto:'+ email" style="font-size: 22px;" class=" link-secondary text-white-50"><i class="bi bi-envelope-fill"></i> </a>&nbsp;&nbsp;</li>
+                      <li><a [href]="'tel:+237' + tel " style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-telephone-fill"></i></a>&nbsp;&nbsp;</li>
+                      <li><a href="https://wa.me/656832062" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-whatsapp"></i></a>&nbsp;&nbsp;</li>
+                    </ul>
+                 
                   </div>
                 </div>
 
@@ -200,14 +211,24 @@
 
                 <span class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Voir le talent</span>
 
-                <div class="card offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop1" aria-labelledby="offcanvasTopLabel">
+                <div class="card offcanvas offcanvas-top bg-dark" tabindex="-1" id="offcanvasTop1" aria-labelledby="offcanvasTopLabel">
                   <div class="offcanvas-header">
-                    <h5 id="offcanvasTopLabel1">Vous n'avez aucun abonnement de type normal</h5>
+                    <h5 id="offcanvasTopLabel1" class="text-danger">Vous n'avez aucun abonnement de type normal</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                   </div>
                   <div class="offcanvas-body">
-                    contactez l'un de ces commerciaux pour pouvoir créer un abonnement
-                    pour voir les détails de cet offre, vous devez souscrire à un abonnement
+             
+                    <p class="text-warning">
+                      Pour avoir accès à cette fonctionnalité, vous devez souscrire à un abonnement de type normal.
+                      Pour ce faire, contactez notre agent en cliquant sur l'un des boutons suivants<i class="bi-arrow-down"></i>
+                    </p>
+
+                    <ul class="nav list-unstyled text-small text-center ">
+                      <li><a [href]= "'mailto:'+ email" style="font-size: 22px;" class=" link-secondary text-white-50"><i class="bi bi-envelope-fill"></i> </a>&nbsp;&nbsp;</li>
+                      <li><a [href]="'tel:+237' + tel " style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-telephone-fill"></i></a>&nbsp;&nbsp;</li>
+                      <li><a href="https://wa.me/656832062" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-whatsapp"></i></a>&nbsp;&nbsp;</li>
+                    </ul>
+                  
                   </div>
                 </div>
 

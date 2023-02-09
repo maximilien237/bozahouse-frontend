@@ -26,6 +26,11 @@ import {AppUserService} from "../../../services/app-user/app-user.service";
 })
 export class ListOfferComponent implements OnInit {
 
+
+  email: string = "contact@bozahouse.com";
+  tel: string = "656832062";
+
+
   roles: string[] = [];
   isLoggedIn = false;
   isAdmin : boolean = false;

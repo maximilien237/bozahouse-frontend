@@ -201,9 +201,9 @@
         </div>
         <div class="card-body text-center" >
           <span class="text-warning" style="font-size: 35px;">{{offer.title}}</span><br>
-          <span class="text-muted" *ngIf="offer.type=='particular' else ent">Auteur : [ Particulier ]</span><br>
+          <span class="text-light" *ngIf="offer.type=='particular' else ent">Auteur : [ Particulier ]</span><br>
           <ng-template #ent>
-            <span class="text-muted">Auteur : [ Entreprise ]</span>
+            <span class="text-light">Auteur : [ Entreprise ]</span>
           </ng-template>
           <span class="text-muted" style=" font-size: 15px"><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{offer.address}}</span><br />
           <span class="text-muted" style="font-size: 15px"><i class="bi bi-book-fill">&nbsp;</i>{{offer.contract}}</span> &nbsp;&nbsp;
@@ -244,15 +244,28 @@
 
               <span class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Voir l'offre</span>
 
-              <div class="card offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+              <div class="card offcanvas offcanvas-top bg-dark" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
                 <div class="offcanvas-header">
-                  <h5 id="offcanvasTopLabel">Vous n'avez aucun abonnement de type normal</h5>
+                  <h5 id="offcanvasTopLabel" class="text-danger">Vous n'avez aucun abonnement de type normal</h5>
                   <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-                  contactez l'un de ces commerciaux pour pouvoir créer un abonnement
-                  pour voir les détails de cet offre, vous devez souscrire à un abonnement
+                
+                    <p class="text-warning">
+                      Pour avoir accès à cette fonctionnalité, vous devez souscrire à un abonnement de type normal.
+                      Pour ce faire, contactez notre agent en cliquant sur l'un des boutons suivants<i class="bi-arrow-down"></i>
+                    
+                    </p>
+
+                    <ul class="nav list-unstyled text-small text-center ">
+                      <li><a [href]= "'mailto:'+ email" style="font-size: 22px;" class=" link-secondary text-white-50"><i class="bi bi-envelope-fill"></i> </a>&nbsp;&nbsp;</li>
+                      <li><a [href]="'tel:+237' + tel " style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-telephone-fill"></i></a>&nbsp;&nbsp;</li>
+                      <li><a href="https://wa.me/656832062" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-whatsapp"></i></a>&nbsp;&nbsp;</li>
+                    </ul>
+                  
+                  
                 </div>
+            
               </div>
 
             </ng-template>

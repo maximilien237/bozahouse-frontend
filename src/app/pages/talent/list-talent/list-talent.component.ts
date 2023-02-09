@@ -22,6 +22,8 @@ import {AppUser} from "../../../models/app-user.models";
 })
 export class ListTalentComponent implements OnInit {
 
+  email: string = "contact@bozahouse.com";
+  tel: string = "656832062";
 
   roles: string[] = [];
   isLoggedIn = false;
