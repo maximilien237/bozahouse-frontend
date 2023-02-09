@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
 
   version: string = "1.0.0";
-  email: string = "contact@bozahouse.com";
+  email: string = "support@bozahouse.com";
   tel: string = "656832062";
   constructor() { }
 
