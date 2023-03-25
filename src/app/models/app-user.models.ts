@@ -31,6 +31,9 @@ export interface AppUser {
   totalPages: number;
   pageSize: number;
   realSize: number;
+  sizeActivated: number;
+  sizeDisabled: number;
+
 
 }
 

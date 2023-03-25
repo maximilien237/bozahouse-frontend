@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.loginFormGroup = this.fb.group({
 
       username: this.fb.control("",[Validators.required,Validators.pattern("[A-Za-z0-9]+"),Validators.minLength(3), Validators.maxLength(12)]),
-      password: this.fb.control("",[ Validators.required, Validators.pattern("[A-Za-z0-9]+"), Validators.minLength(4), Validators.maxLength(8)])
+      password: this.fb.control("",[ Validators.required, Validators.pattern("[A-Za-z0-9-@]+"), Validators.minLength(4), Validators.maxLength(8)])
     })
 
     if (this.authenticationService.getToken()) {
@@ -77,6 +77,18 @@ export class LoginComponent implements OnInit {
     }else return "";
 
   }
+
+    getErrorMessagePassword(fieldName: string, error: ValidationErrors) {
+      if (error['required']){
+        return "vous devez remplir champs !";
+      }else if (error['minlength']){
+        return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  " + "caractères";
+      }else if (error['maxlength']){
+        return "ce champs doit comporter au plus " + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
+      }else if (error['pattern']) {
+          return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres,soit un caractère spécial telque : @ ou un mélange des quatres" ;
+      }else return "";
+    }
 
 }
 

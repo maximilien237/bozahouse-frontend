@@ -4,16 +4,16 @@
 
 export const environment = {
   production: false,
-/*  backendHostPublic: "http://vps91824.serveur-vps.net:8085/api/auth/v1/",
-  backendHostEditor: "http://vps91824.serveur-vps.net:8085/api/editor/v1/",
-  backendHostAppUser: "http://vps91824.serveur-vps.net:8085/api/user/v1/",
-  backendHostAdmin: "http://vps91824.serveur-vps.net:8085/api/admin/v1/"*/
-
 
   backendHostPublic: "http://localhost:8085/api/auth/v1/",
   backendHostEditor: "http://localhost:8085/api/editor/v1/",
   backendHostAppUser: "http://localhost:8085/api/user/v1/",
   backendHostAdmin: "http://localhost:8085/api/admin/v1/"
+
+/*   backendHostPublic: "https://api.bozahouse.com/api/auth/v1/",
+  backendHostEditor: "https://api.bozahouse.com/api/editor/v1/",
+  backendHostAppUser:"https://api.bozahouse.com/api/user/v1/",
+  backendHostAdmin:  "https://api.bozahouse.com/api/admin/v1/" */
 
 };
 

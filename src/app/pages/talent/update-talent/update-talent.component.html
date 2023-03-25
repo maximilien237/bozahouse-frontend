@@ -12,8 +12,8 @@
 
   <div class="card col-md-7 offset-md-3 spacer bg-dark">
     <h5 class="text-center spacer text-warning">Mettez à jour vos informations</h5>
-    <form (ngSubmit)="handleUpdateTalent()" [formGroup]="updateTalentFormGroup">
 
+    <form (ngSubmit)="handleUpdateTalent()" [formGroup]="updateTalentFormGroup">
 
       <div class="card bg-dark spacer-margin">
         <div class="card-body">
@@ -22,25 +22,26 @@
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de talent</label>
               <select  class="form-select bg-secondary" formControlName = "type" >
-             
                 <option value="simple">Simple</option>
                 <option value="professional">Professionnel</option>
               </select>
-              <small *ngIf="updateTalentFormGroup.controls['type'].errors && updateTalentFormGroup.controls['type'].touched" class="text-danger">{{getErrorMessage('Type', updateTalentFormGroup.controls['type'].errors)}}</small>
+              <small *ngIf="updateTalentFormGroup.controls['type'].errors && updateTalentFormGroup.controls['type'].touched" class="text-danger">
+                {{getErrorMessage('Type', updateTalentFormGroup.controls['type'].errors)}}</small>
 
               <ng-container *ngIf="updateTalentFormGroup.controls['type'].value == 'professional'; else simple">
 
 
-                <div class="mb-3 mt-2">
+                <div class="mb-3 mt-3">
                   <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Niveau</label>
                   <select class="form-select bg-secondary" formControlName = "level" >
-              
-                    <option value="bac">BAC</option>
-                    <option value="bac1">BAC+1</option>
-                    <option value="bac2">BAC+2</option>
-                    <option value="licence">Licence</option>
-                    <option value="master1">Master+1</option>
-                    <option value="master2">Master+2</option>
+
+                    <option value="BAC">BAC</option>
+                    <option value="BAC+1">BAC+1</option>
+                    <option value="BAC+2">BAC+2</option>
+                    <option value="LICENCE">Licence</option>
+                    <option value="MASTER+1">Master+1</option>
+                    <option value="MASTER+2">Master+2</option>
+                    <option value="DOCTORAT">Doctorat</option>
                   </select>
 
                   <small *ngIf="updateTalentFormGroup.controls['level'].errors && updateTalentFormGroup.controls['level'].touched" class="text-danger">
@@ -64,7 +65,7 @@
                 </div>
 
                 <div class="mb-3">
-                  <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Email <span class="text-muted"></span></label>
+                  <label class="form-label">Email</label>
                   <input type="email" class="form-control bg-secondary" formControlName = "email" placeholder="you@example.com">
                   <small *ngIf="updateTalentFormGroup.controls['email'].errors && updateTalentFormGroup.controls['email'].touched " class="text-danger">
                     {{getErrorMessageEmail('Email', updateTalentFormGroup.controls['email'].errors)}}</small>
@@ -103,14 +104,14 @@
               </ng-container>
 
               <ng-template #simple>
-                <div class="mb-3">
+                <div class="mb-3 mt-3">
                   <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Niveau</label>
                   <select class="form-select bg-secondary" formControlName = "level" required>
-                  
-                    <option value="cepe">CEPE ou diplome équivalent</option>
-                    <option value="bepc">BEPC ou diplome équivalent</option>
-                    <option value="probatoire">Probatoire ou diplome équivalent</option>
-                    <option value="bac">BAC ou diplome équivalent</option>
+
+                    <option value="CEPE">CEPE ou diplome équivalent</option>
+                    <option value="BEPC">BEPC ou diplome équivalent</option>
+                    <option value="PROBATOIRE">Probatoire ou diplome équivalent</option>
+                    <option value="BAC">BAC ou diplome équivalent</option>
                   </select>
                   <small *ngIf="updateTalentFormGroup.controls['level'].errors && updateTalentFormGroup.controls['level'].touched" class="text-danger">
                     {{getErrorMessage('Level', updateTalentFormGroup.controls['level'].errors)}}</small>
@@ -118,77 +119,82 @@
                 </div>
 
               </ng-template>
-
-
-             <!-- <div class="mb-3 mt-3">
-
-                <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Pays</label>
-                <select class="form-select" formControlName="countryCode" >
-                  <option value="+27" >Afrique du Sud</option>
-                  <option value="+213" >Algérie</option>
-                  <option value="+244" >Angola</option>
-                  <option value="+229" >Bénin</option>
-                  <option value="+267" >Botswana</option>
-                  <option value="+226" >Burkina Faso</option>
-                  <option value="+257" >Burundi</option>
-                  <option value="+237" >Cameroun</option>
-                  <option value="+238" >Cap-Vert</option>
-                  <option value="+236" >République centrafricaine</option>
-                  <option value="+269" >Comores</option>
-                  <option value="+242" >République du Congo</option>
-                  <option value="+243" >République démocratique du Congo</option>
-                  <option value="+225" >Côte d'Ivoire</option>
-                  <option value="+253" >Djibouti</option>
-                  <option value="+20" >Egypte</option>
-                  <option value="+291" >Erythrée</option>
-                  <option value="+251" >Ethiopie</option>
-                  <option value="+241" >Gabon</option>
-                  <option value="+220" >Gambie</option>
-                  <option value="+233" >Ghana</option>
-                  <option value="+224" >Guinée</option>
-                  <option value="+245" >Guinée-Bissau</option>
-                  <option value="+240" >Guinée équatoriale</option>
-                  <option value="+254" >Kenya</option>
-                  <option value="+266" >Lesotho</option>
-                  <option value="+231" >Libéria</option>
-                  <option value="+218" >Libye</option>
-                  <option value="+261" >Madagascar</option>
-                  <option value="+265" >Malawi</option>
-                  <option value="+223" >Mali</option>
-                  <option value="+212" >Maroc</option>
-                  <option value="+230" >Maurice</option>
-                  <option value="+222" >Mauritanie</option>
-                  <option value="+258" >Mozambique</option>
-                  <option value="+264" >Namibie</option>
-                  <option value="+227" >Niger</option>
-                  <option value="+234" >Nigeria</option>
-                  <option value="+256" >Ouganda</option>
-                  <option value="+250" >Rwanda</option>
-                  <option value="+239" >Sao Tomé-et-Principe</option>
-                  <option value="+221" >Sénégal</option>
-                  <option value="+248" >Seychelles</option>
-                  <option value="+232" >Siera Leone</option>
-                  <option value="+252" >Somalie</option>
-                  <option value="+249" >Soudan</option>
-                  <option value="+211" >Soudan du Sud</option>
-                  <option value="+268" >Swaziland</option>
-                  <option value="+255" >Tanzanie</option>
-                  <option value="+235" >Tchad</option>
-                  <option value="+228" >Togo</option>
-                  <option value="+216" >Tunisie</option>
-                  <option value="+260" >Zambie</option>
-                  <option value="+263" >Zimbabwe</option>
-                </select>
-                <small *ngIf="updateTalentFormGroup.controls['countryCode'].errors && updateTalentFormGroup.controls['countryCode'].touched" class="text-danger">{{getErrorMessage('countryCode', updateTalentFormGroup.controls['countryCode'].errors)}}</small>
-              </div>-->
+              <!--
+                            <div class="mb-3 mt-3">
+                              <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Pays</label>
+                              <select class="form-select" formControlName="countryCode" >
+                                <option value="+27" >Afrique du Sud</option>
+                                <option value="+213" >Algérie</option>
+                                <option value="+244" >Angola</option>
+                                <option value="+229" >Bénin</option>
+                                <option value="+267" >Botswana</option>
+                                <option value="+226" >Burkina Faso</option>
+                                <option value="+257" >Burundi</option>
+                                <option value="+237" >Cameroun</option>
+                                <option value="+238" >Cap-Vert</option>
+                                <option value="+236" >République centrafricaine</option>
+                                <option value="+269" >Comores</option>
+                                <option value="+242" >République du Congo</option>
+                                <option value="+243" >République démocratique du Congo</option>
+                                <option value="+225" >Côte d'Ivoire</option>
+                                <option value="+253" >Djibouti</option>
+                                <option value="+20" >Egypte</option>
+                                <option value="+291" >Erythrée</option>
+                                <option value="+251" >Ethiopie</option>
+                                <option value="+241" >Gabon</option>
+                                <option value="+220" >Gambie</option>
+                                <option value="+233" >Ghana</option>
+                                <option value="+224" >Guinée</option>
+                                <option value="+245" >Guinée-Bissau</option>
+                                <option value="+240" >Guinée équatoriale</option>
+                                <option value="+254" >Kenya</option>
+                                <option value="+266" >Lesotho</option>
+                                <option value="+231" >Libéria</option>
+                                <option value="+218" >Libye</option>
+                                <option value="+261" >Madagascar</option>
+                                <option value="+265" >Malawi</option>
+                                <option value="+223" >Mali</option>
+                                <option value="+212" >Maroc</option>
+                                <option value="+230" >Maurice</option>
+                                <option value="+222" >Mauritanie</option>
+                                <option value="+258" >Mozambique</option>
+                                <option value="+264" >Namibie</option>
+                                <option value="+227" >Niger</option>
+                                <option value="+234" >Nigeria</option>
+                                <option value="+256" >Ouganda</option>
+                                <option value="+250" >Rwanda</option>
+                                <option value="+239" >Sao Tomé-et-Principe</option>
+                                <option value="+221" >Sénégal</option>
+                                <option value="+248" >Seychelles</option>
+                                <option value="+232" >Siera Leone</option>
+                                <option value="+252" >Somalie</option>
+                                <option value="+249" >Soudan</option>
+                                <option value="+211" >Soudan du Sud</option>
+                                <option value="+268" >Swaziland</option>
+                                <option value="+255" >Tanzanie</option>
+                                <option value="+235" >Tchad</option>
+                                <option value="+228" >Togo</option>
+                                <option value="+216" >Tunisie</option>
+                                <option value="+260" >Zambie</option>
+                                <option value="+263" >Zimbabwe</option>
+                              </select>
+                              <small *ngIf="updateTalentFormGroup.controls['countryCode'].errors && updateTalentFormGroup.controls['countryCode'].touched" class="text-danger">{{getErrorMessage('countryCode', updateTalentFormGroup.controls['countryCode'].errors)}}</small>
+                            </div>-->
 
               <div class="mb-3">
-                <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Contact</label>
+                <label class="form-label">Tel</label>
                 <input type="text" class="form-control bg-secondary" formControlName="tel" placeholder="6********" >
                 <small *ngIf="updateTalentFormGroup.controls['tel'].errors && updateTalentFormGroup.controls['tel'].touched" class="text-danger">{{getErrorMessageTel('tel', updateTalentFormGroup.controls['tel'].errors)}}</small>
 
               </div>
 
+              <!--          <div class="mb-3">
+                          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Contact</label>
+                          <input class="form-control" formControlName="tel" placeholder="6********" type="text">
+                          <small *ngIf="updateTalentFormGroup.controls['tel'].errors && updateTalentFormGroup.controls['tel'].touched " class="text-danger">
+                            {{getErrorMessage('tel', updateTalentFormGroup.controls['tel'].errors)}}</small>
+
+                        </div>-->
 
               <div class="mb-3">
                 <label class="form-label">Numéro WhatsApp</label>
@@ -239,6 +245,7 @@
                 <option [ngValue]="null" disabled hidden selected>Mode de travail</option>
                 <option value="Sur site">Sur site</option>
                 <option value="A distance">A distance</option>
+                <option value="Hybride">Hybride</option>
               </select>
               <small *ngIf="updateTalentFormGroup.controls['workMode'].errors && updateTalentFormGroup.controls['workMode'].touched " class="text-danger">
                 {{getErrorMessage('WorkMode', updateTalentFormGroup.controls['workMode'].errors)}}</small>
@@ -272,9 +279,10 @@
           <h5 class="text-light">Localisation</h5>
           <div class="card-text text-muted">
 
+
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Address</label>
-              <input class="form-control bg-secondary" formControlName="address" placeholder="Simbok,Yaoundé,Cameroun" required type="text">
+              <input class="form-control bg-secondary" formControlName="address" placeholder="Yaoundé, Centre, Cameroun" type="text">
               <small *ngIf="updateTalentFormGroup.controls['address'].errors && updateTalentFormGroup.controls['address'].touched" class="text-danger">{{getErrorMessageAdress('Address', updateTalentFormGroup.controls['address'].errors)}}</small>
 
             </div>
@@ -300,6 +308,7 @@
                 <option value="FRANCHISE">Franchise</option>
                 <option value="STAGE ACADEMIC">Stage academic</option>
                 <option value="STAGE PROFESSIONNELLE">Stage professionnelle</option>
+                <option value="PEU IMPORTE">Peu importe</option>
               </select>
               <small *ngIf="updateTalentFormGroup.controls['contract'].errors && updateTalentFormGroup.controls['contract'].touched " class="text-danger">
                 {{getErrorMessage('Contract', updateTalentFormGroup.controls['contract'].errors)}}</small>

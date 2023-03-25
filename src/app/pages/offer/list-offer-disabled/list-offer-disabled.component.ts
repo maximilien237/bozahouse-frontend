@@ -32,6 +32,7 @@ export class ListOfferDisabledComponent implements OnInit {
   pageSize: number = 5;
   offers1!: any;
   offerSize : number = 0;
+  sizeOfferDisabled : number = 0;
   constructor(private authenticationService: AuthenticationService, private offerService: OfferService,private userService: AppUserService,
               private fb: FormBuilder, private router: Router) { }
 
@@ -97,6 +98,8 @@ export class ListOfferDisabledComponent implements OnInit {
     this.offers1 =  this.offerService.filterOfferNotValid(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain,this.currentPage, this.pageSize)
       .subscribe({
         next: value => {
+        this.sizeOfferDisabled = value[0].sizeDisabled;
+        console.log(this.sizeOfferDisabled);
           this.offerSize = value.length;
           console.log(value);
           this.totalPages = value[0].totalPages;

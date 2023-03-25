@@ -36,7 +36,7 @@
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Password</label>
               <input (keydown.space)="$event.preventDefault()" type="password" formControlName="password" class="form-control bg-secondary" id="pwd">
               <input type="checkbox" onclick="showAndHidePassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
-              <small *ngIf="loginFormGroup.controls['password'].errors && loginFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessage('password', loginFormGroup.controls['password'].errors)}}</small>
+              <small *ngIf="loginFormGroup.controls['password'].errors && loginFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessagePassword('password', loginFormGroup.controls['password'].errors)}}</small>
 
             </div>
 

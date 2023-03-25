@@ -10,4 +10,6 @@ export interface FilterTalent{
   endDate: Date;
   type: string;
   domain: string;
+  sizeActivated: number;
+  sizeDisabled: number;
 }

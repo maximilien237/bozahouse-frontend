@@ -13,7 +13,6 @@
   <div class="card col-md-7 offset-md-3 spacer bg-dark">
     <h5 class="text-center spacer text-warning">Entrez vos informations</h5>
 
-
     <form (ngSubmit)="handleSaveTalent()" [formGroup]="newTalentFormGroup">
 
 
@@ -24,7 +23,7 @@
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de talent</label>
               <select  class="form-select bg-secondary" formControlName = "type" >
-             
+
                 <option value="simple">Simple</option>
                 <option value="professional">Professionnel</option>
               </select>
@@ -34,16 +33,17 @@
               <ng-container *ngIf="newTalentFormGroup.controls['type'].value == 'professional'; else simple">
 
 
-                <div class="mb-3 mt-2">
+                <div class="mb-3 mt-3">
                   <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Niveau</label>
                   <select class="form-select bg-secondary" formControlName = "level" >
-                 
-                    <option value="bac">BAC</option>
-                    <option value="bac1">BAC+1</option>
-                    <option value="bac2">BAC+2</option>
-                    <option value="licence">Licence</option>
-                    <option value="master1">Master+1</option>
-                    <option value="master2">Master+2</option>
+
+                    <option value="BAC">BAC</option>
+                    <option value="BAC+1">BAC+1</option>
+                    <option value="BAC+2">BAC+2</option>
+                    <option value="LICENCE">Licence</option>
+                    <option value="MASTER+1">Master+1</option>
+                    <option value="MASTER+2">Master+2</option>
+                    <option value="DOCTORAT">Doctorat</option>
                   </select>
 
                   <small *ngIf="newTalentFormGroup.controls['level'].errors && newTalentFormGroup.controls['level'].touched" class="text-danger">
@@ -67,7 +67,7 @@
                 </div>
 
             <div class="mb-3">
-      <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Email <span class="text-muted"></span></label>
+      <label class="form-label">Email</label>
       <input type="email" class="form-control bg-secondary" formControlName = "email" placeholder="you@example.com">
               <small *ngIf="newTalentFormGroup.controls['email'].errors && newTalentFormGroup.controls['email'].touched " class="text-danger">
                 {{getErrorMessageEmail('Email', newTalentFormGroup.controls['email'].errors)}}</small>
@@ -106,14 +106,14 @@
       </ng-container>
 
               <ng-template #simple>
-                <div class="mb-3">
+                <div class="mb-3 mt-3">
                   <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Niveau</label>
                   <select class="form-select bg-secondary" formControlName = "level" required>
-                    
-                    <option value="cepe">CEPE ou diplome équivalent</option>
-                    <option value="bepc">BEPC ou diplome équivalent</option>
-                    <option value="probatoire">Probatoire ou diplome équivalent</option>
-                    <option value="bac">BAC ou diplome équivalent</option>
+
+                    <option value="CEPE">CEPE ou diplome équivalent</option>
+                    <option value="BEPC">BEPC ou diplome équivalent</option>
+                    <option value="PROBATOIRE">Probatoire ou diplome équivalent</option>
+                    <option value="BAC">BAC ou diplome équivalent</option>
                   </select>
                   <small *ngIf="newTalentFormGroup.controls['level'].errors && newTalentFormGroup.controls['level'].touched" class="text-danger">
                     {{getErrorMessage('Level', newTalentFormGroup.controls['level'].errors)}}</small>
@@ -184,7 +184,7 @@
               </div>-->
 
               <div class="mb-3">
-                <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Contact</label>
+                <label class="form-label">Tel</label>
                 <input type="text" class="form-control bg-secondary" formControlName="tel" placeholder="6********" >
                 <small *ngIf="newTalentFormGroup.controls['tel'].errors && newTalentFormGroup.controls['tel'].touched" class="text-danger">{{getErrorMessageTel('tel', newTalentFormGroup.controls['tel'].errors)}}</small>
 
@@ -247,6 +247,7 @@
                 <option [ngValue]="null" disabled hidden selected>Mode de travail</option>
                 <option value="Sur site">Sur site</option>
                 <option value="A distance">A distance</option>
+                <option value="Hybride">Hybride</option>
               </select>
               <small *ngIf="newTalentFormGroup.controls['workMode'].errors && newTalentFormGroup.controls['workMode'].touched " class="text-danger">
                 {{getErrorMessage('WorkMode', newTalentFormGroup.controls['workMode'].errors)}}</small>
@@ -283,7 +284,7 @@
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Address</label>
-              <input class="form-control bg-secondary" formControlName="address" placeholder="Simbok,Yaoundé,Cameroun" type="text">
+              <input class="form-control bg-secondary" formControlName="address" placeholder="Simbok, Yaoundé, Cameroun" type="text">
               <small *ngIf="newTalentFormGroup.controls['address'].errors && newTalentFormGroup.controls['address'].touched" class="text-danger">{{getErrorMessageAdress('Address', newTalentFormGroup.controls['address'].errors)}}</small>
 
             </div>
@@ -309,6 +310,7 @@
                 <option value="FRANCHISE">Franchise</option>
                 <option value="STAGE ACADEMIC">Stage academic</option>
                 <option value="STAGE PROFESSIONNELLE">Stage professionnelle</option>
+                <option value="PEU IMPORTE">Peu importe</option>
               </select>
               <small *ngIf="newTalentFormGroup.controls['contract'].errors && newTalentFormGroup.controls['contract'].touched " class="text-danger">
                 {{getErrorMessage('Contract', newTalentFormGroup.controls['contract'].errors)}}</small>
@@ -349,6 +351,7 @@
       <button [disabled] = "!newTalentFormGroup.valid" class="btn btn-warning spacer-margin" type="submit">Valider</button>&nbsp;<span class="text-muted">les champs marqués par <i class="text-danger">*</i> sont obligatoires </span>
 
     </form>
+
   </div>
 
   <div class="mb-3 spacer-left mt-3">

@@ -24,25 +24,25 @@ export class AddOfferComponent implements OnInit {
 
     this.newOfferFormGroup = this.fb.group({
       type: this.fb.control('', [Validators.required]),
-      title: this.fb.control('', [Validators.pattern("[A-Za-z0-9-çèéàêô' ]+"),Validators.required,Validators.minLength(4),Validators.maxLength(30)]),
+      title: this.fb.control('', [Validators.required]),
       mission: this.fb.control("", [Validators.required]),
-      domain: this.fb.control('', [Validators.pattern("[A-Za-z-çèéàêô' ]+"),Validators.minLength(6),Validators.maxLength(30)]),
+      domain: this.fb.control('', [Validators.required]),
       // countryCode: this.fb.control("", [Validators.required]),
       profile: this.fb.control("", [Validators.required]),
-      address: this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z-0-9-çèéàêô'-]+, [A-Z][a-z-çèéàô]+, [A-Z][a-z-çèéàô]{4,30}")]),
-      tel: this.fb.control("", [Validators.pattern("[0-9]+"),Validators.required,Validators.minLength(9),Validators.maxLength(9)]),
+      address: this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z-0-9-é]+, [A-Z][A-Za-z-]+, [A-Z][a-z]{4,30}")]),
+      tel: this.fb.control("", [Validators.pattern("[0-9]+"),Validators.minLength(9),Validators.maxLength(9)]),
       whatsAppNumber: this.fb.control("", [Validators.pattern("[0-9]+"),Validators.minLength(9),Validators.maxLength(9)]),
       experience: this.fb.control('', [Validators.required]),
       salary: this.fb.control("", [Validators.pattern("[0-9]+")]),
       salaryChoice: this.fb.control("", [Validators.required]),
       endOffer: this.fb.control(null, [Validators.required]),
       needPeople: this.fb.control(1, [Validators.required,Validators.pattern("[0-9]+")]),
-      name: this.fb.control("", [Validators.pattern("[A-Za-z0-9-çèéàêô' ]+"),Validators.minLength(4),Validators.maxLength(30)]),
+      name: this.fb.control(""),
       skills: this.fb.control("", [Validators.required]),
       fcb: this.fb.control("", [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
       web:  this.fb.control("", [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
       linkedin: this.fb.control("", [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
-      email:  this.fb.control("", [Validators.required, Validators.pattern("^[a-z0-9_+&*-]+(?:\\.[a-z0-9_+&*-]+)*@(?:[a-z0-9-]+\\.)+[a-z]{2,15}$"),Validators.email]),
+      email:  this.fb.control("", [Validators.pattern("^[a-z0-9_+&*-]+(?:\\.[a-z0-9_+&*-]+)*@(?:[a-z0-9-]+\\.)+[a-z]{2,15}$"),Validators.email]),
       contract:  this.fb.control('CDI', [Validators.required]),
       workMode: this.fb.control('Sur site', [Validators.required])
 
@@ -84,9 +84,7 @@ export class AddOfferComponent implements OnInit {
   }
 
   getErrorMessageEmail(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez remplir champs !";
-    }else if (error['pattern']) {
+    if (error['pattern']) {
       return "exemple d\'un mail valide : john@example.com ou john.smith@example.com" ;
     }else if (error['email']) {
       return "Entrez une adresse email valide !";
@@ -100,9 +98,7 @@ export class AddOfferComponent implements OnInit {
   }
 
   getErrorMessageTel(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez remplir champs !";
-    }else if (error['pattern']) {
+    if (error['pattern']) {
       return "exemple d\'un numéro valide : 6511232XX" ;
     }else if (error['minlength']){
       return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  "+ "nombres";
@@ -115,7 +111,7 @@ export class AddOfferComponent implements OnInit {
     if (error['required']){
       return "vous devez remplir champs !";
     }else if (error['pattern']) {
-      return "exemple d\'une adresse valide : Simbock, Yaoundé, Cameroun" ;
+      return "exemple d\'une adresse valide : Yaoundé, Centre, Cameroun" ;
     }else return "";
   }
 

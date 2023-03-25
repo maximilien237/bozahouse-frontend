@@ -39,6 +39,7 @@
                   <option value="FRANCHISE">Franchise</option>
                   <option value="STAGE ACADEMIC">Stage academic</option>
                   <option value="STAGE PROFESSIONNELLE">Stage professionnelle</option>
+                  <option value="PEU IMPORTE">Peu importe</option>
                 </select>
               </div>
 
@@ -49,12 +50,13 @@
                   <option value="" disabled selected >Mode de travail</option>
                   <option value="Sur site">Sur site</option>
                   <option value="A distance">A distance</option>
+                  <option value="Hybride">Hybride</option>
                 </select>
               </div>
 
               <div class="mb-3 mt-2">
                 <label class="form-label">Adresse</label>
-                <input type="text" class="form-control" formControlName = "address" placeholder="Address, ex: Simbok,Yaoundé,Cameroun" >
+                <input type="text" class="form-control" formControlName = "address" placeholder="Address, ex: Simbok, Yaoundé, Cameroun" >
               </div>
 
               <!--              <div class="mb-3 mt-2">
@@ -163,7 +165,7 @@
   </div><br>
   <div class="card bg-secondary border-0">
 
-    <h5 class="text-center mt-2">Les talents désactivés [ {{talentSize}} ]</h5>
+    <h5 class="text-center mt-2">Les talents désactivés [ {{sizeTalentDisabled}} ]</h5>
 
     <div class="row">
 

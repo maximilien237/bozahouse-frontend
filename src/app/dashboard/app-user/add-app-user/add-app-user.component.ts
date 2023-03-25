@@ -29,8 +29,8 @@ export class AddAppUserComponent implements OnInit {
         sex: this.fb.control("",[Validators.required]),
         email: this.fb.control("",[Validators.pattern("^[a-z0-9_+&*-]+(?:\\.[a-z0-9_+&*-]+)*@(?:[a-z0-9-]+\\.)+[a-z]{2,15}$"),Validators.required, Validators.email]),
         username : this.fb.control("",[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
-        password: this.fb.control("",[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
-        confirmPassword: this.fb.control("",[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
+        password: this.fb.control("",[Validators.pattern("[A-Za-z0-9-@]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
+        confirmPassword: this.fb.control("",[Validators.pattern("[A-Za-z0-9-@]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
         birthday: this.fb.control(null,[Validators.required]),
         acceptTerms: this.fb.control(false,[Validators.requiredTrue]),
         referralCode: this.fb.control("",[Validators.pattern("[A-Za-z0-9]+"), Validators.minLength(6), Validators.maxLength(15)])
@@ -90,6 +90,17 @@ export class AddAppUserComponent implements OnInit {
     }else return "";
   }
 
+    getErrorMessagePassword(fieldName: string, error: ValidationErrors) {
+      if (error['required']){
+        return "vous devez remplir champs !";
+      }else if (error['minlength']){
+        return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  " + "caractères";
+      }else if (error['maxlength']){
+        return "ce champs doit comporter au plus " + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
+      }else if (error['pattern']) {
+          return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres,soit un caractère spécial telque : @ ou un mélange des quatres" ;
+      }else return "";
+    }
 
   getErrorMessageTerms(fieldName: string, error: ValidationErrors) {
     if (error['required']){

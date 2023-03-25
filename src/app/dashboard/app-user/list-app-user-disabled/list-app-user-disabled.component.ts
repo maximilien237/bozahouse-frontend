@@ -33,6 +33,7 @@ export class ListAppUserDisabledComponent implements OnInit {
   totalPages!: number;
   pageSize: number = 5;
   appUserSize: number = 0;
+  appUserSizeDisabled: number = 0;
 
 
 
@@ -93,7 +94,10 @@ export class ListAppUserDisabledComponent implements OnInit {
     let kw = this.searchFormGroup?.value.keyword;
     this.users1 = this.userService.searchAppUsersDisabledByUsername(kw,this.currentPage, this.pageSize).subscribe({
       next: value => {
-        this.appUserSize = value.length;
+        //this.appUserSizeActivated = value[0].sizeActivated;
+              this.appUserSizeDisabled = value[0].sizeDisabled;
+              //console.log(this.appUserSizeActivated);
+              console.log(this.appUserSizeDisabled);
         this.totalPages = value[0].totalPages;
       },
       error: err => {

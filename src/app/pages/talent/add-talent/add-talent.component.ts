@@ -31,10 +31,10 @@ export class AddTalentComponent implements OnInit {
       linkedin: this.fb.control("", [Validators.pattern("^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9a-f]{2}|[-()_.!~*';/?:@&=+$,a-z0-9])+)([).!';/?:,][[:blank:|:blank:]])?$")]),
       github: this.fb.control("", [Validators.pattern("^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9a-f]{2}|[-()_.!~*';/?:@&=+$,a-z0-9])+)([).!';/?:,][[:blank:|:blank:]])?$")]),
       level: this.fb.control("", [Validators.required]),
-      title: this.fb.control("", [Validators.pattern("[A-ZA-Za-z0-9-çèéàêâô' ]+"),Validators.required,Validators.minLength(4),Validators.maxLength(30)]),
-      domain: this.fb.control("", [Validators.pattern("[A-Za-z-çèéàêô' ]+"),Validators.required,Validators.minLength(4),Validators.maxLength(30)]),
-      address: this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z-0-9-çèéàê'-]+, [A-Z][a-z-çèéà]+, [A-Z][a-z-çèéà]{4,30}")]),
-      tel: this.fb.control("", [Validators.pattern("[0-9]+"),Validators.required,Validators.minLength(9),Validators.maxLength(9)]),
+      title: this.fb.control("", [Validators.required]),
+      domain: this.fb.control("", [Validators.required]),
+      address: this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z-0-9-é]+, [A-Z][A-Za-z-]+, [A-Z][a-z]{4,30}")]),
+      tel: this.fb.control("", [Validators.pattern("[0-9]+"),Validators.minLength(9),Validators.maxLength(9)]),
       whatsAppNumber: this.fb.control("", [Validators.pattern("[0-9]+"),Validators.minLength(9),Validators.maxLength(9)]),
       // countryCode: this.fb.control("",[Validators.required]),
       experience: this.fb.control("", [Validators.required]),
@@ -93,9 +93,7 @@ export class AddTalentComponent implements OnInit {
   }
 
   getErrorMessageTel(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez remplir champs !";
-    }else if (error['pattern']) {
+    if (error['pattern']) {
       return "exemple d\'un numéro valide : 6511232XX" ;
     }else if (error['minlength']){
       return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  "+ "nombres";
@@ -108,7 +106,7 @@ export class AddTalentComponent implements OnInit {
     if (error['required']){
       return "vous devez remplir champs !";
     }else if (error['pattern']) {
-      return "exemple d\'une adresse valide : Simbock, Yaoundé, Cameroun" ;
+      return "exemple d\'une adresse valide : Yaoundé, Centre, Cameroun" ;
     }else return "";
   }
 
