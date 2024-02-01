@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "bozahouse-frontend:build:production"
+              "buildTarget": "bozahouse-frontend:build:production"
             },
             "development": {
-              "browserTarget": "bozahouse-frontend:build:development"
+              "buildTarget": "bozahouse-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "bozahouse-frontend:build"
+            "buildTarget": "bozahouse-frontend:build"
           }
         },
         "test": {
