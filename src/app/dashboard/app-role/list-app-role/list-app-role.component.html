@@ -26,7 +26,7 @@
               </thead>
 
               <tbody>
-              <tr class="text-white" *ngFor="let role of roles | async">
+              <tr class="text-white" *ngFor="let role of listRoles.content ">
 <!--                <td>{{role.id}}</td>-->
                 <td>{{role.name}}</td>
                 <td>
@@ -56,10 +56,10 @@
                 </li>
               </ng-container>
 
-              <li *ngFor="let item of [].constructor(totalPages); let page = index" >
+              <li *ngFor="let item of [].constructor(listRoles.totalPages); let page = index" >
                 <a [ngClass]="page==currentPage?'btn-warning':'btn-outline-warning'" (click)="goToPage(page)" class="btn ms-1"  >{{page}}</a>
               </li>
-              <ng-container *ngIf="currentPage != totalPages - 1">
+              <ng-container *ngIf="currentPage != listRoles.totalPages - 1">
                 <li >
                   <a class="page-link btn ms-1" (click)="goToPage(currentPage + 1)" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>

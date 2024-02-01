@@ -16,8 +16,8 @@ const USER_KEY = 'auth-user';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  authenticateUser: AppUser | undefined;
-  authenticated: boolean | undefined;
+  authenticateUser!: AppUser;
+  authenticated!: boolean;
 
   constructor(private http: HttpClient) {
   }
@@ -27,7 +27,7 @@ export class AuthenticationService {
   }
 
   public signIn(login: Login) {
-    return this.http.post<any>(environment.backendHostPublic + "signIn", login);
+    return this.http.post<any>(environment.backendAPI+ "/api/auth/v1/signIn", login);
   }
 
   public signUp(appUser: AppUser) {
@@ -81,7 +81,7 @@ export class AuthenticationService {
 
   handleLogout(){
     this.authenticated=false;
-    this.authenticateUser=undefined;
+    //this.authenticateUser=undefined;
     localStorage.removeItem(USER_KEY);
   }
 

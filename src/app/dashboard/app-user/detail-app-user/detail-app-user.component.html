@@ -4,7 +4,7 @@
 <app-header></app-header>
 
 
-<div class="container mt-lg-5 mb-lg-5 col-md-6 " >
+<div  *ngIf="user" class="container mt-lg-5 mb-lg-5 col-md-6 " >
   <div class="card offset-md-3 bg-dark">
     <div class="col">
 
@@ -49,7 +49,7 @@
         <h5 class="card-header text-light">EMAIL</h5>
         <div class="card-body">
           <span class="card-text text-warning">
-            {{user.email}}
+            {{user.username}}
           </span>
         </div>
       </div>
@@ -63,7 +63,7 @@
         </div>
       </div>
 
-      <div class="card bg-dark">
+<!--      <div class="card bg-dark">
         <h5 class="card-header text-light">CODE PROMO</h5>
         <div class="card-body">
            <span class="card-text text-warning">
@@ -72,14 +72,14 @@
         </div>
       </div>
 
-            <div class="card bg-dark">
-              <h5 class="card-header text-light">CODE DE PARAINAGE</h5>
-              <div class="card-body">
+      <div class="card bg-dark">
+        <h5 class="card-header text-light">CODE DE PARAINAGE</h5>
+        <div class="card-body">
                 <span class="card-text text-warning">
                   {{user.referralCode}}
                 </span>
-              </div>
-            </div>
+        </div>
+      </div>-->
 
       <div class="card bg-dark">
         <h5 class="card-header text-light">Date Création</h5>
@@ -108,14 +108,14 @@
         </div>
       </div>
 
-      <div class="card bg-dark">
+<!--      <div class="card bg-dark">
         <h5 class="card-header text-light">DATE DE BONUS</h5>
         <div class="card-body">
                 <span class="card-text text-white-50">
                   {{user.discountDate | date: 'd MMMM y HH:mm:ss'}}
                 </span>
         </div>
-      </div>
+      </div>-->
 
 
       <div class="card bg-dark">
@@ -173,7 +173,7 @@
 
     </div>
     <div class="card-footer text-center">
-      <span ><a class="text-warning" [href]= "'mailto:'+ user.email" style="font-size: 25px;"><i class="bi bi-envelope-fill"></i> </a></span>
+      <span ><a class="text-warning" [href]= "'mailto:'+ user.username" style="font-size: 25px;"><i class="bi bi-envelope-fill"></i> </a></span>
     </div>
 
   </div>

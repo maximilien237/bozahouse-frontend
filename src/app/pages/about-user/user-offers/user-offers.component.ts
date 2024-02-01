@@ -23,7 +23,7 @@ export class UserOffersComponent implements OnInit {
   isEditor : boolean = false;
   username?: string;
   currentUser!: AppUser;
-  id!: string;
+  id!: number;
   errorMessageOffer!:string;
   errorMessageAppUser!:string;
   currentPage: number = 0;
@@ -64,7 +64,7 @@ export class UserOffersComponent implements OnInit {
     this.handleListAppUserOffers();
   }
 
-  handleDetailOffer(id: string) {
+  handleDetailOffer(id: number) {
 
     this.router.navigate(['detailOffer', id]);
   }
@@ -90,7 +90,7 @@ export class UserOffersComponent implements OnInit {
 
   }
 
-  handleUpdateOffer(id: string) {
+  handleUpdateOffer(id: number) {
 
     this.router.navigate(['updateOffer', id]);
   }

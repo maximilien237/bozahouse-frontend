@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {AppUserService} from "../../../services/app-user/app-user.service";
-import {catchError, map, Observable, throwError} from "rxjs";
 import {AppUser} from "../../../models/app-user.models";
 import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {Subscription} from "../../../models/subscription.models";
 import {SubscriptionService} from "../../../services/subscription/subscription.service";
 import {AppRoleService} from "../../../services/app-role/app-role.service";
 
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
+
 
 @Component({
   selector: 'app-list-app-user',
@@ -24,12 +23,11 @@ export class ListAppUserComponent implements OnInit {
   isEditor : boolean = false;
   username?: string;
 
-  users!: Observable<Array<AppUser>>;
+  users!: AppUser[];
   users1: any;
   //users2: any;
   errorMessage!:string;
-  searchFormGroup: FormGroup | undefined;
-  newSubscriptionFormGroup!: FormGroup;
+  searchFormGroup!: FormGroup;
   currentPage: number = 0;
   totalPages!: number;
   pageSize: number = 5;
@@ -45,13 +43,6 @@ export class ListAppUserComponent implements OnInit {
 
     this.searchFormGroup = this.fb.group({
    keyword: this.fb.control("", [Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(3), Validators.maxLength(12)])
-
-    });
-
-    this.newSubscriptionFormGroup = this.fb.group({
-      username: this.fb.control("", [Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
-      period: this.fb.control("", [Validators.required]),
-      type: this.fb.control("", [Validators.required])
 
     });
 
@@ -92,12 +83,11 @@ export class ListAppUserComponent implements OnInit {
 
   handleSearchAppUserByUsername() {
     let kw = this.searchFormGroup?.value.keyword;
-    this.users =  this.userService.searchAppUserByUsername(kw,this.currentPage, this.pageSize).pipe(
-      catchError(err => {
-        this.errorMessage = err.message;
-        return throwError(err);
-      })
-    );
+    this.userService.searchAppUserByUsername(kw,this.currentPage, this.pageSize).subscribe(({
+      next: value => {
+        this.users = value.content;
+      }
+    }));
   }
 
 /*  listAppUsers(){
@@ -115,11 +105,7 @@ export class ListAppUserComponent implements OnInit {
      let kw = this.searchFormGroup?.value.keyword;
     this.users1 = this.userService.searchAppUserByUsername(kw,this.currentPage, this.pageSize).subscribe({
       next: value => {
-      this.appUserSizeActivated = value[0].sizeActivated;
-      //this.appUserSizeDisabled = value[0].sizeDisabled;
-      console.log(this.appUserSizeActivated);
-      //console.log(this.appUserSizeDisabled);
-        this.totalPages = value[0].totalPages;
+        this.totalPages = value.totalPages;
       },
       error: err => {
         console.log(err);
@@ -145,12 +131,7 @@ export class ListAppUserComponent implements OnInit {
     this.userService.disableAppUser(appUser.id).subscribe({
       next: value => {
         console.log(value);
-        this.users = this.users.pipe(
-          map(data=>{
-            let index = data.indexOf(appUser)
-            data.slice(index,1)
-            return data;
-          }))
+        this.handleSearchAppUserByUsername();
 
       },
       error: err => {
@@ -165,12 +146,7 @@ export class ListAppUserComponent implements OnInit {
     if (!conf) return;
     this.userService.deleteAppUser(user.id).subscribe({
       next: value => {
-        this.users = this.users.pipe(
-          map(data=>{
-            let index = data.indexOf(user)
-            data.slice(index,1)
-            return data;
-          }))
+        this.handleSearchAppUserByUsername();
 
       },
       error: err => {
@@ -180,43 +156,21 @@ export class ListAppUserComponent implements OnInit {
 
   }
 
-  handleListAppUserSubscription(id: string) {
-    this.router.navigate(['userSubscriptions', id]);
-  }
 
-  handleListAppUserOffer(id: string) {
+  handleListAppUserOffer(id: number) {
     this.router.navigate(['userOffers', id]);
   }
 
-  handleListAppUserTalent(id: string) {
+  handleListAppUserTalent(id: number) {
     this.router.navigate(['userTalents', id]);
   }
 
-  handleAppUserDates(id: string){
-    this.router.navigate(['userDates', id]);
-  }
-
-  handleDetailAppUser(id: string){
+  handleDetailAppUser(id: number){
     this.router.navigate(['detailUser', id]);
   }
 
-  handleUpdateAppUser(id: string){
+  handleUpdateAppUser(id: number){
     this.router.navigate(['updateUser', id]);
-  }
-
-  handleSaveSubscription() {
-    let subscription: Subscription = this.newSubscriptionFormGroup.value;
-    this.subscriptionService.saveSubscription(subscription).subscribe({
-      next: value => {
-        console.log(value);
-        alert("Abonnement crée avec succès !");
-        //this.newSubscriptionFormGroup.reset();
-        this.router.navigateByUrl("/users");
-      },
-      error: err => {
-        console.log(err);
-      }
-    })
   }
 
 

@@ -12,6 +12,7 @@ import {Talent} from "../../../models/talent.models";
 import {Subscription} from "../../../models/subscription.models";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FilterOffer} from "../../../models/filterOffer.models";
+import { Page } from 'src/app/models/Page';
 
 
 @Component({
@@ -20,7 +21,7 @@ import {FilterOffer} from "../../../models/filterOffer.models";
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  id!: string;
+  id!: number;
   roles: string[] = [];
   isLoggedIn = false;
   isAdmin: boolean = false;
@@ -31,24 +32,15 @@ export class AccountComponent implements OnInit {
   errorOfferMessage!: string;
   currentUser!: AppUser;
   errorMessage!: string;
-  totalPagesOffer!: number;
-  totalPagesTalent!: number;
-  totalPagesSubscription!: number;
+
   pageSizeOffer: number = 5;
   pageSizeTalent: number = 5;
-  pageSizeSubscription: number = 5;
-  offers1!: any;
-  subscriptions1!: any;
-  talents1!: any;
   currentPageOffer: number = 0;
   currentPageTalent: number = 0;
-  currentPageSubscription: number = 0;
 
-
-  subscriptions!: Observable<Array<Subscription>>;
-  talents!: Observable<Array<Talent>>;
+  talents!: Observable<Page<Talent>>;
   errorTalentMessage!: string;
-  errorSubscriptionMessage!: string;
+
 
 
 
@@ -63,10 +55,6 @@ export class AccountComponent implements OnInit {
 
     this.listOfferByAppUser();
     this.listTalentByAppUser();
-    this.listSubscriptionByAppUser();
-    this.getTotalPageOffers();
-    this.getTotalPageSubscriptions();
-    this.getTotalPageTalents();
 
     this.isLoggedIn = !!this.authenticationService.getToken();
 
@@ -86,19 +74,19 @@ export class AccountComponent implements OnInit {
   }
 
 
-  handleListAppUserSubscription(id: string) {
+  handleListAppUserSubscription(id: number) {
     this.router.navigate(['userSubscriptions', id]);
   }
 
-  handleListAppUserOffer(id: string) {
+  handleListAppUserOffer(id: number) {
     this.router.navigate(['userOffers', id]);
   }
 
-  handleListAppUserTalent(id: string) {
+  handleListAppUserTalent(id: number) {
     this.router.navigate(['userTalents', id]);
   }
 
-  handleListAppUserTestimony(id: string) {
+  handleListAppUserTestimony(id: number) {
     this.router.navigate(['userTestimonies', id]);
   }
 
@@ -125,52 +113,6 @@ export class AccountComponent implements OnInit {
     this.listTalentByAppUser();
   }
 
-  goToNextPageSubscription(page: number){
-    this.currentPageSubscription = page;
-    this.listSubscriptionByAppUser();
-  }
-
-  getTotalPageOffers() {
-    this.offers1 =  this.offerService.listOfferByAppUser(this.currentUser.id,this.currentPageOffer, this.pageSizeOffer)
-      .subscribe({
-        next: value => {
-          console.log(value);
-          this.totalPagesOffer = value[0].totalPages;
-        },
-        error: err => {
-          console.log(err);
-        }
-      });
-  }
-
-
-  getTotalPageTalents() {
-    this.talents1 =  this.talentService.listTalentByAppUser(this.currentUser.id,this.currentPageTalent, this.pageSizeTalent)
-      .subscribe({
-        next: value => {
-          console.log(value);
-          this.totalPagesTalent = value[0].totalPages;
-        },
-        error: err => {
-          console.log(err);
-        }
-      });
-  }
-
-
-
-  getTotalPageSubscriptions() {
-    this.subscriptions1 =  this.subscriptionService.listSubscriptionByAppUser(this.currentUser.id, this.currentPageSubscription, this.pageSizeSubscription)
-      .subscribe({
-        next: value => {
-          console.log(value);
-          this.totalPagesSubscription = value[0].totalPages;
-        },
-        error: err => {
-          console.log(err);
-        }
-      });
-  }
 
   listOfferByAppUser() {
     this.offers = this.offerService.listOfferByAppUser(this.currentUser.id,this.currentPageOffer, this.pageSizeOffer).pipe(
@@ -191,27 +133,12 @@ export class AccountComponent implements OnInit {
   }
 
 
-  listSubscriptionByAppUser() {
-    this.subscriptions = this.subscriptionService.listSubscriptionByAppUser(this.currentUser.id,this.currentPageSubscription, this.pageSizeSubscription).pipe(
-      catchError(err => {
-        this.errorSubscriptionMessage = err.message;
-        return throwError(err);
-      })
-    );
-  }
-
   handleDeleteOffer(offer: Offer) {
     let conf = confirm("Are you sure ?");
     if (!conf) return;
     this.offerService.deleteOffer(offer.id).subscribe({
       next: value => {
         console.log(value);
-        this.offers = this.offers.pipe(
-          map(data => {
-            let index = data.indexOf(offer)
-            data.slice(index, 1)
-            return data;
-          }))
 
       },
       error: err => {
@@ -229,8 +156,8 @@ export class AccountComponent implements OnInit {
         console.log(value);
         this.talents = this.talents.pipe(
           map(data => {
-            let index = data.indexOf(talent)
-            data.slice(index, 1)
+            let index = data.content.indexOf(talent)
+            data.content.slice(index, 1)
             return data;
           }))
 

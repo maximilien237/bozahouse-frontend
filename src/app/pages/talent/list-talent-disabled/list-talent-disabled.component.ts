@@ -8,6 +8,7 @@ import {AppUserService} from "../../../services/app-user/app-user.service";
 import {Router} from "@angular/router";
 import {TalentService} from "../../../services/talent/talent.service";
 import {FilterTalent} from "../../../models/filterTalent.models";
+import { Page } from 'src/app/models/Page';
 
 @Component({
   selector: 'app-list-talent-disabled',
@@ -23,8 +24,8 @@ export class ListTalentDisabledComponent implements OnInit {
   isUser : boolean = false;
   isEditor : boolean = false;
   username?: string;
-  talents!: Observable<Array<Talent>>;
-  talentsData!: Observable<Array<Talent>>;
+  talents!: Observable<Page<Talent>>;
+  talentsData!: Observable<Page<Talent>>;
   errorMessage!:string;
   errorMessageTalent!:string;
   talentFormGroup!: FormGroup ;
@@ -83,8 +84,31 @@ export class ListTalentDisabledComponent implements OnInit {
 
 
   handleSearchTalents() {
-    let filterTalent: FilterTalent = this.talentFormGroup?.value;
-    this.talents =  this.talentService.filterTalentValidFalse(filterTalent.title, filterTalent.contract, filterTalent.workMode, filterTalent.address, filterTalent.experience, filterTalent.type, filterTalent.domain, this.currentPage, this.pageSize).pipe(
+    const {
+      title,
+      contract,
+      workMode,
+      address,
+      experience,
+      type,
+      domain,
+      startDate,
+      endDate
+    } = this.talentFormGroup.value;
+    const filterTalent:FilterTalent={};
+    filterTalent.title = title;
+    filterTalent.contract = contract;
+    filterTalent.workMode = workMode;
+    filterTalent.address = address;
+    filterTalent.experience = experience;
+    filterTalent.type = type;
+    filterTalent.domain = domain;
+    filterTalent.startDate = new Date(startDate);
+    filterTalent.endDate = new Date(endDate);
+    filterTalent.page = Number(this.currentPage);
+    filterTalent.size = Number(this.pageSize);
+
+    this.talents =  this.talentService.filterTalentValidFalse(filterTalent).pipe(
       catchError(err => {
         this.errorMessageTalent = err.message;
         return throwError(err);
@@ -92,22 +116,43 @@ export class ListTalentDisabledComponent implements OnInit {
     );
   }
 
+
   handleFilterTalents() {
-    //  let kw = this.searchFormGroup?.value.keyword;
-    let filterTalent: FilterTalent = this.talentFormGroup?.value;
-    this.talents1 =  this.talentService.filterTalentValidFalse(filterTalent?.title, filterTalent?.contract, filterTalent?.workMode, filterTalent?.address, filterTalent?.experience, filterTalent?.type, filterTalent?.domain,this.currentPage, this.pageSize)
+    const {
+      title,
+      contract,
+      workMode,
+      address,
+      experience,
+      type,
+      domain,
+      startDate,
+      endDate
+    } = this.talentFormGroup.value;
+    const filterTalent:FilterTalent={};
+    filterTalent.title = title;
+    filterTalent.contract = contract;
+    filterTalent.workMode = workMode;
+    filterTalent.address = address;
+    filterTalent.experience = experience;
+    filterTalent.type = type;
+    filterTalent.domain = domain;
+    filterTalent.startDate = new Date(startDate);
+    filterTalent.endDate = new Date(endDate);
+    filterTalent.page = Number(this.currentPage);
+    filterTalent.size = Number(this.pageSize);
+
+    this.talents1 =  this.talentService.filterTalentValidFalse(filterTalent)
       .subscribe({
         next: value => {
-        this.sizeTalentDisabled = value[0].sizeDisabled
-          this.talentSize = value.length;
-          console.log(value);
-          this.totalPages = value[0].totalPages;
+          this.totalPages = value.totalPages;
         },
         error: err => {
           console.log(err);
         }
       });
   }
+
 
 
   handleDeleteTalent(talent: Talent) {
@@ -118,8 +163,8 @@ export class ListTalentDisabledComponent implements OnInit {
         console.log(data);
         this.talents = this.talents.pipe(
           map(data=>{
-            let index = data.indexOf(talent)
-            data.slice(index,1)
+            let index = data.content.indexOf(talent)
+            data.content.slice(index,1)
             return data;
           }))
 
@@ -139,8 +184,8 @@ export class ListTalentDisabledComponent implements OnInit {
         console.log(value);
         this.talents = this.talents.pipe(
           map(data=>{
-            let index = data.indexOf(talent)
-            data.slice(index,1)
+            let index = data.content.indexOf(talent)
+            data.content.slice(index,1)
             return data;
           }))
 
@@ -151,8 +196,6 @@ export class ListTalentDisabledComponent implements OnInit {
     })
 
   }
-
-
 
   handleDisableTalent(talent: Talent) {
     let conf = confirm("Are you sure ?");
@@ -162,8 +205,8 @@ export class ListTalentDisabledComponent implements OnInit {
         console.log(value);
         this.talents = this.talents.pipe(
           map(data=>{
-            let index = data.indexOf(talent)
-            data.slice(index,1)
+            let index = data.content.indexOf(talent)
+            data.content.slice(index,1)
             return data;
           }))
 
@@ -175,13 +218,13 @@ export class ListTalentDisabledComponent implements OnInit {
 
   }
 
-  handleDetailTalent(id: string){
+  handleDetailTalent(id: number){
     this.router.navigate(['detailTalent', id]).then(()=>{
       console.log("welcome to profile detail !");
     }).catch(console.error)
   }
 
-  handleUpdateTalent(id: string){
+  handleUpdateTalent(id: number){
     this.router.navigate(['updateTalent', id]).then(()=>{
       console.log("update profile page !");
     }).catch(console.error)

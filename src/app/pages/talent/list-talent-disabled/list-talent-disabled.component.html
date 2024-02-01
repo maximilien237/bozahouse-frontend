@@ -103,7 +103,7 @@
                 <input type="text" class="form-control" formControlName = "domain"  placeholder="Domaine, ex: informatique">
               </div>
 
-              <!--        <div class="mb-3 mt-2">
+                      <div class="mb-3 mt-2">
                         <label class="form-label">Date de début</label>
                         <input type="date" class="form-control" formControlName = "startDate" >
                       </div>
@@ -111,7 +111,7 @@
                       <div class="mb-3 mt-2 mb-2">
                         <label class="form-label">Date de fin</label>
                         <input type="date" class="form-control" formControlName = "endDate" >
-                      </div>-->
+                      </div>
 
 
 
@@ -127,7 +127,7 @@
 
 
     <ng-container *ngIf="currentUser">
-      <ng-container *ngIf="currentUser.account == 'talent' && currentUser.activatedHostSubscription || isAdmin">
+      <ng-container *ngIf="currentUser.account == 'talent' || isAdmin">
       <span style="font-size: 20px;">
       <a routerLink="/addTalent" class="hide-underline-link btn btn-dark text-warning">
       <i class="bi bi-plus "></i> publier un profil
@@ -171,7 +171,7 @@
 
       <ng-container>
         <ng-container *ngIf="talents | async as listTalent; else failureOrLoading">
-          <div  *ngFor="let talent of talents | async"  class="col-md-4 ">
+          <div  *ngFor="let talent of listTalent.content "  class="col-md-4 ">
             <div class="card  spacer-margin bg-dark">
 
               <div *ngIf="isAdmin" class="card-header">
@@ -211,9 +211,7 @@
                 </div>
 
                 <ng-container>
-                  <ng-container *ngIf="currentUser.account == 'employer' && currentUser.activatedNormalSubscription
-        || currentUser.account == 'enterprise' && currentUser.activatedNormalSubscription
-        || currentUser.account == 'talent' && currentUser.activatedHostSubscription || isAdmin; else other2">
+                  <ng-container *ngIf="currentUser.account == 'employer' || currentUser.account == 'enterprise' || currentUser.account == 'talent'  || isAdmin; else other2">
                     <span><a (click)="handleDetailTalent(talent.id)" class="btn btn-warning rounded-pill">Voir plus</a></span><br>
                   </ng-container>
 

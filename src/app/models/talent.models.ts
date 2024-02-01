@@ -1,6 +1,6 @@
 
 export interface Talent {
-  id: string;
+  id: number;
   title: string;
   domain: string;
   experience: string;
@@ -17,9 +17,9 @@ export interface Talent {
   publishedAt: Date;
   updatedAt: Date;
   type: string;
-  sizeActivated: number;
-  sizeDisabled: number;
-
+  totalTalent: number;
+  totalTalentValid: number;
+  totalTalentNotValid: number;
 
   email: string;
   contract: string;
@@ -30,9 +30,7 @@ export interface Talent {
   lastname: string;
   firstname: string;
   currentPage: number;
-  totalPages: number;
-  pageSize: number;
-  realSize: number;
+
 
 
 

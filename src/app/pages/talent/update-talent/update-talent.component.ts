@@ -14,7 +14,7 @@ import {Talent} from "../../../models/talent.models";
 })
 export class UpdateTalentComponent implements OnInit {
 
-  id!: string;
+  id!: number;
   talent!: Talent ;
   errorMessage!:string;
   updateTalentFormGroup!: FormGroup;

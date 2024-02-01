@@ -102,8 +102,7 @@
       </div>
     </div> &nbsp;&nbsp;&nbsp;&nbsp;
 
-    <ng-container *ngIf="currentUser.account == 'employer' && currentUser.activatedHostSubscription
-      || currentUser.account == 'enterprise' && currentUser.activatedHostSubscription || isAdmin">
+    <ng-container *ngIf="currentUser.account == 'employer' || currentUser.account == 'enterprise' || isAdmin">
       <span style="font-size: 20px;">
       <a routerLink="/addOffer" class="hide-underline-link btn btn-dark text-warning">
       <i class="bi bi-plus "></i> publier une offre
@@ -196,33 +195,9 @@
                   <span ><i class="bi bi-calendar"></i>&nbsp;<span>{{offer.publishedAt | date : 'd MMM y'}}</span></span>&nbsp;-- <span ><i class="bi bi-lock-fill"></i> <span>{{offer.endOffer | date : 'd MMM y'}}</span></span>
                 </div><br>
 
-                <ng-container>
-                  <ng-container *ngIf="currentUser.account == 'employer' && currentUser.activatedHostSubscription
-        || currentUser.account == 'enterprise' && currentUser.activatedHostSubscription
-        || currentUser.account == 'talent' && currentUser.activatedNormalSubscription || isAdmin; else other2">
+
                     <span><a (click)="handleDetailOffer(offer.id)" class="btn btn-warning rounded-pill">Voir l'offre</a></span><br>
-                  </ng-container>
 
-                  <ng-template #other2>
-                    <!--                <span class="text-muted"><a class="btn btn-success"><i class="bi bi-whatsapp"></i>&nbsp;Click here to subscribe </a></span><br>-->
-
-
-
-                    <span class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Voir l'offre</span>
-
-                    <div class="card offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-                      <div class="offcanvas-header">
-                        <h5 id="offcanvasTopLabel">Vous n'avez aucun abonnement de type normal</h5>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                      </div>
-                      <div class="offcanvas-body">
-                        contactez l'un de ces commerciaux pour pouvoir créer un abonnement
-                        pour voir les détails de cet offre, vous devez souscrire à un abonnement
-                      </div>
-                    </div>
-
-                  </ng-template>
-                </ng-container>
 
               </div>
 <!--              <span class="text-muted card-footer btn" style=" font-size: 18px" (click)="shared()">partager &nbsp;<i class="bi bi-share-fill"></i></span>-->

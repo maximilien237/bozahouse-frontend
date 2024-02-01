@@ -6,7 +6,7 @@
   <div class="text-center">
 
     <ng-container *ngIf="currentUser">
-      <ng-container *ngIf="currentUser.account == 'talent' && currentUser.activatedHostSubscription || isAdmin">
+      <ng-container *ngIf="currentUser.account == 'talent' || isAdmin">
       <span style="font-size: 20px;">
       <a routerLink="/addTalent" class="hide-underline-link btn btn-dark text-warning">
       <i class="bi bi-plus "></i> publier un profil
@@ -26,7 +26,7 @@
 
       <ng-container>
         <ng-container *ngIf="userTalents | async as listTalent; else failureOrLoading">
-          <div  *ngFor="let talent of userTalents | async"  class="col-md-4 ">
+          <div  *ngFor="let talent of listTalent.content"  class="col-md-4 ">
             <div class="card  spacer-margin bg-dark">
 
               <div class="card-header">

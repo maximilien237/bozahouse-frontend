@@ -18,7 +18,7 @@
 <!--          <h5 class="card-header bg-dark text-warning"><i class="bi bi-search"></i>Rechercher </h5>-->
           <div class="card-body bg-dark text-white-50" >
 
-            <form  *ngIf="talentFormGroup" [formGroup] = "talentFormGroup" (ngSubmit)="handleSearchTalents()" >
+            <form  *ngIf="talentFormGroup" [formGroup] = "talentFormGroup" (ngSubmit)="handleFilterTalents()" >
 
               <div class="mb-3 mt-2">
                 <label class="form-label">Métier</label>
@@ -103,7 +103,7 @@
                 <input type="text" class="form-control" formControlName = "domain"  placeholder="Domaine, ex: informatique">
               </div>
 
-      <!--        <div class="mb-3 mt-2">
+              <div class="mb-3 mt-2">
                 <label class="form-label">Date de début</label>
                 <input type="date" class="form-control" formControlName = "startDate" >
               </div>
@@ -111,7 +111,7 @@
               <div class="mb-3 mt-2 mb-2">
                 <label class="form-label">Date de fin</label>
                 <input type="date" class="form-control" formControlName = "endDate" >
-              </div>-->
+              </div>
 
 
 
@@ -127,7 +127,7 @@
 
 
     <ng-container *ngIf="currentUser">
-      <ng-container *ngIf="currentUser.account == 'talent' && currentUser.activatedHostSubscription || isAdmin">
+      <ng-container *ngIf="currentUser.account == 'talent' || isAdmin">
       <span style="font-size: 20px;">
       <a routerLink="/addTalent" class="hide-underline-link btn btn-dark text-warning">
       <i class="bi bi-plus "></i> publier un profil
@@ -165,13 +165,13 @@
   </div><br>
   <div class="card bg-secondary border-0">
 
-    <h5 class="text-center mt-2">Vos derniers talents / [ {{sizeTalentActivated}} ]</h5>
+    <h5 class="text-center mt-2">Vos derniers talents / [ {{talents.length}} ]</h5>
 
     <div class="row">
 
       <ng-container>
-        <ng-container *ngIf="talents | async as listTalent; else failureOrLoading">
-          <div  *ngFor="let talent of talents | async"  class="col-md-4 ">
+        <ng-container *ngIf="talents; else failureOrLoading">
+          <div  *ngFor="let talent of talents "  class="col-md-4 ">
             <div class="card  spacer-margin bg-dark">
 
               <div *ngIf="isAdmin" class="card-header">
@@ -209,43 +209,10 @@
                   <span class="text-white-50"><i class="bi bi-book-fill"></i>&nbsp;<span>{{talent.contract}}</span></span>
                 </div>
 
-                <ng-container>
-                  <ng-container *ngIf="currentUser.account == 'employer' && currentUser.activatedNormalSubscription
-        || currentUser.account == 'enterprise' && currentUser.activatedNormalSubscription
-        || currentUser.account == 'talent' && currentUser.activatedHostSubscription || isAdmin; else other2">
+                <div>
+
                     <span><a (click)="handleDetailTalent(talent.id)" class="btn btn-warning rounded-pill">Voir plus</a></span><br>
-                  </ng-container>
-
-                  <ng-template #other2>
-                    <!--                <span class="text-muted"><a class="btn btn-success"><i class="bi bi-whatsapp"></i>&nbsp;Click here to subscribe </a></span><br>-->
-
-
-
-                    <span class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Voir le talent</span>
-
-                    <div class="card offcanvas offcanvas-top bg-dark" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-                      <div class="offcanvas-header">
-                        <h5 id="offcanvasTopLabel" class="text-danger">Vous n'avez aucun abonnement de type normal</h5>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                      </div>
-                      <div class="offcanvas-body">
-                        <p class="text-warning">
-                          Pour avoir accès à cette fonctionnalité, vous devez souscrire à un abonnement de type normal.
-                          Pour ce faire, contactez notre agent en cliquant sur l'un des boutons suivants<i class="bi-arrow-down"></i>
-
-                        </p>
-
-                        <ul class="nav list-unstyled text-small text-center ">
-                          <li><a [href]= "'mailto:'+ email" style="font-size: 22px;" class=" link-secondary text-white-50"><i class="bi bi-envelope-fill"></i> </a>&nbsp;&nbsp;</li>
-                          <li><a [href]="'tel:+237' + tel " style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-telephone-fill"></i></a>&nbsp;&nbsp;</li>
-                          <li><a href="https://wa.me/656832062" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-whatsapp"></i></a>&nbsp;&nbsp;</li>
-                        </ul>
-
-                      </div>
-                    </div>
-
-                  </ng-template>
-                </ng-container>
+                  </div>
 
               </div>
 <!--              <span class="text-muted card-footer btn" style=" font-size: 18px" (click)="shared()">partager &nbsp;<i class="bi bi-share-fill"></i></span>-->

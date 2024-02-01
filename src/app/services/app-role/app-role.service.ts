@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {AppRole} from "../../models/app-role.models";
+import {Page} from "../../models/Page";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,8 +24,8 @@ export class AppRoleService {
     return this.http.put<AppRole>(environment.backendHostAdmin + "roles/" +id, role);
   }
 
-  public listRoles(page: number, size: number): Observable<Array<AppRole>> {
-    return this.http.get<Array<AppRole>>(environment.backendHostAdmin + "roles?page=" + page + "&size=" + size)
+  public listRoles(page: number, size: number): Observable<Page<AppRole>> {
+    return this.http.get<Page<AppRole>>(environment.backendHostAdmin + "roles?page=" + page + "&size=" + size)
   }
 
   public saveRole(role: AppRole):Observable<AppRole>{

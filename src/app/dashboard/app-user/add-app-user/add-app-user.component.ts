@@ -27,13 +27,13 @@ export class AddAppUserComponent implements OnInit {
         lastname : this.fb.control("", [Validators.pattern("[A-Za-z-çèéàê' -]+"),Validators.required, Validators.minLength(3),Validators.maxLength(30)]),
         firstname: this.fb.control("",[Validators.pattern("[A-Za-z-çèéàê' -]+"),Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
         sex: this.fb.control("",[Validators.required]),
-        email: this.fb.control("",[Validators.pattern("^[a-z0-9_+&*-]+(?:\\.[a-z0-9_+&*-]+)*@(?:[a-z0-9-]+\\.)+[a-z]{2,15}$"),Validators.required, Validators.email]),
-        username : this.fb.control("",[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
+        //email: this.fb.control("",[Validators.pattern("^[a-z0-9_+&*-]+(?:\\.[a-z0-9_+&*-]+)*@(?:[a-z0-9-]+\\.)+[a-z]{2,15}$"),Validators.required, Validators.email]),
+        username : this.fb.control("",[Validators.pattern("^[a-z0-9_+&*-]+(?:\\.[a-z0-9_+&*-]+)*@(?:[a-z0-9-]+\\.)+[a-z]{2,15}$"),Validators.required, Validators.email]),
         password: this.fb.control("",[Validators.pattern("[A-Za-z0-9-@]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
         confirmPassword: this.fb.control("",[Validators.pattern("[A-Za-z0-9-@]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
         birthday: this.fb.control(null,[Validators.required]),
         acceptTerms: this.fb.control(false,[Validators.requiredTrue]),
-        referralCode: this.fb.control("",[Validators.pattern("[A-Za-z0-9]+"), Validators.minLength(6), Validators.maxLength(15)])
+       // referralCode: this.fb.control("",[Validators.pattern("[A-Za-z0-9]+"), Validators.minLength(6), Validators.maxLength(15)])
 
       });
 

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {catchError, map, Observable, throwError} from "rxjs";
-
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 import {Router} from "@angular/router";
 import {Talent} from "../../../models/talent.models";
@@ -31,8 +29,7 @@ export class ListTalentComponent implements OnInit {
   isUser : boolean = false;
   isEditor : boolean = false;
   username?: string;
-  talents!: Observable<Array<Talent>>;
-  talentsData!: Observable<Array<Talent>>;
+  talents: Talent[] = [];
   errorMessage!:string;
   errorMessageTalent!:string;
   talentFormGroup!: FormGroup ;
@@ -40,9 +37,6 @@ export class ListTalentComponent implements OnInit {
   currentPage: number = 0;
   totalPages!: number;
   pageSize: number = 5;
-  talents1!: any;
-  talentSize: number = 0;
-  sizeTalentActivated: number = 0;
 
 
   constructor(private authenticationService: AuthenticationService,private userService: AppUserService,
@@ -57,17 +51,16 @@ export class ListTalentComponent implements OnInit {
       address: this.fb.control(""),
       experience: this.fb.control(""),
       type: this.fb.control(""),
-      domain: this.fb.control("")
-   /*   startDate: this.fb.control(moment().subtract(7,'days').format('YYYY-MM-DD'),[Validators.required]),
-      endDate: this.fb.control(moment().format('YYYY-MM-DD'), [Validators.required])
-*/
+      domain: this.fb.control(""),
+      startDate: this.fb.control(""),
+      endDate: this.fb.control("")
 
     });
 
     this.handleCurrentAppUser();
     // this.listTalent();
 
-    this.handleSearchTalents();
+   // this.handleSearchTalents();
     this.handleFilterTalents();
 
 
@@ -89,73 +82,47 @@ export class ListTalentComponent implements OnInit {
 
   handleSetSearchTalentForm(){
     this.talentFormGroup.reset();
+    this.handleFilterTalents();
   }
 
 
-
-  handleSearchTalents() {
-    let filterTalent: FilterTalent = this.talentFormGroup?.value;
-    this.talents =  this.talentService.filterTalent(filterTalent.title, filterTalent.contract, filterTalent.workMode, filterTalent.address, filterTalent.experience, filterTalent.type, filterTalent.domain, this.currentPage, this.pageSize).pipe(
-      catchError(err => {
-        this.errorMessageTalent = err.message;
-        return throwError(err);
-      })
-    );
-  }
 
   handleFilterTalents() {
-    //  let kw = this.searchFormGroup?.value.keyword;
-    let filterTalent: FilterTalent = this.talentFormGroup?.value;
-    this.talents1 =  this.talentService.filterTalent(filterTalent?.title, filterTalent?.contract, filterTalent?.workMode, filterTalent?.address, filterTalent?.experience, filterTalent?.type, filterTalent?.domain,this.currentPage, this.pageSize)
-      .subscribe({
-        next: value => {
-        this.sizeTalentActivated = value[0].sizeActivated;
-        console.log(this.sizeTalentActivated);
-          this.talentSize = value.length;
-          console.log(value);
-          this.totalPages = value[0].totalPages;
-        },
-        error: err => {
-          console.log(err);
-        }
-      });
+    const {
+      title,
+      contract,
+      workMode,
+      address,
+      experience,
+      type,
+      domain,
+      startDate,
+      endDate
+    } = this.talentFormGroup.value;
+    const filterTalent:FilterTalent={};
+    filterTalent.title = title;
+    filterTalent.contract = contract;
+    filterTalent.workMode = workMode;
+    filterTalent.address = address;
+    filterTalent.experience = experience;
+    filterTalent.type = type;
+    filterTalent.domain = domain;
+    filterTalent.startDate = new Date(startDate);
+    filterTalent.endDate = new Date(endDate);
+    filterTalent.valid = true;
+    filterTalent.page = Number(this.currentPage);
+    filterTalent.size = Number(this.pageSize);
+
+    this.talentService.filterTalent(filterTalent).subscribe({
+      next: value => {
+        this.talents = value.content;
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
+    console.log(this.talents);
   }
-
-/*
-  handleSearchTalents() {
-    let filterTalent: FilterTalent = this.talentFormGroup?.value;
-    this.talents =  this.talentService.filterTalent(filterTalent?.title, filterTalent?.contract, filterTalent?.workMode, filterTalent?.address, filterTalent?.experience, filterTalent?.type, filterTalent?.domain, this.currentPage, this.pageSize).pipe(
-      catchError(err => {
-        this.errorMessageTalent = err.message;
-        return throwError(err);
-      })
-    );
-  }
-
-  handleFilterTalents() {
-    //  let kw = this.searchFormGroup?.value.keyword;
-    let filterTalent: FilterTalent = this.talentFormGroup?.value;
-    this.talents1 =  this.talentService.filterTalent(filterTalent?.title, filterTalent?.contract, filterTalent?.workMode, filterTalent?.address, filterTalent?.experience, filterTalent?.type, filterTalent?.domain,this.currentPage, this.pageSize)
-      .subscribe({
-        next: value => {
-          console.log(value);
-          this.totalPages = value[0].totalPages;
-        },
-        error: err => {
-          console.log(err);
-        }
-      });
-  }*/
-
-/*
-  listTalent(){
-    this.talentsData = this.talentService.listTalent(this.currentPage, this.pageSize).pipe(
-      catchError(err => {
-        this.errorMessage = err.message;
-        return throwError(err);
-      })
-    );
-  }*/
 
   handleDeleteTalent(talent: Talent) {
     let conf = confirm("Are you sure ?");
@@ -163,12 +130,6 @@ export class ListTalentComponent implements OnInit {
     this.talentService.deleteTalent(talent.id).subscribe({
       next: data => {
         console.log(data);
-        this.talents = this.talents.pipe(
-          map(data=>{
-            let index = data.indexOf(talent)
-            data.slice(index,1)
-            return data;
-          }))
 
       },
       error: err => {
@@ -184,13 +145,6 @@ export class ListTalentComponent implements OnInit {
     this.talentService.enableTalent(talent.id).subscribe({
       next: value => {
         console.log(value);
-        this.talents = this.talents.pipe(
-          map(data=>{
-            let index = data.indexOf(talent)
-            data.slice(index,1)
-            return data;
-          }))
-
       },
       error: err => {
         console.log(err);
@@ -198,8 +152,6 @@ export class ListTalentComponent implements OnInit {
     })
 
   }
-
-
 
   handleDisableTalent(talent: Talent) {
     let conf = confirm("Are you sure ?");
@@ -207,12 +159,6 @@ export class ListTalentComponent implements OnInit {
     this.talentService.disableTalent(talent.id).subscribe({
       next: value => {
         console.log(value);
-        this.talents = this.talents.pipe(
-          map(data=>{
-            let index = data.indexOf(talent)
-            data.slice(index,1)
-            return data;
-          }))
 
       },
       error: err => {
@@ -222,27 +168,22 @@ export class ListTalentComponent implements OnInit {
 
   }
 
-  handleDetailTalent(id: string){
+  handleDetailTalent(id: number){
     this.router.navigate(['detailTalent', id]).then(()=>{
       console.log("welcome to profile detail !");
     }).catch(console.error)
   }
 
-  handleUpdateTalent(id: string){
+  handleUpdateTalent(id: number){
     this.router.navigate(['updateTalent', id]).then(()=>{
       console.log("update profile page !");
     }).catch(console.error)
   }
-
-
-
-
-
-
+  
 
   goToPage(page: number){
     this.currentPage = page;
-    this.handleSearchTalents();
+    this.handleFilterTalents();
   }
 
 
@@ -273,3 +214,5 @@ export class ListTalentComponent implements OnInit {
   }
 
 }
+
+

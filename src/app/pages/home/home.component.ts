@@ -154,11 +154,11 @@ export class HomeComponent implements OnInit {
 
     }
 
-    handleDetailOffer(id: string) {
+    handleDetailOffer(id: number) {
       this.router.navigate(['detailOffer', id]);
     }
 
-    handleUpdateOffer(id: string) {
+    handleUpdateOffer(id: number) {
       this.router.navigate(['updateOffer', id]);
     }
 
@@ -193,11 +193,11 @@ export class HomeComponent implements OnInit {
 
     }
 
-    handleDetailTalent(id: string) {
+    handleDetailTalent(id: number) {
       this.router.navigate(['detailTalent', id]);
     }
 
-    handleUpdateTalent(id: string) {
+    handleUpdateTalent(id: number) {
       this.router.navigate(['updateTalent', id]);
     }
 

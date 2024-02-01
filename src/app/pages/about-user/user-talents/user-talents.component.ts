@@ -9,6 +9,7 @@ import {AppUser} from "../../../models/app-user.models";
 import {AppUserService} from "../../../services/app-user/app-user.service";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
 import {Offer} from "../../../models/offer.models";
+import { Page } from 'src/app/models/Page';
 
 @Component({
   selector: 'app-user-talents',
@@ -26,12 +27,12 @@ export class UserTalentsComponent implements OnInit {
   currentUser!: AppUser;
   errorMessageAppUser!:string;
 
-  id!: string;
+  id!: number;
   errorMessage!:string;
   currentPage: number = 0;
   totalPages!: number;
   pageSize: number = 5;
-  userTalents!: Observable<Array<Talent>>;
+  userTalents!: Observable<Page<Talent>>;
   userTalents1!: any;
 
   constructor(private router: Router, private authenticationService: AuthenticationService, private userService: AppUserService, private activatedRoute: ActivatedRoute, private talentService: TalentService) { }
@@ -69,8 +70,8 @@ export class UserTalentsComponent implements OnInit {
       next: value => {
         this.userTalents = this.userTalents.pipe(
           map(data=>{
-            let index = data.indexOf(talent)
-            data.slice(index,1)
+            let index = data.content.indexOf(talent)
+            data.content.slice(index,1)
             return data;
           }))
 
@@ -82,11 +83,11 @@ export class UserTalentsComponent implements OnInit {
 
   }
 
-  handleDetailTalent(id: string){
+  handleDetailTalent(id: number){
     this.router.navigate(['detailTalent', id]);
   }
 
-  handleUpdateTalent(id: string){
+  handleUpdateTalent(id: number){
     this.router.navigate(['updateTalent', id]);
   }
 
@@ -100,8 +101,8 @@ export class UserTalentsComponent implements OnInit {
         console.log(value);
         this.userTalents = this.userTalents.pipe(
           map(data=>{
-            let index = data.indexOf(talent)
-            data.slice(index,1)
+            let index = data.content.indexOf(talent)
+            data.content.slice(index,1)
             return data;
           }))
 
@@ -123,8 +124,8 @@ export class UserTalentsComponent implements OnInit {
         console.log(value);
         this.userTalents = this.userTalents.pipe(
           map(data=>{
-            let index = data.indexOf(talent)
-            data.slice(index,1)
+            let index = data.content.indexOf(talent)
+            data.content.slice(index,1)
             return data;
           }))
 
@@ -145,7 +146,7 @@ export class UserTalentsComponent implements OnInit {
   handleGetTotalPageAppUserTalents(){
     this.userTalents1 = this.talentService.listTalentByAppUser(this.id,this.currentPage, this.pageSize).subscribe({
       next: value => {
-        this.totalPages = value[0].totalPages;
+        this.totalPages = value.totalPages;
       },
       error: err => {
         console.log(err);

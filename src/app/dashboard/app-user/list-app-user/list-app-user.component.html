@@ -22,23 +22,23 @@
 
 <div  *ngIf="isEditor" class="container mt-lg-5 spacer-bottom text-center">
 
-  <div *ngIf="isAdmin" class="text-center mt-3" >
-      <span  style="font-size: 20px;">
+
+      <span *ngIf="isAdmin"  style="font-size: 20px;">
       <a routerLink="/listRole" class="hide-underline-link btn btn-dark text-white">
       Roles
       </a>
     </span>
-  </div>
-  <div class="card bg-secondary border-0">
-    <div class="row">
+
+  <div class="container">
+
       <!-- list users -->
-      <div class="container col-md-5  mt-3" >
-      <ng-container *ngIf="users | async as listUsers; else failureOrLoading">
-        <div class="card spacer-top bg-dark">
-          <div class=" text-secondary mt-2"><span style="font-size: 20px; font-weight: bold">[ {{appUserSizeActivated}} ] &nbsp;Les utilisateurs &nbsp;<a *ngIf="isAdmin" routerLink="/addUser" class="btn btn-outline-secondary">
+      <div class="mt-3" >
+      <ng-container *ngIf="users ; else failureOrLoading">
+        <div class=" bg-dark">
+          <span *ngIf="isAdmin" class="text-light"> [ {{users.length}} ] &nbsp;Les utilisateurs &nbsp;<a  routerLink="/addUser" class="btn btn-outline-secondary">
               <i class="bi bi-plus-circle"></i>
-            </a></span></div>
-          <div class="card-body">
+            </a></span>
+          <div>
 
             <ng-container  *ngIf="searchFormGroup">
               <form [formGroup]="searchFormGroup" (ngSubmit)="handleSearchAppUserByUsername()">
@@ -51,10 +51,14 @@
             </ng-container>
 
 
-            <table class="table mt-4 table-responsive">
+            <table class="table mt-4 table-striped" aria-describedby="user table">
               <thead class="text-center text-light">
               <tr>
-                <th>Pseudo</th>
+                <th>Type</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Connu par?</th>
                 <th>Activitée</th>
                 <th *ngIf="isAdmin">Actions</th>
 
@@ -63,47 +67,36 @@
               </thead>
 
               <tbody>
-              <tr class="text-light" *ngFor="let user of users | async">
+              <tr class="text-light" *ngFor="let user of users">
 
-                <td>
-                  {{user.username}} <br />
-                  <p *ngIf="user.account == 'employer'" style="font-size: 16px; color: lightseagreen">&nbsp;[Par]</p>
-                  <p *ngIf="user.account == 'enterprise'" style="font-size: 16px; color: lightseagreen">&nbsp;[Ent]</p>
-                  <p *ngIf="user.account == 'talent'" style="font-size: 16px; color: lightseagreen">&nbsp;[Tal]</p>
-                </td>
+                <td>{{user.account}}</td>
+                <td>{{user.lastname}}</td>
+                <td>{{user.firstname}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.howKnowUs}}</td>
 
-                <td>
-                  <div class="card-body" >
-                    <p > <button (click)="handleListAppUserSubscription(user.id)" class="btn btn-secondary">Abonnements</button> <span *ngIf="isAdmin">|</span>
-                      <a *ngIf="isAdmin" (click)="handleAppUserDates(user.id)" class="btn btn-warning">
-                      <i class="bi bi-calendar"></i>
-                    </a></p>
-                    <p *ngIf="isAdmin"  >
-                      <button (click)="handleListAppUserOffer(user.id)" class="btn btn-secondary">Offres</button> |
-                      <button (click)="handleListAppUserTalent(user.id)" class="btn btn-secondary">Talents </button></p>
-                  </div>
+                <td *ngIf="isAdmin" >
+                      <a (click)="handleListAppUserOffer(user.id)" href="" class="text-secondary">Offres</a> |
+                      <a (click)="handleListAppUserTalent(user.id)"  href="" class="text-secondary">Talents </a>
                 </td>
 
 
-                <td>
+                <td *ngIf="isAdmin" >
+                      <a (click)="handleDetailAppUser(user.id)" href="javascript:void(0);" class="text-light">
+                        <i class="bi bi-eye"></i>
+                      </a>&nbsp;
 
-                  <p *ngIf="isAdmin">
-                    <a (click)="handleDetailAppUser(user.id)" class="btn btn-outline-secondary">
-                      <i class="bi bi-eye"></i>
-                    </a>  <br>
+                      <a (click)="handleUpdateAppUser(user.id)" href="javascript:void(0);" class="text-warning">
+                        <i class="bi bi-pencil"></i>
+                      </a>&nbsp;
 
-                    <a (click)="handleUpdateAppUser(user.id)" class="btn btn-outline-warning">
-                      <i class="bi bi-pencil"></i>
-                    </a> <br>
+                      <a (click)="handleDisableAppUser(user)" href="javascript:void(0);" class="text-secondary">
+                        <i class="bi bi-arrow-down"></i>
+                      </a>&nbsp;
 
-                    <a (click)="handleDisableAppUser(user)" class="btn btn-outline-secondary">
-                      <i class="bi bi-arrow-down"></i>
-                    </a><br>
-
-                    <a (click)="handleDeleteUser(user)" class="btn btn-outline-danger">
-                      <i class="bi bi-trash"></i>
-                    </a>
-                  </p>
+                      <a (click)="handleDeleteUser(user)" href="javascript:void(0);" class="text-danger">
+                        <i class="bi bi-trash"></i>
+                      </a>
 
 
                 </td>
@@ -174,66 +167,11 @@
       </ng-template>
       </div>
 
-      <!-- create subscription -->
-      <div *ngIf="isEditor" class="container col-md-5  mt-3" >
-      <div class="card spacer-top bg-dark">
-        <h5 class="text-center text-warning spacer">Créer un abonnement</h5>
+<div class="container col-md-12">
 
-        <div class="card-body text-white">
-          <form [formGroup]="newSubscriptionFormGroup" (ngSubmit)="handleSaveSubscription()">
-
-            <div class="mb-3">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Pseudo </label>
-              <input class="form-control" formControlName = "username"  required>
-              <small *ngIf="newSubscriptionFormGroup.controls['username'].errors && newSubscriptionFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', newSubscriptionFormGroup.controls['username'].errors)}}</small>
-
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type d' abonnement</label>
-              <select class="form-select" formControlName = "type"  required>
-                <option [ngValue]="null" selected disabled hidden>Type d' abonnement</option>
-                <option value="normal">NORMAL</option>
-                <option value="host">HOST</option>
-              </select>
-              <small *ngIf="newSubscriptionFormGroup.controls['type'].errors && newSubscriptionFormGroup.controls['type'].touched" class="text-danger">{{getErrorMessage('type', newSubscriptionFormGroup.controls['type'].errors)}}</small>
-
-            </div>
-
-
-            <div class="mb-3">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Durée de l'abonnement</label>
-              <select class="form-select" formControlName = "period"  required>
-                <option [ngValue]="null" selected disabled hidden>Durée de l'abonnement</option>
-                <option value="1M">1 Mois</option>
-                <option value="2M">2 Mois</option>
-                <option value="3M">3 Mois</option>
-                <option value="4M">4 Mois</option>
-                <option value="5M">5 Mois</option>
-                <option value="6M">6 Mois</option>
-                <option value="7M">7 Mois</option>
-                <option value="8M">8 Mois</option>
-                <option value="9M">9 Mois</option>
-                <option value="10M">10 Mois</option>
-                <option value="11M">11 Mois</option>
-                <option value="1A">1 an</option>
-              </select>
-              <small *ngIf="newSubscriptionFormGroup.controls['period'].errors && newSubscriptionFormGroup.controls['period'].touched" class="text-danger">{{getErrorMessage('period', newSubscriptionFormGroup.controls['period'].errors)}}</small>
-
-            </div>
-
-            <div class="text-center">
-              <button [disabled] = "!newSubscriptionFormGroup.valid" class="btn btn-warning" type="submit">Valider</button>
-            </div>
-
-        </form>
-        </div>
-      </div>
-      </div>
-
-
-      <!-- add role to user -->
-      <div class="container col-md-5  mt-3" >
+  <div class="row">
+    <!-- add role to user -->
+    <div class="container col-md-4 " >
       <div *ngIf="isAdmin" class="card spacer-top bg-dark">
         <h5 class="text-center text-warning spacer">Ajouter un role à un utilisateur</h5>
 
@@ -261,18 +199,16 @@
             </div>
 
             <div class="text-center">
-              <button [disabled] = "!newSubscriptionFormGroup.valid" class="btn btn-warning" type="submit">Valider</button>
+              <button [disabled] = "!addRoleToUserFormGroup.valid" class="btn btn-warning" type="submit">Valider</button>
             </div>
 
           </form>
         </div>
       </div>
-      </div>
+    </div>
 
-
-
-      <!-- remove role to user -->
-      <div class="container col-md-5  mt-3" >
+    <!-- remove role to user -->
+    <div class="container col-md-4  " >
       <div *ngIf="isAdmin" class="card spacer-top bg-dark">
         <h5 class="text-center text-warning spacer">Retirer un role à un utilisateur</h5>
 
@@ -305,9 +241,15 @@
 
           </form>
         </div>
-  </div>
       </div>
+    </div>
+  </div>
+
+
 </div>
+
+
+
   </div>
 </div>
 <div class="mb-lg-5"></div>

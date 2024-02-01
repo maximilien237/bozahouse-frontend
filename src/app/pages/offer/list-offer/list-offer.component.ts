@@ -17,6 +17,8 @@ import {Subscription} from "../../../models/subscription.models";
 import {FilterOffer} from "../../../models/filterOffer.models";
 import {AppUser} from "../../../models/app-user.models";
 import {AppUserService} from "../../../services/app-user/app-user.service";
+import {FilterTalent} from "../../../models/filterTalent.models";
+import {Talent} from "../../../models/talent.models";
 
 
 @Component({
@@ -37,7 +39,7 @@ export class ListOfferComponent implements OnInit {
   isUser : boolean = false;
   isEditor : boolean = false;
   username?: string;
-  offers!: Observable<Array<Offer>>;
+  offers: Offer[] = [] ;
   errorMessage!:string;
   errorMessageOffer!:string;
   offerFormGroup!: FormGroup ;
@@ -75,7 +77,7 @@ export class ListOfferComponent implements OnInit {
 
     });
     //this.listOffer();
-    this.handleSearchOffers();
+    //this.handleSearchOffers();
     this.handleFilterOffers();
 
 
@@ -102,7 +104,7 @@ export class ListOfferComponent implements OnInit {
 
 
 
-  handleSearchOffers() {
+/*  handleSearchOffers() {
     //  let kw = this.searchFormGroup?.value.keyword;
     let filterOffer: FilterOffer = this.offerFormGroup.value;
     this.offers =  this.offerService.filterOffer(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain, this.currentPage, this.pageSize).pipe(
@@ -111,23 +113,43 @@ export class ListOfferComponent implements OnInit {
         return throwError(err);
       })
     );
-  }
+  }*/
 
   handleFilterOffers() {
-    //  let kw = this.searchFormGroup?.value.keyword;
-    let filterOffer: FilterOffer = this.offerFormGroup.value;
-    this.offers1 =  this.offerService.filterOffer(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain,this.currentPage, this.pageSize)
-      .subscribe({
-        next: value => {
-        this.sizeOfferActivated = value[0].sizeActivated;
-        console.log(this.sizeOfferActivated);
-          console.log(value);
-          this.totalPages = value[0].totalPages;
-        },
-        error: err => {
-          console.log(err);
-        }
-      });
+    const {
+      title,
+      contract,
+      workMode,
+      address,
+      experience,
+      type,
+      domain,
+      startDate,
+      endDate
+    } = this.offerFormGroup.value;
+    const filterOffer:FilterOffer={};
+    filterOffer.title = title;
+    filterOffer.contract = contract;
+    filterOffer.workMode = workMode;
+    filterOffer.address = address;
+    filterOffer.experience = experience;
+    filterOffer.type = type;
+    filterOffer.domain = domain;
+    filterOffer.startDate = new Date(startDate);
+    filterOffer.endDate = new Date(endDate);
+    filterOffer.valid = true;
+    filterOffer.page = Number(this.currentPage);
+    filterOffer.size = Number(this.pageSize);
+
+    this.offerService.filterOffer(filterOffer).subscribe({
+      next: value => {
+        this.offers = value.content;
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
+    console.log(this.offers);
   }
 
   datesCompare() {
@@ -164,15 +186,16 @@ export class ListOfferComponent implements OnInit {
 
 
 
-  listOffer(){
+/*  listOffer(){
     this.offers = this.offerService.listOffer().pipe(
       catchError(err => {
         this.errorMessage = err.message;
         return throwError(err);
       })
     );
-  }
+  }*/
 
+/*
   handleDeleteOffer(offer: Offer) {
     let conf = confirm("Are you sure ?");
     if (!conf) return;
@@ -193,9 +216,54 @@ export class ListOfferComponent implements OnInit {
     })
 
   }
+*/
 
+
+  handleDeleteOffer(offer: Offer) {
+    let conf = confirm("Are you sure ?");
+    if (!conf) return;
+    this.offerService.disableOffer(offer.id).subscribe({
+      next: data => {
+        console.log(data);
+
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+
+  }
 
   handleEnableOffer(offer: Offer) {
+    let conf = confirm("Are you sure ?");
+    if (!conf) return;
+    this.offerService.enableOffer(offer.id).subscribe({
+      next: value => {
+        console.log(value);
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+
+  }
+
+  handleDisableOffer(offer: Offer) {
+    let conf = confirm("Are you sure ?");
+    if (!conf) return;
+    this.offerService.disableOffer(offer.id).subscribe({
+      next: value => {
+        console.log(value);
+
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+
+  }
+
+/*  handleEnableOffer(offer: Offer) {
     let conf = confirm("Are you sure ?");
     if (!conf) return;
     this.offerService.enableOffer(offer.id).subscribe({
@@ -237,14 +305,14 @@ export class ListOfferComponent implements OnInit {
       }
     })
 
-  }
+  }*/
 
-  handleUpdateOffer(id: string) {
+  handleUpdateOffer(id: number) {
 
     this.router.navigate(['updateOffer', id]);
   }
 
-  handleDetailOffer(id: string) {
+  handleDetailOffer(id: number) {
 
     this.router.navigate(['detailOffer', id]);
   }
@@ -252,7 +320,7 @@ export class ListOfferComponent implements OnInit {
 
   goToPage(page: number){
     this.currentPage = page;
-    this.handleSearchOffers();
+    this.handleFilterOffers();
   }
 
 

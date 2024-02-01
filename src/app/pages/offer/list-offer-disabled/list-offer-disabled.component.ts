@@ -83,18 +83,18 @@ export class ListOfferDisabledComponent implements OnInit {
 
   handleSearchOffersNotValid() {
     //  let kw = this.searchFormGroup?.value.keyword;
-    let filterOffer: FilterOffer = this.offerFormGroup.value;
+/*    let filterOffer: FilterOffer = this.offerFormGroup.value;
     this.offers =  this.offerService.filterOfferNotValid(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain, this.currentPage, this.pageSize).pipe(
       catchError(err => {
         this.errorMessageOffer = err.message;
         return throwError(err);
       })
-    );
+    );*/
   }
 
   handleFilterOffersNotValid() {
     //  let kw = this.searchFormGroup?.value.keyword;
-    let filterOffer: FilterOffer = this.offerFormGroup.value;
+/*    let filterOffer: FilterOffer = this.offerFormGroup.value;
     this.offers1 =  this.offerService.filterOfferNotValid(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain,this.currentPage, this.pageSize)
       .subscribe({
         next: value => {
@@ -107,7 +107,7 @@ export class ListOfferDisabledComponent implements OnInit {
         error: err => {
           console.log(err);
         }
-      });
+      });*/
   }
 
 
@@ -177,12 +177,12 @@ export class ListOfferDisabledComponent implements OnInit {
 
   }
 
-  handleUpdateOffer(id: string) {
+  handleUpdateOffer(id: number) {
 
     this.router.navigate(['updateOffer', id]);
   }
 
-  handleDetailOffer(id: string) {
+  handleDetailOffer(id: number) {
 
     this.router.navigate(['detailOffer', id]);
   }

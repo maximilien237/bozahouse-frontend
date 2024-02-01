@@ -10,7 +10,7 @@ import {OfferService} from "../../../services/offer/offer.service";
 })
 export class DetailOfferComponent implements OnInit {
 
-  id!: string;
+  id!: number;
   offer!: Offer;
   constructor(private activatedRoute: ActivatedRoute, private offerService: OfferService) { }
 

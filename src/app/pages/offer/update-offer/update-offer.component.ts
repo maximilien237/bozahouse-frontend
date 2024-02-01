@@ -13,7 +13,7 @@ import {formatDate} from "@angular/common";
 })
 export class UpdateOfferComponent implements OnInit {
 
-  id!: string;
+  id!: number;
   offer!: Offer ;
   errorMessage!:string;
   updateOfferFormGroup!: FormGroup;

@@ -94,11 +94,8 @@ export class ListAppUserDisabledComponent implements OnInit {
     let kw = this.searchFormGroup?.value.keyword;
     this.users1 = this.userService.searchAppUsersDisabledByUsername(kw,this.currentPage, this.pageSize).subscribe({
       next: value => {
-        //this.appUserSizeActivated = value[0].sizeActivated;
-              this.appUserSizeDisabled = value[0].sizeDisabled;
-              //console.log(this.appUserSizeActivated);
-              console.log(this.appUserSizeDisabled);
-        this.totalPages = value[0].totalPages;
+
+        this.totalPages = value.length;
       },
       error: err => {
         console.log(err);
@@ -112,12 +109,6 @@ export class ListAppUserDisabledComponent implements OnInit {
     this.userService.enableAppUser(appUser.id).subscribe({
       next: value => {
         console.log(value);
-        this.users = this.users.pipe(
-          map(data=>{
-            let index = data.indexOf(appUser)
-            data.slice(index,1)
-            return data;
-          }))
 
       },
       error: err => {
@@ -149,27 +140,27 @@ export class ListAppUserDisabledComponent implements OnInit {
 
   }
 
-  handleListAppUserSubscription(id: string) {
+  handleListAppUserSubscription(id: number) {
     this.router.navigate(['userSubscriptions', id]);
   }
 
-  handleListAppUserOffer(id: string) {
+  handleListAppUserOffer(id: number) {
     this.router.navigate(['userOffers', id]);
   }
 
-  handleListAppUserTalent(id: string) {
+  handleListAppUserTalent(id: number) {
     this.router.navigate(['userTalents', id]);
   }
 
-  handleAppUserDates(id: string){
+  handleAppUserDates(id: number){
     this.router.navigate(['userDates', id]);
   }
 
-  handleDetailAppUser(id: string){
+  handleDetailAppUser(id: number){
     this.router.navigate(['detailUser', id]);
   }
 
-  handleUpdateAppUser(id: string){
+  handleUpdateAppUser(id: number){
     this.router.navigate(['updateUser', id]);
   }
 

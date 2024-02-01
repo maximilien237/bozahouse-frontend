@@ -10,7 +10,7 @@ import {AppUser} from "../../../models/app-user.models";
 })
 export class DetailAppUserComponent implements OnInit {
 
-  id!: string;
+  id!: number;
   user!: AppUser;
   constructor(private activatedRoute: ActivatedRoute, private userService: AppUserService) { }
 

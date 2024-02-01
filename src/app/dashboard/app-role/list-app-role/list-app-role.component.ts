@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {AppUser} from "../../../models/app-user.models";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
 import {AppUserService} from "../../../services/app-user/app-user.service";
+import {Page} from "../../../models/Page";
 
 @Component({
   selector: 'app-list-app-role',
@@ -22,14 +23,14 @@ export class ListAppRoleComponent implements OnInit {
   isEditor : boolean = false;
   username?: string;
 
-  roles1: any;
+  //roles1: any;
   searchFormGroup: FormGroup | undefined;
   currentPage: number = 0;
   totalPages!: number;
   pageSize: number = 5;
 
 
-  roles!: Observable<Array<AppRole>>;
+  roles!: Observable<Page<AppRole>>;
   errorMessage!:string;
   newRoleFormGroup!: FormGroup;
   constructor(private authenticationService: AuthenticationService,private userService: AppUserService, private fb: FormBuilder, private roleService: AppRoleService,
@@ -37,7 +38,7 @@ export class ListAppRoleComponent implements OnInit {
 
   ngOnInit(): void {
     this.listRoles();
-    this.getTotalPage();
+    //this.getTotalPage();
     this.newRoleFormGroup = this.fb.group({
       name : this.fb.control("",[Validators.pattern("[A-Z]+"),Validators.required, Validators.minLength(4),Validators.maxLength(18)])
 
@@ -59,16 +60,16 @@ export class ListAppRoleComponent implements OnInit {
 
   }
 
-  getTotalPage(){
+/*  getTotalPage(){
     this.roles1 = this.roleService.listRoles(this.currentPage, this.pageSize).subscribe({
       next: value => {
-        this.totalPages = value[0].totalPages;
+        this.totalPages = value.totalPages;
       },
       error: err => {
         console.log(err);
       }
     });
-  }
+  }*/
 
   reloadPage() {
     this.currentPage = this.currentPage -1;
@@ -112,12 +113,7 @@ export class ListAppRoleComponent implements OnInit {
     if (!conf) return;
     this.roleService.deleteRoleById(role.id).subscribe({
       next: value => {
-        this.roles = this.roles.pipe(
-          map(data=>{
-            let index = data.indexOf(role)
-            data.slice(index,1)
-            return data;
-          }))
+        console.log(value)
 
       },
       error: err => {

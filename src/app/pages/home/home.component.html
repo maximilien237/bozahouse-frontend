@@ -12,7 +12,7 @@
 
 <ng-container>
       <ng-container *ngIf="threeOffers | async as listOffer; else failureOrLoading">
-      <div  *ngFor="let offer of threeOffers | async"  class="col-md-4 ">
+      <div  *ngFor="let offer of listOffer"  class="col-md-4 ">
         <div class="card spacer-margin bg-dark">
 
           <div *ngIf="isAdmin" class="card-header">
@@ -70,41 +70,8 @@
               <span ><i class="bi bi-calendar"></i>&nbsp;<span>{{offer.publishedAt | date : 'd MMM y'}}</span></span>&nbsp;-- <span ><i class="bi bi-lock-fill"></i> <span>{{offer.endOffer | date : 'd MMM y'}}</span></span>
             </div><br>
 
-            <ng-container>
-              <ng-container *ngIf="currentUser.account == 'employer' && currentUser.activatedHostSubscription
-        || currentUser.account == 'enterprise' && currentUser.activatedHostSubscription
-        || currentUser.account == 'talent' && currentUser.activatedNormalSubscription || isAdmin; else other2">
                 <span><a (click)="handleDetailOffer(offer.id)" class="btn btn-warning rounded-pill">Voir l'offre</a></span><br>
-              </ng-container>
 
-              <ng-template #other2>
-
-                <span class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Voir l'offre</span>
-
-                <div class="card offcanvas offcanvas-top bg-dark" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-                  <div class="offcanvas-header">
-                    <h5 id="offcanvasTopLabel" class="text-danger">Vous n'avez aucun abonnement de type normal</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                  </div>
-                  <div class="offcanvas-body">
-
-                    <p class="text-warning">
-                      Pour avoir accès à cette fonctionnalité, vous devez souscrire à un abonnement de type normal.
-                      Pour ce faire, contactez notre agent en cliquant sur l'un des boutons suivants<i class="bi-arrow-down"></i>
-
-                    </p>
-
-                    <ul class="nav list-unstyled text-small text-center ">
-                      <li><a [href]= "'mailto:'+ email" style="font-size: 22px;" class=" link-secondary text-white-50"><i class="bi bi-envelope-fill"></i> </a>&nbsp;&nbsp;</li>
-                      <li><a [href]="'tel:+237' + tel " style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-telephone-fill"></i></a>&nbsp;&nbsp;</li>
-                      <li><a href="https://wa.me/656832062" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-whatsapp"></i></a>&nbsp;&nbsp;</li>
-                    </ul>
-
-                  </div>
-                </div>
-
-              </ng-template>
-            </ng-container>
 
           </div>
 <!--          <span class="text-muted card-footer btn" style=" font-size: 18px" (click)="shared()">partager &nbsp;<i class="bi bi-share-fill"></i></span>-->
@@ -149,7 +116,7 @@
 
       <ng-container>
         <ng-container *ngIf="threeTalents | async as listTalent; else failureOrLoading">
-      <div  *ngFor="let talent of threeTalents | async"  class="col-md-4 ">
+      <div  *ngFor="let talent of listTalent"  class="col-md-4 ">
         <div class="card  spacer-margin bg-dark">
 
           <div *ngIf="isAdmin" class="card-header">
@@ -197,43 +164,8 @@
               <span class="text-secondary" ><i class="bi bi-book-fill"></i>&nbsp;<span>{{talent.contract}}</span></span>
             </div><br>
 
-            <ng-container>
-              <ng-container *ngIf="currentUser.account == 'employer' && currentUser.activatedNormalSubscription
-        || currentUser.account == 'enterprise' && currentUser.activatedNormalSubscription
-        || currentUser.account == 'talent' && currentUser.activatedHostSubscription || isAdmin; else other2">
                 <span><a (click)="handleDetailTalent(talent.id)" class="btn btn-warning rounded-pill">Voir plus</a></span><br>
-              </ng-container>
 
-              <ng-template #other2>
-                <!--                <span class="text-muted"><a class="btn btn-success"><i class="bi bi-whatsapp"></i>&nbsp;Click here to subscribe </a></span><br>-->
-
-
-
-                <span class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Voir le talent</span>
-
-                <div class="card offcanvas offcanvas-top bg-dark" tabindex="-1" id="offcanvasTop1" aria-labelledby="offcanvasTopLabel">
-                  <div class="offcanvas-header">
-                    <h5 id="offcanvasTopLabel1" class="text-danger">Vous n'avez aucun abonnement de type normal</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                  </div>
-                  <div class="offcanvas-body">
-
-                    <p class="text-warning">
-                      Pour avoir accès à cette fonctionnalité, vous devez souscrire à un abonnement de type normal.
-                      Pour ce faire, contactez notre agent en cliquant sur l'un des boutons suivants<i class="bi-arrow-down"></i>
-                    </p>
-
-                    <ul class="nav list-unstyled text-small text-center ">
-                      <li><a [href]= "'mailto:'+ email" style="font-size: 22px;" class=" link-secondary text-white-50"><i class="bi bi-envelope-fill"></i> </a>&nbsp;&nbsp;</li>
-                      <li><a [href]="'tel:+237' + tel " style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-telephone-fill"></i></a>&nbsp;&nbsp;</li>
-                      <li><a href="https://wa.me/656832062" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-whatsapp"></i></a>&nbsp;&nbsp;</li>
-                    </ul>
-
-                  </div>
-                </div>
-
-              </ng-template>
-            </ng-container>
 
           </div>
 <!--          <span class="text-muted card-footer btn" style=" font-size: 18px" (click)="shared()">partager &nbsp;<i class="bi bi-share-fill"></i></span>-->

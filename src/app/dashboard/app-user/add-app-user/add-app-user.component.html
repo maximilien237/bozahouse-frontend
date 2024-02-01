@@ -64,17 +64,17 @@
 
         </div>
 
-        <div class="mb-3">
+<!--        <div class="mb-3">
           <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
           <input (keydown.space)="$event.preventDefault()" type="email" formControlName = "email" class="form-control bg-secondary" placeholder="ex : youremail@gmail.com">
           <small *ngIf="newUserFormGroup.controls['email'].errors && newUserFormGroup.controls['email'].touched" class="text-danger">{{getErrorMessageEmail('email', newUserFormGroup.controls['email'].errors)}}</small>
 
-        </div>
+        </div>-->
 
         <div class="mb-3">
-          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom d'utilisateur</label>
+          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
           <input (keydown.space)="$event.preventDefault()" type="text" formControlName = "username" class="form-control bg-secondary">
-          <small *ngIf="newUserFormGroup.controls['username'].errors && newUserFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', newUserFormGroup.controls['username'].errors)}}</small>
+          <small *ngIf="newUserFormGroup.controls['username'].errors && newUserFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessageEmail('username', newUserFormGroup.controls['username'].errors)}}</small>
 
         </div>
 
