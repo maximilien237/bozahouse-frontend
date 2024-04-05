@@ -69,6 +69,9 @@ import { ListTalentDisabledComponent } from './pages/talent/list-talent-disabled
 import { ListOfferDisabledComponent } from './pages/offer/list-offer-disabled/list-offer-disabled.component';
 import { PrivacyOutComponent } from './pages/privacy-out/privacy-out.component';
 import {ModalManagementComponent} from "./pages/fragments/modal-management/modal-management.component";
+import { ModalValidationComponent } from './pages/shares/modal-validation/modal-validation.component';
+import { ModalConfirmationComponent } from './pages/shares/modal-confirmation/modal-confirmation.component';
+import { ModalErrorComponent } from './pages/shares/modal-error/modal-error.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +125,10 @@ import {ModalManagementComponent} from "./pages/fragments/modal-management/modal
     ListTalentDisabledComponent,
     ListOfferDisabledComponent,
     PrivacyOutComponent,
-    ModalManagementComponent
+    ModalManagementComponent,
+    ModalValidationComponent,
+    ModalConfirmationComponent,
+    ModalErrorComponent
   ],
   imports: [
     BrowserModule,
