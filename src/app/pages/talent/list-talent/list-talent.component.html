@@ -1,5 +1,4 @@
-<html class="bg-secondary" xmlns="http://www.w3.org/1999/html">
-<body class="bg-secondary">
+
 <app-navbar></app-navbar>
 
 <div class="container spacer  ">
@@ -127,7 +126,7 @@
 
 
     <ng-container *ngIf="currentUser">
-      <ng-container *ngIf="currentUser.account == 'talent' || isAdmin">
+      <ng-container *ngIf="currentUser.account == 'talent' ">
       <span style="font-size: 20px;">
       <a routerLink="/addTalent" class="hide-underline-link btn btn-dark text-warning">
       <i class="bi bi-plus "></i> publier un profil
@@ -171,10 +170,10 @@
 
       <ng-container>
         <ng-container *ngIf="talents; else failureOrLoading">
-          <div  *ngFor="let talent of talents "  class="col-md-4 ">
+          <div  *ngFor="let talent of talents| paginate: { itemsPerPage: 3, currentPage: currentPage, totalItems: totalElements }"  class="col-md-4 ">
             <div class="card  spacer-margin bg-dark">
 
-              <div *ngIf="isAdmin" class="card-header">
+              <div class="card-header">
 
                 <a (click)="handleDisableTalent(talent)" class="btn btn-outline-secondary">
                   <i class="bi bi-arrow-down"></i>
@@ -241,29 +240,11 @@
 
     </div>
 
-    <ul class=" nav nav-pills spacer-left spacer-bottom">
-      <ng-container *ngIf="currentPage > 0 && currentPage != 0">
-        <li >
-          <a class="page-link btn ms-1" (click)="goToPage(currentPage - 1)" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-      </ng-container>
+    <div class="d-flex justify-content-center">
 
-      <!-- "[A-Za-z0-9.%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{3,4}" -->
+      <pagination-controls (pageChange)="goToPage($event)"></pagination-controls>
 
-      <li *ngFor="let item of [].constructor(totalPages); let page = index" >
-        <a [ngClass]="page==currentPage?'btn-warning':'btn-outline-warning'" (click)="goToPage(page)" class="btn ms-1"  >{{page}}</a>
-      </li>
-      <ng-container *ngIf="currentPage != totalPages - 1 && currentPage>0">
-        <li >
-          <a class="page-link btn ms-1" (click)="goToPage(currentPage + 1)" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ng-container>
-
-    </ul>
+    </div>
 
   </div >
 
@@ -278,13 +259,5 @@
 <app-footer>
 
 </app-footer>
-</body>
-</html>
-
-<!--<html class="bg-secondary">
-<body class="bg-secondary">
-
-</body>
-</html>-->
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {catchError, map, Observable, throwError} from "rxjs";
 
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 
 import {TalentService} from "../../../services/talent/talent.service";
 import {Talent} from "../../../models/talent.models";
@@ -10,20 +10,28 @@ import {AppUserService} from "../../../services/app-user/app-user.service";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
 import {Offer} from "../../../models/offer.models";
 import { Page } from 'src/app/models/Page';
+import {NavbarComponent} from "../../fragments/navbar/navbar.component";
+import {AsyncPipe, DecimalPipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {FooterComponent} from "../../fragments/footer/footer.component";
 
 @Component({
   selector: 'app-user-talents',
   templateUrl: './user-talents.component.html',
-  styleUrls: ['./user-talents.component.css']
+  styleUrls: ['./user-talents.component.css'],
+  imports: [
+    NavbarComponent,
+    RouterLink,
+    NgIf,
+    AsyncPipe,
+    DecimalPipe,
+    FooterComponent,
+    NgClass,
+    NgForOf
+  ],
+  standalone: true
 })
 export class UserTalentsComponent implements OnInit {
 
-  roles: string[] = [];
-  isLoggedIn = false;
-  isAdmin : boolean = false;
-  isUser : boolean = false;
-  isEditor : boolean = false;
-  username?: string;
   currentUser!: AppUser;
   errorMessageAppUser!:string;
 
@@ -42,23 +50,6 @@ export class UserTalentsComponent implements OnInit {
 
     this.handleGetTotalPageAppUserTalents();
     this.handleListAppUserTalents();
-
-
-
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN")>-1;
-      this.isEditor = this.roles.indexOf("EDITOR")>-1;
-      this.isUser = this.roles.indexOf("USER")>-1;
-
-      this.username = user.username;
-
-
-    }
 
 
   }

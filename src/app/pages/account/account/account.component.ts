@@ -1,36 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
 import {AppUser} from "../../../models/app-user.models";
 import {AppUserService} from "../../../services/app-user/app-user.service";
 import {catchError, map, Observable, throwError} from "rxjs";
-import {SubscriptionService} from "../../../services/subscription/subscription.service";
 import {OfferService} from "../../../services/offer/offer.service";
 import {TalentService} from "../../../services/talent/talent.service";
 import {Offer} from "../../../models/offer.models";
 import {Talent} from "../../../models/talent.models";
-import {Subscription} from "../../../models/subscription.models";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FilterOffer} from "../../../models/filterOffer.models";
 import { Page } from 'src/app/models/Page';
+import {NavbarComponent} from "../../fragments/navbar/navbar.component";
+import {DatePipe, NgIf} from "@angular/common";
+import {FooterComponent} from "../../fragments/footer/footer.component";
 
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css']
+  styleUrls: ['./account.component.css'],
+  imports: [
+    NavbarComponent,
+    NgIf,
+    DatePipe,
+    FooterComponent
+  ],
+  standalone: true
 })
 export class AccountComponent implements OnInit {
   id!: number;
-  roles: string[] = [];
-  isLoggedIn = false;
-  isAdmin: boolean = false;
-  isUser: boolean = false;
-  isEditor: boolean = false;
-  username?: string;
   offers!: Observable<Array<Offer>>;
   errorOfferMessage!: string;
-  currentUser!: AppUser;
+  @Input() currentUser!: AppUser;
   errorMessage!: string;
 
   pageSizeOffer: number = 5;
@@ -46,30 +48,14 @@ export class AccountComponent implements OnInit {
 
 
   constructor(private talentService: TalentService,private offerService: OfferService
-              ,private subscriptionService: SubscriptionService, private authenticationService: AuthenticationService
+              ,private authenticationService: AuthenticationService
               , private userService: AppUserService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params['id'];
-    this.handleCurrentAppUser();
 
     this.listOfferByAppUser();
     this.listTalentByAppUser();
-
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN") > -1;
-      this.isEditor = this.roles.indexOf("EDITOR") > -1;
-      this.isUser = this.roles.indexOf("USER") > -1;
-
-      this.username = user.username;
-
-
-    }
 
   }
 
@@ -90,18 +76,7 @@ export class AccountComponent implements OnInit {
     this.router.navigate(['userTestimonies', id]);
   }
 
-  handleCurrentAppUser(){
-    this.userService.getAccount().subscribe({
-      next: value => {
-        console.log(value);
-        this.currentUser = value;
-      },
-      error: err => {
-        console.log(err);
-        this.errorMessage = err.error.message;
-      }
-    })
-  }
+
 
   goToNextPageOffer(page: number){
     this.currentPageOffer = page;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormGroup,
+  FormGroup, ReactiveFormsModule,
   ValidationErrors,
   Validators
 } from "@angular/forms";
@@ -10,11 +10,21 @@ import {Router} from "@angular/router";
 
 import {News} from "../../../models/newsletter.models";
 import {NewsService} from "../../../services/news/news.service";
+import {HeaderComponent} from "../../../pages/fragments/header/header.component";
+import {NgIf} from "@angular/common";
+import {FooterComponent} from "../../../pages/fragments/footer/footer.component";
 
 @Component({
   selector: 'app-add-news',
   templateUrl: './add-news.component.html',
-  styleUrls: ['./add-news.component.css']
+  styleUrls: ['./add-news.component.css'],
+  imports: [
+    HeaderComponent,
+    ReactiveFormsModule,
+    NgIf,
+    FooterComponent
+  ],
+  standalone: true
 })
 export class AddNewsComponent implements OnInit {
 

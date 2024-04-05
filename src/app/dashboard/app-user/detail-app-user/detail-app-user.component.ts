@@ -1,12 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {AppUserService} from "../../../services/app-user/app-user.service";
 import {AppUser} from "../../../models/app-user.models";
+import {HeaderComponent} from "../../../pages/fragments/header/header.component";
+import {DatePipe, NgIf} from "@angular/common";
+import {FooterComponent} from "../../../pages/fragments/footer/footer.component";
 
 @Component({
   selector: 'app-detail-app-user',
   templateUrl: './detail-app-user.component.html',
-  styleUrls: ['./detail-app-user.component.css']
+  styleUrls: ['./detail-app-user.component.css'],
+  imports: [
+    HeaderComponent,
+    NgIf,
+    DatePipe,
+    RouterLink,
+    FooterComponent
+  ],
+  standalone: true
 })
 export class DetailAppUserComponent implements OnInit {
 

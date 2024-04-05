@@ -1,5 +1,60 @@
 
-<footer class="footer mt-auto py-3 bg-dark text-white">
+
+<div class="container ">
+  <footer class="py-5 ">
+    <div class="row ">
+      <div class="col-6 col-md-2 mb-3">
+        <h5>Consultez</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a routerLink="/jobs" routerLinkActive="active"  class="nav-link p-0 text-body-secondary"> Jobs </a></li>
+          <li class="nav-item mb-2"><a routerLink="/talents" routerLinkActive="active"  class="nav-link p-0 text-body-secondary">Talents</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-2 mb-3">
+        <h5>Nos groupes</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="https://t.me/+AeTmiFVt0f1iYTM0"  class="nav-link p-0 text-body-secondary"><i class="bi bi-telegram">&nbsp;&nbsp;telegram</i></a></li>
+          <li class="nav-item mb-2"><a href="https://chat.whatsapp.com/GWznAcsJH0jKcaKWCeTZqt" class="nav-link p-0 text-body-secondary"><i class="bi bi-whatsapp">&nbsp;&nbsp;whatsapp</i></a></li>
+
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-2 mb-3">
+        <h5>Contact</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a [href]= "'mailto:'+ email" class="nav-link p-0 text-body-secondary"><i class="bi bi-envelope-fill"></i> Email </a></li>
+          <li class="nav-item mb-2"><a [href]="'tel:+237' + tel " class="nav-link p-0 text-body-secondary"><i class="bi bi-telephone-fill"></i> Call </a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-2 mb-3">
+        <form [formGroup]="testimonyFormGroup" (ngSubmit)="handleSaveTestimony()">
+          <h5>Avis</h5>
+          <div class="row">
+            <textarea class="form-control bg-secondary " formControlName="message" type="text" placeholder="Décrivez votre expérience" ></textarea>
+            <small *ngIf="testimonyFormGroup.controls['message'].errors && testimonyFormGroup.controls['message'].touched" class="text-danger">{{handleGetErrorMessageFromChild('message', testimonyFormGroup.controls['message'].errors!)}}</small>
+
+
+            <button [disabled] = "!testimonyFormGroup.valid"  class="btn btn-primary mt-2" type="submit">Envoyer</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+      <p>&copy; 2024 Bozahouse. All rights reserved.</p>
+      <ul class="list-unstyled d-flex">
+        <li><a href="https://www.facebook.com/bozahouse/" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-facebook"></i></a>&nbsp;&nbsp;Facebook</li> &nbsp; &nbsp;
+        <li><a href="https://www.linkedin.com/company/bozahouse/" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-linkedin"></i></a>&nbsp;&nbsp;Linkedin</li>
+      </ul>
+    </div>
+  </footer>
+</div>
+
+
+<!--<footer class="footer mt-auto py-3 bg-dark text-white">
   <div class="container">
     <div class="row">
 
@@ -32,7 +87,7 @@
       <div class="col-6 col-md">
         <h5 class="text-danger">Nous Suivre</h5>
         <ul class="list-unstyled text-small ">
-          <!-- <li><a href="https://t.me/+AeTmiFVt0f1iYTM0" style="font-size: 22px;" class=" link-secondary text-white-50"><i class="bi bi-telegram"></i> </a>&nbsp;&nbsp;Telegram</li> -->
+          &lt;!&ndash; <li><a href="https://t.me/+AeTmiFVt0f1iYTM0" style="font-size: 22px;" class=" link-secondary text-white-50"><i class="bi bi-telegram"></i> </a>&nbsp;&nbsp;Telegram</li> &ndash;&gt;
           <li><a href="https://www.facebook.com/bozahouse/" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-facebook"></i></a>&nbsp;&nbsp;Facebook</li>
           <li><a href="https://www.linkedin.com/company/bozahouse/" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-linkedin"></i></a>&nbsp;&nbsp;Linkedin</li>
         </ul>
@@ -43,7 +98,7 @@
         <ul class="nav list-unstyled text-small ">
           <li><a [href]= "'mailto:'+ email" style="font-size: 22px;" class=" link-secondary text-white-50"><i class="bi bi-envelope-fill"></i> </a>&nbsp;&nbsp;</li>
           <li><a [href]="'tel:+237' + tel " style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-telephone-fill"></i></a>&nbsp;&nbsp;</li>
-          <li><a href="https://wa.me/656832062" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-whatsapp"></i></a>&nbsp;&nbsp;</li>
+          <li><a href="https://wa.me/237656832062?text=hello" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-whatsapp"></i></a>&nbsp;&nbsp;</li>
         </ul>
       </div>
 
@@ -56,7 +111,7 @@
       </div>
 
 
-<!--
+&lt;!&ndash;
 
       <div class="col-4 col-md">
         <h5>About</h5>
@@ -88,13 +143,13 @@
           <li><a class="link-secondary" href="#">Terms</a></li>
         </ul>
       </div>
--->
+&ndash;&gt;
 
 
     </div>
-    <span class="text-white-50">&nbsp;&copy;&nbsp;2023. BOZAHOUSE </span>
+    <p>&copy; 2024 Bozahouse. All rights reserved.</p>
 
   </div>
-</footer>
+</footer>-->
 
 

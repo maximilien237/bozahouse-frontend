@@ -1,15 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators} from "@angular/forms";
 
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {Offer} from "../../../models/offer.models";
 import {OfferService} from "../../../services/offer/offer.service";
-import {formatDate} from "@angular/common";
+import {formatDate, NgIf} from "@angular/common";
+import {FooterComponent} from "../../fragments/footer/footer.component";
+import {NavbarComponent} from "../../fragments/navbar/navbar.component";
 
 @Component({
   selector: 'app-update-offer',
   templateUrl: './update-offer.component.html',
-  styleUrls: ['./update-offer.component.css']
+  styleUrls: ['./update-offer.component.css'],
+  imports: [
+    NgIf,
+    ReactiveFormsModule,
+    FooterComponent,
+    RouterLink,
+    NavbarComponent
+  ],
+  standalone: true
 })
 export class UpdateOfferComponent implements OnInit {
 

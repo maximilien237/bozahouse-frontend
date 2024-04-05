@@ -14,7 +14,7 @@ export class AuthenticationGuard  {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    let isUser = this.authenticationService.getUser().roles.indexOf("USER")>-1;
+    let isUser = this.authenticationService.hasAnyAuthority("USER");
 
     if (!isUser){
       this.router.navigateByUrl("/login");

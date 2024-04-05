@@ -1,14 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 
 import {Talent} from "../../../models/talent.models";
 import {TalentService} from "../../../services/talent/talent.service";
+import {DatePipe, DecimalPipe, NgForOf, NgIf} from "@angular/common";
+import {NavbarComponent} from "../../fragments/navbar/navbar.component";
+import {FooterComponent} from "../../fragments/footer/footer.component";
 
 @Component({
   selector: 'app-detail-talent',
   templateUrl: './detail-talent.component.html',
-  styleUrls: ['./detail-talent.component.css']
+  styleUrls: ['./detail-talent.component.css'],
+  imports: [
+    DatePipe,
+    NavbarComponent,
+    DecimalPipe,
+    FooterComponent,
+    RouterLink,
+    NgIf,
+    NgForOf
+  ],
+  standalone: true
 })
 export class DetailTalentComponent implements OnInit {
 

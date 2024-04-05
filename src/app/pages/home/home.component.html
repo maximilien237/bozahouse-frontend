@@ -1,10 +1,77 @@
-<html class="bg-secondary">
-<body class="bg-secondary">
+
 <app-navbar></app-navbar>
+<main>
+  <section>
+    <h3 >Nos trois dernières offres</h3>
+    <div class="" *appAuthorize="['USER']">
+      <div *ngIf="threeOffers"  class="row">
+
+          <article *ngFor="let offer of threeOffers | async as offers " class="col-md-4">
+            <div class="card spacer-margin bg-dark">
+
+              <div *appAuthorize="['ADMIN']" class="card-header">
+
+                <a (click)="handleDisableOffer(offer)" class="btn btn-outline-secondary">
+                  <i class="bi bi-arrow-down"></i>
+                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <a (click)="handleUpdateOffer(offer.id)" class="btn btn-warning">
+                  <i class="bi bi-pencil"></i>
+                </a> &nbsp;&nbsp;&nbsp;&nbsp;
+
+                <a (click)="handleDeleteOffer(offer)" class="btn btn-danger">
+                  <i class="bi bi-trash"></i>
+                </a>
+
+              </div>
+              <div class="card-body text-center" >
+                <span class="text-warning" style="font-size: 35px;">{{offer.title}}</span><br>
+                <span class="text-light" *ngIf="offer.type=='particular' else ent">Auteur : [ Particulier ]</span><br>
+                <ng-template #ent>
+                  <span class="text-light">Auteur : [ Entreprise ]</span>
+                </ng-template>
+                <span class="text-white-50" style="font-size: 15px"><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{offer.address}}</span><br />
+                <span class="text-white-50" style=" font-size: 15px"><i class="bi bi-book-fill">&nbsp;</i>{{offer.contract}}</span> &nbsp;&nbsp;
+
+                <ng-container *ngIf="offer.workMode == 'Sur site'">
+                  <span class="text-muted" style="font-size: 15px" ><i class="bi bi-house-fill"></i> {{offer.workMode}} </span><br />
+                </ng-container>
+
+                <ng-container *ngIf="offer.workMode == 'A distance'">
+                  <span class="text-muted" style="font-size: 15px" ><i class="bi bi-wifi"></i> {{offer.workMode}} </span><br />
+                </ng-container>
+
+
+                <span *ngIf="offer.salary == ''; else other">
+        <span style="color: #bb2d3b; font-size: 20px"> Salaire à définir avec l'employeur </span><br />
+      </span>
+
+                <ng-template #other>
+                  <span style="color: #bb2d3b; font-size: 20px"> {{offer.salary | number: '1.0-0'}} FCFA</span><br />
+                </ng-template>
+
+
+                <div class="text-muted">
+                  <span ><i class="bi bi-calendar"></i>&nbsp;<span>{{offer.publishedAt | date : 'd MMM y'}}</span></span>&nbsp;-- <span ><i class="bi bi-lock-fill"></i> <span>{{offer.endOffer | date : 'd MMM y'}}</span></span>
+                </div><br>
+
+                <span><a (click)="handleDetailOffer(offer.id)" class="btn btn-warning rounded-pill">Voir l'offre</a></span><br>
+
+
+              </div>
+              <!--          <span class="text-muted card-footer btn" style=" font-size: 18px" (click)="shared()">partager &nbsp;<i class="bi bi-share-fill"></i></span>-->
+
+            </div>
+          </article>
+
+      </div>
+    </div>
+  </section>
+</main>
 
 <div class="container spacer  ">
 
-  <div class="card bg-secondary border-0">
+  <div class="card border-0">
 
     <h5 class="spacer-left spacer-top " style=" font-size: 30px; border-bottom-width: 1px; border-bottom-style: solid">Nos trois dernières offres</h5>
 
@@ -15,7 +82,7 @@
       <div  *ngFor="let offer of listOffer"  class="col-md-4 ">
         <div class="card spacer-margin bg-dark">
 
-          <div *ngIf="isAdmin" class="card-header">
+          <div *appAuthorize="['ADMIN']" class="card-header">
 
 
 <!--            <a (click)="handleDetailOffer(offer.id)" class="btn btn-secondary">
@@ -119,7 +186,7 @@
       <div  *ngFor="let talent of listTalent"  class="col-md-4 ">
         <div class="card  spacer-margin bg-dark">
 
-          <div *ngIf="isAdmin" class="card-header">
+          <div *appAuthorize="['ADMIN']" class="card-header">
 
 
  <!--           <a (click)="handleDetailTalent(talent.id)" class="btn btn-secondary">
@@ -202,39 +269,13 @@
 
 <div class="spacer"></div>
 
-<!-- <div class="fab-container spacer">
-  <div class="fab shadow">
-    <div class="fab-content">
-      <span class="material-icons">support_agent</span>
-    </div>
-  </div>
-  <div class="sub-button shadow">
-    <a href="google.com" target="_blank">
-      <span class="material-icons">phone</span>
-    </a>
-  </div>
-  <div class="sub-button shadow">
-    <a href="google.com" target="_blank">
-      <span class="material-icons">mail_outline</span>
-    </a>
-  </div>
-  <div class="sub-button shadow">
-    <a href="google.com" target="_blank">
-      <span class="material-icons">language</span>
-    </a>
-  </div>
-  <div class="sub-button shadow">
-    <a href="google.com" target="_blank">
-      <span class="material-icons">help_outline</span>
-    </a>
-  </div>
-</div> -->
+
+<app-theme-color></app-theme-color>
 
 <app-footer>
 
 </app-footer>
-</body>
-</html>
+
 
 
 

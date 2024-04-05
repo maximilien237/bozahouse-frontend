@@ -1,4 +1,4 @@
-export class FilterTalent{
+export interface FilterTalent{
   title?: string;
   contract?: string;
   workMode?: string;
@@ -11,8 +11,8 @@ export class FilterTalent{
   type?: string;
   domain?: string;
   appUserId?: number;
-  valid?: boolean = true;
-  page?: number = 0;
-  size?: number = 5;
+  valid?: boolean ;
+  page?: number ;
+  size?: number ;
 
 }

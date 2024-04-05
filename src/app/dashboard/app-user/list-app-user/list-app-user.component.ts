@@ -1,27 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import {AppUserService} from "../../../services/app-user/app-user.service";
 import {AppUser} from "../../../models/app-user.models";
-import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {SubscriptionService} from "../../../services/subscription/subscription.service";
+import {FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators} from "@angular/forms";
+import {Router, RouterLink} from "@angular/router";
 import {AppRoleService} from "../../../services/app-role/app-role.service";
 
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
+import {HeaderComponent} from "../../../pages/fragments/header/header.component";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {FooterComponent} from "../../../pages/fragments/footer/footer.component";
 
 
 @Component({
   selector: 'app-list-app-user',
   templateUrl: './list-app-user.component.html',
-  styleUrls: ['./list-app-user.component.css']
+  styleUrls: ['./list-app-user.component.css'],
+  imports: [
+    HeaderComponent,
+    RouterLink,
+    NgIf,
+    ReactiveFormsModule,
+    NgForOf,
+    NgClass,
+    FooterComponent
+  ],
+  standalone: true
 })
 export class ListAppUserComponent implements OnInit {
-
-  roles: string[] = [];
-  isLoggedIn = false;
-  isAdmin : boolean = false;
-  isUser : boolean = false;
-  isEditor : boolean = false;
-  username?: string;
 
   users!: AppUser[];
   users1: any;
@@ -37,7 +42,7 @@ export class ListAppUserComponent implements OnInit {
   appUserSizeActivated: number = 0;
 
 
-  constructor(private authenticationService: AuthenticationService,private userService: AppUserService,private roleService: AppRoleService, private fb: FormBuilder, private router: Router, private subscriptionService: SubscriptionService) { }
+  constructor(private authenticationService: AuthenticationService,private userService: AppUserService,private roleService: AppRoleService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -63,31 +68,16 @@ export class ListAppUserComponent implements OnInit {
 //     this.getTotalActivatedAppUser();
 
 
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN") > -1;
-      this.isEditor = this.roles.indexOf("EDITOR") > -1;
-      this.isUser = this.roles.indexOf("USER") > -1;
-
-      //this.username = user.username;
-
-    }
-
-
   }
 
 
   handleSearchAppUserByUsername() {
     let kw = this.searchFormGroup?.value.keyword;
-    this.userService.searchAppUserByUsername(kw,this.currentPage, this.pageSize).subscribe(({
+    this.userService.searchAppUserByUsername(kw,this.currentPage, this.pageSize).subscribe({
       next: value => {
         this.users = value.content;
       }
-    }));
+    });
   }
 
 /*  listAppUsers(){

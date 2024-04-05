@@ -1,6 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/home">BOZAHOUSE</a>
+<!--    <a class="navbar-brand" routerLink="/home">BOZAHOUSE</a>-->
+    <a class="navbar-brand" href="javascript:void (0);">
+      <img ngSrc="assets/img/bozahouse.svg" alt="" width="50" height="44" class="d-inline-block align-text-top">
+      Bozahouse
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -12,14 +16,7 @@
         <li class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/home">Accueil</a></li>
         <li class="nav-item"><a routerLink="/jobs" routerLinkActive="active" class="nav-link ">Jobs</a></li>
         <li class="nav-item"><a routerLink="/talents" routerLinkActive="active" class="nav-link ">Talents</a></li>
-<!--        <li class="nav-item"><a routerLink="/package" routerLinkActive="active" class="nav-link">Nos forfaits</a>
 
-      @angular/cdk                       16.2.13 -> 17.1.2        ng update @angular/cdk
-      @angular/cli                       16.2.12 -> 17.1.2        ng update @angular/cli
-      @angular/core                      16.2.12 -> 17.1.2        ng update @angular/core
-
-
-</li>-->
         <li class="nav-item"><a routerLink="/testimonies" routerLinkActive="active" class="nav-link">Avis</a></li>
 
 
@@ -27,9 +24,9 @@
 
       <ul class="navbar-nav d-flex">
 
-        <li *ngIf="isEditor" class="nav-item"><a routerLink="/users" routerLinkActive="active" class="nav-link"><i class="bi bi-eye-slash-fill"></i> </a></li>
+        <li *appAuthorize="['EDITOR']" class="nav-item"><a routerLink="/users" routerLinkActive="active" class="nav-link"><i class="bi bi-eye-slash-fill"></i> </a></li>
 
-      <li class="nav-item" style="margin-right: 40px;"><a routerLink="/account" routerLinkActive="active"  class="nav-link"><i class="bi bi-person"></i> {{username}}</a></li>
+      <li class="nav-item" style="margin-right: 40px;"><a routerLink="/account" routerLinkActive="active"  class="nav-link"> <img ngSrc="assets/img/logo.jpg" alt="" width="30" height="30" class="rounded-pill"> {{currentUser.username}}</a></li>
 
       <li class="nav-item" style="margin-right: 30px"><a routerLink="/login" routerLinkActive="active" (click)="logout()"  class="nav-link"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
       </ul>
@@ -39,3 +36,13 @@
   </div>
 
 </nav>
+
+
+<!--<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img ngSrc="assets/img/logo.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+      Bozahouse
+    </a>
+  </div>
+</nav>-->

@@ -1,38 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-import {TokenStorageService} from "../../../services/token/token-storage.service";
-import {Router} from "@angular/router";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
+import {OfferService} from "../../../services/offer/offer.service";
+import {TalentService} from "../../../services/talent/talent.service";
+import {AppUserService} from "../../../services/app-user/app-user.service";
+import {AppUser} from "../../../models/app-user.models";
+import {ErrorManagementComponent} from "../error-management/error-management.component";
+import {NgOptimizedImage} from "@angular/common";
+import {AuthorizeDirective} from "../../../directives/authorize.directive";
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
+  imports: [
+    RouterLinkActive,
+    RouterLink,
+    NgOptimizedImage,
+    AuthorizeDirective
+  ],
+  standalone: true
 })
 export class NavbarComponent implements OnInit {
 
-  roles: string[] = [];
-  isLoggedIn = false;
-  isAdmin : boolean =false;
-  isUser : boolean =false;
-  isEditor : boolean =false;
-  username?: string;
+  currentUser!: AppUser;
+  @ViewChild(ErrorManagementComponent) private childError !:any ;
 
-  constructor(private router: Router, private authenticationService: AuthenticationService) { }
+  constructor(private router: Router, private authenticationService: AuthenticationService,
+              private offerService: OfferService, private talentService: TalentService, private appUserService: AppUserService) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN")>-1;
-      this.isEditor = this.roles.indexOf("EDITOR")>-1;
-      this.isUser = this.roles.indexOf("USER")>-1;
-
-      this.username = user.username;
-    }
+    this.handleCurrentAppUser();
   }
+
+  handleCurrentAppUser(){
+    this.appUserService.getAccount().subscribe({
+      next: value => {
+        console.log(value);
+        this.currentUser = value;
+      },
+      error: err => {
+        this.childError.handleErrors(err);
+      }
+    })
+  }
+
 
   logout(): void {
    localStorage.clear();

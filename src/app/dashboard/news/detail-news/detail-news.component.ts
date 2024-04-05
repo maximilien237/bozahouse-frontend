@@ -1,14 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import {AppUser} from "../../../models/app-user.models";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {AppUserService} from "../../../services/app-user/app-user.service";
 import {News} from "../../../models/newsletter.models";
 import {NewsService} from "../../../services/news/news.service";
+import {HeaderComponent} from "../../../pages/fragments/header/header.component";
+import {DatePipe, NgIf} from "@angular/common";
+import {FooterComponent} from "../../../pages/fragments/footer/footer.component";
 
 @Component({
   selector: 'app-detail-news',
   templateUrl: './detail-news.component.html',
-  styleUrls: ['./detail-news.component.css']
+  styleUrls: ['./detail-news.component.css'],
+  imports: [
+    HeaderComponent,
+    NgIf,
+    DatePipe,
+    FooterComponent,
+    RouterLink
+  ],
+  standalone: true
 })
 export class DetailNewsComponent implements OnInit {
 

@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li *ngIf="isAdmin" class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/admin">Statistic</a></li>
+        <li  class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/admin">Statistic</a></li>
 
 
 <!--
@@ -29,11 +29,11 @@
         </li>-->
         <li class="nav-item"><a routerLink="/users" routerLinkActive="active" class="nav-link">Users</a></li>
 
-        <li *ngIf="isAdmin" class="nav-item"><a routerLink="/listNews" routerLinkActive="active" class="nav-link">Email</a></li>
+        <li  class="nav-item"><a routerLink="/listNews" routerLinkActive="active" class="nav-link">Email</a></li>
 
         <li class="nav-item"><a routerLink="/listSubscription" routerLinkActive="active" class="nav-link">Abonnements</a></li>
 
-        <li *ngIf="isAdmin" class="nav-item dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Disabled
           </a>
@@ -48,9 +48,9 @@
 
       <ul class="navbar-nav d-flex">
 
-        <li *ngIf="isEditor" class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/home"><i class="bi bi-eye-fill"></i> </a></li>
+        <li  class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/home"><i class="bi bi-eye-fill"></i> </a></li>
 
-        <li class="nav-item" style="margin-right: 40px;"><a routerLink="/account" routerLinkActive="active" class="nav-link">{{username}}</a></li>
+        <li class="nav-item" style="margin-right: 40px;"><a routerLink="/account" routerLinkActive="active" class="nav-link">{{"username"}}</a></li>
 
         <li class="nav-item" style="margin-right: 30px"><a routerLink="/login" (click)="logout()"  class="nav-link"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
       </ul>
@@ -61,79 +61,3 @@
 
 </nav>
 
-
-
-<!--
-
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/admin">BOZAHOUSE</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarsExample03">
-      <ul class="navbar-nav me-auto mb-2 mb-sm-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/admin">Statistic</a>
-        </li>
-
-&lt;!&ndash;
-        <li><a routerLink="/login" class="nav-link px-2 text-white">Login</a></li>
-        <li><a routerLink="/register" class="nav-link px-2 text-white">Register</a></li>
-
-&ndash;&gt;
-
-
-        <li class="nav-item dropdown">
-          <a class="nav-link px-2 text-white dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">User</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown03">
-            <li><a class="dropdown-item" routerLink="/addRole" >create role</a></li>
-            <li><a class="dropdown-item" routerLink="/listRole" >List roles</a></li>
-            <li><a class="dropdown-item" routerLink="/addUser" >create user</a></li>
-            <li><a class="dropdown-item" routerLink="/listUser" *ngIf="isAdmin" >List users</a></li>
-          </ul>
-        </li>
-
-
-        <li class="nav-item dropdown">
-          <a class="nav-link px-2 text-white dropdown-toggle" href="#" id="dropdown02" data-bs-toggle="dropdown" aria-expanded="false">Email</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown03">
-            <li><a class="dropdown-item" routerLink="/addNews" >create email</a></li>
-            <li><a class="dropdown-item" routerLink="/listNews" >List email</a></li>
-          </ul>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link px-2 text-white dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">Subscription</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown04">
-            <li><a class="dropdown-item" routerLink="/addSubscription" >create subscription</a></li>
-            <li><a class="dropdown-item" routerLink="/listSubscription" >List subscription</a></li>
-          </ul>
-        </li>
-
-
-        <li class="nav-item dropdown">
-          <a class="nav-link px-2 text-white dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Country</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown06">
-            <li><a class="dropdown-item" routerLink="/addCountry" >create country</a></li>
-            <li><a class="dropdown-item" routerLink="/listCountry" >List country</a></li>
-            <li><a class="dropdown-item" routerLink="/addCity" >create city</a></li>
-            <li><a class="dropdown-item" routerLink="/listCity" >List city</a></li>
-          </ul>
-        </li>
-
-      </ul>
-
-      <ul class="navbar-nav d-flex">
-        <li class="nav-item"><a class="nav-link active" aria-current="page" routerLink="/home">Accueil</a></li>
-
-        <li class="nav-item" style="margin-right: 40px;"><a routerLink="/account"  class="nav-link">{{username}}</a></li>
-
-        <li class="nav-item" style="margin-right: 30px"><a routerLink="/login" (click)="logout()"  class="nav-link">Logout</a></li>
-      </ul>
-
-    </div>
-  </div>
-</nav>
--->

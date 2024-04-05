@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AppUser} from "../../models/app-user.models";
 import {environment} from "../../../environments/environment";
-import {AppUserDates} from "../../models/appUserDates.models";
 import { Page } from 'src/app/models/Page';
 
 const httpOptions = {
@@ -49,9 +48,6 @@ export class AppUserService {
     return this.http.get<Array<AppUser>>(environment.backendHostAdmin  + "users/disabled/username", {params: queryParams})
   }
 
-  public listAppUserConnexionDates(id : string,page: number, size: number): Observable<Array<AppUserDates>> {
-    return this.http.get<Array<AppUserDates>>(environment.backendHostAdmin  + "users/dates/" +id + "?page=" + page + "&size=" + size)
-  }
 
   public saveAppUser(user: AppUser):Observable<AppUser>{
     return this.http.post<AppUser>(environment.backendHostAdmin+"users",user);

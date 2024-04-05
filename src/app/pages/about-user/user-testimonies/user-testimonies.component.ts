@@ -1,27 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import {AppUser} from "../../../models/app-user.models";
 import {catchError, Observable, throwError} from "rxjs";
-import {Subscription} from "../../../models/subscription.models";
-import {ActivatedRoute, Router} from "@angular/router";
-import {SubscriptionService} from "../../../services/subscription/subscription.service";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
 import {AppUserService} from "../../../services/app-user/app-user.service";
 import {TestimonyService} from "../../../services/testimony/testimony.service";
 import {Testimony} from "../../../models/testimony.models";
+import {NavbarComponent} from "../../fragments/navbar/navbar.component";
+import {AsyncPipe, DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {FooterComponent} from "../../fragments/footer/footer.component";
 
 @Component({
   selector: 'app-user-testimonies',
   templateUrl: './user-testimonies.component.html',
-  styleUrls: ['./user-testimonies.component.css']
+  styleUrls: ['./user-testimonies.component.css'],
+  imports: [
+    NavbarComponent,
+    AsyncPipe,
+    NgForOf,
+    NgIf,
+    DatePipe,
+    NgClass,
+    RouterLink,
+    FooterComponent
+  ],
+  standalone: true
 })
 export class UserTestimoniesComponent implements OnInit {
 
-  roles: string[] = [];
-  isLoggedIn = false;
-  isAdmin : boolean = false;
-  isUser : boolean = false;
-  isEditor : boolean = false;
-  username?: string;
   currentUser!: AppUser;
   errorMessageAppUser!:string;
 
@@ -42,21 +48,6 @@ export class UserTestimoniesComponent implements OnInit {
 
     this.handleGetTotalPageAppUserTestimonies();
     this.handleListAppUserTestimonies();
-
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN")>-1;
-      this.isEditor = this.roles.indexOf("EDITOR")>-1;
-      this.isUser = this.roles.indexOf("USER")>-1;
-
-      this.username = user.username;
-
-
-    }
 
   }
 

@@ -1,16 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 
-import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators} from "@angular/forms";
 
 import {ActivatedRoute, Router} from "@angular/router";
 import {News} from "../../../models/newsletter.models";
 import {NewsService} from "../../../services/news/news.service";
-import {formatDate} from "@angular/common";
+import {DatePipe, formatDate, NgIf} from "@angular/common";
+import {HeaderComponent} from "../../../pages/fragments/header/header.component";
+import {FooterComponent} from "../../../pages/fragments/footer/footer.component";
 
 @Component({
   selector: 'app-update-news',
   templateUrl: './update-news.component.html',
-  styleUrls: ['./update-news.component.css']
+  styleUrls: ['./update-news.component.css'],
+  imports: [
+    HeaderComponent,
+    ReactiveFormsModule,
+    DatePipe,
+    FooterComponent,
+    NgIf
+  ],
+  standalone: true
 })
 export class UpdateNewsComponent implements OnInit {
 

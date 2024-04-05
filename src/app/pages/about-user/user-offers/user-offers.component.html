@@ -1,12 +1,11 @@
-<html class="bg-secondary">
-<body class="bg-secondary">
+
 <app-navbar></app-navbar>
 
 <div class="container spacer  ">
   <div class="text-center">
 
     <ng-container *ngIf="currentUser">
-      <ng-container *ngIf="currentUser.account == 'employer'  || currentUser.account == 'enterprise'  || isAdmin">
+      <ng-container *ngIf="currentUser.account == 'employer'  || currentUser.account == 'enterprise' ">
       <span style="font-size: 20px;">
       <a routerLink="/addOffer" class="hide-underline-link btn btn-dark text-warning">
       <i class="bi bi-plus "></i> publier une offre
@@ -135,13 +134,6 @@
 <app-footer>
 
 </app-footer>
-</body>
-</html>
 
-<!--<html class="bg-secondary">
-<body class="bg-secondary">
-
-</body>
-</html>-->
 
 

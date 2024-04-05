@@ -1,13 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
+import {FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators} from "@angular/forms";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {AppRole} from "../../../models/app-role.models";
 import {AppRoleService} from "../../../services/app-role/app-role.service";
+import {HeaderComponent} from "../../../pages/fragments/header/header.component";
+import {FooterComponent} from "../../../pages/fragments/footer/footer.component";
 
 @Component({
   selector: 'app-update-app-role',
   templateUrl: './update-app-role.component.html',
-  styleUrls: ['./update-app-role.component.css']
+  styleUrls: ['./update-app-role.component.css'],
+  imports: [
+    HeaderComponent,
+    ReactiveFormsModule,
+    FooterComponent,
+    RouterLink
+  ],
+  standalone: true
 })
 export class UpdateAppRoleComponent implements OnInit {
 

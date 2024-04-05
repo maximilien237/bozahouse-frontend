@@ -1,28 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {
   FormBuilder,
-  FormGroup,
+  FormGroup, ReactiveFormsModule,
   ValidationErrors,
   Validators
 } from "@angular/forms";
 
 import {Login} from "../../models/login.models";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
-import {ProblemDetail} from "../../models/ProblemDetail";
+import {ErrorManagementComponent} from "../fragments/error-management/error-management.component";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  imports: [
+    ReactiveFormsModule,
+    ErrorManagementComponent,
+    CommonModule,
+    RouterLink
+  ],
+  standalone: true
 })
 export class LoginComponent implements OnInit {
 
   loginFormGroup!: FormGroup;
-  errorMessage = '';
-  roles: string[] = [];
-  problemDetail!: ProblemDetail;
+  @ViewChild(ErrorManagementComponent) private childError !:any ;
 
 
   constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private router: Router) {
@@ -35,9 +41,6 @@ export class LoginComponent implements OnInit {
       password: this.fb.control("",[ Validators.required, Validators.pattern("[A-Za-z0-9-@]+"), Validators.minLength(4), Validators.maxLength(8)])
     })
 
-    if (this.authenticationService.getToken()) {
-      this.roles = this.authenticationService.getUser().roles;
-    }
   }
 
 
@@ -45,67 +48,40 @@ export class LoginComponent implements OnInit {
       let login: Login = this.loginFormGroup.value;
 
       this.authenticationService.signIn(login).subscribe({
-        next: value => {
-          console.log(value);
+        next: token => {
+          console.log('after login',token);
 
-          this.authenticationService.saveToken(value.token);
-          this.authenticationService.saveUser(value);
+          // ajout du token dans le localstorage
+          this.authenticationService.addTokenInLocalstorage(token.accessToken);
 
-          this.roles = this.authenticationService.getUser().roles;
-          console.log(this.roles);
+          console.log('after addTokenInLocalstorage',token);
 
-          if (this.roles.indexOf("EDITOR")>-1){
+          if (this.authenticationService.hasAnyAuthority('EDITOR')){
             this.router.navigateByUrl("/users");
           }else {
             this.router.navigateByUrl("/home");
           }
 
         },
-        error: err => {
-         this.handleErrors(err);
+        error: (err: HttpErrorResponse) => {
+          // appel de la méthode handleError(error) situé dans ErrorManagementComponent
+          console.log("testet  hkdjdj")
+         this.childError?.handleErrors(err);
         }
-      })
+      });
     }
 
 
-
-  handleErrors(err: HttpErrorResponse) {
-    this.problemDetail={
-      type: err.error.type,
-      title: err.error.title,
-      status: err.error.status,
-      detail: err.error.detail,
-      instance: err.error.instance,
-      error: err.error.error
-    }
-    console.log(this.problemDetail);
-    alert(this.problemDetail.detail);
+  // appel de la méthode handleError(error) situé dans ErrorManagementComponent
+  handleErrorFromChild(error: HttpErrorResponse) {
+    this.childError.handleError(error);
   }
 
-  getErrorMessage(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez remplir ce champs !";
-    }else if (error['minlength']){
-      return "ce champs doit comporter au moins" + "  "+ error['minlength']['requiredLength'] + "  "+ "caractères";
-    }else if (error['maxlength']){
-      return "ce champs doit comporter au plus" + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
-    }else if (error['pattern']) {
-      return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres, ou un mélange des trois" ;
-    }else return "";
 
+  handleGetErrorMessageFromChild(fieldName: string, error: ValidationErrors) {
+    return this.childError.getErrorMessage(fieldName, error);
   }
 
-    getErrorMessagePassword(fieldName: string, error: ValidationErrors) {
-      if (error['required']){
-        return "vous devez remplir champs !";
-      }else if (error['minlength']){
-        return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  " + "caractères";
-      }else if (error['maxlength']){
-        return "ce champs doit comporter au plus " + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
-      }else if (error['pattern']) {
-          return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres,soit un caractère spécial telque : @ ou un mélange des quatres" ;
-      }else return "";
-    }
 
 }
 

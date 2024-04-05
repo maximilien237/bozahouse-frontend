@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {catchError, map, Observable, throwError} from "rxjs";
+import {Component, Input, OnInit} from '@angular/core';
+import {async, catchError, map, Observable, throwError} from "rxjs";
 
 import {FormBuilder,FormGroup} from "@angular/forms";
 
@@ -11,26 +11,41 @@ import {OfferService} from "../../services/offer/offer.service";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
 import {AppUserService} from "../../services/app-user/app-user.service";
 import {AppUser} from "../../models/app-user.models";
+import {Testimony} from "../../models/testimony.models";
+import {TestimonyService} from "../../services/testimony/testimony.service";
+import {NavbarComponent} from "../fragments/navbar/navbar.component";
+import {AuthorizeDirective} from "../../directives/authorize.directive";
+import {AsyncPipe, DatePipe, DecimalPipe, NgForOf, NgIf} from "@angular/common";
+import {FooterComponent} from "../fragments/footer/footer.component";
+import {ThemeColorComponent} from "../fragments/theme-color/theme-color.component";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  imports: [
+    NavbarComponent,
+    AuthorizeDirective,
+    NgForOf,
+    NgIf,
+    DecimalPipe,
+    DatePipe,
+    FooterComponent,
+    ThemeColorComponent,
+    AsyncPipe
+  ],
+  standalone: true
 })
 export class HomeComponent implements OnInit {
 
-  email: string = "contact@bozahouse.com";
-  tel: string = "656832062";
+  //@Input() currentUser!: AppUser;
 
-  roles: string[] = [];
-  isLoggedIn = false;
-  isAdmin: boolean = false;
-  isUser: boolean = false;
-  isEditor: boolean = false;
-  username?: string;
   errorOfferMessage!: string;
-  currentUser!: AppUser;
+
   errorMessage!: string;
+  testimonyList!: Array<Testimony>;
+  errorTestimonyMessage!:string;
+  currentPage: number = 0;
   totalPages!: number;
   pageSize: number = 5;
 
@@ -39,45 +54,14 @@ export class HomeComponent implements OnInit {
   errorTalentMessage!: string;
   searchFormGroup: FormGroup | undefined;
 
-  constructor(private authenticationService: AuthenticationService, private userService: AppUserService, private talentService: TalentService, private offerService: OfferService, private fb: FormBuilder, private router: Router) {
+  constructor(private authenticationService: AuthenticationService, private userService: AppUserService,private testimonyService: TestimonyService, private talentService: TalentService, private offerService: OfferService, private fb: FormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {
 
     this.lastThreeOffer();
     this.lastThreeTalent();
-    this.handleCurrentAppUser();
 
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN") > -1;
-      this.isEditor = this.roles.indexOf("EDITOR") > -1;
-      this.isUser = this.roles.indexOf("USER") > -1;
-
-      this.username = user.username;
-
-
-    }
-
-  }
-
-
-
-  handleCurrentAppUser(){
-    this.userService.getAccount().subscribe({
-      next: value => {
-        console.log(value);
-        this.currentUser = value;
-      },
-      error: err => {
-        console.log(err);
-        this.errorMessage = err.error.message;
-      }
-    })
   }
 
 
@@ -201,7 +185,31 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['updateTalent', id]);
     }
 
+  listTestimony(){
+     this.testimonyService.listTestimony(this.currentPage, this.pageSize).subscribe({
+      next: value => {
+        this.testimonyList = value;
+      },
+       error: err => {
+         console.log(err)
+       }
+    })
+  }
 
+  handleDeleteTestimony(testimony1: Testimony) {
+    let conf = confirm("Are you sure ?");
+    if (!conf) return;
+    this.testimonyService.deleteTestimonyById(testimony1.id).subscribe({
+      next: value => {
+        console.log(value)
+
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+
+  }
 
   shared(){
     if (navigator.share){
@@ -214,5 +222,5 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  }
+}
 

@@ -1,5 +1,4 @@
-<html class="bg-secondary">
-<body class="bg-secondary">
+
 
 <app-navbar></app-navbar>
 
@@ -22,7 +21,7 @@
                 <p class="card-text text-white-50" style="font-size: 20px">{{testimony.message}}</p>
 
                 <span class="text-white-50"> le {{testimony.createdAt | date: 'd MMM yyyy, à HH:mm:ss'}}</span><br />
-                <div class="text-center mt-2" *ngIf="isAdmin" >
+                <div class="text-center mt-2">
                   <a (click)="handleUpdateTestimony(testimony.id)" class="btn btn-warning"><i class="bi bi-pencil"></i></a> &nbsp;
 
               </div>
@@ -90,6 +89,3 @@
 
 
 <app-footer></app-footer>
-
-</body>
-</html>

@@ -1,19 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import {AppUser} from "../../../models/app-user.models";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {AppUserService} from "../../../services/app-user/app-user.service";
 import {
   FormBuilder,
-  FormGroup,
+  FormGroup, ReactiveFormsModule,
   ValidationErrors,
   Validators
 } from "@angular/forms";
-import {formatDate} from "@angular/common";
+import {formatDate, NgIf} from "@angular/common";
+import {HeaderComponent} from "../../../pages/fragments/header/header.component";
+import {FooterComponent} from "../../../pages/fragments/footer/footer.component";
 
 @Component({
   selector: 'app-update-app-user',
   templateUrl: './update-app-user.component.html',
-  styleUrls: ['./update-app-user.component.css']
+  styleUrls: ['./update-app-user.component.css'],
+  imports: [
+    HeaderComponent,
+    ReactiveFormsModule,
+    NgIf,
+    RouterLink,
+    FooterComponent
+  ],
+  standalone: true
 })
 export class UpdateAppUserComponent implements OnInit {
 

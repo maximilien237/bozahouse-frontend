@@ -14,7 +14,7 @@ export class IsEditorGuard  {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    let isEditor = this.authenticationService.getUser().roles.indexOf("EDITOR")>-1;
+    let isEditor = this.authenticationService.hasAnyAuthority("EDITOR");
 
     if (!isEditor){
       this.router.navigateByUrl("/home");

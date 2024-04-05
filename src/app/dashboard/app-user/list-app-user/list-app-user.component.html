@@ -1,6 +1,4 @@
-<html class="bg-secondary" xmlns="http://www.w3.org/1999/html">
 
-<body class="bg-secondary">
 
 <app-header></app-header>
 
@@ -20,10 +18,10 @@
   </div>
 </div>-->
 
-<div  *ngIf="isEditor" class="container mt-lg-5 spacer-bottom text-center">
+<div   class="container mt-lg-5 spacer-bottom text-center">
 
 
-      <span *ngIf="isAdmin"  style="font-size: 20px;">
+      <span   style="font-size: 20px;">
       <a routerLink="/listRole" class="hide-underline-link btn btn-dark text-white">
       Roles
       </a>
@@ -35,7 +33,7 @@
       <div class="mt-3" >
       <ng-container *ngIf="users ; else failureOrLoading">
         <div class=" bg-dark">
-          <span *ngIf="isAdmin" class="text-light"> [ {{users.length}} ] &nbsp;Les utilisateurs &nbsp;<a  routerLink="/addUser" class="btn btn-outline-secondary">
+          <span  class="text-light"> [ {{users.length}} ] &nbsp;Les utilisateurs &nbsp;<a  routerLink="/addUser" class="btn btn-outline-secondary">
               <i class="bi bi-plus-circle"></i>
             </a></span>
           <div>
@@ -60,7 +58,7 @@
                 <th>Email</th>
                 <th>Connu par?</th>
                 <th>Activitée</th>
-                <th *ngIf="isAdmin">Actions</th>
+                <th >Actions</th>
 
 
               </tr>
@@ -75,13 +73,13 @@
                 <td>{{user.username}}</td>
                 <td>{{user.howKnowUs}}</td>
 
-                <td *ngIf="isAdmin" >
+                <td  >
                       <a (click)="handleListAppUserOffer(user.id)" href="" class="text-secondary">Offres</a> |
                       <a (click)="handleListAppUserTalent(user.id)"  href="" class="text-secondary">Talents </a>
                 </td>
 
 
-                <td *ngIf="isAdmin" >
+                <td  >
                       <a (click)="handleDetailAppUser(user.id)" href="javascript:void(0);" class="text-light">
                         <i class="bi bi-eye"></i>
                       </a>&nbsp;
@@ -172,7 +170,7 @@
   <div class="row">
     <!-- add role to user -->
     <div class="container col-md-4 " >
-      <div *ngIf="isAdmin" class="card spacer-top bg-dark">
+      <div  class="card spacer-top bg-dark">
         <h5 class="text-center text-warning spacer">Ajouter un role à un utilisateur</h5>
 
         <div class="card-body text-white">
@@ -209,7 +207,7 @@
 
     <!-- remove role to user -->
     <div class="container col-md-4  " >
-      <div *ngIf="isAdmin" class="card spacer-top bg-dark">
+      <div class="card spacer-top bg-dark">
         <h5 class="text-center text-warning spacer">Retirer un role à un utilisateur</h5>
 
         <div class="card-body text-white">
@@ -257,8 +255,6 @@
 <app-footer></app-footer>
 
 
-</body>
-</html>
 
 
 

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  backendAPI: "http://localhost:8085",
+  backendAPI: "http://localhost:8080/",
   backendHostPublic: "http://localhost:8085/api/auth/v1/",
   backendHostEditor: "http://localhost:8085/api/editor/v1/",
   backendHostAppUser: "http://localhost:8085/api/user/v1/",

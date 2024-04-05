@@ -1,27 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import {catchError, map, Observable, throwError} from "rxjs";
 
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 
 import {OfferService} from "../../../services/offer/offer.service";
 import {Offer} from "../../../models/offer.models";
 import {AppUserService} from "../../../services/app-user/app-user.service";
 import {AppUser} from "../../../models/app-user.models";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
+import {NavbarComponent} from "../../fragments/navbar/navbar.component";
+import {AsyncPipe, DatePipe, DecimalPipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {FooterComponent} from "../../fragments/footer/footer.component";
 
 @Component({
   selector: 'app-user-offers',
   templateUrl: './user-offers.component.html',
-  styleUrls: ['./user-offers.component.css']
+  styleUrls: ['./user-offers.component.css'],
+  imports: [
+    NavbarComponent,
+    RouterLink,
+    NgIf,
+    AsyncPipe,
+    DecimalPipe,
+    DatePipe,
+    NgForOf,
+    NgClass,
+    FooterComponent
+  ],
+  standalone: true
 })
 export class UserOffersComponent implements OnInit {
 
-  roles: string[] = [];
-  isLoggedIn = false;
-  isAdmin : boolean = false;
-  isUser : boolean = false;
-  isEditor : boolean = false;
-  username?: string;
+
   currentUser!: AppUser;
   id!: number;
   errorMessageOffer!:string;
@@ -40,21 +50,6 @@ export class UserOffersComponent implements OnInit {
 
     this.handleGetTotalPageAppUserOffers();
     this.handleListAppUserOffers();
-
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN")>-1;
-      this.isEditor = this.roles.indexOf("EDITOR")>-1;
-      this.isUser = this.roles.indexOf("USER")>-1;
-
-      this.username = user.username;
-
-
-    }
 
 
   }
@@ -135,7 +130,7 @@ export class UserOffersComponent implements OnInit {
         title: 'the link to share',
         url: 'http://localhost:59423/'
       }).then(()=>{
-        console.log("thanks for sharing !");
+        alert("thanks for sharing !");
       }).catch(console.error)
     }
   }

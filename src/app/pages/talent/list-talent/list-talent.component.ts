@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {Talent} from "../../../models/talent.models";
 import {TalentService} from "../../../services/talent/talent.service";
 import {FilterTalent} from "../../../models/filterTalent.models";
@@ -9,33 +9,45 @@ import {AuthenticationService} from "../../../services/authentication/authentica
 import {AppUserService} from "../../../services/app-user/app-user.service";
 
 import {AppUser} from "../../../models/app-user.models";
-
-
-
+import {ErrorManagementComponent} from "../../fragments/error-management/error-management.component";
+import {ModalManagementComponent} from "../../fragments/modal-management/modal-management.component";
+import {NavbarComponent} from "../../fragments/navbar/navbar.component";
+import {DecimalPipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {FooterComponent} from "../../fragments/footer/footer.component";
+import {NgxPaginationModule} from "ngx-pagination";
 
 @Component({
   selector: 'app-list-talent',
   templateUrl: './list-talent.component.html',
-  styleUrls: ['./list-talent.component.css']
+  styleUrls: ['./list-talent.component.css'],
+  imports: [
+    ReactiveFormsModule,
+    NavbarComponent,
+    DecimalPipe,
+    NgIf,
+    NgForOf,
+    NgClass,
+    FooterComponent,
+    RouterLink,
+    NgxPaginationModule
+  ],
+  standalone: true
 })
 export class ListTalentComponent implements OnInit {
 
   email: string = "contact@bozahouse.com";
   tel: string = "656832062";
 
-  roles: string[] = [];
-  isLoggedIn = false;
-  isAdmin : boolean = false;
-  isUser : boolean = false;
-  isEditor : boolean = false;
-  username?: string;
+  @ViewChild(ErrorManagementComponent) private childError !:any ;
+  @ViewChild(ModalManagementComponent) private childModal !:any ;
+
   talents: Talent[] = [];
   errorMessage!:string;
   errorMessageTalent!:string;
   talentFormGroup!: FormGroup ;
   currentUser!: AppUser;
-  currentPage: number = 0;
-  totalPages!: number;
+  currentPage: number = 1;
+  totalElements!: number;
   pageSize: number = 5;
 
 
@@ -58,25 +70,8 @@ export class ListTalentComponent implements OnInit {
     });
 
     this.handleCurrentAppUser();
-    // this.listTalent();
-
-   // this.handleSearchTalents();
     this.handleFilterTalents();
 
-
-
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN")>-1;
-      this.isEditor = this.roles.indexOf("EDITOR")>-1;
-      this.isUser = this.roles.indexOf("USER")>-1;
-
-      //this.username = user.username;
-    }
   }
 
 
@@ -110,12 +105,13 @@ export class ListTalentComponent implements OnInit {
     filterTalent.startDate = new Date(startDate);
     filterTalent.endDate = new Date(endDate);
     filterTalent.valid = true;
-    filterTalent.page = Number(this.currentPage);
+    filterTalent.page = Number(this.currentPage - 1);
     filterTalent.size = Number(this.pageSize);
 
     this.talentService.filterTalent(filterTalent).subscribe({
       next: value => {
         this.talents = value.content;
+        this.totalElements = value.totalElements;
       },
       error: err => {
         console.log(err)
@@ -179,7 +175,7 @@ export class ListTalentComponent implements OnInit {
       console.log("update profile page !");
     }).catch(console.error)
   }
-  
+
 
   goToPage(page: number){
     this.currentPage = page;

@@ -1,18 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormGroup,
+  FormGroup, ReactiveFormsModule,
   ValidationErrors,
   Validators
 } from "@angular/forms";
 import {AppUserService} from "../../../services/app-user/app-user.service";
 import {AppUser} from "../../../models/app-user.models";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
+import {HeaderComponent} from "../../../pages/fragments/header/header.component";
+import {NgIf} from "@angular/common";
+import {FooterComponent} from "../../../pages/fragments/footer/footer.component";
 
 @Component({
   selector: 'app-add-app-user',
   templateUrl: './add-app-user.component.html',
-  styleUrls: ['./add-app-user.component.css']
+  styleUrls: ['./add-app-user.component.css'],
+  imports: [
+    HeaderComponent,
+    ReactiveFormsModule,
+    NgIf,
+    RouterLink,
+    FooterComponent
+  ],
+  standalone: true
 })
 export class AddAppUserComponent implements OnInit {
 

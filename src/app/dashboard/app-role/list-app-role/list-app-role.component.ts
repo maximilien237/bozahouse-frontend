@@ -2,26 +2,34 @@ import { Component, OnInit } from '@angular/core';
 import {catchError, map, Observable, throwError} from "rxjs";
 import {AppRole} from "../../../models/app-role.models";
 import {AppRoleService} from "../../../services/app-role/app-role.service";
-import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import {FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators} from "@angular/forms";
+import {Router, RouterLink} from "@angular/router";
 import {AppUser} from "../../../models/app-user.models";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
 import {AppUserService} from "../../../services/app-user/app-user.service";
 import {Page} from "../../../models/Page";
+import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {HeaderComponent} from "../../../pages/fragments/header/header.component";
+import {FooterComponent} from "../../../pages/fragments/footer/footer.component";
 
 @Component({
   selector: 'app-list-app-role',
   templateUrl: './list-app-role.component.html',
-  styleUrls: ['./list-app-role.component.css']
+  styleUrls: ['./list-app-role.component.css'],
+  imports: [
+    NgIf,
+    HeaderComponent,
+    AsyncPipe,
+    NgForOf,
+    NgClass,
+    ReactiveFormsModule,
+    RouterLink,
+    FooterComponent
+  ],
+  standalone: true
 })
 export class ListAppRoleComponent implements OnInit {
 
-  rolesUser: string[] = [];
-  isLoggedIn = false;
-  isAdmin : boolean = false;
-  isUser : boolean = false;
-  isEditor : boolean = false;
-  username?: string;
 
   //roles1: any;
   searchFormGroup: FormGroup | undefined;
@@ -44,19 +52,6 @@ export class ListAppRoleComponent implements OnInit {
 
     });
 
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.rolesUser = user.roles;
-
-      this.isAdmin = this.rolesUser.indexOf("ADMIN") > -1;
-      this.isEditor = this.rolesUser.indexOf("EDITOR") > -1;
-      this.isUser = this.rolesUser.indexOf("USER") > -1;
-
-      //this.username = user.username;
-
-    }
 
   }
 

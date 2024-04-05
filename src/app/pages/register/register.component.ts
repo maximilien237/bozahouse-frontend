@@ -2,20 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormGroup,
+  FormGroup, ReactiveFormsModule,
   ValidationErrors, ValidatorFn,
   Validators
 } from "@angular/forms";
 import {Router} from "@angular/router";
 import {AppUser} from "../../models/app-user.models";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
+import {NgIf} from "@angular/common";
 
 
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  imports: [
+    NgIf,
+    ReactiveFormsModule
+  ],
+  standalone: true
 })
 export class RegisterComponent implements OnInit {
 

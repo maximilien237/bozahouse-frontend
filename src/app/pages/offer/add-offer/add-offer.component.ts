@@ -1,23 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {
   FormBuilder,
-  FormGroup,
+  FormGroup, ReactiveFormsModule,
   ValidationErrors,
   Validators
 } from "@angular/forms";
 import {OfferService} from "../../../services/offer/offer.service";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {Offer} from "../../../models/offer.models";
+import {ErrorManagementComponent} from "../../fragments/error-management/error-management.component";
+import {NavbarComponent} from "../../fragments/navbar/navbar.component";
+import {NgIf} from "@angular/common";
+import {FooterComponent} from "../../fragments/footer/footer.component";
 
 @Component({
   selector: 'app-add-offer',
   templateUrl: './add-offer.component.html',
-  styleUrls: ['./add-offer.component.css']
+  styleUrls: ['./add-offer.component.css'],
+  imports: [
+    NavbarComponent,
+    RouterLink,
+    ReactiveFormsModule,
+    NgIf,
+    FooterComponent
+  ],
+  standalone: true
 })
 export class AddOfferComponent implements OnInit {
 
   errorMessage!:string;
   newOfferFormGroup!: FormGroup;
+  // permet de définir ErrorManagementComponent comme enfant de AddOfferComponent
+  @ViewChild(ErrorManagementComponent) private childError !:any ;
   constructor(private fb: FormBuilder, private offerService: OfferService, private router: Router) { }
 
   ngOnInit(): void {
@@ -64,61 +78,13 @@ export class AddOfferComponent implements OnInit {
         this.router.navigateByUrl("/jobs");
       },
       error: err => {
-        console.log(err);
+        this.childError.handleErrors(err);
       }
     })
   }
 
 
-  getErrorMessage(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "Vous devez remplir ce champs !";
-    }else if (error['minlength']){
-      return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  "+ "caractères";
-    }else if (error['maxlength']){
-      return "ce champs doit comporter au plus" + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
-    }else if (error['pattern']) {
-      return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres, ou un mélange des trois";
-    }else return "";
-
+  handleGetErrorMessageFromChild(fieldName: string, error: ValidationErrors) {
+    return this.childError.getErrorMessage(fieldName, error);
   }
-
-  getErrorMessageEmail(fieldName: string, error: ValidationErrors) {
-    if (error['pattern']) {
-      return "exemple d\'un mail valide : john@example.com ou john.smith@example.com" ;
-    }else if (error['email']) {
-      return "Entrez une adresse email valide !";
-    }else return "";
-  }
-
-  getErrorMessageUrl(fieldName: string, error: ValidationErrors) {
-    if (error['pattern']) {
-      return "exemple d\'une url valide : https://www.monsite.com ou https://wwww.facebook.com/username" ;
-    }else return "";
-  }
-
-  getErrorMessageTel(fieldName: string, error: ValidationErrors) {
-    if (error['pattern']) {
-      return "exemple d\'un numéro valide : 6511232XX" ;
-    }else if (error['minlength']){
-      return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  "+ "nombres";
-    }else if (error['maxlength']){
-      return "ce champs doit comporter au plus" + "  " + error['maxlength']['requiredLength'] + "  " + "nombres";
-    }else return "";
-  }
-
-  getErrorMessageAdress(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez remplir champs !";
-    }else if (error['pattern']) {
-      return "exemple d\'une adresse valide : Yaoundé, Centre, Cameroun" ;
-    }else return "";
-  }
-
-  getErrorMessageSalary(salary: string, error: ValidationErrors) {
-    if (error['pattern']) {
-      return "exemple d\'un salaire valide : 100000" ;
-    }else return "";
-  }
-
 }

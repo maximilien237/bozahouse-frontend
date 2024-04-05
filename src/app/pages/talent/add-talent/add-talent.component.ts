@@ -1,28 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
-  FormGroup,
+  FormGroup, ReactiveFormsModule,
   ValidationErrors,
   Validators
 } from "@angular/forms";
 import {TalentService} from "../../../services/talent/talent.service";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {Talent} from "../../../models/talent.models";
+import {ErrorManagementComponent} from "../../fragments/error-management/error-management.component";
+import {ModalManagementComponent} from "../../fragments/modal-management/modal-management.component";
+import {NgIf} from "@angular/common";
+import {FooterComponent} from "../../fragments/footer/footer.component";
+import {NavbarComponent} from "../../fragments/navbar/navbar.component";
 
 
 @Component({
   selector: 'app-add-talent',
   templateUrl: './add-talent.component.html',
-  styleUrls: ['./add-talent.component.css']
+  styleUrls: ['./add-talent.component.css'],
+  imports: [
+    NgIf,
+    ReactiveFormsModule,
+    RouterLink,
+    FooterComponent,
+    NavbarComponent
+  ],
+  standalone: true
 })
 export class AddTalentComponent implements OnInit {
 
-  errorMessage!:string;
   newTalentFormGroup!: FormGroup;
+
+  @ViewChild(ErrorManagementComponent) private childError !:any ;
+  @ViewChild(ModalManagementComponent) private childModal !:any ;
+
   constructor(private fb: FormBuilder, private talentService: TalentService, private router: Router) { }
 
   ngOnInit(): void {
-
 
     this.newTalentFormGroup = this.fb.group({
       type: this.fb.control("", [Validators.required]),
@@ -36,7 +52,9 @@ export class AddTalentComponent implements OnInit {
       address: this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z-0-9-é]+, [A-Z][A-Za-z-]+, [A-Z][a-z]{4,30}")]),
       tel: this.fb.control("", [Validators.pattern("[0-9]+"),Validators.minLength(9),Validators.maxLength(9)]),
       whatsAppNumber: this.fb.control("", [Validators.pattern("[0-9]+"),Validators.minLength(9),Validators.maxLength(9)]),
-      // countryCode: this.fb.control("",[Validators.required]),
+      countryCode: this.fb.control("",[Validators.required]),
+      cityName: this.fb.control("",[Validators.required]),
+      quarterName: this.fb.control("",[Validators.required]),
       experience: this.fb.control("", [Validators.required]),
       salary: this.fb.control("", [Validators.pattern("[0-9]+")]),
       salaryChoice: this.fb.control("", [Validators.required]),
@@ -47,75 +65,47 @@ export class AddTalentComponent implements OnInit {
 
   }
 
+  /* Set County as Required, based on Country Selected */
+  onCountryChange() {
+    let salaryChoiceSelected = this.newTalentFormGroup.get('salaryChoice')?.value;
+    if(salaryChoiceSelected === 'B') {
+      this.newTalentFormGroup.get('salaryChoice')?.setValidators([Validators.required]); // 5.Set Required Validator
+      this.newTalentFormGroup.get('salaryChoice')?.updateValueAndValidity();
+    } else {
+      this.newTalentFormGroup.get('salaryChoice')?.clearValidators(); // 6. Clear All Validators
+      this.newTalentFormGroup.get('salaryChoice')?.updateValueAndValidity();
+    }
+  }
+
+  get controlLinkedin() {
+    return this.newTalentFormGroup.get('linkedin');
+  }
+
+  handleGetErrorMessageFromChild(fieldName: string, error: ValidationErrors) {
+    return this.childError.getErrorMessage(fieldName, error);
+  }
+
+  // appel de la méthode showValidationMessageToModal situé dans le composant enfant ModalManagementComponent
+  handleShowValidationMessageInModalOfChild(message:string){
+    this.childModal.showValidationMessageToModal(message);
+
+  }
+
   handleSaveTalent() {
     let talent: Talent = this.newTalentFormGroup.value;
     this.talentService.saveTalent(talent).subscribe({
       next: value => {
-        console.log(value);
-        alert("Votre profil a été crée avec succès !");
+        console.log('after save talent', value);
+        this.handleShowValidationMessageInModalOfChild("Votre profil a été crée avec succès !");
         //this.newUserFormGroup.reset();
         this.router.navigateByUrl("/talents");
       },
       error: err => {
-        console.log(err);
+        this.childError.handleErrors(err);
       }
     })
   }
 
-
-  getErrorMessage(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "Vous devez remplir ce champs !";
-    }else if (error['minlength']){
-      return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  "+ "caractères";
-    }else if (error['maxlength']){
-      return "ce champs doit comporter au plus" + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
-    }else if (error['pattern']) {
-      return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres, ou un mélange des trois";
-    }else return "";
-
-  }
-
-  getErrorMessageEmail(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez remplir champs !";
-    }else if (error['pattern']) {
-      return "exemple d\'un mail valide : john@example.com ou john.smith@example.com" ;
-    }else if (error['email']) {
-      return "Entrez une adresse email valide !";
-    }else return "";
-  }
-
-  getErrorMessageUrl(fieldName: string, error: ValidationErrors) {
-    if (error['pattern']) {
-      return "exemple d\'une url valide : https://www.monsite.com ou https://wwww.facebook.com/username" ;
-    }else return "";
-  }
-
-  getErrorMessageTel(fieldName: string, error: ValidationErrors) {
-    if (error['pattern']) {
-      return "exemple d\'un numéro valide : 6511232XX" ;
-    }else if (error['minlength']){
-      return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  "+ "nombres";
-    }else if (error['maxlength']){
-      return "ce champs doit comporter au plus" + "  " + error['maxlength']['requiredLength'] + "  " + "nombres";
-    }else return "";
-  }
-
-  getErrorMessageAdress(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez remplir champs !";
-    }else if (error['pattern']) {
-      return "exemple d\'une adresse valide : Yaoundé, Centre, Cameroun" ;
-    }else return "";
-  }
-
-
-  getErrorMessageSalary(fieldName: string, error: ValidationErrors) {
-    if (error['pattern']) {
-      return "exemple d\'un salaire valide : 100000" ;
-    }else return "";
-  }
 
 
 }

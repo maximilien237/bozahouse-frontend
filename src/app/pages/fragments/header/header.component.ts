@@ -1,35 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
+import {RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  imports: [
+    RouterLink,
+    RouterLinkActive
+  ],
+  standalone: true
 })
 export class HeaderComponent implements OnInit {
-
-  private roles: string[] = [];
-  isLoggedIn = false;
-  isAdmin : boolean = false;
-  isEditor : boolean = false;
-  username?: string;
 
   constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-
-      this.isAdmin = this.roles.indexOf("ADMIN")>-1;
-      this.isEditor = this.roles.indexOf("EDITOR")>-1;
-
-
-      this.username = user.username;
-    }
   }
 
   logout(): void {

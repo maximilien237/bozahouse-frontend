@@ -1,14 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators} from "@angular/forms";
 
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {AppUser} from "../../models/app-user.models";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  styleUrls: ['./forgot-password.component.css'],
+  imports: [
+    ReactiveFormsModule,
+    NgIf,
+    RouterLink
+  ],
+  standalone: true
 })
 export class ForgotPasswordComponent implements OnInit {
 

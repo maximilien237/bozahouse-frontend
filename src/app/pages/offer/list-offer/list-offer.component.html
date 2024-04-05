@@ -1,5 +1,4 @@
-<html class="bg-secondary">
-<body class="bg-secondary">
+
 <app-navbar></app-navbar>
 
 <div class="container spacer  ">
@@ -139,7 +138,7 @@
       </div>
     </div> &nbsp;&nbsp;&nbsp;&nbsp;
 
-    <ng-container *ngIf="currentUser.account == 'employer' || currentUser.account == 'enterprise' || isAdmin">
+    <ng-container *ngIf="currentUser.account == 'employer' || currentUser.account == 'enterprise' ">
       <span style="font-size: 20px;">
       <a routerLink="/addOffer" class="hide-underline-link btn btn-dark text-warning">
       <i class="bi bi-plus "></i> publier une offre
@@ -176,7 +175,7 @@
   </div><br>
   <div class="card bg-secondary border-0">
 
-    <h5 class="text-center mt-2">Vos derniers jobs / [ {{sizeOfferActivated}} ]</h5>
+    <h5 class="text-center mt-2">Vos derniers jobs / [ {{offers.length}} ]</h5>
 
     <div class="row">
 
@@ -185,7 +184,7 @@
     <div  *ngFor="let offer of offers "  class="col-md-4 ">
       <div class="card  spacer-margin bg-dark">
 
-        <div *ngIf="isAdmin" class="card-header">
+        <div  class="card-header">
 
           <a (click)="handleDisableOffer(offer)" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-down"></i>
@@ -300,13 +299,6 @@
 <app-footer>
 
 </app-footer>
-</body>
-</html>
 
-<!--<html class="bg-secondary">
-<body class="bg-secondary">
-
-</body>
-</html>-->
 
 

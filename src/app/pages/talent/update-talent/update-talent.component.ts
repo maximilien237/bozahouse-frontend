@@ -1,16 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import {catchError, throwError} from "rxjs";
 
-import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators} from "@angular/forms";
 import {TalentService} from "../../../services/talent/talent.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 
 import {Talent} from "../../../models/talent.models";
+import {FooterComponent} from "../../fragments/footer/footer.component";
+import {NavbarComponent} from "../../fragments/navbar/navbar.component";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-update-talent',
   templateUrl: './update-talent.component.html',
-  styleUrls: ['./update-talent.component.css']
+  styleUrls: ['./update-talent.component.css'],
+  imports: [
+    FooterComponent,
+    ReactiveFormsModule,
+    NavbarComponent,
+    RouterLink,
+    NgIf
+  ],
+  standalone: true
 })
 export class UpdateTalentComponent implements OnInit {
 

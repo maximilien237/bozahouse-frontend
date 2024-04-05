@@ -1,33 +1,19 @@
-<!doctype html>
-<html lang="en" class="bg-secondary" >
-<head>
 
-
-  <title></title></head>
-<body class="d-flex  text-white bg-secondary">
-
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="mb-auto">
-    <div>
-
-    </div>
-  </header>
-
-  <main >
-    <div class="container">
 
       <div class="card bg-dark col-md-6 offset-md-3 mt-xxl-5 sp">
         <h5 class="text-center text-warning spacer">BOZAHOUSE</h5>
         <h5 class="text-center text-muted">la maison des bozayeurs ! </h5>
 
-        <div class="card-body text-muted">
+        <div class="card-body">
 
           <form [formGroup]="loginFormGroup" (ngSubmit)="handleLogin()">
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i> Username</label>
               <input (keydown.space)="$event.preventDefault()" type="text" formControlName="username" class="form-control bg-secondary" >
 
-              <small *ngIf="loginFormGroup.controls['username'].errors && loginFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', loginFormGroup.controls['username'].errors)}}</small>
+              @if() {}
+
+              <small *ngIf="loginFormGroup.controls['username'].errors && loginFormGroup.controls['username'].touched" class="text-danger">{{handleGetErrorMessageFromChild('username', loginFormGroup.controls['username'].errors)}}</small>
 
             </div>
 
@@ -36,7 +22,7 @@
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Password</label>
               <input (keydown.space)="$event.preventDefault()" type="password" formControlName="password" class="form-control bg-secondary" id="pwd">
               <input type="checkbox" onclick="showAndHidePassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
-              <small *ngIf="loginFormGroup.controls['password'].errors && loginFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessagePassword('password', loginFormGroup.controls['password'].errors)}}</small>
+              <small *ngIf="loginFormGroup.controls['password'].errors && loginFormGroup.controls['password'].touched" class="text-danger">{{handleGetErrorMessageFromChild('password', loginFormGroup.controls['password'].errors)}}</small>
 
             </div>
 
@@ -52,74 +38,6 @@
         </div>
       </div>
 
-    </div>
-  </main>
-
-</div>
-
-</body>
-</html>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-<!--
-
-<html class="bg-secondary">
-<body class="bg-secondary mt-xxl-5 mb-xxl-5">
-
-<div class="container">
-
-  <div class="card bg-dark col-md-6 offset-md-3">
-    <h5 class="text-center text-warning spacer">BOZAHOUSE</h5>
-    <h5 class="text-center text-muted">la maison des bozayeurs ! </h5>
-
-    <div class="card-body">
-
-      <form [formGroup]="loginFormGroup" (ngSubmit)="handleLogin()">
-        <div class="mb-3">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i> Username</label>
-          <input type="text" formControlName="username" class="form-control">
-          <small *ngIf="loginFormGroup.controls['username'].errors && loginFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', loginFormGroup.controls['username'].errors)}}</small>
-
-        </div>
-
-
-        <div class="mb-3">
-          <label class="form-label text-white"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Password</label>
-          <input type="text" formControlName="password" class="form-control">
-          <small *ngIf="loginFormGroup.controls['password'].errors && loginFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessage('password', loginFormGroup.controls['password'].errors)}}</small>
-
-        </div>
-
-
-        <span class="text-secondary" style="font-size: 17px">Pas de compte ? | <a class="hide-underline-link" routerLink="/register"><span class="text-light">Inscrivez vous</span></a></span>&nbsp;
-        <span class="text-white"  style="font-size: 17px"> | <a class="hide-underline-link" routerLink="/register"><span style="font-size: 17px" class="text-warning">Mot de passe oublié ?</span></a></span><br>
-
-        <div class="text-center text-white">
-          <button class="btn btn-primary w-100 mb-xxl-5 mt-lg-5" type="submit">Connexion</button>
-        </div>
-
-      </form>
-    </div>
-  </div>
-
-</div>
-
-<div class="bg-secondary">
-
-</div>
-
-</body>
-</html>
--->
