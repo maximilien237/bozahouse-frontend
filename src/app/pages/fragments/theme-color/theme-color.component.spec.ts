@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ForgotPasswordComponent } from './forgot-password.component';
+import { ThemeColorComponent } from './theme-color.component';
 
-describe('ForgotPasswordComponent', () => {
-  let component: ForgotPasswordComponent;
-  let fixture: ComponentFixture<ForgotPasswordComponent>;
+describe('ThemeColorComponent', () => {
+  let component: ThemeColorComponent;
+  let fixture: ComponentFixture<ThemeColorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ForgotPasswordComponent ]
+      imports: [ThemeColorComponent]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(ForgotPasswordComponent);
+    
+    fixture = TestBed.createComponent(ThemeColorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

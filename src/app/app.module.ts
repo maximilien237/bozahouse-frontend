@@ -68,6 +68,7 @@ import { ListAppUserDisabledComponent } from './dashboard/app-user/list-app-user
 import { ListTalentDisabledComponent } from './pages/talent/list-talent-disabled/list-talent-disabled.component';
 import { ListOfferDisabledComponent } from './pages/offer/list-offer-disabled/list-offer-disabled.component';
 import { PrivacyOutComponent } from './pages/privacy-out/privacy-out.component';
+import {ModalManagementComponent} from "./pages/fragments/modal-management/modal-management.component";
 
 @NgModule({
   declarations: [
@@ -120,7 +121,8 @@ import { PrivacyOutComponent } from './pages/privacy-out/privacy-out.component';
     ListAppUserDisabledComponent,
     ListTalentDisabledComponent,
     ListOfferDisabledComponent,
-    PrivacyOutComponent
+    PrivacyOutComponent,
+    ModalManagementComponent
   ],
   imports: [
     BrowserModule,
