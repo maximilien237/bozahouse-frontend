@@ -125,8 +125,8 @@
                 <small *ngIf="updateOfferFormGroup.controls['countryCode'].errors && updateOfferFormGroup.controls['countryCode'].touched" class="text-danger">{{getErrorMessage('countryCode', updateOfferFormGroup.controls['countryCode'].errors)}}</small>
               </div>-->
 
-              <div class="mb-3 mt-3">
-                <label class="form-label">Tel</label>
+              <div class="mb-3">
+                <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Contact</label>
                 <input type="text" class="form-control bg-secondary" formControlName="tel" placeholder="6********" >
                 <small *ngIf="updateOfferFormGroup.controls['tel'].errors && updateOfferFormGroup.controls['tel'].touched" class="text-danger">{{getErrorMessageTel('tel', updateOfferFormGroup.controls['tel'].errors)}}</small>
 
@@ -141,7 +141,7 @@
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Email</label>
+                <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Email <span class="text-muted"></span></label>
                 <input class="form-control bg-secondary" formControlName="email" placeholder="you@example.com" type="text">
                 <small *ngIf="updateOfferFormGroup.controls['email'].errors && updateOfferFormGroup.controls['email'].touched" class="text-danger">{{getErrorMessageEmail('email', updateOfferFormGroup.controls['email'].errors)}}</small>
 
@@ -205,7 +205,6 @@
                 <option [ngValue]="null" disabled hidden selected>Mode de travail</option>
                 <option value="Sur site">Sur site</option>
                 <option value="A distance">A distance</option>
-                <option value="Hybride">Hybride</option>
               </select>
               <small *ngIf="updateOfferFormGroup.controls['workMode'].errors && updateOfferFormGroup.controls['workMode'].touched" class="text-danger">{{getErrorMessage('workMode', updateOfferFormGroup.controls['workMode'].errors)}}</small>
 
@@ -237,7 +236,7 @@
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Address</label>
-              <input class="form-control bg-secondary" formControlName="address" placeholder="Simbok, Yaoundé, Cameroun" type="text">
+              <input class="form-control bg-secondary" formControlName="address" placeholder="Simbok,Yaoundé,Cameroun" type="text">
               <small *ngIf="updateOfferFormGroup.controls['address'].errors && updateOfferFormGroup.controls['address'].touched" class="text-danger">{{getErrorMessageAdress('address', updateOfferFormGroup.controls['address'].errors)}}</small>
 
             </div>
@@ -263,7 +262,7 @@
                 <option value="FRANCHISE">Franchise</option>
                 <option value="STAGE ACADEMIC">Stage academic</option>
                 <option value="STAGE PROFESSIONNELLE">Stage professionnelle</option>
-                <option value="PEU IMPORTE">Peu importe</option>
+                <option value="TOUT">Tout</option>
               </select>
               <small *ngIf="updateOfferFormGroup.controls['contract'].errors && updateOfferFormGroup.controls['contract'].touched" class="text-danger">{{getErrorMessage('contract', updateOfferFormGroup.controls['contract'].errors)}}</small>
 

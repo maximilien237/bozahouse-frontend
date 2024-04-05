@@ -46,7 +46,6 @@ export class ListOfferComponent implements OnInit {
   totalPages!: number;
   pageSize: number = 5;
   offers1!: any;
-  sizeOfferActivated : number = 0;
 
   offerSize : number = 0;
   constructor(private authenticationService: AuthenticationService, private offerService: OfferService,private userService: AppUserService,
@@ -119,8 +118,6 @@ export class ListOfferComponent implements OnInit {
     this.offers1 =  this.offerService.filterOffer(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain,this.currentPage, this.pageSize)
       .subscribe({
         next: value => {
-        this.sizeOfferActivated = value[0].sizeActivated;
-        console.log(this.sizeOfferActivated);
           console.log(value);
           this.totalPages = value[0].totalPages;
         },

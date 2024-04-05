@@ -34,7 +34,6 @@ export class ListTalentDisabledComponent implements OnInit {
   pageSize: number = 5;
   talents1!: any;
   talentSize: number = 0;
-  sizeTalentDisabled: number = 0;
 
 
   constructor(private authenticationService: AuthenticationService,private userService: AppUserService,
@@ -98,7 +97,6 @@ export class ListTalentDisabledComponent implements OnInit {
     this.talents1 =  this.talentService.filterTalentValidFalse(filterTalent?.title, filterTalent?.contract, filterTalent?.workMode, filterTalent?.address, filterTalent?.experience, filterTalent?.type, filterTalent?.domain,this.currentPage, this.pageSize)
       .subscribe({
         next: value => {
-        this.sizeTalentDisabled = value[0].sizeDisabled
           this.talentSize = value.length;
           console.log(value);
           this.totalPages = value[0].totalPages;

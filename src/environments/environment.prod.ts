@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  backendHostPublic: "https://api.bozahouse.com/api/auth/v1/",
-  backendHostEditor: "https://api.bozahouse.com/api/editor/v1/",
-  backendHostAppUser:"https://api.bozahouse.com/api/user/v1/",
-  backendHostAdmin:  "https://api.bozahouse.com/api/admin/v1/"
+  backendHostPublic: "https://www.bozahouse.com:8085/api/auth/v1/",
+  backendHostEditor: "https://www.bozahouse.com:8085/api/editor/v1/",
+  backendHostAppUser:"https://www.bozahouse.com:8085/api/user/v1/",
+  backendHostAdmin:  "https://www.bozahouse.com:8085/api/admin/v1/"
 };

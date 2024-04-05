@@ -35,9 +35,9 @@ export class UpdateTalentComponent implements OnInit {
       linkedin: this.fb.control(this.talent.linkedin, [Validators.pattern("^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9a-f]{2}|[-()_.!~*';/?:@&=+$,a-z0-9])+)([).!';/?:,][[:blank:|:blank:]])?$")]),
       github: this.fb.control(this.talent.github, [Validators.pattern("^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9a-f]{2}|[-()_.!~*';/?:@&=+$,a-z0-9])+)([).!';/?:,][[:blank:|:blank:]])?$")]),
       level: this.fb.control(this.talent.level, [Validators.required]),
-      title: this.fb.control(this.talent.title, [Validators.required]),
-      domain: this.fb.control(this.talent.domain, [Validators.required]),
-      address: this.fb.control(this.talent.address, [Validators.required,Validators.pattern("[A-Z][a-z-0-9-é]+, [A-Z][A-Za-z-]+, [A-Z][a-z]{4,30}")]),
+      title: this.fb.control(this.talent.title, [Validators.pattern("[A-Za-z0-9-çèéàêâô']+"),Validators.required,Validators.minLength(4),Validators.maxLength(30)]),
+      domain: this.fb.control(this.talent.domain, [Validators.pattern("[A-Za-z-çèéàêô' ]+"),Validators.required,Validators.minLength(4),Validators.maxLength(30)]),
+      address: this.fb.control(this.talent.address, [Validators.required,Validators.pattern("[A-Z][a-z-0-9-çèéàê'-]+, [A-Z][a-z-çèéà]+, [A-Z][a-z-çèéà]{4,30}")]),
       tel: this.fb.control(this.talent.tel, [Validators.pattern("[0-9]+"),Validators.required,Validators.minLength(9),Validators.maxLength(9)]),
       whatsAppNumber: this.fb.control(this.talent.whatsAppNumber, [Validators.pattern("[0-9]+"),Validators.minLength(9),Validators.maxLength(9)]),
       // countryCode: this.fb.control(this.talent.countryCode, [Validators.required]),
@@ -116,7 +116,7 @@ export class UpdateTalentComponent implements OnInit {
     if (error['required']){
       return "vous devez remplir champs !";
     }else if (error['pattern']) {
-      return "exemple d\'une adresse valide : Yaoundé, Centre, Cameroun" ;
+      return "exemple d\'une adresse valide : Simbock,Yaoundé,Cameroun" ;
     }else return "";
   }
 

@@ -35,8 +35,6 @@ export interface Offer {
   totalPages: number;
   pageSize: number;
   realSize: number;
-  sizeActivated: number;
-  sizeDisabled: number;
 
 
 }

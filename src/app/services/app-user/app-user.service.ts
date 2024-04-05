@@ -15,9 +15,9 @@ const httpOptions = {
 export class AppUserService {
 
   constructor(private http: HttpClient) { }
-/*
-  public listAppUser(): Observable<Array<AppUser>> {
-    return this.http.get<Array<AppUser>>(environment.backendHostAdmin + "users")
+
+/*  public listAppUser(page: number, size: number): Observable<Array<AppUser>> {
+    return this.http.get<Array<AppUser>>(environment.backendHostEditor + "users?page=" + page + "&size=" + size)
   }
 
   public listAppUserDisabled(page: number, size: number): Observable<Array<AppUser>> {

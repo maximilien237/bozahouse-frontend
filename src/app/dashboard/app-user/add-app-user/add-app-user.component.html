@@ -82,14 +82,14 @@
           <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
           <input type="password" formControlName = "password" class="form-control bg-secondary" id="pwd">
           <input type="checkbox" onclick="showAndHidePassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
-          <small *ngIf="newUserFormGroup.controls['password'].errors && newUserFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessagePassword('password', newUserFormGroup.controls['password'].errors)}}</small>
+          <small *ngIf="newUserFormGroup.controls['password'].errors && newUserFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessage('password', newUserFormGroup.controls['password'].errors)}}</small>
         </div>
 
         <div class="mb-3 mt-2">
           <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du mot de passe</label>
           <input type="password" formControlName = "confirmPassword" class="form-control bg-secondary" id="confPwd">
           <input type="checkbox" onclick="showAndHideConfPassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
-          <small *ngIf="newUserFormGroup.controls['confirmPassword'].errors && newUserFormGroup.controls['confirmPassword'].touched" class="text-danger">{{getErrorMessagePassword('confirmPassword', newUserFormGroup.controls['confirmPassword'].errors)}}</small>
+          <small *ngIf="newUserFormGroup.controls['confirmPassword'].errors && newUserFormGroup.controls['confirmPassword'].touched" class="text-danger">{{getErrorMessage('confirmPassword', newUserFormGroup.controls['confirmPassword'].errors)}}</small>
         </div>
 
         <div class="mb-3">

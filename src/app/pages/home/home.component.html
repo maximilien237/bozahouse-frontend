@@ -43,7 +43,7 @@
             <span class="text-warning" style="font-size: 35px;">{{offer.title}}</span><br>
             <span class="text-light" *ngIf="offer.type=='particular' else ent">Auteur : [ Particulier ]</span><br>
             <ng-template #ent>
-              <span class="text-light">Auteur : [ Entreprise ]</span>
+              <span class="text-light0">Auteur : [ Entreprise ]</span>
             </ng-template>
             <span class="text-white-50" style="font-size: 15px"><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{offer.address}}</span><br />
             <span class="text-white-50" style=" font-size: 15px"><i class="bi bi-book-fill">&nbsp;</i>{{offer.contract}}</span> &nbsp;&nbsp;
@@ -87,11 +87,11 @@
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                   </div>
                   <div class="offcanvas-body">
-
+               
                     <p class="text-warning">
                       Pour avoir accès à cette fonctionnalité, vous devez souscrire à un abonnement de type normal.
                       Pour ce faire, contactez notre agent en cliquant sur l'un des boutons suivants<i class="bi-arrow-down"></i>
-
+                    
                     </p>
 
                     <ul class="nav list-unstyled text-small text-center ">
@@ -99,7 +99,7 @@
                       <li><a [href]="'tel:+237' + tel " style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-telephone-fill"></i></a>&nbsp;&nbsp;</li>
                       <li><a href="https://wa.me/656832062" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-whatsapp"></i></a>&nbsp;&nbsp;</li>
                     </ul>
-
+                 
                   </div>
                 </div>
 
@@ -217,7 +217,7 @@
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                   </div>
                   <div class="offcanvas-body">
-
+             
                     <p class="text-warning">
                       Pour avoir accès à cette fonctionnalité, vous devez souscrire à un abonnement de type normal.
                       Pour ce faire, contactez notre agent en cliquant sur l'un des boutons suivants<i class="bi-arrow-down"></i>
@@ -228,7 +228,7 @@
                       <li><a [href]="'tel:+237' + tel " style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-telephone-fill"></i></a>&nbsp;&nbsp;</li>
                       <li><a href="https://wa.me/656832062" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-whatsapp"></i></a>&nbsp;&nbsp;</li>
                     </ul>
-
+                  
                   </div>
                 </div>
 

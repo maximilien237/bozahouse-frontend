@@ -17,8 +17,6 @@ export interface Talent {
   publishedAt: Date;
   updatedAt: Date;
   type: string;
-  sizeActivated: number;
-  sizeDisabled: number;
 
 
   email: string;

@@ -42,7 +42,6 @@ export class ListTalentComponent implements OnInit {
   pageSize: number = 5;
   talents1!: any;
   talentSize: number = 0;
-  sizeTalentActivated: number = 0;
 
 
   constructor(private authenticationService: AuthenticationService,private userService: AppUserService,
@@ -109,8 +108,6 @@ export class ListTalentComponent implements OnInit {
     this.talents1 =  this.talentService.filterTalent(filterTalent?.title, filterTalent?.contract, filterTalent?.workMode, filterTalent?.address, filterTalent?.experience, filterTalent?.type, filterTalent?.domain,this.currentPage, this.pageSize)
       .subscribe({
         next: value => {
-        this.sizeTalentActivated = value[0].sizeActivated;
-        console.log(this.sizeTalentActivated);
           this.talentSize = value.length;
           console.log(value);
           this.totalPages = value[0].totalPages;

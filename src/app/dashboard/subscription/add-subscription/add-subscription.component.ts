@@ -20,9 +20,9 @@ export class AddSubscriptionComponent implements OnInit {
   ngOnInit(): void {
 
     this.newSubscriptionFormGroup = this.fb.group({
-      username : this.fb.control(null, [Validators.required]),
-      period : this.fb.control(null, [Validators.required]),
-      type: this.fb.control(null, [Validators.required])
+      username : this.fb.control(null, [Validators.required, Validators.minLength(4)]),
+      period : this.fb.control(null, [Validators.required, Validators.minLength(4)]),
+      type: this.fb.control(null, [Validators.required, Validators.minLength(4)])
 
     });
 
@@ -45,7 +45,15 @@ export class AddSubscriptionComponent implements OnInit {
 
   getErrorMessage(fieldName: string, error: ValidationErrors) {
     if (error['required']){
-      return " vous devez remplir ce champs ! ";
+      return fieldName + "  "+ " is required";
+    }else if (error['minlength']){
+      return fieldName + "  "+ "should have at least" + " "+ error['minlength']['requiredLength'] + "  "+ "characters";
+    }else if (error['maxlength']){
+      return fieldName + "  "+ "should have at the most" + "  " + error['maxlength']['requiredLength'] + "  " + "characters";
+    }else if (error['pattern']) {
+      return fieldName + "  "+ "required this pattern" + error['pattern']['requiredPattern'] ;
+    }else if (error['email']) {
+      return fieldName + "  " + "address is not valid "+ "  "+ error['email']['requiredEmail'];
     }else return "";
 
   }

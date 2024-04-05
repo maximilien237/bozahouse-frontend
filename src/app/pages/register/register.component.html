@@ -84,23 +84,23 @@
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom d'utilisateur</label>
-              <input (keydown.space)="$event.preventDefault()" (keydown.space)="$event.preventDefault()" type="text" formControlName = "username" class="form-control bg-secondary">
+              <input (keydown.space)="$event.preventDefault()" type="text" formControlName = "username" class="form-control bg-secondary">
               <small *ngIf="registerFormGroup.controls['username'].errors && registerFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', registerFormGroup.controls['username'].errors)}}</small>
 
             </div>
 
             <div class="mb-3 mt-2">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
-              <input (keydown.space)="$event.preventDefault()" type="password" formControlName = "password" class="form-control bg-secondary" id="pwd">
+              <input type="password" formControlName = "password" class="form-control bg-secondary" id="pwd">
               <input type="checkbox" onclick="showAndHidePassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
-              <small *ngIf="registerFormGroup.controls['password'].errors && registerFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessagePassword('password', registerFormGroup.controls['password'].errors)}}</small>
+              <small *ngIf="registerFormGroup.controls['password'].errors && registerFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessage('password', registerFormGroup.controls['password'].errors)}}</small>
             </div>
 
             <div class="mb-3 mt-2">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du mot de passe</label>
-              <input (keydown.space)="$event.preventDefault()" type="password" formControlName = "confirmPassword" class="form-control bg-secondary" id="confPwd">
+              <input type="password" formControlName = "confirmPassword" class="form-control bg-secondary" id="confPwd">
               <input type="checkbox" onclick="showAndHideConfPassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
-              <small *ngIf="registerFormGroup.controls['confirmPassword'].errors && registerFormGroup.controls['confirmPassword'].touched" class="text-danger">{{getErrorMessagePassword('confirmPassword', registerFormGroup.controls['confirmPassword'].errors)}}</small>
+              <small *ngIf="registerFormGroup.controls['confirmPassword'].errors && registerFormGroup.controls['confirmPassword'].touched" class="text-danger">{{getErrorMessage('confirmPassword', registerFormGroup.controls['confirmPassword'].errors)}}</small>
             </div>
 
             <div class="mb-3">

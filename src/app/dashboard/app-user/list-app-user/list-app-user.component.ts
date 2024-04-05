@@ -26,7 +26,6 @@ export class ListAppUserComponent implements OnInit {
 
   users!: Observable<Array<AppUser>>;
   users1: any;
-  //users2: any;
   errorMessage!:string;
   searchFormGroup: FormGroup | undefined;
   newSubscriptionFormGroup!: FormGroup;
@@ -36,40 +35,37 @@ export class ListAppUserComponent implements OnInit {
   addRoleToUserFormGroup!: FormGroup;
   removeRoleToUserFormGroup!: FormGroup;
   appUserSize: number = 0;
-  appUserSizeActivated: number = 0;
-
 
   constructor(private authenticationService: AuthenticationService,private userService: AppUserService,private roleService: AppRoleService, private fb: FormBuilder, private router: Router, private subscriptionService: SubscriptionService) { }
 
   ngOnInit(): void {
 
     this.searchFormGroup = this.fb.group({
-   keyword: this.fb.control("", [Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(3), Validators.maxLength(12)])
+   keyword: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required, Validators.minLength(3), Validators.maxLength(12)])
 
     });
 
     this.newSubscriptionFormGroup = this.fb.group({
-      username: this.fb.control("", [Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
+      username: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
       period: this.fb.control("", [Validators.required]),
       type: this.fb.control("", [Validators.required])
 
     });
 
     this.addRoleToUserFormGroup = this.fb.group({
-      username: this.fb.control("", [Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
+      username: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
       roleName: this.fb.control("", [Validators.required])
 
     });
 
     this.removeRoleToUserFormGroup = this.fb.group({
-      username: this.fb.control("", [Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
+      username: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
       roleName: this.fb.control("", [Validators.required])
     });
 
     this.handleSearchAppUserByUsername();
 
     this.getTotalPageAppUser();
-//     this.getTotalActivatedAppUser();
 
 
     this.isLoggedIn = !!this.authenticationService.getToken();
@@ -115,10 +111,7 @@ export class ListAppUserComponent implements OnInit {
      let kw = this.searchFormGroup?.value.keyword;
     this.users1 = this.userService.searchAppUserByUsername(kw,this.currentPage, this.pageSize).subscribe({
       next: value => {
-      this.appUserSizeActivated = value[0].sizeActivated;
-      //this.appUserSizeDisabled = value[0].sizeDisabled;
-      console.log(this.appUserSizeActivated);
-      //console.log(this.appUserSizeDisabled);
+        this.appUserSize = value.length;
         this.totalPages = value[0].totalPages;
       },
       error: err => {
@@ -126,17 +119,6 @@ export class ListAppUserComponent implements OnInit {
       }
     });
   }
-
-/*      getTotalActivatedAppUser(){
-      this.users2 = this.userService.listAppUser().subscribe({
-        next: value => {
-          this.appUserSize = value.length;
-        },
-        error: err => {
-          console.log(err);
-        }
-      });
-    } */
 
 
   handleDisableAppUser(appUser: AppUser) {

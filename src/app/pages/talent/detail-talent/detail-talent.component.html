@@ -50,7 +50,7 @@
 
               <span style="font-size: 15px">Contract : {{talent.contract}}</span><br />
               <span style=" font-size: 15px" >Mode de travail : {{talent.workMode}} </span><br />
-              <span style=" font-size: 15px" >Niveau d'étude : {{talent.level}} </span><br />
+
               <span *ngIf="!talent.salary.endsWith('0'); else other">
         <span > {{talent.salary}} </span><br />
       </span>
@@ -75,8 +75,7 @@
             <p class="card-text text-white-50" *ngFor="let item of [].constructor(talent.address.split(','));">
               <i class="bi bi-flag-fill" style="font-size: 20px;"></i>&nbsp; : &nbsp;<span style="font-size: 15px">{{item[2]}} </span><br />
               <i class="bi bi-building" style="font-size: 20px;"></i>&nbsp; : &nbsp;<span style="font-size: 15px">{{item[1]}} </span><br />
-              <span style="font-size: 15px"><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{item}}</span>
-
+              <span style="font-size: 15px"><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{talent.address}}</span>
             </p>
           </div>
         </div>
