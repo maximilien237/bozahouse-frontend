@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AppUser} from "../../models/app-user.models";
 import {environment} from "../../../environments/environment";
-import {AppUserDates} from "../../models/appUserDates.models";
+import {Page} from "../../models/Page";
+import {UtilCriteria} from "../../models/criteria/utilCriteria";
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+
+const path = "users/";
 
 @Injectable({
   providedIn: 'root'
@@ -16,70 +16,53 @@ export class AppUserService {
 
   constructor(private http: HttpClient) { }
 
-/*  public listAppUser(page: number, size: number): Observable<Array<AppUser>> {
-    return this.http.get<Array<AppUser>>(environment.backendHostEditor + "users?page=" + page + "&size=" + size)
-  }
-
-  public listAppUserDisabled(page: number, size: number): Observable<Array<AppUser>> {
-    return this.http.get<Array<AppUser>>(environment.backendHostAdmin + "users/disabled?page=" + page + "&size=" + size)
-  }*/
-
-  public getAppUser(id : string): Observable<AppUser> {
-    return this.http.get<AppUser>(environment.backendHostAdmin  + "users/"+id)
+  public getAppUser(id : number): Observable<AppUser> {
+    return this.http.get<AppUser>(environment.backendAPI  + "users/"+id)
   }
 
   public getAccount(): Observable<AppUser> {
-    return this.http.get<AppUser>(environment.backendHostAppUser  + "users/account")
+    return this.http.get<AppUser>(environment.backendAPI  + "users/account")
   }
 
-  public searchAppUserByUsername(keyword : string,page: number, size: number): Observable<Array<AppUser>> {
-    return this.http.get<Array<AppUser>>(environment.backendHostEditor  + "users/username?keyword="+keyword+ "&page=" + page + "&size=" + size)
-  }
-
-  public searchAppUsersDisabledByUsername(keyword : string,page: number, size: number): Observable<Array<AppUser>> {
-    return this.http.get<Array<AppUser>>(environment.backendHostAdmin  + "users/disabled/username?keyword="+keyword+ "&page=" + page + "&size=" + size)
-  }
-
-  public listAppUserConnexionDates(id : string,page: number, size: number): Observable<Array<AppUserDates>> {
-    return this.http.get<Array<AppUserDates>>(environment.backendHostAdmin  + "users/dates/" +id + "?page=" + page + "&size=" + size)
+  public appUserSpecification(criteria: UtilCriteria): Observable<Page<AppUser>> {
+    return this.http.post<Page<AppUser>>(environment.backendAPI +"/users/criteria", criteria)
   }
 
   public saveAppUser(user: AppUser):Observable<AppUser>{
-    return this.http.post<AppUser>(environment.backendHostAdmin+"users",user);
+    return this.http.post<AppUser>(environment.backendAPI+"users",user);
   }
 
-  public updateAppUser(id: string, appUser: AppUser): Observable<AppUser>{
-    return this.http.put<AppUser>(environment.backendHostAdmin + "users/"+id, appUser);
+  public updateAppUser(id: number, appUser: AppUser): Observable<AppUser>{
+    return this.http.put<AppUser>(environment.backendAPI + "users/"+id, appUser);
   }
 
-  public deleteAppUser(id: string){
-    return this.http.delete(environment.backendHostAdmin+"users/"+id);
+  public deleteAppUser(id: number){
+    return this.http.delete(environment.backendAPI+"users/"+id);
   }
 
   public deleteAppUserDates(id: number){
-    return this.http.delete(environment.backendHostAdmin+"users/dates/"+id);
+    return this.http.delete(environment.backendAPI+"users/dates/"+id);
   }
 
 
   public addRoleToUser(username: string, roleName: string): Observable<AppUser>{
-    return this.http.put<AppUser>(environment.backendHostAdmin + "users/add?username=" + username + "&roleName=" + roleName, httpOptions);
+    return this.http.get<AppUser>(environment.backendAPI + "users/add?username=" + username + "&roleName=" + roleName);
   }
 
   public removeRoleToUser(username: string, roleName: string): Observable<AppUser>{
-    return this.http.put<AppUser>(environment.backendHostAdmin + "users/remove?username=" + username + "&roleName=" + roleName,httpOptions);
+    return this.http.get<AppUser>(environment.backendAPI + "users/remove?username=" + username + "&roleName=" + roleName);
   }
 
 
-  public disableAppUser(id: string){
+  public disableAppUser(id: number){
 
-    return this.http.delete(environment.backendHostAdmin + "users/disabled/"+id);
+    return this.http.delete(environment.backendAPI + "users/disabled/"+id);
   }
 
-  public enableAppUser(id: string){
+  public enableAppUser(id: number){
 
-    return this.http.delete(environment.backendHostAdmin + "users/enabled/"+id);
+    return this.http.delete(environment.backendAPI + "users/enabled/"+id);
   }
-
 
 
 }

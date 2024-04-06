@@ -1,6 +1,6 @@
 
 export interface Talent {
-  id: string;
+  id: number;
   title: string;
   domain: string;
   experience: string;

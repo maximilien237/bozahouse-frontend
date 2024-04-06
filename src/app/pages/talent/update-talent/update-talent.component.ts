@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {catchError, throwError} from "rxjs";
 
 import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {TalentService} from "../../../services/talent/talent.service";
 import {ActivatedRoute, Router} from "@angular/router";
-
 import {Talent} from "../../../models/talent.models";
 
 @Component({
@@ -14,7 +12,7 @@ import {Talent} from "../../../models/talent.models";
 })
 export class UpdateTalentComponent implements OnInit {
 
-  id!: string;
+  id!: number;
   talent!: Talent ;
   errorMessage!:string;
   updateTalentFormGroup!: FormGroup;

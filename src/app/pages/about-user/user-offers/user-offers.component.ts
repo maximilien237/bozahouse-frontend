@@ -23,7 +23,7 @@ export class UserOffersComponent implements OnInit {
   isEditor : boolean = false;
   username?: string;
   currentUser!: AppUser;
-  id!: string;
+  id!: number;
   errorMessageOffer!:string;
   errorMessageAppUser!:string;
   currentPage: number = 0;
@@ -41,20 +41,10 @@ export class UserOffersComponent implements OnInit {
     this.handleGetTotalPageAppUserOffers();
     this.handleListAppUserOffers();
 
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN")>-1;
-      this.isEditor = this.roles.indexOf("EDITOR")>-1;
-      this.isUser = this.roles.indexOf("USER")>-1;
-
-      this.username = user.username;
+      this.username = this.authenticationService.getUsernameFromToken();
 
 
-    }
+
 
 
   }
@@ -64,7 +54,7 @@ export class UserOffersComponent implements OnInit {
     this.handleListAppUserOffers();
   }
 
-  handleDetailOffer(id: string) {
+  handleDetailOffer(id: number) {
 
     this.router.navigate(['detailOffer', id]);
   }
@@ -90,7 +80,7 @@ export class UserOffersComponent implements OnInit {
 
   }
 
-  handleUpdateOffer(id: string) {
+  handleUpdateOffer(id: number) {
 
     this.router.navigate(['updateOffer', id]);
   }

@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {Talent} from "../../models/talent.models";
+import {Page} from "../../models/Page";
+import {TalentCriteria} from "../../models/criteria/talentCriteria";
 
 @Injectable({
   providedIn: 'root'
@@ -11,52 +13,22 @@ export class TalentService {
 
   constructor(private http: HttpClient) { }
 
-  public listTalent(page: number,size: number): Observable<Array<Talent>> {
-    return this.http.get<Array<Talent>>(environment.backendHostAppUser + "talents?page=" +page + "&size=" +size)
-  }
-
-  public listProfessionalTalent(): Observable<Array<Talent>> {
-    return this.http.get<Array<Talent>>(environment.backendHostAppUser + "talents/professional")
-  }
-
-  public listSimpleTalent(): Observable<Array<Talent>> {
-    return this.http.get<Array<Talent>>(environment.backendHostAppUser + "talents/simple")
-  }
 
   public lastThreeTalent(): Observable<Array<Talent>> {
     return this.http.get<Array<Talent>>(environment.backendHostAppUser + "talents/three")
   }
 
-  public lastThreeSimpleTalent(): Observable<Array<Talent>> {
-    return this.http.get<Array<Talent>>(environment.backendHostAppUser + "talents/free/three")
-  }
 
-  public listTalentByAppUser(appUserId: string, page: number,size: number): Observable<Array<Talent>> {
+  public listTalentByAppUser(appUserId: number, page: number,size: number): Observable<Array<Talent>> {
     return this.http.get<Array<Talent>>(environment.backendHostAppUser + "talents/user/" +appUserId + "?page=" +page + "&size=" +size)
   }
 
-  public filterTalent(title: string, contract: string, workMode: string, address: string,
-                     experience: string, type: string, domain: string, page: number,size: number ): Observable<Array<Talent>> {
-    return this.http.get<Array<Talent>>(environment.backendHostAppUser + "talents/filter?title=" + title + "&contract=" + contract + "&workMode=" +workMode + "&address="+ address + "&experience=" +experience  + "&type=" +type + "&domain=" +domain + "&page=" +page + "&size=" +size)
+
+  public talentSpecification(criteria: TalentCriteria): Observable<Page<Talent>> {
+    return this.http.post<Page<Talent>>(environment.backendAPI +"/talents/criteria", criteria)
   }
 
-
-  public filterTalentWithDates(title: string, contract: string, workMode: string, address: string,
-                              experience: string, type: string, domain: string,startDate: Date, endDate: Date, page: number,size: number ): Observable<Array<Talent>> {
-    return this.http.get<Array<Talent>>(environment.backendHostAppUser + "talents/filterDates?title=" + title + "&contract=" + contract + "&workMode=" +workMode + "&address="+ address + "&experience=" +experience  + "&type=" +type + "&domain=" +domain +"&startDate=" +startDate + "&endDate=" +endDate + "&page=" +page + "&size=" +size)
-  }
-
-
-  public filterTalentValidFalse(title: string, contract: string, workMode: string, address: string,
-                      experience: string, type: string, domain: string, page: number,size: number ): Observable<Array<Talent>> {
-    return this.http.get<Array<Talent>>(environment.backendHostAdmin + "talents/disabled/filter?title=" + title + "&contract=" + contract + "&workMode=" +workMode + "&address="+ address + "&experience=" +experience  + "&type=" +type + "&domain=" +domain + "&page=" +page + "&size=" +size)
-  }
-
-  public searchTalents(keyword : string): Observable<Array<Talent>> {
-    return this.http.get<Array<Talent>>(environment.backendHostAppUser  + "talents/search?keyword="+keyword)
-  }
-
-  public getTalent(id : string): Observable<Talent> {
+  public getTalent(id : number): Observable<Talent> {
     return this.http.get<Talent>(environment.backendHostAppUser  + "talents/"+id)
   }
 
@@ -65,20 +37,20 @@ export class TalentService {
     return this.http.post<Talent>(environment.backendHostAppUser+"talents",talent);
   }
 
-  updateTalent(id: string, talent: Talent): Observable<Talent>{
+  updateTalent(id: number, talent: Talent): Observable<Talent>{
     return this.http.put<Talent>(environment.backendHostAppUser + "talents/"+id, talent);
   }
 
-  public deleteTalent(id: string){
+  public deleteTalent(id: number){
     return this.http.delete(environment.backendHostAdmin + "talents/"+id);
   }
 
-  public disableTalent(id: string){
+  public disableTalent(id: number){
 
     return this.http.delete(environment.backendHostAppUser + "talents/disable/"+id);
   }
 
-  public enableTalent(id: string){
+  public enableTalent(id: number){
 
     return this.http.delete(environment.backendHostAdmin + "talents/enable/"+id);
   }

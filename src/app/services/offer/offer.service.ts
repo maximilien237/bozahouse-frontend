@@ -3,9 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {Offer} from "../../models/offer.models";
-import {FilterOffer} from "../../models/filterOffer.models";
-
-
+import {Page} from "../../models/Page";
+import {OfferCriteria} from "../../models/criteria/offerCriteria";
 
 
 @Injectable({
@@ -15,71 +14,42 @@ export class OfferService {
 
   constructor(private http: HttpClient) { }
 
-  public listOffer(): Observable<Array<Offer>> {
-    return this.http.get<Array<Offer>>(environment.backendHostAppUser + "offers")
-  }
-
-  public listEnterpriseOffer(): Observable<Array<Offer>> {
-    return this.http.get<Array<Offer>>(environment.backendHostAppUser + "offers/enterprise")
-  }
-
-  public listEmployerOffer(): Observable<Array<Offer>> {
-    return this.http.get<Array<Offer>>(environment.backendHostAppUser + "offers/employer")
+  public offerSpecification(criteria: OfferCriteria): Observable<Page<Offer>> {
+    return this.http.post<Page<Offer>>(environment.backendAPI +"/offers/criteria", criteria)
   }
 
   public lastThreeOffer(): Observable<Array<Offer>> {
-    return this.http.get<Array<Offer>>(environment.backendHostAppUser + "offers/three")
+    return this.http.get<Array<Offer>>(environment.backendAPI + "offers/three")
   }
 
-  public listOfferByAppUser(appUserId: string, page: number,size: number): Observable<Array<Offer>> {
-    return this.http.get<Array<Offer>>(environment.backendHostAppUser + "offers/user/" +appUserId + "?page=" +page + "&size=" +size)
+  public listOfferByAppUser(appUserId: number, page: number,size: number): Observable<Array<Offer>> {
+    return this.http.get<Array<Offer>>(environment.backendAPI + "offers/user/" +appUserId + "?page=" +page + "&size=" +size)
   }
 
-  public filterOffer(title: string, contract: string, workMode: string, address: string,
-                     experience: string, type: string, domain: string, page: number,size: number ): Observable<Array<Offer>> {
-    return this.http.get<Array<Offer>>(environment.backendHostAppUser + "offers/filter?title=" + title + "&contract=" + contract + "&workMode=" +workMode + "&address="+ address + "&experience=" +experience  + "&type=" +type + "&domain=" +domain + "&page=" +page + "&size=" +size)
+  public getOffer(id : number): Observable<Offer> {
+    return this.http.get<Offer>(environment.backendAPI  + "offers/"+id)
   }
-
-
-  public filterOfferWithDates(title: string, contract: string, workMode: string, address: string,
-                     experience: string, type: string, domain: string,startDate: Date, endDate: Date, page: number,size: number ): Observable<Array<Offer>> {
-    return this.http.get<Array<Offer>>(environment.backendHostAppUser + "offers/filterDates?title=" + title + "&contract=" + contract + "&workMode=" +workMode + "&address="+ address + "&experience=" +experience  + "&type=" +type + "&domain=" +domain +"&startDate=" +startDate + "&endDate=" +endDate + "&page=" +page + "&size=" +size)
-  }
-
-  public filterOfferNotValid(title: string, contract: string, workMode: string, address: string,
-                     experience: string, type: string, domain: string, page: number,size: number ): Observable<Array<Offer>> {
-    return this.http.get<Array<Offer>>(environment.backendHostAdmin + "offers/disabled/filter?title=" + title + "&contract=" + contract + "&workMode=" +workMode + "&address="+ address + "&experience=" +experience  + "&type=" +type + "&domain=" +domain + "&page=" +page + "&size=" +size)
-  }
-
-  public searchOffers(keyword : string): Observable<Array<Offer>> {
-    return this.http.get<Array<Offer>>(environment.backendHostAppUser  + "offers/search?keyword="+keyword)
-  }
-
-  public getOffer(id : string): Observable<Offer> {
-    return this.http.get<Offer>(environment.backendHostAppUser  + "offers/"+id)
-  }
-
 
   public saveOffer(offer: Offer):Observable<Offer>{
-    return this.http.post<Offer>(environment.backendHostAppUser+"offers/",offer);
+    return this.http.post<Offer>(environment.backendAPI+"offers/",offer);
   }
 
-  updateOffer(id: string, offer: Offer): Observable<Offer>{
-    return this.http.put<Offer>(environment.backendHostAppUser + "offers/"+id, offer);
+  updateOffer(id: number, offer: Offer): Observable<Offer>{
+    return this.http.put<Offer>(environment.backendAPI + "offers/"+id, offer);
   }
 
-  public deleteOffer(id: string){
-    return this.http.delete(environment.backendHostAdmin + "offers/"+id);
+  public deleteOffer(id: number){
+    return this.http.delete(environment.backendAPI + "offers/"+id);
   }
 
-  public disableOffer(id: string){
+  public disableOffer(id: number){
 
-    return this.http.delete(environment.backendHostAppUser + "offers/disable/"+id);
+    return this.http.delete(environment.backendAPI + "offers/disable/"+id);
   }
 
-  public enableOffer(id: string){
+  public enableOffer(id: number){
 
-    return this.http.delete(environment.backendHostAdmin + "offers/enable/"+id);
+    return this.http.delete(environment.backendAPI + "offers/enable/"+id);
   }
 
 }

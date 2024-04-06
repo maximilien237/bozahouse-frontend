@@ -12,7 +12,7 @@ import {TalentService} from "../../../services/talent/talent.service";
 })
 export class DetailTalentComponent implements OnInit {
 
-  id!: string;
+  id!: number;
   talent!: Talent;
   constructor(private activatedRoute: ActivatedRoute, private talentService: TalentService) { }
 

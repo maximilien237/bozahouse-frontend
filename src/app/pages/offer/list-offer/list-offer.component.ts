@@ -1,22 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {catchError, map, Observable, throwError} from "rxjs";
 import {Offer} from "../../../models/offer.models";
 import {
   FormBuilder,
   FormGroup,
-  UntypedFormBuilder,
-  UntypedFormGroup,
   ValidationErrors,
-  Validators
 } from "@angular/forms";
 import {OfferService} from "../../../services/offer/offer.service";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
 
-import {Subscription} from "../../../models/subscription.models";
-import {FilterOffer} from "../../../models/filterOffer.models";
+
 import {AppUser} from "../../../models/app-user.models";
 import {AppUserService} from "../../../services/app-user/app-user.service";
+import {OfferCriteria} from "../../../models/criteria/offerCriteria";
 
 
 @Component({
@@ -37,23 +33,20 @@ export class ListOfferComponent implements OnInit {
   isUser : boolean = false;
   isEditor : boolean = false;
   username?: string;
-  offers!: Observable<Array<Offer>>;
+  offers!: Offer[];
   errorMessage!:string;
   errorMessageOffer!:string;
   offerFormGroup!: FormGroup ;
   currentUser!: AppUser;
-  currentPage: number = 0;
-  totalPages!: number;
-  pageSize: number = 5;
-  offers1!: any;
+  currentPage: number = 1;
+  totalElements!: number;
+  pageSize: number = 6;
 
-  offerSize : number = 0;
   constructor(private authenticationService: AuthenticationService, private offerService: OfferService,private userService: AppUserService,
               private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.handleCurrentAppUser();
-    this.datesCompare();
 
 
     //this.listCityByCountry();
@@ -73,25 +66,9 @@ export class ListOfferComponent implements OnInit {
 
 
     });
-    //this.listOffer();
-    this.handleSearchOffers();
+
     this.handleFilterOffers();
 
-
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN")>-1;
-      this.isEditor = this.roles.indexOf("EDITOR")>-1;
-      this.isUser = this.roles.indexOf("USER")>-1;
-
-      this.username = user.username;
-
-
-    }
   }
 
 
@@ -101,73 +78,15 @@ export class ListOfferComponent implements OnInit {
 
 
 
-  handleSearchOffers() {
-    //  let kw = this.searchFormGroup?.value.keyword;
-    let filterOffer: FilterOffer = this.offerFormGroup.value;
-    this.offers =  this.offerService.filterOffer(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain, this.currentPage, this.pageSize).pipe(
-      catchError(err => {
-        this.errorMessageOffer = err.message;
-        return throwError(err);
-      })
-    );
-  }
-
   handleFilterOffers() {
     //  let kw = this.searchFormGroup?.value.keyword;
-    let filterOffer: FilterOffer = this.offerFormGroup.value;
-    this.offers1 =  this.offerService.filterOffer(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain,this.currentPage, this.pageSize)
-      .subscribe({
-        next: value => {
-          console.log(value);
-          this.totalPages = value[0].totalPages;
-        },
-        error: err => {
-          console.log(err);
-        }
-      });
-  }
-
-  datesCompare() {
-    let dateBefore  = this.offerFormGroup?.value.startDate;
-    let dateAfter  = this.offerFormGroup?.value.endDate;
-  }
-
-/*
-    handleSearchOffers() {
-    //  let kw = this.searchFormGroup?.value.keyword;
-      let filterOffer: FilterOffer = this.offerFormGroup.value;
-      this.offers =  this.offerService.filterOffer(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain, this.currentPage, this.pageSize).pipe(
-        catchError(err => {
-          this.errorMessage = err.message;
-          return throwError(err);
-        })
-      );
-    }
-
-  handleFilterOffers() {
-    //  let kw = this.searchFormGroup?.value.keyword;
-    let filterOffer: FilterOffer = this.offerFormGroup.value;
-    this.offers1 =  this.offerService.filterOffer(filterOffer.title, filterOffer.contract, filterOffer.workMode, filterOffer.address, filterOffer.experience, filterOffer.type, filterOffer.domain,this.currentPage, this.pageSize)
-     .subscribe({
+    let criteria: OfferCriteria = this.offerFormGroup.value;
+     this.offerService.offerSpecification(criteria).subscribe({
       next: value => {
-        console.log(value);
-        this.totalPages = value[0].totalPages;
-      },
-      error: err => {
-        console.log(err);
+        this.offers = value.content;
+        this.totalElements = value.totalElements;
       }
-    });
-  }*/
-
-
-
-  listOffer(){
-    this.offers = this.offerService.listOffer().pipe(
-      catchError(err => {
-        this.errorMessage = err.message;
-        return throwError(err);
-      })
-    );
+    })
   }
 
   handleDeleteOffer(offer: Offer) {
@@ -176,12 +95,6 @@ export class ListOfferComponent implements OnInit {
     this.offerService.deleteOffer(offer.id).subscribe({
       next: value => {
         console.log(value);
-        this.offers = this.offers.pipe(
-          map(data=>{
-            let index = data.indexOf(offer)
-            data.slice(index,1)
-            return data;
-          }))
 
       },
       error: err => {
@@ -198,12 +111,6 @@ export class ListOfferComponent implements OnInit {
     this.offerService.enableOffer(offer.id).subscribe({
       next: value => {
         console.log(value);
-        this.offers = this.offers.pipe(
-          map(data=>{
-            let index = data.indexOf(offer)
-            data.slice(index,1)
-            return data;
-          }))
 
       },
       error: err => {
@@ -221,12 +128,6 @@ export class ListOfferComponent implements OnInit {
     this.offerService.disableOffer(offer.id).subscribe({
       next: value => {
         console.log(value);
-        this.offers = this.offers.pipe(
-          map(data=>{
-            let index = data.indexOf(offer)
-            data.slice(index,1)
-            return data;
-          }))
 
       },
       error: err => {
@@ -236,12 +137,12 @@ export class ListOfferComponent implements OnInit {
 
   }
 
-  handleUpdateOffer(id: string) {
+  handleUpdateOffer(id: number) {
 
     this.router.navigate(['updateOffer', id]);
   }
 
-  handleDetailOffer(id: string) {
+  handleDetailOffer(id: number) {
 
     this.router.navigate(['detailOffer', id]);
   }
@@ -249,7 +150,7 @@ export class ListOfferComponent implements OnInit {
 
   goToPage(page: number){
     this.currentPage = page;
-    this.handleSearchOffers();
+    this.handleFilterOffers();
   }
 
 

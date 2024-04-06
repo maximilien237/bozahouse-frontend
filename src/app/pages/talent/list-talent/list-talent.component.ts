@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {catchError, map, Observable, throwError} from "rxjs";
 
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 import {Router} from "@angular/router";
 import {Talent} from "../../../models/talent.models";
 import {TalentService} from "../../../services/talent/talent.service";
-import {FilterTalent} from "../../../models/filterTalent.models";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
 import {AppUserService} from "../../../services/app-user/app-user.service";
-
 import {AppUser} from "../../../models/app-user.models";
+import {TalentCriteria} from "../../../models/criteria/talentCriteria";
 
 
 
@@ -31,17 +29,15 @@ export class ListTalentComponent implements OnInit {
   isUser : boolean = false;
   isEditor : boolean = false;
   username?: string;
-  talents!: Observable<Array<Talent>>;
-  talentsData!: Observable<Array<Talent>>;
+  talents!: Talent[];
   errorMessage!:string;
   errorMessageTalent!:string;
   talentFormGroup!: FormGroup ;
   currentUser!: AppUser;
-  currentPage: number = 0;
-  totalPages!: number;
-  pageSize: number = 5;
-  talents1!: any;
-  talentSize: number = 0;
+  currentPage: number = 1;
+  totalElements!: number;
+  pageSize: number = 6;
+
 
 
   constructor(private authenticationService: AuthenticationService,private userService: AppUserService,
@@ -66,23 +62,7 @@ export class ListTalentComponent implements OnInit {
     this.handleCurrentAppUser();
     // this.listTalent();
 
-    this.handleSearchTalents();
     this.handleFilterTalents();
-
-
-
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN")>-1;
-      this.isEditor = this.roles.indexOf("EDITOR")>-1;
-      this.isUser = this.roles.indexOf("USER")>-1;
-
-      //this.username = user.username;
-    }
   }
 
 
@@ -90,27 +70,15 @@ export class ListTalentComponent implements OnInit {
     this.talentFormGroup.reset();
   }
 
-
-
-  handleSearchTalents() {
-    let filterTalent: FilterTalent = this.talentFormGroup?.value;
-    this.talents =  this.talentService.filterTalent(filterTalent.title, filterTalent.contract, filterTalent.workMode, filterTalent.address, filterTalent.experience, filterTalent.type, filterTalent.domain, this.currentPage, this.pageSize).pipe(
-      catchError(err => {
-        this.errorMessageTalent = err.message;
-        return throwError(err);
-      })
-    );
-  }
-
   handleFilterTalents() {
     //  let kw = this.searchFormGroup?.value.keyword;
-    let filterTalent: FilterTalent = this.talentFormGroup?.value;
-    this.talents1 =  this.talentService.filterTalent(filterTalent?.title, filterTalent?.contract, filterTalent?.workMode, filterTalent?.address, filterTalent?.experience, filterTalent?.type, filterTalent?.domain,this.currentPage, this.pageSize)
+    let criteria: TalentCriteria = this.talentFormGroup?.value;
+    this.talentService.talentSpecification(criteria)
       .subscribe({
         next: value => {
-          this.talentSize = value.length;
           console.log(value);
-          this.totalPages = value[0].totalPages;
+          this.talents = value.content;
+          this.totalElements = value.totalElements;
         },
         error: err => {
           console.log(err);
@@ -118,41 +86,7 @@ export class ListTalentComponent implements OnInit {
       });
   }
 
-/*
-  handleSearchTalents() {
-    let filterTalent: FilterTalent = this.talentFormGroup?.value;
-    this.talents =  this.talentService.filterTalent(filterTalent?.title, filterTalent?.contract, filterTalent?.workMode, filterTalent?.address, filterTalent?.experience, filterTalent?.type, filterTalent?.domain, this.currentPage, this.pageSize).pipe(
-      catchError(err => {
-        this.errorMessageTalent = err.message;
-        return throwError(err);
-      })
-    );
-  }
 
-  handleFilterTalents() {
-    //  let kw = this.searchFormGroup?.value.keyword;
-    let filterTalent: FilterTalent = this.talentFormGroup?.value;
-    this.talents1 =  this.talentService.filterTalent(filterTalent?.title, filterTalent?.contract, filterTalent?.workMode, filterTalent?.address, filterTalent?.experience, filterTalent?.type, filterTalent?.domain,this.currentPage, this.pageSize)
-      .subscribe({
-        next: value => {
-          console.log(value);
-          this.totalPages = value[0].totalPages;
-        },
-        error: err => {
-          console.log(err);
-        }
-      });
-  }*/
-
-/*
-  listTalent(){
-    this.talentsData = this.talentService.listTalent(this.currentPage, this.pageSize).pipe(
-      catchError(err => {
-        this.errorMessage = err.message;
-        return throwError(err);
-      })
-    );
-  }*/
 
   handleDeleteTalent(talent: Talent) {
     let conf = confirm("Are you sure ?");
@@ -160,12 +94,6 @@ export class ListTalentComponent implements OnInit {
     this.talentService.deleteTalent(talent.id).subscribe({
       next: data => {
         console.log(data);
-        this.talents = this.talents.pipe(
-          map(data=>{
-            let index = data.indexOf(talent)
-            data.slice(index,1)
-            return data;
-          }))
 
       },
       error: err => {
@@ -181,12 +109,6 @@ export class ListTalentComponent implements OnInit {
     this.talentService.enableTalent(talent.id).subscribe({
       next: value => {
         console.log(value);
-        this.talents = this.talents.pipe(
-          map(data=>{
-            let index = data.indexOf(talent)
-            data.slice(index,1)
-            return data;
-          }))
 
       },
       error: err => {
@@ -195,7 +117,6 @@ export class ListTalentComponent implements OnInit {
     })
 
   }
-
 
 
   handleDisableTalent(talent: Talent) {
@@ -204,12 +125,6 @@ export class ListTalentComponent implements OnInit {
     this.talentService.disableTalent(talent.id).subscribe({
       next: value => {
         console.log(value);
-        this.talents = this.talents.pipe(
-          map(data=>{
-            let index = data.indexOf(talent)
-            data.slice(index,1)
-            return data;
-          }))
 
       },
       error: err => {
@@ -219,29 +134,23 @@ export class ListTalentComponent implements OnInit {
 
   }
 
-  handleDetailTalent(id: string){
+  handleDetailTalent(id: number){
     this.router.navigate(['detailTalent', id]).then(()=>{
       console.log("welcome to profile detail !");
     }).catch(console.error)
   }
 
-  handleUpdateTalent(id: string){
+  handleUpdateTalent(id: number){
     this.router.navigate(['updateTalent', id]).then(()=>{
       console.log("update profile page !");
     }).catch(console.error)
   }
 
 
-
-
-
-
-
   goToPage(page: number){
     this.currentPage = page;
-    this.handleSearchTalents();
+    this.handleFilterTalents();
   }
-
 
 
   handleCurrentAppUser(){
@@ -262,7 +171,7 @@ export class ListTalentComponent implements OnInit {
     if (navigator.share){
       navigator.share({
         title: 'consulter vos derniers talents',
-        url: 'http://vps91824.serveur-vps.net/talents',
+        url: window.location.href,
       }).then(()=>{
         console.log("thanks for sharing !");
       }).catch(console.error)

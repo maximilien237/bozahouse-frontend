@@ -1,7 +1,7 @@
 
 export interface AppUser {
 
-  id: string;
+  id: number;
   account: string;
   howKnowUs: string;
   lastname: string;

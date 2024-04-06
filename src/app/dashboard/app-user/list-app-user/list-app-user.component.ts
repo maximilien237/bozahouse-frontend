@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AppUserService} from "../../../services/app-user/app-user.service";
-import {catchError, map, Observable, throwError} from "rxjs";
+import { map} from "rxjs";
 import {AppUser} from "../../../models/app-user.models";
 import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -9,6 +9,9 @@ import {SubscriptionService} from "../../../services/subscription/subscription.s
 import {AppRoleService} from "../../../services/app-role/app-role.service";
 
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
+import {UtilCriteria} from "../../../models/criteria/utilCriteria";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ModalErrorComponent} from "../../../pages/shares/modal-error/modal-error.component";
 
 @Component({
   selector: 'app-list-app-user',
@@ -17,108 +20,59 @@ import {AuthenticationService} from "../../../services/authentication/authentica
 })
 export class ListAppUserComponent implements OnInit {
 
-  roles: string[] = [];
-  isLoggedIn = false;
-  isAdmin : boolean = false;
-  isUser : boolean = false;
-  isEditor : boolean = false;
+  @ViewChild(ModalErrorComponent) private childError!: any ;
   username?: string;
-
-  users!: Observable<Array<AppUser>>;
-  users1: any;
+  users!: AppUser[];
   errorMessage!:string;
-  searchFormGroup: FormGroup | undefined;
-  newSubscriptionFormGroup!: FormGroup;
-  currentPage: number = 0;
-  totalPages!: number;
-  pageSize: number = 5;
-  addRoleToUserFormGroup!: FormGroup;
-  removeRoleToUserFormGroup!: FormGroup;
-  appUserSize: number = 0;
+  currentPage: number = 1;
+  totalElements!: number;
+  pageSize: number = 6;
 
-  constructor(private authenticationService: AuthenticationService,private userService: AppUserService,private roleService: AppRoleService, private fb: FormBuilder, private router: Router, private subscriptionService: SubscriptionService) { }
+  searchFormGroup: FormGroup= this.fb.group({
+    keyword: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required])
+  });
+
+  addRoleToUserFormGroup: FormGroup= this.fb.group({
+    username: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required]),
+    roleName: this.fb.control("", [Validators.required])  });
+
+  removeRoleToUserFormGroup: FormGroup= this.fb.group({
+    username: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required]),
+    roleName: this.fb.control("", [Validators.required])  });
+
+
+  constructor(private authenticationService: AuthenticationService,
+              private userService: AppUserService,private roleService: AppRoleService,
+              private fb: FormBuilder, private router: Router, private subscriptionService: SubscriptionService) { }
 
   ngOnInit(): void {
-
-    this.searchFormGroup = this.fb.group({
-   keyword: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required, Validators.minLength(3), Validators.maxLength(12)])
-
-    });
-
-    this.newSubscriptionFormGroup = this.fb.group({
-      username: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
-      period: this.fb.control("", [Validators.required]),
-      type: this.fb.control("", [Validators.required])
-
-    });
-
-    this.addRoleToUserFormGroup = this.fb.group({
-      username: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
-      roleName: this.fb.control("", [Validators.required])
-
-    });
-
-    this.removeRoleToUserFormGroup = this.fb.group({
-      username: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
-      roleName: this.fb.control("", [Validators.required])
-    });
-
-    this.handleSearchAppUserByUsername();
-
-    this.getTotalPageAppUser();
+    this.handleAppUserSpecification();
+  }
 
 
-    this.isLoggedIn = !!this.authenticationService.getToken();
+  handleAppUserSpecification() {
+    const {
+      keyword,
+    } = this.searchFormGroup.value;
+    const criteria : UtilCriteria={};
+    criteria.keyword = keyword || "";
+    criteria.page = Number(this.currentPage - 1);
+    criteria.size = Number(this.pageSize);
 
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN") > -1;
-      this.isEditor = this.roles.indexOf("EDITOR") > -1;
-      this.isUser = this.roles.indexOf("USER") > -1;
-
-      //this.username = user.username;
-
+  this.userService.appUserSpecification(criteria).subscribe({
+    next: value => {
+      this.users = value.content;
+      this.totalElements = value.totalElements;
+    },
+    error: (err: HttpErrorResponse) => {
+      // appel de la méthode handleError(error) situé dans ErrorManagementComponent
+      console.log("testet  hkdjdj")
+      this.childError?.handleErrors(err);
     }
-
+  });
 
   }
 
-
-  handleSearchAppUserByUsername() {
-    let kw = this.searchFormGroup?.value.keyword;
-    this.users =  this.userService.searchAppUserByUsername(kw,this.currentPage, this.pageSize).pipe(
-      catchError(err => {
-        this.errorMessage = err.message;
-        return throwError(err);
-      })
-    );
-  }
-
-/*  listAppUsers(){
-    this.users = this.userService.listAppUser(this.currentPage, this.pageSize).pipe(
-      catchError(err => {
-        this.errorMessage = err.message;
-        return throwError(err);
-      })
-    );
-  }*/
-
-
-
-   getTotalPageAppUser(){
-     let kw = this.searchFormGroup?.value.keyword;
-    this.users1 = this.userService.searchAppUserByUsername(kw,this.currentPage, this.pageSize).subscribe({
-      next: value => {
-        this.appUserSize = value.length;
-        this.totalPages = value[0].totalPages;
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
-  }
 
 
   handleDisableAppUser(appUser: AppUser) {
@@ -127,12 +81,6 @@ export class ListAppUserComponent implements OnInit {
     this.userService.disableAppUser(appUser.id).subscribe({
       next: value => {
         console.log(value);
-        this.users = this.users.pipe(
-          map(data=>{
-            let index = data.indexOf(appUser)
-            data.slice(index,1)
-            return data;
-          }))
 
       },
       error: err => {
@@ -147,12 +95,7 @@ export class ListAppUserComponent implements OnInit {
     if (!conf) return;
     this.userService.deleteAppUser(user.id).subscribe({
       next: value => {
-        this.users = this.users.pipe(
-          map(data=>{
-            let index = data.indexOf(user)
-            data.slice(index,1)
-            return data;
-          }))
+        console.log(value)
 
       },
       error: err => {
@@ -178,49 +121,22 @@ export class ListAppUserComponent implements OnInit {
     this.router.navigate(['userDates', id]);
   }
 
-  handleDetailAppUser(id: string){
+  handleDetailAppUser(id: number){
     this.router.navigate(['detailUser', id]);
   }
 
-  handleUpdateAppUser(id: string){
+  handleUpdateAppUser(id: number){
     this.router.navigate(['updateUser', id]);
   }
 
-  handleSaveSubscription() {
-    let subscription: Subscription = this.newSubscriptionFormGroup.value;
-    this.subscriptionService.saveSubscription(subscription).subscribe({
-      next: value => {
-        console.log(value);
-        alert("Abonnement crée avec succès !");
-        //this.newSubscriptionFormGroup.reset();
-        this.router.navigateByUrl("/users");
-      },
-      error: err => {
-        console.log(err);
-      }
-    })
-  }
 
-
-  goToPage(page: number) {
+  // navigation entre les pages
+  goToPage(page: number){
     this.currentPage = page;
-    this.handleSearchAppUserByUsername();
+    this.handleAppUserSpecification();
   }
 
-  goToPreviousPage() {
-    this.currentPage = this.currentPage - 1;
-    this.handleSearchAppUserByUsername();
-  }
 
-  goToNextPage() {
-    this.currentPage = this.currentPage + 1;
-    this.handleSearchAppUserByUsername();
-  }
-
-  reloadPage(page: number) {
-    this.currentPage = page - 1;
-    this.handleSearchAppUserByUsername();
-  }
 
   handleAddRoleToUser() {
     const { username, roleName } = this.addRoleToUserFormGroup.value;

@@ -1,90 +1,94 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, of} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {AppUser} from "../../models/app-user.models";
 import {Login} from "../../models/login.models";
+import {jwtDecode} from "jwt-decode";
+import {DataResponse} from "../../models/DataResponse";
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
-const TOKEN_KEY = 'auth-token';
-const USER_KEY = 'auth-user';
+
+
+const TOKEN_KEY = "token";
+const path = "auth/";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  authenticateUser: AppUser | undefined;
-  authenticated: boolean | undefined;
 
   constructor(private http: HttpClient) {
   }
 
+  //npm i jwt-decode
+
   forgotPassword(username : string): Observable<any> {
-    return this.http.put(environment.backendHostPublic + "forgotPassword/" , username);
+    return this.http.put(environment.backendAPI + "forgotPassword/" , username);
   }
 
-  public signIn(login: Login) {
-    return this.http.post<any>(environment.backendHostPublic + "signIn", login);
+  public signIn(login: Login): Observable<DataResponse<string>> {
+    return this.http.post<DataResponse<string>>(environment.backendAPI+ path +"signIn", login);
   }
 
   public signUp(appUser: AppUser) {
-    return this.http.post<AppUser>(environment.backendHostPublic + "signUp", appUser);
+    return this.http.post<AppUser>(environment.backendAPI + path +"signUp", appUser);
   }
 
-  //manage token
-  public saveToken(token: string): void {
+  //ajout du token dans le localstorage
+  public addTokenInLocalstorage(token: string  | undefined): void {
+    console.log('addTokenInLocalstorage', token)
     localStorage.removeItem(TOKEN_KEY);
-    localStorage.setItem(TOKEN_KEY, token);
+    if (typeof token === "string") {
+      localStorage.setItem(TOKEN_KEY, token);
+    }
   }
 
-  public getToken(): string | null {
+  // obtention du token dans le localstorage
+  public getToken(): any  {
     return localStorage.getItem(TOKEN_KEY);
   }
 
-  public saveUser(user: any): void {
-    localStorage.removeItem(USER_KEY);
-    localStorage.setItem(USER_KEY, JSON.stringify(user));
+  // obtention des roles de l'utilisateur à partir du localstorage
+  getRolesFromToken():any{
+    return this.getClaimOfToken()?.authorities;
   }
 
-  public getUser(): any {
-    const user = localStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
+  // obtention du username à partir du localstorage
+  getUsernameFromToken(): string{
+    return this.getClaimOfToken()?.sub;
+  }
+
+  hasAnyAuthority(authorities: string[] | string): boolean {
+
+    // vérification de l'existence du token
+    if (!localStorage.getItem(TOKEN_KEY)) {
+      return false;
+    }
+    // on vérifie si authorities est un tableau
+    if (!Array.isArray(authorities)) {
+      // conversion du string authorities en tableau d'authorities
+      authorities = [authorities];
     }
 
-    return {};
+    //console.log("authorities...",this.getRoleFromToken());
+    // retourne true si l'authority entré fait partie des autorities de l'utilisateur connecter
+    console.log(this.getRolesFromToken())
+    return this.getRolesFromToken().some((authority: string) => authorities.includes(authority) );
   }
 
-  isAdmin(){
-    if(this.authenticateUser){
-      return this.authenticateUser.roles.indexOf("ADMIN")>-1;
+  getClaimOfToken(): any{
+    return this.decodeAccescToken(this.getToken());
+  }
+
+  decodeAccescToken(token: string){
+    try {
+      return jwtDecode(token);
+    }catch (error){
+      return null;
     }
-    else return false;
   }
-
-  isEditor(){
-    if(this.authenticateUser){
-      return this.authenticateUser.roles.indexOf("EDITOR")>-1;
-    }
-    else return false;
-  }
-
-  isUser(){
-    if(this.authenticateUser){
-      return this.authenticateUser.roles.indexOf("USER")>-1;
-    }
-    else return false;
-  }
-
-  handleLogout(){
-    this.authenticated=false;
-    this.authenticateUser=undefined;
-    localStorage.removeItem(USER_KEY);
-  }
-
 
 
 }

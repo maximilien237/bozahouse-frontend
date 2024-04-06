@@ -1,9 +1,4 @@
 
-<html class="bg-secondary">
-<body class="bg-secondary">
-<app-navbar></app-navbar>
-
-
 <div *ngIf="currentUser" class="container col-md-4">
   <div class="card bg-dark">
     <div class="col">
@@ -92,145 +87,13 @@
               Mes  avis
             </a>&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <a *ngIf="currentUser.account == 'talent' || currentUser.account == 'employer' || currentUser.account == 'enterprise'" (click)="handleListAppUserSubscription(currentUser.id)" class="btn btn-outline-light">
+ <!--           <a *ngIf="currentUser.account == 'talent' || currentUser.account == 'employer' || currentUser.account == 'enterprise'" (click)="handleListAppUserSubscription(currentUser.id)" class="btn btn-outline-light">
              Mes abonnements
-            </a>
-          </p>
-        </div>
-      </div>
-<!--
-
-      <div class="spacer-margin">
-        <h5 style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Mes profils</h5>
-        <div class="card-body">
-          <p class="card-text">
-            <a (click)="handleListAppUserTalent(currentUser.id)" class="btn btn-secondary">
-              profils
-            </a>&nbsp;&nbsp;&nbsp;&nbsp;
+            </a>-->
           </p>
         </div>
       </div>
 
-      <div class="spacer-margin">
-        <h5 style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Mes abonnements</h5>
-        <div class="card-body">
-          <p class="card-text">
-            <a (click)="handleListAppUserSubscription(currentUser.id)" class="btn btn-secondary">
-              abonnements
-            </a>&nbsp;&nbsp;&nbsp;&nbsp;
-          </p>
-        </div>
-      </div>
--->
-
-
-
-    <!--  <div class="card">
-        <h5 class="card-header">NOM</h5>
-        <div class="card-body">
-          <span class="card-text">
-            {{currentUser.lastname}}
-          </span>
-        </div>
-      </div>
-
-       <div class="spacer-margin">
-        <h5 style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid"></h5>
-        <div class="card-body">
-          <p class="card-text">
-
-          </p>
-        </div>
-      </div>
-
-      -->
-
-<!--      <div class="card">
-        <h5 class="card-header">PRENOM</h5>
-        <div class="card-body">
-          <span class="card-text">
-            {{currentUser.firstname}}
-          </span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h5 class="card-header">PSEUDO</h5>
-        <div class="card-body">
-            <span class="card-text">
-            {{currentUser.username}}
-          </span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h5 class="card-header">DATE DE NAISSANCE</h5>
-        <div class="card-body">
-              <span class="card-text">
-            {{currentUser.birthday | date: 'd MMMM yyyy'}}
-          </span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h5 class="card-header">EMAIL</h5>
-        <div class="card-body">
-          <span class="card-text">
-            {{currentUser.email}}
-          </span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h5 class="card-header">COMPTE</h5>
-        <div class="card-body">
-          <span class="card-text">
-            {{currentUser.account}}
-          </span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h5 class="card-header">CODE PROMO</h5>
-        <div class="card-body">
-           <span class="card-text">
-            {{currentUser.promoCode}}
-          </span>
-        </div>
-      </div>
-
-            <div class="card">
-              <h5 class="card-header">Mes offres</h5>
-              <div class="card-body">
-                <div class="card-text">
-                  <a (click)="handleListAppUserOffer(currentUser.id)" class="btn btn-secondary">
-                    offres
-                  </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <h5 class="card-header">Mes profils</h5>
-              <div class="card-body">
-                <div class="card-text">
-                  <a (click)="handleListAppUserTalent(currentUser.id)" class="btn btn-secondary">
-                    profils
-                  </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <h5 class="card-header">Mes abonnements</h5>
-              <div class="card-body">
-                <div class="card-text">
-                  <a (click)="handleListAppUserSubscription(currentUser.id)" class="btn btn-secondary">
-                    abonnements
-                  </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-              </div>
-            </div>-->
 
     </div>
 
@@ -238,13 +101,7 @@
 </div>
 
 
-<div class="spacer"></div>
 
-<app-footer>
-
-</app-footer>
-</body>
-</html>
 
 
 

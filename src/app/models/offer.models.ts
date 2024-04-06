@@ -1,6 +1,6 @@
 
 export interface Offer {
-  id: string;
+  id: number;
   type: string;
   title: string;
   mission: string;

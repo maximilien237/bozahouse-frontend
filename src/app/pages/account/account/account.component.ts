@@ -11,7 +11,6 @@ import {Offer} from "../../../models/offer.models";
 import {Talent} from "../../../models/talent.models";
 import {Subscription} from "../../../models/subscription.models";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FilterOffer} from "../../../models/filterOffer.models";
 
 
 @Component({
@@ -33,22 +32,18 @@ export class AccountComponent implements OnInit {
   errorMessage!: string;
   totalPagesOffer!: number;
   totalPagesTalent!: number;
-  totalPagesSubscription!: number;
   pageSizeOffer: number = 5;
   pageSizeTalent: number = 5;
-  pageSizeSubscription: number = 5;
   offers1!: any;
-  subscriptions1!: any;
   talents1!: any;
   currentPageOffer: number = 0;
   currentPageTalent: number = 0;
-  currentPageSubscription: number = 0;
+
 
 
   subscriptions!: Observable<Array<Subscription>>;
   talents!: Observable<Array<Talent>>;
   errorTalentMessage!: string;
-  errorSubscriptionMessage!: string;
 
 
 
@@ -63,42 +58,25 @@ export class AccountComponent implements OnInit {
 
     this.listOfferByAppUser();
     this.listTalentByAppUser();
-    this.listSubscriptionByAppUser();
     this.getTotalPageOffers();
-    this.getTotalPageSubscriptions();
     this.getTotalPageTalents();
 
-    this.isLoggedIn = !!this.authenticationService.getToken();
 
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN") > -1;
-      this.isEditor = this.roles.indexOf("EDITOR") > -1;
-      this.isUser = this.roles.indexOf("USER") > -1;
-
-      this.username = user.username;
-
-
-    }
+      this.username = this.authenticationService.getUsernameFromToken();
 
   }
 
 
-  handleListAppUserSubscription(id: string) {
-    this.router.navigate(['userSubscriptions', id]);
-  }
 
-  handleListAppUserOffer(id: string) {
+  handleListAppUserOffer(id: number) {
     this.router.navigate(['userOffers', id]);
   }
 
-  handleListAppUserTalent(id: string) {
+  handleListAppUserTalent(id: number) {
     this.router.navigate(['userTalents', id]);
   }
 
-  handleListAppUserTestimony(id: string) {
+  handleListAppUserTestimony(id: number) {
     this.router.navigate(['userTestimonies', id]);
   }
 
@@ -125,10 +103,6 @@ export class AccountComponent implements OnInit {
     this.listTalentByAppUser();
   }
 
-  goToNextPageSubscription(page: number){
-    this.currentPageSubscription = page;
-    this.listSubscriptionByAppUser();
-  }
 
   getTotalPageOffers() {
     this.offers1 =  this.offerService.listOfferByAppUser(this.currentUser.id,this.currentPageOffer, this.pageSizeOffer)
@@ -159,18 +133,7 @@ export class AccountComponent implements OnInit {
 
 
 
-  getTotalPageSubscriptions() {
-    this.subscriptions1 =  this.subscriptionService.listSubscriptionByAppUser(this.currentUser.id, this.currentPageSubscription, this.pageSizeSubscription)
-      .subscribe({
-        next: value => {
-          console.log(value);
-          this.totalPagesSubscription = value[0].totalPages;
-        },
-        error: err => {
-          console.log(err);
-        }
-      });
-  }
+
 
   listOfferByAppUser() {
     this.offers = this.offerService.listOfferByAppUser(this.currentUser.id,this.currentPageOffer, this.pageSizeOffer).pipe(
@@ -191,14 +154,7 @@ export class AccountComponent implements OnInit {
   }
 
 
-  listSubscriptionByAppUser() {
-    this.subscriptions = this.subscriptionService.listSubscriptionByAppUser(this.currentUser.id,this.currentPageSubscription, this.pageSizeSubscription).pipe(
-      catchError(err => {
-        this.errorSubscriptionMessage = err.message;
-        return throwError(err);
-      })
-    );
-  }
+
 
   handleDeleteOffer(offer: Offer) {
     let conf = confirm("Are you sure ?");
@@ -242,19 +198,19 @@ export class AccountComponent implements OnInit {
 
   }
 
-  handleDetailOffer(id: string) {
+  handleDetailOffer(id: number) {
     this.router.navigate(['detailOffer', id]);
   }
 
-  handleUpdateOffer(id: string) {
+  handleUpdateOffer(id: number) {
     this.router.navigate(['updateOffer', id]);
   }
 
-  handleDetailTalent(id: string) {
+  handleDetailTalent(id: number) {
     this.router.navigate(['detailTalent', id]);
   }
 
-  handleUpdateTalent(id: string) {
+  handleUpdateTalent(id: number) {
     this.router.navigate(['updateTalent', id]);
   }
 

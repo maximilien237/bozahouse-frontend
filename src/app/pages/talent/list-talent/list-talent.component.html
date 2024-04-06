@@ -1,6 +1,3 @@
-<html class="bg-secondary" xmlns="http://www.w3.org/1999/html">
-<body class="bg-secondary">
-<app-navbar></app-navbar>
 
 <div class="container spacer  ">
   <div class="text-center">
@@ -18,7 +15,7 @@
 <!--          <h5 class="card-header bg-dark text-warning"><i class="bi bi-search"></i>Rechercher </h5>-->
           <div class="card-body bg-dark text-white-50" >
 
-            <form  *ngIf="talentFormGroup" [formGroup] = "talentFormGroup" (ngSubmit)="handleSearchTalents()" >
+            <form  *ngIf="talentFormGroup" [formGroup] = "talentFormGroup" (ngSubmit)="handleFilterTalents()" >
 
               <div class="mb-3 mt-2">
                 <label class="form-label">Métier</label>
@@ -168,8 +165,8 @@
     <div class="row">
 
       <ng-container>
-        <ng-container *ngIf="talents | async as listTalent; else failureOrLoading">
-          <div  *ngFor="let talent of talents | async"  class="col-md-4 ">
+        <ng-container *ngIf="talents  else failureOrLoading">
+          <div  *ngFor="let talent of talents | paginate: { itemsPerPage: 6, currentPage: currentPage, totalItems: totalElements }"  class="col-md-4 ">
             <div class="card  spacer-margin bg-dark">
 
               <div *ngIf="isAdmin" class="card-header">
@@ -200,7 +197,7 @@
       </span>
 
                 <ng-template #other>
-                  <span *ngIf="talent.salary" style="color: #bb2d3b; font-size: 20px"> {{talent.salary | number: '1.0-0'}} FCFA</span><br />
+                  <span *ngIf="talent.salary" style="color: #bb2d3b; font-size: 20px"> {{talent.salary? (talent.salary | number: '1.0-0') +'FCFA' : 'Salaire à définir avec l\'employeur'}} </span><br />
                 </ng-template>
 
                 <div class="text-muted mb-1">
@@ -230,15 +227,15 @@
                         <p class="text-warning">
                           Pour avoir accès à cette fonctionnalité, vous devez souscrire à un abonnement de type normal.
                           Pour ce faire, contactez notre agent en cliquant sur l'un des boutons suivants<i class="bi-arrow-down"></i>
-                        
+
                         </p>
-    
+
                         <ul class="nav list-unstyled text-small text-center ">
                           <li><a [href]= "'mailto:'+ email" style="font-size: 22px;" class=" link-secondary text-white-50"><i class="bi bi-envelope-fill"></i> </a>&nbsp;&nbsp;</li>
                           <li><a [href]="'tel:+237' + tel " style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-telephone-fill"></i></a>&nbsp;&nbsp;</li>
                           <li><a href="https://wa.me/656832062" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-whatsapp"></i></a>&nbsp;&nbsp;</li>
                         </ul>
-                      
+
                       </div>
                     </div>
 
@@ -272,29 +269,11 @@
 
     </div>
 
-    <ul class=" nav nav-pills spacer-left spacer-bottom">
-      <ng-container *ngIf="currentPage > 0 && currentPage != 0">
-        <li >
-          <a class="page-link btn ms-1" (click)="goToPage(currentPage - 1)" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-      </ng-container>
+    <div class="d-flex justify-content-center">
+      <pagination-controls (pageChange)="goToPage($event)"></pagination-controls>
+    </div>
 
-      <!-- "[A-Za-z0-9.%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{3,4}" -->
 
-      <li *ngFor="let item of [].constructor(totalPages); let page = index" >
-        <a [ngClass]="page==currentPage?'btn-warning':'btn-outline-warning'" (click)="goToPage(page)" class="btn ms-1"  >{{page}}</a>
-      </li>
-      <ng-container *ngIf="currentPage != totalPages - 1 && currentPage>0">
-        <li >
-          <a class="page-link btn ms-1" (click)="goToPage(currentPage + 1)" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ng-container>
-
-    </ul>
 
   </div >
 
@@ -306,16 +285,5 @@
 
 </div>
 
-<app-footer>
-
-</app-footer>
-</body>
-</html>
-
-<!--<html class="bg-secondary">
-<body class="bg-secondary">
-
-</body>
-</html>-->
 
 

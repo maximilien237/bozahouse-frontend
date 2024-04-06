@@ -1,1 +1,24 @@
-<p>modal-confirmation works!</p>
+<!-- ---------------------- Modal confirmation ------------------------- -->
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <div class="modal-body text-center p-3">
+          <br>
+          <img [src]=" images.imageErrorModal" width="60%" alt="">
+          <br>
+          <br>
+          <p class="h3 font-weight-bold">{{confMessageChild}}</p>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-dismiss="modal" aria-label="Close">Non &emsp;</button>
+<!--          <button type="button" class="btn btn-danger" (click)="onDeleteTask()">Oui, supprimer &emsp; <i class="fa fa-chevron-right"></i></button>-->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

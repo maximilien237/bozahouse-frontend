@@ -26,7 +26,7 @@ export class UserTestimoniesComponent implements OnInit {
   errorMessageAppUser!:string;
 
 
-  id!: string;
+  id!: number;
   errorMessage!:string;
   currentPage: number = 0;
   totalPages!: number;
@@ -43,20 +43,6 @@ export class UserTestimoniesComponent implements OnInit {
     this.handleGetTotalPageAppUserTestimonies();
     this.handleListAppUserTestimonies();
 
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN")>-1;
-      this.isEditor = this.roles.indexOf("EDITOR")>-1;
-      this.isUser = this.roles.indexOf("USER")>-1;
-
-      this.username = user.username;
-
-
-    }
 
   }
 

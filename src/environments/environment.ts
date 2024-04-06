@@ -9,7 +9,7 @@ export const environment = {
   backendHostAppUser: "http://vps91824.serveur-vps.net:8085/api/user/v1/",
   backendHostAdmin: "http://vps91824.serveur-vps.net:8085/api/admin/v1/"*/
 
-
+  backendAPI: "http://localhost:8085/api/v1/",
   backendHostPublic: "http://localhost:8085/api/auth/v1/",
   backendHostEditor: "http://localhost:8085/api/editor/v1/",
   backendHostAppUser: "http://localhost:8085/api/user/v1/",

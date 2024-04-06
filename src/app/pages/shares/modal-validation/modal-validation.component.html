@@ -1,1 +1,20 @@
-<p>modal-validation works!</p>
+<!-- -------------------------------- modal de Confirmation ------------ -->
+
+<div class="modal fade" id="modalvalidation"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabe2" aria-hidden="true">
+  <div class="modal-dialog largeur-modal" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body text-center p-3">
+        <br>
+                <img [src]="images.imageOk " width="60%" alt="">
+        <br>
+        <br>
+        <p class="h3 font-weight-bold">Parfait !</p>
+        <p class="h5 p-3">{{validationMessageChild}} </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark btn-block" data-dismiss="modal" aria-label="Close">Ok &emsp; <i class="fa fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -43,19 +43,8 @@ export class ListAppRoleComponent implements OnInit {
 
     });
 
-    this.isLoggedIn = !!this.authenticationService.getToken();
 
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.rolesUser = user.roles;
 
-      this.isAdmin = this.rolesUser.indexOf("ADMIN") > -1;
-      this.isEditor = this.rolesUser.indexOf("EDITOR") > -1;
-      this.isUser = this.rolesUser.indexOf("USER") > -1;
-
-      //this.username = user.username;
-
-    }
 
   }
 

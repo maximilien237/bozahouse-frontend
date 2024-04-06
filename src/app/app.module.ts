@@ -27,10 +27,6 @@ import { DetailNewsComponent } from './dashboard/news/detail-news/detail-news.co
 import { AddNewsComponent } from './dashboard/news/add-news/add-news.component';
 import { ListNewsComponent } from './dashboard/news/list-news/list-news.component';
 import { UpdateNewsComponent } from './dashboard/news/update-news/update-news.component';
-import { ListSubscriptionComponent } from './dashboard/subscription/list-subscription/list-subscription.component';
-import { AddSubscriptionComponent } from './dashboard/subscription/add-subscription/add-subscription.component';
-import { UpdateSubscriptionComponent } from './dashboard/subscription/update-subscription/update-subscription.component';
-import { DetailSubscriptionComponent } from './dashboard/subscription/detail-subscription/detail-subscription.component';
 
 import { AddOfferComponent } from './pages/offer/add-offer/add-offer.component';
 import { DetailOfferComponent } from './pages/offer/detail-offer/detail-offer.component';
@@ -50,10 +46,7 @@ import {RegisterComponent} from "./pages/register/register.component";
 import { AccountComponent } from './pages/account/account/account.component';
 import { AdminComponent } from './dashboard/admin/admin.component';
 import {AuthInterceptor} from "./services/interceptor/AuthInterceptor";
-import { ForfaitComponent } from './pages/forfait/forfait.component';
 import { UserOffersComponent } from './pages/about-user/user-offers/user-offers.component';
-import { UserSubscriptionsComponent } from './pages/about-user/user-subscriptions/user-subscriptions.component';
-import {UserDatesComponent} from "./pages/about-user/user-dates/user-dates.component";
 import {UserTalentsComponent} from "./pages/about-user/user-talents/user-talents.component";
 import {registerLocaleData} from "@angular/common";
 import * as fr from '@angular/common/locales/fr';
@@ -64,14 +57,13 @@ import { AddTestimonyComponent } from './pages/testimony/add-testimony/add-testi
 import { ListTestimonyComponent } from './pages/testimony/list-testimony/list-testimony.component';
 import { UpdateTestimonyComponent } from './pages/testimony/update-testimony/update-testimony.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
-import { ListAppUserDisabledComponent } from './dashboard/app-user/list-app-user-disabled/list-app-user-disabled.component';
-import { ListTalentDisabledComponent } from './pages/talent/list-talent-disabled/list-talent-disabled.component';
-import { ListOfferDisabledComponent } from './pages/offer/list-offer-disabled/list-offer-disabled.component';
 import { PrivacyOutComponent } from './pages/privacy-out/privacy-out.component';
 import {ModalManagementComponent} from "./pages/fragments/modal-management/modal-management.component";
 import { ModalValidationComponent } from './pages/shares/modal-validation/modal-validation.component';
 import { ModalConfirmationComponent } from './pages/shares/modal-confirmation/modal-confirmation.component';
 import { ModalErrorComponent } from './pages/shares/modal-error/modal-error.component';
+import { ConfigurationComponent } from './pages/configuration/configuration.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -93,10 +85,6 @@ import { ModalErrorComponent } from './pages/shares/modal-error/modal-error.comp
     AddNewsComponent,
     ListNewsComponent,
     UpdateNewsComponent,
-    ListSubscriptionComponent,
-    AddSubscriptionComponent,
-    UpdateSubscriptionComponent,
-    DetailSubscriptionComponent,
     AddOfferComponent,
     DetailOfferComponent,
     UpdateOfferComponent,
@@ -109,11 +97,8 @@ import { ModalErrorComponent } from './pages/shares/modal-error/modal-error.comp
     ListAppRoleComponent,
     AccountComponent,
     AdminComponent,
-    ForfaitComponent,
-    UserDatesComponent,
     UserTalentsComponent,
     UserOffersComponent,
-    UserSubscriptionsComponent,
     ForgotPasswordComponent,
     InfoComponent,
     UserTestimoniesComponent,
@@ -121,24 +106,23 @@ import { ModalErrorComponent } from './pages/shares/modal-error/modal-error.comp
     ListTestimonyComponent,
     UpdateTestimonyComponent,
     PrivacyComponent,
-    ListAppUserDisabledComponent,
-    ListTalentDisabledComponent,
-    ListOfferDisabledComponent,
     PrivacyOutComponent,
     ModalManagementComponent,
     ModalValidationComponent,
     ModalConfirmationComponent,
-    ModalErrorComponent
+    ModalErrorComponent,
+    ConfigurationComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        NgxPaginationModule,
 
 
-  ],
+    ],
 
   providers: [ {
     provide: HTTP_INTERCEPTORS,

@@ -17,7 +17,7 @@ import {formatDate} from "@angular/common";
 })
 export class UpdateAppUserComponent implements OnInit {
 
-  id!: string;
+  id!: number;
   appUser!: AppUser ;
   updateUserFormGroup!: FormGroup;
   constructor(private userService: AppUserService,

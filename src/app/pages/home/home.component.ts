@@ -48,21 +48,6 @@ export class HomeComponent implements OnInit {
     this.lastThreeTalent();
     this.handleCurrentAppUser();
 
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN") > -1;
-      this.isEditor = this.roles.indexOf("EDITOR") > -1;
-      this.isUser = this.roles.indexOf("USER") > -1;
-
-      this.username = user.username;
-
-
-    }
-
   }
 
 
@@ -154,11 +139,11 @@ export class HomeComponent implements OnInit {
 
     }
 
-    handleDetailOffer(id: string) {
+    handleDetailOffer(id: number) {
       this.router.navigate(['detailOffer', id]);
     }
 
-    handleUpdateOffer(id: string) {
+    handleUpdateOffer(id: number) {
       this.router.navigate(['updateOffer', id]);
     }
 
@@ -193,11 +178,11 @@ export class HomeComponent implements OnInit {
 
     }
 
-    handleDetailTalent(id: string) {
+    handleDetailTalent(id: number) {
       this.router.navigate(['detailTalent', id]);
     }
 
-    handleUpdateTalent(id: string) {
+    handleUpdateTalent(id: number) {
       this.router.navigate(['updateTalent', id]);
     }
 
@@ -207,7 +192,7 @@ export class HomeComponent implements OnInit {
     if (navigator.share){
       navigator.share({
         title: 'consulter les offres et les talents les plus récents',
-        url: 'http://localhost:4200/home'
+        url: window.location.href
       }).then(()=>{
         console.log("thanks for sharing !");
       }).catch(console.error)

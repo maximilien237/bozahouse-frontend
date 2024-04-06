@@ -46,18 +46,7 @@ export class ListNewsComponent implements OnInit {
     this.handleCurrentAppUser();
     this.handleGetTotalPageNews();
 
-    this.isLoggedIn = !!this.authenticationService.getToken();
 
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN")>-1;
-      this.isEditor = this.roles.indexOf("EDITOR")>-1;
-      this.isUser = this.roles.indexOf("USER")>-1;
-
-      //this.username = user.username;
-    }
 
   }
 

@@ -8,7 +8,6 @@ import {Talent} from "../../../models/talent.models";
 import {AppUser} from "../../../models/app-user.models";
 import {AppUserService} from "../../../services/app-user/app-user.service";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
-import {Offer} from "../../../models/offer.models";
 
 @Component({
   selector: 'app-user-talents',
@@ -26,7 +25,7 @@ export class UserTalentsComponent implements OnInit {
   currentUser!: AppUser;
   errorMessageAppUser!:string;
 
-  id!: string;
+  id!: number;
   errorMessage!:string;
   currentPage: number = 0;
   totalPages!: number;
@@ -41,24 +40,6 @@ export class UserTalentsComponent implements OnInit {
 
     this.handleGetTotalPageAppUserTalents();
     this.handleListAppUserTalents();
-
-
-
-    this.isLoggedIn = !!this.authenticationService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.authenticationService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.indexOf("ADMIN")>-1;
-      this.isEditor = this.roles.indexOf("EDITOR")>-1;
-      this.isUser = this.roles.indexOf("USER")>-1;
-
-      this.username = user.username;
-
-
-    }
-
 
   }
 
@@ -82,11 +63,11 @@ export class UserTalentsComponent implements OnInit {
 
   }
 
-  handleDetailTalent(id: string){
+  handleDetailTalent(id: number){
     this.router.navigate(['detailTalent', id]);
   }
 
-  handleUpdateTalent(id: string){
+  handleUpdateTalent(id: number){
     this.router.navigate(['updateTalent', id]);
   }
 

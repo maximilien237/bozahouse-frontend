@@ -22,10 +22,6 @@ import {ListAppRoleComponent} from "./dashboard/app-role/list-app-role/list-app-
 import {UpdateAppRoleComponent} from "./dashboard/app-role/update-app-role/update-app-role.component";
 import {DetailAppRoleComponent} from "./dashboard/app-role/detail-app-role/detail-app-role.component";
 import {AddAppRoleComponent} from "./dashboard/app-role/add-app-role/add-app-role.component";
-import {AddSubscriptionComponent} from "./dashboard/subscription/add-subscription/add-subscription.component";
-import {DetailSubscriptionComponent} from "./dashboard/subscription/detail-subscription/detail-subscription.component";
-import {UpdateSubscriptionComponent} from "./dashboard/subscription/update-subscription/update-subscription.component";
-import {ListSubscriptionComponent} from "./dashboard/subscription/list-subscription/list-subscription.component";
 import {ListNewsComponent} from "./dashboard/news/list-news/list-news.component";
 import {UpdateNewsComponent} from "./dashboard/news/update-news/update-news.component";
 import {DetailNewsComponent} from "./dashboard/news/detail-news/detail-news.component";
@@ -34,11 +30,9 @@ import {AddNewsComponent} from "./dashboard/news/add-news/add-news.component";
 import {AccountComponent} from "./pages/account/account/account.component";
 import {AdminComponent} from "./dashboard/admin/admin.component";
 
-import {ForfaitComponent} from "./pages/forfait/forfait.component";
-import {UserSubscriptionsComponent} from "./pages/about-user/user-subscriptions/user-subscriptions.component";
+
 import {UserOffersComponent} from "./pages/about-user/user-offers/user-offers.component";
 import {UserTalentsComponent} from "./pages/about-user/user-talents/user-talents.component";
-import {UserDatesComponent} from "./pages/about-user/user-dates/user-dates.component";
 import {AuthenticationGuard} from "./services/guards/authentication.guard";
 import {IsAdminGuard} from "./services/guards/is-admin.guard";
 import {IsEditorGuard} from "./services/guards/is-editor.guard";
@@ -49,11 +43,6 @@ import {ListTestimonyComponent} from "./pages/testimony/list-testimony/list-test
 import {UpdateTestimonyComponent} from "./pages/testimony/update-testimony/update-testimony.component";
 import {AddTestimonyComponent} from "./pages/testimony/add-testimony/add-testimony.component";
 import {PrivacyComponent} from "./pages/privacy/privacy.component";
-import {
-  ListAppUserDisabledComponent
-} from "./dashboard/app-user/list-app-user-disabled/list-app-user-disabled.component";
-import {ListOfferDisabledComponent} from "./pages/offer/list-offer-disabled/list-offer-disabled.component";
-import {ListTalentDisabledComponent} from "./pages/talent/list-talent-disabled/list-talent-disabled.component";
 import {PrivacyOutComponent} from "./pages/privacy-out/privacy-out.component";
 
 
@@ -61,20 +50,19 @@ import {PrivacyOutComponent} from "./pages/privacy-out/privacy-out.component";
 const routes: Routes = [
   { path: "home", component: HomeComponent, canActivate: [AuthenticationGuard]},
   { path: "account", component: AccountComponent, canActivate: [AuthenticationGuard]},
-  { path: "package", component: ForfaitComponent, canActivate: [AuthenticationGuard]},
 
 
   { path: "addOffer", component: AddOfferComponent, canActivate: [AuthenticationGuard] },
   { path: "detailOffer/:id", component: DetailOfferComponent, canActivate: [AuthenticationGuard] },
   { path: "updateOffer/:id", component: UpdateOfferComponent, canActivate: [AuthenticationGuard]},
   { path: "jobs", component: ListOfferComponent, canActivate: [AuthenticationGuard]},
-  { path: "offersDisabled", component: ListOfferDisabledComponent, canActivate: [AuthenticationGuard, IsAdminGuard]},
+
 
   { path: "addTalent", component: AddTalentComponent, canActivate: [AuthenticationGuard] },
   { path: "detailTalent/:id", component: DetailTalentComponent, canActivate: [AuthenticationGuard] },
   { path: "updateTalent/:id", component: UpdateTalentComponent, canActivate: [AuthenticationGuard]},
   { path: "talents", component: ListTalentComponent, canActivate: [AuthenticationGuard] },
-  { path: "talentsDisabled", component: ListTalentDisabledComponent, canActivate: [AuthenticationGuard, IsAdminGuard] },
+
 
   { path: "addTestimony", component: AddTestimonyComponent, canActivate: [AuthenticationGuard] },
   { path: "updateTestimony/:id", component: UpdateTestimonyComponent, canActivate: [AuthenticationGuard]},
@@ -99,19 +87,13 @@ const routes: Routes = [
   { path: "updateNews/:id", component: UpdateNewsComponent, canActivate: [AuthenticationGuard, IsAdminGuard]},
   { path: "listNews", component: ListNewsComponent, canActivate: [AuthenticationGuard, IsAdminGuard] },
 
-  { path: "addSubscription", component: AddSubscriptionComponent, canActivate: [AuthenticationGuard, IsEditorGuard] },
-  { path: "detailSubscription/:id", component: DetailSubscriptionComponent, canActivate: [AuthenticationGuard] },
-  { path: "updateSubscription/:id", component: UpdateSubscriptionComponent, canActivate: [AuthenticationGuard]},
-  { path: "listSubscription", component: ListSubscriptionComponent, canActivate: [AuthenticationGuard, IsEditorGuard] },
 
   { path: "addUser", component: AddAppUserComponent, canActivate: [AuthenticationGuard, IsAdminGuard] },
   { path: "detailUser/:id", component: DetailAppUserComponent, canActivate: [AuthenticationGuard, IsAdminGuard] },
   { path: "updateUser/:id", component: UpdateAppUserComponent, canActivate: [AuthenticationGuard, IsAdminGuard]},
   { path: "users", component: ListAppUserComponent, canActivate: [AuthenticationGuard, IsEditorGuard] },
-  { path: "usersDisabled", component: ListAppUserDisabledComponent, canActivate: [AuthenticationGuard, IsAdminGuard] },
 
-  { path: "userDates/:id", component: UserDatesComponent, canActivate: [AuthenticationGuard, IsAdminGuard]},
-  { path: "userSubscriptions/:id", component: UserSubscriptionsComponent, canActivate: [AuthenticationGuard]},
+
   { path: "userOffers/:id", component: UserOffersComponent, canActivate: [AuthenticationGuard]},
   { path: "userTalents/:id", component: UserTalentsComponent, canActivate: [AuthenticationGuard]},
   { path: "userTestimonies/:id", component: UserTestimoniesComponent, canActivate: [AuthenticationGuard]},
