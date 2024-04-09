@@ -1,38 +1,39 @@
 
 
+
   <main >
     <div class="container">
 
-      <div class="card bg-dark col-md-6 offset-md-3 mt-xxl-5 sp">
-        <h5 class="text-center text-warning spacer">BOZAHOUSE</h5>
-        <h5 class="text-center text-muted">la maison des bozayeurs ! </h5>
+      <div class="card col-md-6 offset-md-3 mt-xxl-5 sp">
+        <h5 class="text-center spacer">BOZAHOUSE</h5>
+        <h5 class="text-center ">la maison des bozayeurs ! </h5>
 
-        <div class="card-body text-muted">
+        <div class="card-body ">
 
           <form [formGroup]="loginFormGroup" (ngSubmit)="handleLogin()">
             <div class="mb-3">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i> Username</label>
-              <input (keydown.space)="$event.preventDefault()" type="text" formControlName="username" class="form-control bg-secondary" >
+              <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i> Email</label>
+              <input (keydown.space)="$event.preventDefault()" type="text" formControlName="username" class="form-control " >
 
-              <small *ngIf="loginFormGroup.controls['username'].errors && loginFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', loginFormGroup.controls['username'].errors)}}</small>
+              <small *ngIf="loginFormGroup.controls['username'].errors && loginFormGroup.controls['username'].touched" class="text-danger">{{handleGetErrorMessageFromChild('username', loginFormGroup.controls['username'].errors)}}</small>
+
+            </div>
+            <div class="mb-3 ">
+              <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Password</label>
+              <input (keydown.space)="$event.preventDefault()" type="password" formControlName="password" class="form-control" id="pwd">
+<!--              <button class="btn" (click)="showAndHidePassword()"><img src="favicon.ico" alt="show/hide password"></button>-->
+              <input type="checkbox" (change)="showAndHidePassword()" class="mt-2">&nbsp;<span  style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
+              <small *ngIf="loginFormGroup.controls['password'].errors && loginFormGroup.controls['password'].touched" class="text-danger">{{handleGetErrorMessageFromChild('password', loginFormGroup.controls['password'].errors)}}</small>
 
             </div>
 
 
-            <div class="mb-3">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Password</label>
-              <input (keydown.space)="$event.preventDefault()" type="password" formControlName="password" class="form-control bg-secondary" id="pwd">
-              <input type="checkbox" (change)="showAndHidePassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
-              <small *ngIf="loginFormGroup.controls['password'].errors && loginFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessage('password', loginFormGroup.controls['password'].errors)}}</small>
 
-            </div>
-
-
-            <span class="text-secondary" style="font-size: 15px">Pas de compte ? | <a class="hide-underline-link" routerLink="/register"><span class="text-light">Inscrivez vous</span></a></span>&nbsp;
+            <span  style="font-size: 15px">Pas de compte ? | <a class="hide-underline-link" routerLink="/register"><span>Inscrivez vous</span></a></span>&nbsp;
 <!--            <span class="text-white mb-2"  style="font-size: 15px"> | <a class="hide-underline-link" routerLink="/forgotPassword"><span style="font-size: 15px" class="text-warning">Mot de passe oublié ?</span></a></span><br>-->
 
-            <div class="text-center text-dark">
-              <button [disabled] = "!loginFormGroup.valid" class="btn btn-warning w-40 mt-lg-4" type="submit">Connexion</button>
+            <div class="text-center ">
+              <button [disabled] = "!loginFormGroup.valid" class="btn  w-40 mt-lg-4" type="submit">Connexion</button>
             </div>
 
           </form>

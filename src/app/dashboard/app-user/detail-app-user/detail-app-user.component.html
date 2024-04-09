@@ -1,7 +1,3 @@
-<html class="bg-secondary">
-<body class="bg-secondary">
-
-<app-header></app-header>
 
 
 <div class="container mt-lg-5 mb-lg-5 col-md-6 " >
@@ -49,7 +45,7 @@
         <h5 class="card-header text-light">EMAIL</h5>
         <div class="card-body">
           <span class="card-text text-warning">
-            {{user.email}}
+            {{user.username}}
           </span>
         </div>
       </div>
@@ -67,7 +63,7 @@
         <h5 class="card-header text-light">CODE PROMO</h5>
         <div class="card-body">
            <span class="card-text text-warning">
-            {{user.promoCode}}
+
           </span>
         </div>
       </div>
@@ -76,7 +72,7 @@
               <h5 class="card-header text-light">CODE DE PARAINAGE</h5>
               <div class="card-body">
                 <span class="card-text text-warning">
-                  {{user.referralCode}}
+
                 </span>
               </div>
             </div>
@@ -94,7 +90,7 @@
         <h5 class="card-header text-light">DERNIERE CONNEXION</h5>
         <div class="card-body">
                 <span class="card-text text-white-50">
-                  {{user.lastConnexion | date: 'd MMMM y HH:mm:ss'}}
+<!--                  {{user.lastConnexion | date: 'd MMMM y HH:mm:ss'}}-->
                 </span>
         </div>
       </div>
@@ -103,7 +99,7 @@
         <h5 class="card-header text-light">PREMIERE CONNEXION</h5>
         <div class="card-body">
                 <span class="card-text text-white-50">
-                  {{user.firstConnexion.toString()}}
+<!--                  {{user.firstConnexion.toString()}}-->
                 </span>
         </div>
       </div>
@@ -112,7 +108,7 @@
         <h5 class="card-header text-light">DATE DE BONUS</h5>
         <div class="card-body">
                 <span class="card-text text-white-50">
-                  {{user.discountDate | date: 'd MMMM y HH:mm:ss'}}
+<!--                  {{user.discountDate | date: 'd MMMM y HH:mm:ss'}}-->
                 </span>
         </div>
       </div>
@@ -173,7 +169,7 @@
 
     </div>
     <div class="card-footer text-center">
-      <span ><a class="text-warning" [href]= "'mailto:'+ user.email" style="font-size: 25px;"><i class="bi bi-envelope-fill"></i> </a></span>
+      <span ><a class="text-warning" [href]= "'mailto:'+ user.username" style="font-size: 25px;"><i class="bi bi-envelope-fill"></i> </a></span>
     </div>
 
   </div>
@@ -185,7 +181,4 @@
 
 </div>
 
-<app-footer></app-footer>
 
-</body>
-</html>

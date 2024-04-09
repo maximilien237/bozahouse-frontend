@@ -5,8 +5,6 @@ import { AppComponent } from './app.component';
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppRoutingModule} from "./app-routing.module";
-import { FooterComponent } from './pages/fragments/footer/footer.component';
-import { HeaderComponent } from './pages/fragments/header/header.component';
 
 import {HomeComponent} from "./pages/home/home.component";
 
@@ -18,7 +16,6 @@ import { DetailAppUserComponent } from './dashboard/app-user/detail-app-user/det
 import { UpdateAppUserComponent } from './dashboard/app-user/update-app-user/update-app-user.component';
 import { AddAppUserComponent } from './dashboard/app-user/add-app-user/add-app-user.component';
 
-import {NavbarComponent} from "./pages/fragments/navbar/navbar.component";
 import { ListTalentComponent } from './pages/talent/list-talent/list-talent.component';
 import { ListOfferComponent } from './pages/offer/list-offer/list-offer.component';
 
@@ -51,26 +48,23 @@ import {UserTalentsComponent} from "./pages/about-user/user-talents/user-talents
 import {registerLocaleData} from "@angular/common";
 import * as fr from '@angular/common/locales/fr';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { InfoComponent } from './pages/info/info.component';
 import { UserTestimoniesComponent } from './pages/about-user/user-testimonies/user-testimonies.component';
 import { AddTestimonyComponent } from './pages/testimony/add-testimony/add-testimony.component';
 import { ListTestimonyComponent } from './pages/testimony/list-testimony/list-testimony.component';
 import { UpdateTestimonyComponent } from './pages/testimony/update-testimony/update-testimony.component';
-import { PrivacyComponent } from './pages/privacy/privacy.component';
-import { PrivacyOutComponent } from './pages/privacy-out/privacy-out.component';
-import {ModalManagementComponent} from "./pages/fragments/modal-management/modal-management.component";
 import { ModalValidationComponent } from './pages/shares/modal-validation/modal-validation.component';
 import { ModalConfirmationComponent } from './pages/shares/modal-confirmation/modal-confirmation.component';
 import { ModalErrorComponent } from './pages/shares/modal-error/modal-error.component';
 import { ConfigurationComponent } from './pages/configuration/configuration.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import { NavBarComponent } from './pages/static/nav-bar/nav-bar.component';
+import { ColorModeComponent } from './pages/static/color-mode/color-mode.component';
+import {FooterComponent} from "./pages/static/footer/footer.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    FooterComponent,
-    HeaderComponent,
     FooterComponent,
     LoginComponent,
     RegisterComponent,
@@ -78,7 +72,6 @@ import {NgxPaginationModule} from "ngx-pagination";
     DetailAppUserComponent,
     UpdateAppUserComponent,
     AddAppUserComponent,
-    NavbarComponent,
     ListTalentComponent,
     ListOfferComponent,
     DetailNewsComponent,
@@ -100,18 +93,16 @@ import {NgxPaginationModule} from "ngx-pagination";
     UserTalentsComponent,
     UserOffersComponent,
     ForgotPasswordComponent,
-    InfoComponent,
     UserTestimoniesComponent,
     AddTestimonyComponent,
     ListTestimonyComponent,
     UpdateTestimonyComponent,
-    PrivacyComponent,
-    PrivacyOutComponent,
-    ModalManagementComponent,
     ModalValidationComponent,
     ModalConfirmationComponent,
     ModalErrorComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
+    NavBarComponent,
+    ColorModeComponent
   ],
     imports: [
         BrowserModule,

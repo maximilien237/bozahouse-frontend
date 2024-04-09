@@ -1,145 +1,259 @@
-<!doctype html>
-<html lang="en" class="bg-secondary">
 
-<body class="d-flex  text-white bg-secondary">
 
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="mb-auto">
-    <div>
 
+<main >
+
+  <div class="container col-md-10">
+
+    <div class="card col-md-7 offset-md-3 mt-xxl-5 mb-xxl-5">
+      <h5 class="text-center text-warning spacer">BOZAHOUSE</h5>
+      <h5 class="text-center text-muted">la maison des bozayeurs ! </h5>
+      <h5 class="text-center text-white-50" style="font-size: 14px">besoin d'aide ? <a href="javascript:void (0);" class="text-decoration-none text-warning" data-bs-toggle="modal" data-bs-target="#help">Cliquez ici</a></h5>
+
+      <div class="card-body ">
+        <form [formGroup] = "registerFormGroup" (ngSubmit)="handleRegister()">
+
+
+          <div class="mb-3">
+            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de compte</label>
+            <select class="form-select bg-secondary" formControlName = "account" >
+              <option value="talent">Talent</option>
+              <option value="employer">Employeur</option>
+              <option value="enterprise">Entreprise</option>
+            </select>
+            <small *ngIf="r['account'].errors && r['account'].touched" class="text-danger">{{handleGetErrorMessageFromChild('account', r['account'].errors)}}</small>
+
+          </div>
+
+
+          <div class="mb-3">
+            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Comment avez vous connu Bozahouse ?</label>
+            <select class="form-select bg-secondary" formControlName = "howKnowUs">
+              <option value="friend">Amis</option>
+              <option value="facebook">Facebook</option>
+              <option value="whatsapp">Whatsapp</option>
+              <option value="linkedin">LinkedIn</option>
+              <option value="youtube">Youtube</option>
+              <option value="twitter">Twitter</option>
+              <option value="other">Autre</option>
+            </select>
+            <small *ngIf="r['howKnowUs'].errors && r['howKnowUs'].touched" class="text-danger">{{handleGetErrorMessageFromChild('howKnowUs', r['howKnowUs'].errors)}}</small>
+
+          </div>
+
+          <div class="mb-3 mt-2">
+            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom</label>
+            <input type="text" formControlName = "lastname" class="form-control bg-secondary">
+            <small *ngIf="r['lastname'].errors && r['lastname'].touched" class="text-danger">{{handleGetErrorMessageFromChild('lastname', r['lastname'].errors)}}</small>
+
+          </div>
+
+          <div class="mb-3 mt-2">
+            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Prénom</label>
+            <input type="text" formControlName = "firstname" class="form-control bg-secondary">
+            <small *ngIf="r['firstname'].errors && r['firstname'].touched" class="text-danger">{{handleGetErrorMessageFromChild('firstname', r['firstname'].errors)}}</small>
+
+          </div>
+
+          <div class="mb-3 mt-2">
+            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Sexe</label>
+            <select class="form-select bg-secondary" formControlName = "sex">
+              <option value="" disabled>Choose...</option>
+              <option value="Homme">Homme</option>
+              <option value="Femme">Femme</option>
+            </select>
+            <small *ngIf="r['sex'].errors && r['sex'].touched" class="text-danger">{{handleGetErrorMessageFromChild('sex', r['sex'].errors)}}</small>
+
+          </div>
+
+          <!--            <div class="mb-3">
+                        <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
+                        <input (keydown.space)="$event.preventDefault()" type="email" formControlName = "email" class="form-control bg-secondary" placeholder="ex : youremail@gmail.com">
+                        <small *ngIf="r['email'].errors && r['email'].touched" class="text-danger">{{handleGetErrorMessageFromChild('email', r['email'].errors)}}</small>
+
+                      </div>-->
+
+          <div class="mb-3">
+            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
+            <input (keydown.space)="$event.preventDefault()" type="text" formControlName = "username" class="form-control bg-secondary">
+            <small *ngIf="r['username'].errors && r['username'].touched" class="text-danger">{{handleGetErrorMessageFromChild('username', r['username'].errors)}}</small>
+
+          </div>
+
+          <div class="mb-3 mt-2">
+            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
+            <input type="password" formControlName = "password" class="form-control bg-secondary" id="pwd">
+            <input type="checkbox" (change)="showAndHidePassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
+            <small *ngIf="r['password'].errors && r['password'].touched" class="text-danger">{{handleGetErrorMessageFromChild('password', r['password'].errors)}}</small>
+          </div>
+
+          <div class="mb-3 mt-2">
+            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du mot de passe</label>
+            <input type="password" formControlName = "confirmPassword" class="form-control bg-secondary" id="confPwd">
+            <input type="checkbox" (change)="showAndHideConfirmPassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
+            <small *ngIf="r['confirmPassword'].errors && r['confirmPassword'].touched" class="text-danger">{{handleGetErrorMessageFromChild('confirmPassword', r['confirmPassword'].errors)}}</small>
+            <small *ngIf="!passwordsMatch()" class="text-danger">Les mots de passe ne correspondent pas</small>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date d'anniversaire</label>
+            <input type="date" formControlName = "birthday" class="form-control bg-secondary">
+            <small *ngIf="r['birthday'].errors && r['birthday'].touched" class="text-danger">{{handleGetErrorMessageFromChild('birthday', r['birthday'].errors)}}</small>
+
+          </div>
+
+          <!--     <div class="mb-3">
+                 <label class="form-label">Code de parrainage</label>
+                 <input type="text" formControlName = "referralCode" class="form-control bg-secondary">
+                 <small *ngIf="r['referralCode'].errors && r['referralCode'].touched" class="text-danger">{{handleGetErrorMessageFromChild('referralCode', r['referralCode'].errors)}}</small>
+               </div>-->
+
+          <div class="mb-3 form-check text-light">
+            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>j'ai lu et approuvé les <a href="javascript:void (0);" class="hide-underline-link text-warning" data-bs-toggle="modal" data-bs-target="#terms">termes</a></label>&nbsp;
+            <input type="checkbox" formControlName = "acceptTerms" class="form-check-input bg-secondary">
+            <small *ngIf="r['acceptTerms'].errors && r['acceptTerms'].touched" class="text-danger">{{handleGetErrorMessageFromChild('acceptTerms', r['acceptTerms'].errors)}}</small>
+
+          </div>
+
+          <span class="text-secondary" style="font-size: 17px">Déjà un compte ? | <a class="hide-underline-link" routerLink="/login"><span class="text-warning">Connectez vous</span></a></span>
+
+          <div class="text-center text-white">
+            <button [disabled] = "!registerFormGroup.valid " class="btn btn-warning w-30 mb-xxl-2 mt-lg-1" type="submit">Inscription</button>
+          </div>
+
+        </form>
+        <span class="text-light text-center"> les champs marqués par <i class="text-danger">*</i> sont obligatoires</span>
+      </div>
     </div>
-  </header>
+  </div>
 
-  <main >
-
-    <div class="container col-md-10">
-
-      <div class="card bg-dark col-md-7 offset-md-3 mt-xxl-5 mb-xxl-5">
-        <h5 class="text-center text-warning spacer">BOZAHOUSE</h5>
-        <h5 class="text-center text-muted">la maison des bozayeurs ! </h5>
-        <h5 class="text-center text-white-50" style="font-size: 14px">besoin d'aide ? <a class="text-warning text-decoration-none" routerLink="/info" style="font-size: 12px">Cliquez ici</a></h5>
-
-        <div class="card-body text-muted">
-          <form [formGroup] = "registerFormGroup" (ngSubmit)="handleRegister()">
+</main>
 
 
-            <div class="mb-3">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de compte</label>
-              <select class="form-select bg-secondary" formControlName = "account" >
-                <option value="talent">Talent</option>
-                <option value="employer">Employeur</option>
-                <option value="enterprise">Entreprise</option>
-              </select>
-              <small *ngIf="registerFormGroup.controls['account'].errors && registerFormGroup.controls['account'].touched" class="text-danger">{{getErrorMessage('account', registerFormGroup.controls['account'].errors)}}</small>
 
-            </div>
+<!-- Modal terms -->
+<div class="modal fade " id="terms" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Politique de confidentielité</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <h5 >PROTECTION DES DONNEES</h5>
+          <p >
+            Cette politique de protection de données décrit la manière dont vos informations personnelles sont collectées et utilisées
+            lorsque vous postez des annonces sur Bozahouse.
+          </p>
+
+          <h5 >COLLECTE DE DONNEES PERSONNELLES</h5>
+
+          <p>
+            Losque vous postez une annonce, nous collectons certaines informations, notamment votre nom,
+            adresse électronique, numéro de télépone et l'url de vos réseaux sociaux.
+            Nous utilisons ces informations pour permettre à votre cible d'entrer facilement en contact avec vous.
+          </p>
+          <p>
+            Lorsque nous parlons d'informations personnelles, dans la présente politique de confidentialité, nous
+            parlons d'informations sur les annonces et vos données personnelles.
+          </p>
+
+          <h5 > TRAITEMENT DE DONNEES PERSONNELLES</h5>
+
+          <p>
+            Nous utilisons les informations que nous collectons pour permettre à votre cible d'entrer facilement en contact avec vous.
+          </p>
 
 
-            <div class="mb-3">
-              <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Comment avez vous connu Bozahouse ?</label>
-              <select class="form-select bg-secondary" formControlName = "howKnowUs">
-                <option value="friend">Amis</option>
-                <option value="facebook">Facebook</option>
-                <option value="whatsapp">Whatsapp</option>
-                <option value="linkedin">LinkedIn</option>
-                <option value="youtube">Youtube</option>
-                <option value="twitter">Twitter</option>
-                <option value="other">Autre</option>
-              </select>
-              <small *ngIf="registerFormGroup.controls['howKnowUs'].errors && registerFormGroup.controls['howKnowUs'].touched" class="text-danger">{{getErrorMessage('howKnowUs', registerFormGroup.controls['howKnowUs'].errors)}}</small>
+          <h5 >PARTAGE DE DONNEES PERSONNELLES</h5>
+          <p>
+            Nous partageons vos informations personnelles avec vos futurs employeurs si vous êtes à la recherche d'un emploi
+            ou avec vos futurs employés si vous êtes à la recherche des talents.
+          </p>
 
-            </div>
+          <h5 >VOS DROITS</h5>
+          <p>
+            Vous avez le droit d'accéder aux informations personnelles que nous détenons à votre sujet et de demander que vos informations
+            personnelles soient corrigées, mise à jour ou supprimer. Si vous souhaitez exercer ce droit, veuillez nous contacter via les
+            coordonnées ci-dessous.
+          </p>
+          <h5 >DETENTION DES DONNEES</h5>
 
-            <div class="mb-3 mt-2">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom</label>
-              <input type="text" formControlName = "lastname" class="form-control bg-secondary">
-              <small *ngIf="registerFormGroup.controls['lastname'].errors && registerFormGroup.controls['lastname'].touched" class="text-danger">{{getErrorMessageName('lastname', registerFormGroup.controls['lastname'].errors)}}</small>
+          <p>
+            Lorsque vous vous inscrivez sur notre site, nous conservons vos informations jusqu'à ce que vous nous demandiez des les supprimer.
+            Nous pouvons mettre à jour cette politique de confidentialité de temps à autre à fin d'ameliorer votre expérience sur Bozahouse.
+          </p>
+          <p>
+            Pour plus d'informations sur nos pratiques de confidentialitées, si vous avez es questions ou si vous souhaitez
+            déposer une plainte, veuillez nous contacter par courrier électronique à l'adresse support@bozahouse.com ou par téléphone au numéro +237656832062
+          </p>
+          <p>
+            L’utilisateur est invité à prendre connaissance de cette Politique à chaque fois qu’il utilise nos services, sans qu’il soit nécessaire de l’en prévenir formellement.
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-            </div>
 
-            <div class="mb-3 mt-2">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Prénom</label>
-              <input type="text" formControlName = "firstname" class="form-control bg-secondary">
-              <small *ngIf="registerFormGroup.controls['firstname'].errors && registerFormGroup.controls['firstname'].touched" class="text-danger">{{getErrorMessageName('firstname', registerFormGroup.controls['firstname'].errors)}}</small>
+<!-- Modal help -->
+<div class="modal fade " id="help" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel1">PAGE D'AIDE</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container ">
+          <span >
+        Lisez les instructions suivantes pour remplir correctement votre formulaire d'inscription, car cette étape est crutiale pour la suite de votre expérience.
+      </span>
 
-            </div>
+          <h5 class="mt-2">Type de compte</h5>
 
-            <div class="mb-3 mt-2">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Sexe</label>
-              <select class="form-select bg-secondary" formControlName = "sex">
-                <option value="" disabled>Choose...</option>
-                <option value="Homme">Homme</option>
-                <option value="Femme">Femme</option>
-              </select>
-              <small *ngIf="registerFormGroup.controls['sex'].errors && registerFormGroup.controls['sex'].touched" class="text-danger">{{getErrorMessage('sex', registerFormGroup.controls['sex'].errors)}}</small>
+          <span > Ce champs comporte trois options parmi lesquelles : Talent, Employeur et Entreprise.</span>
+          <ul>
+            <li>Si vous êtes à la recherche d'un emploi, sélectionner Talent. </li>
+            <li> Si vous rechercher un freelancer pour exécuter une tâche, sélectionner Employeur. </li>
+            <li> Si vous êtes une entreprise et rechercher des talents (employés) et ou freelancer sélectionner Entreprise. </li>
+          </ul>
 
-            </div>
+          <h5 class="mt-2">Comment avez vous connu Bozahouse ?</h5>
+          <span > Ici il est question pour vous de nous dire comment vous nous avez connu.</span>
 
-            <div class="mb-3">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
-              <input (keydown.space)="$event.preventDefault()" type="email" formControlName = "email" class="form-control bg-secondary" placeholder="ex : youremail@gmail.com">
-              <small *ngIf="registerFormGroup.controls['email'].errors && registerFormGroup.controls['email'].touched" class="text-danger">{{getErrorMessageEmail('email', registerFormGroup.controls['email'].errors)}}</small>
+          <h5 class="mt-2">Nom</h5>
+          <span > Saisissez votre nom en respectant la consigne. Exemple : NOM ou Nom ou nom</span>
 
-            </div>
+          <h5 class="mt-2">Prénom</h5>
+          <span > Saisissez votre prénom en respectant la consigne. Exemple : PRENOM ou Prenom ou prenom</span>
 
-            <div class="mb-3">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom d'utilisateur</label>
-              <input (keydown.space)="$event.preventDefault()" type="text" formControlName = "username" class="form-control bg-secondary">
-              <small *ngIf="registerFormGroup.controls['username'].errors && registerFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', registerFormGroup.controls['username'].errors)}}</small>
+          <h5 class="mt-2">Sexe</h5>
+          <span > Si vous être un homme sélectionner homme et femme dans le cas contraire.</span>
 
-            </div>
+          <h5 class="mt-2">Adresse email</h5>
+          <span > Saississez une adresse email valide en respectant la consigne. Exemple : youremail@gmail.com</span>
 
-            <div class="mb-3 mt-2">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
-              <input type="password" formControlName = "password" class="form-control bg-secondary" id="pwd">
-              <input type="checkbox" onclick="showAndHidePassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
-              <small *ngIf="registerFormGroup.controls['password'].errors && registerFormGroup.controls['password'].touched" class="text-danger">{{getErrorMessage('password', registerFormGroup.controls['password'].errors)}}</small>
-            </div>
+          <h5 class="mt-2">Mot de passe</h5>
+          <span > Saisissez un mot de passe en respectant la consigne. Exemple : PASSWORD ou Password ou password ou pwd123</span>
 
-            <div class="mb-3 mt-2">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du mot de passe</label>
-              <input type="password" formControlName = "confirmPassword" class="form-control bg-secondary" id="confPwd">
-              <input type="checkbox" onclick="showAndHideConfPassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
-              <small *ngIf="registerFormGroup.controls['confirmPassword'].errors && registerFormGroup.controls['confirmPassword'].touched" class="text-danger">{{getErrorMessage('confirmPassword', registerFormGroup.controls['confirmPassword'].errors)}}</small>
-            </div>
+          <h5 class="mt-2">Date d'anniversaire</h5>
+          <span > Cliquez sur ce champs et choisissez votre date d'anniversaire.</span>
 
-            <div class="mb-3">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date d'anniversaire</label>
-              <input type="date" formControlName = "birthday" class="form-control bg-secondary">
-              <small *ngIf="registerFormGroup.controls['birthday'].errors && registerFormGroup.controls['birthday'].touched" class="text-danger">{{getErrorMessage('birthday', registerFormGroup.controls['birthday'].errors)}}</small>
+          <h5 class="mt-2">Politique de confidentielité</h5>
+          <span > Si vous êtes d'accord avec les termes de notre policique de confidentielité, cochez la case.</span>
 
-            </div>
+        </div>
 
-       <!--     <div class="mb-3">
-              <label class="form-label">Code de parrainage</label>
-              <input type="text" formControlName = "referralCode" class="form-control bg-secondary">
-              <small *ngIf="registerFormGroup.controls['referralCode'].errors && registerFormGroup.controls['referralCode'].touched" class="text-danger">{{getErrorMessage('referralCode', registerFormGroup.controls['referralCode'].errors)}}</small>
-            </div>-->
-
-            <div class="mb-3 form-check">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>j'ai lu et approuvé les <a class="hide-underline-link text-warning" routerLink="/privacyOut">termes</a></label>&nbsp;
-              <input type="checkbox" formControlName = "acceptTerms" class="form-check-input bg-secondary">
-              <small *ngIf="registerFormGroup.controls['acceptTerms'].errors && registerFormGroup.controls['acceptTerms'].touched" class="text-danger">{{getErrorMessageTerms('acceptTerms', registerFormGroup.controls['acceptTerms'].errors)}}</small>
-
-            </div>
-
-            <span class="text-secondary" style="font-size: 17px">Déjà un compte ? | <a class="hide-underline-link" routerLink="/login"><span class="text-warning">Connectez vous</span></a></span>
-
-            <div class="text-center text-white">
-              <button [disabled] = "!registerFormGroup.valid" class="btn btn-warning w-30 mb-xxl-2 mt-lg-1" type="submit">Inscription</button>
-            </div>
-
-          </form>
-          <span class="text-muted text-center"> les champs marqués par <i class="text-danger">*</i> sont obligatoires</span>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
-
-  </main>
-
+  </div>
 </div>
-
-</body>
-</html>
-
-

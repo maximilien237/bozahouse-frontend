@@ -5,7 +5,6 @@ import {AppUser} from "../../../models/app-user.models";
 import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {Subscription} from "../../../models/subscription.models";
-import {SubscriptionService} from "../../../services/subscription/subscription.service";
 import {AppRoleService} from "../../../services/app-role/app-role.service";
 
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
@@ -43,7 +42,7 @@ export class ListAppUserComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
               private userService: AppUserService,private roleService: AppRoleService,
-              private fb: FormBuilder, private router: Router, private subscriptionService: SubscriptionService) { }
+              private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.handleAppUserSpecification();
@@ -78,7 +77,7 @@ export class ListAppUserComponent implements OnInit {
   handleDisableAppUser(appUser: AppUser) {
     let conf = confirm("Are you sure ?");
     if (!conf) return;
-    this.userService.disableAppUser(appUser.id).subscribe({
+    this.userService.disableAppUser(appUser.id!).subscribe({
       next: value => {
         console.log(value);
 
@@ -93,7 +92,7 @@ export class ListAppUserComponent implements OnInit {
   handleDeleteUser(user: AppUser) {
     let conf = confirm("Are you sure ?");
     if (!conf) return;
-    this.userService.deleteAppUser(user.id).subscribe({
+    this.userService.deleteAppUser(user.id!).subscribe({
       next: value => {
         console.log(value)
 

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 
 import {ActivatedRoute, Router} from "@angular/router";
 import {Offer} from "../../../models/offer.models";
 import {OfferService} from "../../../services/offer/offer.service";
 import {formatDate} from "@angular/common";
+import {ModalErrorComponent} from "../../shares/modal-error/modal-error.component";
 
 @Component({
   selector: 'app-update-offer',
@@ -17,6 +18,8 @@ export class UpdateOfferComponent implements OnInit {
   offer!: Offer ;
   errorMessage!:string;
   updateOfferFormGroup!: FormGroup;
+  @ViewChild(ModalErrorComponent)
+  private childError!: ModalErrorComponent ;
   constructor(private activatedRoute: ActivatedRoute,private fb: FormBuilder, private offerService: OfferService, private router: Router) { }
 
   ngOnInit(): void {
@@ -74,61 +77,13 @@ export class UpdateOfferComponent implements OnInit {
     })
   }
 
-  getErrorMessage(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "Vous devez remplir ce champs !";
-    }else if (error['minlength']){
-      return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  "+ "caractères";
-    }else if (error['maxlength']){
-      return "ce champs doit comporter au plus" + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
-    }else if (error['pattern']) {
-      return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres, ou un mélange des trois";
-    }else return "";
-
+  get r(){
+    return this.updateOfferFormGroup.controls;
   }
 
-  getErrorMessageEmail(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez remplir champs !";
-    }else if (error['pattern']) {
-      return "exemple d\'un mail valide : john@example.com ou john.smith@example.com" ;
-    }else if (error['email']) {
-      return "Entrez une adresse email valide !";
-    }else return "";
+  handleGetErrorMessageFromChild(fieldName: string, error: ValidationErrors) {
+    return this.childError.getErrorMessage(fieldName, error);
   }
-
-  getErrorMessageUrl(fieldName: string, error: ValidationErrors) {
-    if (error['pattern']) {
-      return "exemple d\'une url valide : https://www.monsite.com ou https://wwww.facebook.com/username" ;
-    }else return "";
-  }
-
-  getErrorMessageTel(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez remplir champs !";
-    }else if (error['pattern']) {
-      return "exemple d\'un numéro valide : 6511232XX" ;
-    }else if (error['minlength']){
-      return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  "+ "nombres";
-    }else if (error['maxlength']){
-      return "ce champs doit comporter au plus" + "  " + error['maxlength']['requiredLength'] + "  " + "nombres";
-    }else return "";
-  }
-
-  getErrorMessageAdress(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez remplir champs !";
-    }else if (error['pattern']) {
-      return "exemple d\'une adresse valide : Simbock, Yaoundé, Cameroun" ;
-    }else return "";
-  }
-
-  getErrorMessageSalary(salary: string, error: ValidationErrors) {
-    if (error['pattern']) {
-      return "exemple d\'un salaire valide : 100000" ;
-    }else return "";
-  }
-
 
 
 }

@@ -28,11 +28,11 @@ export class AuthenticationService {
     return this.http.put(environment.backendAPI + "forgotPassword/" , username);
   }
 
-  public signIn(login: Login): Observable<DataResponse<string>> {
-    return this.http.post<DataResponse<string>>(environment.backendAPI+ path +"signIn", login);
+  public signIn(login: Login): Observable<any> {
+    return this.http.post<any>(environment.backendAPI+ path +"signIn", login);
   }
 
-  public signUp(appUser: AppUser) {
+  public signUp(appUser: AppUser): Observable<AppUser> {
     return this.http.post<AppUser>(environment.backendAPI + path +"signUp", appUser);
   }
 

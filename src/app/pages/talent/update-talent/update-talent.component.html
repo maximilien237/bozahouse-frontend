@@ -1,7 +1,3 @@
-<html class="bg-secondary">
-<app-navbar></app-navbar>
-
-<body class="bg-secondary">
 
 <div class="mt-2 spacer-left">
   <span><a routerLink="/talents" class="hide-underline-link btn btn-dark text-warning">Retour</a> </span>
@@ -22,19 +18,19 @@
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de talent</label>
               <select  class="form-select bg-secondary" formControlName = "type" >
-             
+
                 <option value="simple">Simple</option>
                 <option value="professional">Professionnel</option>
               </select>
-              <small *ngIf="updateTalentFormGroup.controls['type'].errors && updateTalentFormGroup.controls['type'].touched" class="text-danger">{{getErrorMessage('Type', updateTalentFormGroup.controls['type'].errors)}}</small>
+              <small *ngIf="r['type'].errors && r['type'].touched" class="text-danger">{{handleGetErrorMessageFromChild('Type', r['type'].errors)}}</small>
 
-              <ng-container *ngIf="updateTalentFormGroup.controls['type'].value == 'professional'; else simple">
+              <ng-container *ngIf="r['type'].value == 'professional'; else simple">
 
 
                 <div class="mb-3 mt-2">
                   <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Niveau</label>
                   <select class="form-select bg-secondary" formControlName = "level" >
-              
+
                     <option value="bac">BAC</option>
                     <option value="bac1">BAC+1</option>
                     <option value="bac2">BAC+2</option>
@@ -43,8 +39,8 @@
                     <option value="master2">Master+2</option>
                   </select>
 
-                  <small *ngIf="updateTalentFormGroup.controls['level'].errors && updateTalentFormGroup.controls['level'].touched" class="text-danger">
-                    {{getErrorMessage('Level', updateTalentFormGroup.controls['level'].errors)}}</small>
+                  <small *ngIf="r['level'].errors && r['level'].touched" class="text-danger">
+                    {{handleGetErrorMessageFromChild('Level', r['level'].errors)}}</small>
 
                 </div>
 
@@ -52,22 +48,22 @@
                 <div class="mb-3">
                   <label  class="form-label">L'url de ton profil Linkedin</label>
                   <input type="text" class="form-control bg-secondary" formControlName = "linkedin"  placeholder="example : https://www.linkedin.com/example/">
-                  <small *ngIf="updateTalentFormGroup.controls['linkedin'].errors && updateTalentFormGroup.controls['linkedin'].touched" class="text-danger">{{getErrorMessageUrl('Linkedin', updateTalentFormGroup.controls['linkedin'].errors)}}</small>
+                  <small *ngIf="r['linkedin'].errors && r['linkedin'].touched" class="text-danger">{{handleGetErrorMessageFromChild('Linkedin', r['linkedin'].errors)}}</small>
 
                 </div>
 
                 <div class="mb-3">
                   <label  class="form-label">L'url de ton repo github</label>
                   <input type="text" class="form-control bg-secondary" formControlName = "github"  placeholder="example : https://www.github.com/example/">
-                  <small *ngIf="updateTalentFormGroup.controls['github'].errors && updateTalentFormGroup.controls['github'].touched" class="text-danger">{{getErrorMessageUrl('Github', updateTalentFormGroup.controls['github'].errors)}}</small>
+                  <small *ngIf="r['github'].errors && r['github'].touched" class="text-danger">{{handleGetErrorMessageFromChild('Github', r['github'].errors)}}</small>
 
                 </div>
 
                 <div class="mb-3">
                   <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Email <span class="text-muted"></span></label>
                   <input type="email" class="form-control bg-secondary" formControlName = "email" placeholder="you@example.com">
-                  <small *ngIf="updateTalentFormGroup.controls['email'].errors && updateTalentFormGroup.controls['email'].touched " class="text-danger">
-                    {{getErrorMessageEmail('Email', updateTalentFormGroup.controls['email'].errors)}}</small>
+                  <small *ngIf="r['email'].errors && r['email'].touched " class="text-danger">
+                    {{handleGetErrorMessageFromChild('Email', r['email'].errors)}}</small>
 
                 </div>
 
@@ -106,14 +102,14 @@
                 <div class="mb-3">
                   <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Niveau</label>
                   <select class="form-select bg-secondary" formControlName = "level" required>
-                  
+
                     <option value="cepe">CEPE ou diplome équivalent</option>
                     <option value="bepc">BEPC ou diplome équivalent</option>
                     <option value="probatoire">Probatoire ou diplome équivalent</option>
                     <option value="bac">BAC ou diplome équivalent</option>
                   </select>
-                  <small *ngIf="updateTalentFormGroup.controls['level'].errors && updateTalentFormGroup.controls['level'].touched" class="text-danger">
-                    {{getErrorMessage('Level', updateTalentFormGroup.controls['level'].errors)}}</small>
+                  <small *ngIf="r['level'].errors && r['level'].touched" class="text-danger">
+                    {{handleGetErrorMessageFromChild('Level', r['level'].errors)}}</small>
 
                 </div>
 
@@ -179,13 +175,13 @@
                   <option value="+260" >Zambie</option>
                   <option value="+263" >Zimbabwe</option>
                 </select>
-                <small *ngIf="updateTalentFormGroup.controls['countryCode'].errors && updateTalentFormGroup.controls['countryCode'].touched" class="text-danger">{{getErrorMessage('countryCode', updateTalentFormGroup.controls['countryCode'].errors)}}</small>
+                <small *ngIf="r['countryCode'].errors && r['countryCode'].touched" class="text-danger">{{handleGetErrorMessageFromChild('countryCode', r['countryCode'].errors)}}</small>
               </div>-->
 
               <div class="mb-3">
                 <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Contact</label>
                 <input type="text" class="form-control bg-secondary" formControlName="tel" placeholder="6********" >
-                <small *ngIf="updateTalentFormGroup.controls['tel'].errors && updateTalentFormGroup.controls['tel'].touched" class="text-danger">{{getErrorMessageTel('tel', updateTalentFormGroup.controls['tel'].errors)}}</small>
+                <small *ngIf="r['tel'].errors && r['tel'].touched" class="text-danger">{{handleGetErrorMessageFromChild('tel', r['tel'].errors)}}</small>
 
               </div>
 
@@ -193,8 +189,8 @@
               <div class="mb-3">
                 <label class="form-label">Numéro WhatsApp</label>
                 <input class="form-control bg-secondary" formControlName="whatsAppNumber" placeholder="6********" type="text">
-                <small *ngIf="updateTalentFormGroup.controls['whatsAppNumber'].errors && updateTalentFormGroup.controls['whatsAppNumber'].touched " class="text-danger">
-                  {{getErrorMessageTel('whatsAppNumber', updateTalentFormGroup.controls['whatsAppNumber'].errors)}}</small>
+                <small *ngIf="r['whatsAppNumber'].errors && r['whatsAppNumber'].touched " class="text-danger">
+                  {{handleGetErrorMessageFromChild('whatsAppNumber', r['whatsAppNumber'].errors)}}</small>
 
               </div>
 
@@ -212,24 +208,24 @@
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Métier</label>
               <input type="text" class="form-control bg-secondary" formControlName = "title">
-              <small *ngIf="updateTalentFormGroup.controls['title'].errors && updateTalentFormGroup.controls['title'].touched" class="text-danger">
-                {{getErrorMessage('Title', updateTalentFormGroup.controls['title'].errors)}}</small>
+              <small *ngIf="r['title'].errors && r['title'].touched" class="text-danger">
+                {{handleGetErrorMessageFromChild('Title', r['title'].errors)}}</small>
 
             </div>
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Domaine</label>
               <input class="form-control bg-secondary" formControlName="domain" placeholder="ssi,srt,..." type="text">
-              <small *ngIf="updateTalentFormGroup.controls['domain'].errors && updateTalentFormGroup.controls['domain'].touched" class="text-danger">
-                {{getErrorMessage('Domain', updateTalentFormGroup.controls['domain'].errors)}}</small>
+              <small *ngIf="r['domain'].errors && r['domain'].touched" class="text-danger">
+                {{handleGetErrorMessageFromChild('Domain', r['domain'].errors)}}</small>
 
             </div>
 
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Compétences</label>
               <textarea class="form-control bg-secondary" formControlName = "skills" aria-label="With textarea" style="height: 150px" ></textarea>
-              <small *ngIf="updateTalentFormGroup.controls['skills'].errors && updateTalentFormGroup.controls['skills'].touched " class="text-danger">
-                {{getErrorMessage('Skills', updateTalentFormGroup.controls['skills'].errors)}}</small>
+              <small *ngIf="r['skills'].errors && r['skills'].touched " class="text-danger">
+                {{handleGetErrorMessageFromChild('Skills', r['skills'].errors)}}</small>
 
             </div>
 
@@ -240,8 +236,8 @@
                 <option value="Sur site">Sur site</option>
                 <option value="A distance">A distance</option>
               </select>
-              <small *ngIf="updateTalentFormGroup.controls['workMode'].errors && updateTalentFormGroup.controls['workMode'].touched " class="text-danger">
-                {{getErrorMessage('WorkMode', updateTalentFormGroup.controls['workMode'].errors)}}</small>
+              <small *ngIf="r['workMode'].errors && r['workMode'].touched " class="text-danger">
+                {{handleGetErrorMessageFromChild('WorkMode', r['workMode'].errors)}}</small>
 
             </div>
 
@@ -257,8 +253,8 @@
                 <option value="11-20 ans">11-20 ans</option>
                 <option value="+20 ans">plus de 20 ans</option>
               </select>
-              <small *ngIf="updateTalentFormGroup.controls['experience'].errors && updateTalentFormGroup.controls['experience'].touched " class="text-danger">
-                {{getErrorMessage('Experience', updateTalentFormGroup.controls['experience'].errors)}}</small>
+              <small *ngIf="r['experience'].errors && r['experience'].touched " class="text-danger">
+                {{handleGetErrorMessageFromChild('Experience', r['experience'].errors)}}</small>
 
             </div>
 
@@ -275,7 +271,7 @@
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Address</label>
               <input class="form-control bg-secondary" formControlName="address" placeholder="Simbok,Yaoundé,Cameroun" required type="text">
-              <small *ngIf="updateTalentFormGroup.controls['address'].errors && updateTalentFormGroup.controls['address'].touched" class="text-danger">{{getErrorMessageAdress('Address', updateTalentFormGroup.controls['address'].errors)}}</small>
+              <small *ngIf="r['address'].errors && r['address'].touched" class="text-danger">{{handleGetErrorMessageFromChild('Address', r['address'].errors)}}</small>
 
             </div>
           </div>
@@ -301,8 +297,8 @@
                 <option value="STAGE ACADEMIC">Stage academic</option>
                 <option value="STAGE PROFESSIONNELLE">Stage professionnelle</option>
               </select>
-              <small *ngIf="updateTalentFormGroup.controls['contract'].errors && updateTalentFormGroup.controls['contract'].touched " class="text-danger">
-                {{getErrorMessage('Contract', updateTalentFormGroup.controls['contract'].errors)}}</small>
+              <small *ngIf="r['contract'].errors && r['contract'].touched " class="text-danger">
+                {{handleGetErrorMessageFromChild('Contract', r['contract'].errors)}}</small>
 
             </div>
 
@@ -314,16 +310,16 @@
                 <option value="Salaire à définir avec l'employeur">Salaire à définir avec l'employeur</option>
                 <option value="amount">Entrer un montant</option>
               </select>
-              <small *ngIf="updateTalentFormGroup.controls['salaryChoice'].errors && updateTalentFormGroup.controls['salaryChoice'].touched " class="text-danger">
-                {{getErrorMessage('SalaryChoice', updateTalentFormGroup.controls['salaryChoice'].errors)}}</small>
+              <small *ngIf="r['salaryChoice'].errors && r['salaryChoice'].touched " class="text-danger">
+                {{handleGetErrorMessageFromChild('SalaryChoice', r['salaryChoice'].errors)}}</small>
 
-              <span *ngIf="updateTalentFormGroup.controls['salaryChoice'].value=='amount'">
+              <span *ngIf="r['salaryChoice'].value=='amount'">
 
                <div class="mb-3 mt-2">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Montant</label>
               <input type="text" class="form-control bg-secondary" formControlName="salary">
-               <small *ngIf="updateTalentFormGroup.controls['salary'].errors && updateTalentFormGroup.controls['salary'].touched " class="text-danger">
-                {{getErrorMessageSalary('Salary', updateTalentFormGroup.controls['salary'].errors)}}</small>
+               <small *ngIf="r['salary'].errors && r['salary'].touched " class="text-danger">
+                {{handleGetErrorMessageFromChild('Salary', r['salary'].errors)}}</small>
 
             </div>
 
@@ -349,10 +345,6 @@
 
 </div>
 
-<app-footer></app-footer>
-</body>
-
-</html>
 
 
 

@@ -1,6 +1,3 @@
-<html class="bg-secondary">
-<body class="bg-secondary">
-<app-navbar></app-navbar>
 
 <div class="container spacer  ">
 
@@ -71,39 +68,9 @@
             </div><br>
 
             <ng-container>
-              <ng-container *ngIf="currentUser.account == 'employer' && currentUser.activatedHostSubscription
-        || currentUser.account == 'enterprise' && currentUser.activatedHostSubscription
-        || currentUser.account == 'talent' && currentUser.activatedNormalSubscription || isAdmin; else other2">
+
                 <span><a (click)="handleDetailOffer(offer.id)" class="btn btn-warning rounded-pill">Voir l'offre</a></span><br>
-              </ng-container>
 
-              <ng-template #other2>
-
-                <span class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Voir l'offre</span>
-
-                <div class="card offcanvas offcanvas-top bg-dark" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-                  <div class="offcanvas-header">
-                    <h5 id="offcanvasTopLabel" class="text-danger">Vous n'avez aucun abonnement de type normal</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                  </div>
-                  <div class="offcanvas-body">
-               
-                    <p class="text-warning">
-                      Pour avoir accès à cette fonctionnalité, vous devez souscrire à un abonnement de type normal.
-                      Pour ce faire, contactez notre agent en cliquant sur l'un des boutons suivants<i class="bi-arrow-down"></i>
-                    
-                    </p>
-
-                    <ul class="nav list-unstyled text-small text-center ">
-                      <li><a [href]= "'mailto:'+ email" style="font-size: 22px;" class=" link-secondary text-white-50"><i class="bi bi-envelope-fill"></i> </a>&nbsp;&nbsp;</li>
-                      <li><a [href]="'tel:+237' + tel " style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-telephone-fill"></i></a>&nbsp;&nbsp;</li>
-                      <li><a href="https://wa.me/656832062" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-whatsapp"></i></a>&nbsp;&nbsp;</li>
-                    </ul>
-                 
-                  </div>
-                </div>
-
-              </ng-template>
             </ng-container>
 
           </div>
@@ -198,41 +165,9 @@
             </div><br>
 
             <ng-container>
-              <ng-container *ngIf="currentUser.account == 'employer' && currentUser.activatedNormalSubscription
-        || currentUser.account == 'enterprise' && currentUser.activatedNormalSubscription
-        || currentUser.account == 'talent' && currentUser.activatedHostSubscription || isAdmin; else other2">
+
                 <span><a (click)="handleDetailTalent(talent.id)" class="btn btn-warning rounded-pill">Voir plus</a></span><br>
-              </ng-container>
 
-              <ng-template #other2>
-                <!--                <span class="text-muted"><a class="btn btn-success"><i class="bi bi-whatsapp"></i>&nbsp;Click here to subscribe </a></span><br>-->
-
-
-
-                <span class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Voir le talent</span>
-
-                <div class="card offcanvas offcanvas-top bg-dark" tabindex="-1" id="offcanvasTop1" aria-labelledby="offcanvasTopLabel">
-                  <div class="offcanvas-header">
-                    <h5 id="offcanvasTopLabel1" class="text-danger">Vous n'avez aucun abonnement de type normal</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                  </div>
-                  <div class="offcanvas-body">
-             
-                    <p class="text-warning">
-                      Pour avoir accès à cette fonctionnalité, vous devez souscrire à un abonnement de type normal.
-                      Pour ce faire, contactez notre agent en cliquant sur l'un des boutons suivants<i class="bi-arrow-down"></i>
-                    </p>
-
-                    <ul class="nav list-unstyled text-small text-center ">
-                      <li><a [href]= "'mailto:'+ email" style="font-size: 22px;" class=" link-secondary text-white-50"><i class="bi bi-envelope-fill"></i> </a>&nbsp;&nbsp;</li>
-                      <li><a [href]="'tel:+237' + tel " style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-telephone-fill"></i></a>&nbsp;&nbsp;</li>
-                      <li><a href="https://wa.me/656832062" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-whatsapp"></i></a>&nbsp;&nbsp;</li>
-                    </ul>
-                  
-                  </div>
-                </div>
-
-              </ng-template>
             </ng-container>
 
           </div>
@@ -268,41 +203,34 @@
 </div>
 
 
-<div class="spacer"></div>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#advise" data-bs-whatever="@mdo">Open modal for @mdo</button>
 
-<!-- <div class="fab-container spacer">
-  <div class="fab shadow">
-    <div class="fab-content">
-      <span class="material-icons">support_agent</span>
+<div class="modal fade" id="advise" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Un nouvel avis</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary">Envoyer</button>
+      </div>
     </div>
   </div>
-  <div class="sub-button shadow">
-    <a href="google.com" target="_blank">
-      <span class="material-icons">phone</span>
-    </a>
-  </div>
-  <div class="sub-button shadow">
-    <a href="google.com" target="_blank">
-      <span class="material-icons">mail_outline</span>
-    </a>
-  </div>
-  <div class="sub-button shadow">
-    <a href="google.com" target="_blank">
-      <span class="material-icons">language</span>
-    </a>
-  </div>
-  <div class="sub-button shadow">
-    <a href="google.com" target="_blank">
-      <span class="material-icons">help_outline</span>
-    </a>
-  </div>
-</div> -->
-
-<app-footer>
-
-</app-footer>
-</body>
-</html>
+</div>
 
 
 

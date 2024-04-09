@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginFormGroup = this.fb.group({
 
-      username: this.fb.control("",[Validators.required,Validators.pattern("[A-Za-z0-9]+"),Validators.minLength(3), Validators.maxLength(12)]),
-      password: this.fb.control("",[ Validators.required, Validators.pattern("[A-Za-z0-9]+"), Validators.minLength(4), Validators.maxLength(8)])
+      username: this.fb.control("",[Validators.required,Validators.pattern("^[a-z0-9_+&*-]+(?:\\.[a-z0-9_+&*-]+)*@(?:[a-z0-9-]+\\.)+[a-z]{2,15}$"),Validators.email]),
+      password: this.fb.control("",[ Validators.required, Validators.minLength(4), Validators.maxLength(8)])
     })
 
   }
@@ -56,24 +56,12 @@ export class LoginComponent implements OnInit {
 
       },
       error: (err: HttpErrorResponse) => {
+        console.log('jentre bien')
         this.errorMessageParent = err.error.detail;
         // appel de la méthode handleError(error) situé dans ModalErrorComponent
         this.childError?.handleError(err);
       }
     });
-  }
-
-  getErrorMessage(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez remplir ce champs !";
-    }else if (error['minlength']){
-      return "ce champs doit comporter au moins" + "  "+ error['minlength']['requiredLength'] + "  "+ "caractères";
-    }else if (error['maxlength']){
-      return "ce champs doit comporter au plus" + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
-    }else if (error['pattern']) {
-      return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres, ou un mélange des trois" ;
-    }else return "";
-
   }
 
 
@@ -91,6 +79,38 @@ export class LoginComponent implements OnInit {
   showAndHidePassword() {
     let x:any = document.getElementById("pwd");
     x.type === "password"? x.type = "text": x.type = "password";
+  }
+
+/*  function password_show_hide() {
+    var x = document.getElementById("password");
+    var show_eye = document.getElementById("show_eye");
+    var hide_eye = document.getElementById("hide_eye");
+    hide_eye.classList.remove("d-none");
+    if (x.type === "password") {
+      x.type = "text";
+      show_eye.style.display = "none";
+      hide_eye.style.display = "block";
+    } else {
+      x.type = "password";
+      show_eye.style.display = "block";
+      hide_eye.style.display = "none";
+    }
+  }*/
+
+   password_show_hide() {
+    let x: any = document.getElementById("password");
+    let show_eye = document.getElementById("show_eye");
+    let hide_eye = document.getElementById("hide_eye");
+    hide_eye?.classList.remove("d-none");
+    if (x.type === "password") {
+      x.type = "text";
+      show_eye!.style.display = "none";
+      hide_eye!.style.display = "block";
+    } else {
+      x.type = "password";
+      show_eye!.style.display = "block";
+      hide_eye!.style.display = "none";
+    }
   }
 
 }

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AppUser} from "../../../models/app-user.models";
 import {catchError, Observable, throwError} from "rxjs";
-import {Subscription} from "../../../models/subscription.models";
 import {ActivatedRoute, Router} from "@angular/router";
-import {SubscriptionService} from "../../../services/subscription/subscription.service";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
 import {AppUserService} from "../../../services/app-user/app-user.service";
 import {TestimonyService} from "../../../services/testimony/testimony.service";

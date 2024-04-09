@@ -122,7 +122,7 @@
 
 
     <ng-container *ngIf="currentUser">
-      <ng-container *ngIf="currentUser.account == 'talent' && currentUser.activatedHostSubscription || isAdmin">
+      <ng-container *ngIf="currentUser.account == 'talent' || isAdmin">
       <span style="font-size: 20px;">
       <a routerLink="/addTalent" class="hide-underline-link btn btn-dark text-warning">
       <i class="bi bi-plus "></i> publier un profil
@@ -205,41 +205,9 @@
                 </div>
 
                 <ng-container>
-                  <ng-container *ngIf="currentUser.account == 'employer' && currentUser.activatedNormalSubscription
-        || currentUser.account == 'enterprise' && currentUser.activatedNormalSubscription
-        || currentUser.account == 'talent' && currentUser.activatedHostSubscription || isAdmin; else other2">
+
                     <span><a (click)="handleDetailTalent(talent.id)" class="btn btn-warning rounded-pill">Voir plus</a></span><br>
-                  </ng-container>
 
-                  <ng-template #other2>
-                    <!--                <span class="text-muted"><a class="btn btn-success"><i class="bi bi-whatsapp"></i>&nbsp;Click here to subscribe </a></span><br>-->
-
-
-
-                    <span class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Voir le talent</span>
-
-                    <div class="card offcanvas offcanvas-top bg-dark" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-                      <div class="offcanvas-header">
-                        <h5 id="offcanvasTopLabel" class="text-danger">Vous n'avez aucun abonnement de type normal</h5>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                      </div>
-                      <div class="offcanvas-body">
-                        <p class="text-warning">
-                          Pour avoir accès à cette fonctionnalité, vous devez souscrire à un abonnement de type normal.
-                          Pour ce faire, contactez notre agent en cliquant sur l'un des boutons suivants<i class="bi-arrow-down"></i>
-
-                        </p>
-
-                        <ul class="nav list-unstyled text-small text-center ">
-                          <li><a [href]= "'mailto:'+ email" style="font-size: 22px;" class=" link-secondary text-white-50"><i class="bi bi-envelope-fill"></i> </a>&nbsp;&nbsp;</li>
-                          <li><a [href]="'tel:+237' + tel " style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-telephone-fill"></i></a>&nbsp;&nbsp;</li>
-                          <li><a href="https://wa.me/656832062" style="font-size: 22px;" class="link-secondary text-white-50"><i class="bi bi-whatsapp"></i></a>&nbsp;&nbsp;</li>
-                        </ul>
-
-                      </div>
-                    </div>
-
-                  </ng-template>
                 </ng-container>
 
               </div>

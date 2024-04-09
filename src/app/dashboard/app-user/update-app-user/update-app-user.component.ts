@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AppUser} from "../../../models/app-user.models";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AppUserService} from "../../../services/app-user/app-user.service";
@@ -9,6 +9,7 @@ import {
   Validators
 } from "@angular/forms";
 import {formatDate} from "@angular/common";
+import {ModalErrorComponent} from "../../../pages/shares/modal-error/modal-error.component";
 
 @Component({
   selector: 'app-update-app-user',
@@ -20,6 +21,9 @@ export class UpdateAppUserComponent implements OnInit {
   id!: number;
   appUser!: AppUser ;
   updateUserFormGroup!: FormGroup;
+  @ViewChild(ModalErrorComponent)
+  private childError!: ModalErrorComponent ;
+
   constructor(private userService: AppUserService,
               private activatedRoute: ActivatedRoute,
               private fb: FormBuilder,
@@ -34,20 +38,16 @@ export class UpdateAppUserComponent implements OnInit {
           console.log(value);
           this.appUser = value;
           this.updateUserFormGroup = this.fb.group({
-
             account : this.fb.control(this.appUser.account, [Validators.required]),
             howKnowUs: this.fb.control(this.appUser.howKnowUs, [Validators.required]),
             lastname : this.fb.control(this.appUser.lastname, [Validators.pattern("[A-Za-z-çèéàê' -]+"),Validators.required, Validators.minLength(3),Validators.maxLength(30)]),
             firstname: this.fb.control(this.appUser.firstname,[Validators.pattern("[A-Za-z-çèéàê' -]+"),Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
             sex: this.fb.control(this.appUser.sex,[Validators.required]),
-            email: this.fb.control(this.appUser.email,[Validators.pattern("^[a-z0-9_+&*-]+(?:\\.[a-z0-9_+&*-]+)*@(?:[a-z0-9-]+\\.)+[a-z]{2,15}$"),Validators.required, Validators.email]),
             username : this.fb.control(this.appUser.username,[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
             password: this.fb.control(this.appUser.password,[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
-            confirmPassword: this.fb.control(this.appUser.confirmPassword,[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
+            confirmPassword: this.fb.control(this.appUser.password,[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
             birthday: this.fb.control(formatDate(this.appUser.birthday, 'yyyy-MM-dd', 'en'),[Validators.required]),
             acceptTerms: this.fb.control(this.appUser.acceptTerms,[Validators.requiredTrue]),
-            referralCode: this.fb.control(this.appUser.referralCode,[Validators.pattern("[A-Za-z0-9]+"), Validators.minLength(6), Validators.maxLength(15)])
-
           });
         }, error: err => {
           console.log(err);
@@ -72,50 +72,34 @@ export class UpdateAppUserComponent implements OnInit {
     })
   }
 
-
-  getErrorMessage(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez remplir champs !";
-    }else if (error['requiredTrue']) {
-      return "vous devez cocher cette case !" ;
-    }else if (error['minlength']){
-      return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  " + "caractères";
-    }else if (error['maxlength']){
-      return "ce champs doit comporter au plus " + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
-    }else if (error['pattern']) {
-      return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres, ou un mélange des trois" ;
-    }else return "";
-
+  get r() {
+    return this.updateUserFormGroup.controls;
   }
 
-  getErrorMessageEmail(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez remplir champs !";
-    }else if (error['pattern']) {
-      return "exemple d\'un mail valide : john@example.com ou john.smith@example.com" ;
-    }else if (error['email']) {
-      return "Entrez une adresse email valide !";
-    }else return "";
+  get password() {
+    return this.updateUserFormGroup.get('password');
   }
 
-  getErrorMessageName(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez remplir champs !";
-    }else if (error['minlength']){
-      return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  " + "caractères";
-    }else if (error['maxlength']){
-      return "ce champs doit comporter au plus " + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
-    }else if (error['pattern']) {
-      return "ce champs doit comporter soit des majuscules, soit des minuscules, ou un mélange des deux" ;
-    }else return "";
+  get confirmPassword() {
+    return this.updateUserFormGroup.get('confirmPassword');
   }
 
+  passwordsMatch() : boolean {
+    return this.password?.value === this.confirmPassword?.value;
+  }
 
-  getErrorMessageTerms(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return "vous devez cocher cette case !" ;
-    }else return "";
+  handleGetErrorMessageFromChild(fieldName: string, error: ValidationErrors) {
+    return this.childError.getErrorMessage(fieldName, error);
+  }
 
+  showAndHidePassword() {
+    let x:any = document.getElementById("pwd");
+    x.type === "password"? x.type = "text": x.type = "password";
+  }
+
+  showAndHideConfirmPassword() {
+    let x:any = document.getElementById("confPwd");
+    x.type === "password"? x.type = "text": x.type = "password";
   }
 
 

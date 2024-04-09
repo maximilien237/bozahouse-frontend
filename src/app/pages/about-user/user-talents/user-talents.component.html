@@ -1,12 +1,9 @@
-<html class="bg-secondary">
-<body class="bg-secondary">
-<app-navbar></app-navbar>
 
 <div class="container spacer  ">
   <div class="text-center">
 
     <ng-container *ngIf="currentUser">
-      <ng-container *ngIf="currentUser.account == 'talent' && currentUser.activatedHostSubscription || isAdmin">
+      <ng-container *ngIf="currentUser.account == 'talent'  || isAdmin">
       <span style="font-size: 20px;">
       <a routerLink="/addTalent" class="hide-underline-link btn btn-dark text-warning">
       <i class="bi bi-plus "></i> publier un profil
@@ -133,16 +130,6 @@
   <span><a class="hide-underline-link btn btn-dark text-warning" routerLink="/account"> Retour</a> </span>
 </div>
 
-<app-footer>
 
-</app-footer>
-</body>
-</html>
-
-<!--<html class="bg-secondary">
-<body class="bg-secondary">
-
-</body>
-</html>-->
 
 

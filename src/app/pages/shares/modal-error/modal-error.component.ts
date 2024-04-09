@@ -23,8 +23,6 @@ export class ModalErrorComponent implements OnInit, OnChanges {
   @Input()
   errorMessageChild: string = "";
 
-  constructor() { }
-
   ngOnInit(): void {
     console.log("errorMessageChild",this.errorMessageChild)
   }
@@ -38,31 +36,50 @@ export class ModalErrorComponent implements OnInit, OnChanges {
   }
 
 
-
   getErrorMessage(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
+    if (error['required'] && fieldName == "acceptTerms") {
+      return "vous devez cocher cette case !";
+    }
+    if (error['required'] ){
       return "Vous devez remplir ce champs !";
-    }else if (error['minlength']){
+    }
+    if (error['minlength']){
       return "ce champs doit comporter au moins" + " "+ error['minlength']['requiredLength'] + "  "+ "caractères";
-    }else if (error['maxlength']){
+    }
+
+    if (error['maxlength']){
       return "ce champs doit comporter au plus" + "  " + error['maxlength']['requiredLength'] + "  " + "caractères";
-    }else if (error['pattern'] && fieldName == "salary" || fieldName == "needPeople") {
+    }
+
+    if (error['pattern'] && fieldName == "salary" || fieldName == "needPeople") {
       return "exemple d\'une entrée valide : 100000 ou 2" ;
-    }else if (error['pattern'] && fieldName == "email") {
+    }
+
+/*    if (error['pattern'] && fieldName == "email") {
       return "exemple d\'un mail valide : john@example.com ou john.smith@example.com" ;
-    }else if (error['pattern'] && fieldName == "address") {
-      return "exemple d\'une adresse valide : Yaoundé, Centre, Cameroun" ;
-    }else if (error['pattern'] && fieldName == "fcb" || fieldName == "web" || fieldName == "linkedin") {
+    }*/
+
+    if (error['pattern'] && fieldName == "username") {
+      return "exemple d\'un mail valide : john@example.com ou john.smith@example.com" ;
+    }
+
+    if (error['pattern'] && fieldName == "fcb" || fieldName == "web" || fieldName == "linkedin") {
       return "exemple d\'une url valide : https://www.monsite.com ou https://wwww.facebook.com/username" ;
-    }else if (error['pattern'] && fieldName == "tel" || fieldName == "whatsAppNumber") {
+    }
+
+    if (error['pattern'] && fieldName == "tel" || fieldName == "whatsAppNumber") {
       return "exemple d\'un numéro valide : 6511232XX" ;
-    }else if (error['pattern'] && fieldName == "password") {
+    }
+    if (error['pattern'] && fieldName == "password") {
       return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres,soit un caractère spécial telque : @ ou un mélange des quatres" ;
-    }else if (error['pattern']) {
+    }
+    if (error['pattern']) {
       return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres, ou un mélange des trois";
-    }else if (error['email']) {
+    }
+    if (error['email']) {
       return "Entrez une adresse email valide !";
-    }else return "";
+    }
+    return "";
   }
 
   handleError(err: HttpErrorResponse) {

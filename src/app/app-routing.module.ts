@@ -37,13 +37,11 @@ import {AuthenticationGuard} from "./services/guards/authentication.guard";
 import {IsAdminGuard} from "./services/guards/is-admin.guard";
 import {IsEditorGuard} from "./services/guards/is-editor.guard";
 import {ForgotPasswordComponent} from "./pages/forgot-password/forgot-password.component";
-import {InfoComponent} from "./pages/info/info.component";
 import {UserTestimoniesComponent} from "./pages/about-user/user-testimonies/user-testimonies.component";
 import {ListTestimonyComponent} from "./pages/testimony/list-testimony/list-testimony.component";
 import {UpdateTestimonyComponent} from "./pages/testimony/update-testimony/update-testimony.component";
 import {AddTestimonyComponent} from "./pages/testimony/add-testimony/add-testimony.component";
-import {PrivacyComponent} from "./pages/privacy/privacy.component";
-import {PrivacyOutComponent} from "./pages/privacy-out/privacy-out.component";
+
 
 
 
@@ -70,9 +68,6 @@ const routes: Routes = [
 
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
-  { path: "info", component: InfoComponent },
-  { path: "privacy", component: PrivacyComponent, canActivate: [AuthenticationGuard]  },
-  { path: "privacyOut", component: PrivacyOutComponent },
   { path: "forgotPassword", component: ForgotPasswordComponent },
 
   { path: "admin", component: AdminComponent, canActivate: [AuthenticationGuard, IsAdminGuard]},
