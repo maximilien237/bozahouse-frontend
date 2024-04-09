@@ -6,17 +6,17 @@
   <div class="container col-md-10">
 
     <div class="card col-md-7 offset-md-3 mt-xxl-5 mb-xxl-5">
-      <h5 class="text-center text-warning spacer">BOZAHOUSE</h5>
-      <h5 class="text-center text-muted">la maison des bozayeurs ! </h5>
-      <h5 class="text-center text-white-50" style="font-size: 14px">besoin d'aide ? <a href="javascript:void (0);" class="text-decoration-none text-warning" data-bs-toggle="modal" data-bs-target="#help">Cliquez ici</a></h5>
+      <h5 class="text-center  spacer">BOZAHOUSE</h5>
+      <h5 class="text-center ">la maison des bozayeurs ! </h5>
+      <h5 class="text-center " style="font-size: 14px">besoin d'aide ? <a href="javascript:void (0);" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#help">Cliquez ici</a></h5>
 
       <div class="card-body ">
         <form [formGroup] = "registerFormGroup" (ngSubmit)="handleRegister()">
 
 
           <div class="mb-3">
-            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de compte</label>
-            <select class="form-select bg-secondary" formControlName = "account" >
+            <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type de compte</label>
+            <select class="form-select " formControlName = "account" >
               <option value="talent">Talent</option>
               <option value="employer">Employeur</option>
               <option value="enterprise">Entreprise</option>
@@ -27,8 +27,8 @@
 
 
           <div class="mb-3">
-            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Comment avez vous connu Bozahouse ?</label>
-            <select class="form-select bg-secondary" formControlName = "howKnowUs">
+            <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Comment avez vous connu Bozahouse ?</label>
+            <select class="form-select " formControlName = "howKnowUs">
               <option value="friend">Amis</option>
               <option value="facebook">Facebook</option>
               <option value="whatsapp">Whatsapp</option>
@@ -42,22 +42,22 @@
           </div>
 
           <div class="mb-3 mt-2">
-            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom</label>
-            <input type="text" formControlName = "lastname" class="form-control bg-secondary">
+            <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom</label>
+            <input type="text" formControlName = "lastname" class="form-control ">
             <small *ngIf="r['lastname'].errors && r['lastname'].touched" class="text-danger">{{handleGetErrorMessageFromChild('lastname', r['lastname'].errors)}}</small>
 
           </div>
 
           <div class="mb-3 mt-2">
-            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Prénom</label>
-            <input type="text" formControlName = "firstname" class="form-control bg-secondary">
+            <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Prénom</label>
+            <input type="text" formControlName = "firstname" class="form-control ">
             <small *ngIf="r['firstname'].errors && r['firstname'].touched" class="text-danger">{{handleGetErrorMessageFromChild('firstname', r['firstname'].errors)}}</small>
 
           </div>
 
           <div class="mb-3 mt-2">
-            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Sexe</label>
-            <select class="form-select bg-secondary" formControlName = "sex">
+            <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Sexe</label>
+            <select class="form-select " formControlName = "sex">
               <option value="" disabled>Choose...</option>
               <option value="Homme">Homme</option>
               <option value="Femme">Femme</option>
@@ -74,30 +74,30 @@
                       </div>-->
 
           <div class="mb-3">
-            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
-            <input (keydown.space)="$event.preventDefault()" type="text" formControlName = "username" class="form-control bg-secondary">
+            <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
+            <input (keydown.space)="$event.preventDefault()" type="text" formControlName = "username" class="form-control ">
             <small *ngIf="r['username'].errors && r['username'].touched" class="text-danger">{{handleGetErrorMessageFromChild('username', r['username'].errors)}}</small>
 
           </div>
 
           <div class="mb-3 mt-2">
-            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
-            <input type="password" formControlName = "password" class="form-control bg-secondary" id="pwd">
-            <input type="checkbox" (change)="showAndHidePassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
+            <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
+            <input type="password" formControlName = "password" class="form-control " id="pwd">
+            <input type="checkbox" (change)="showAndHidePassword()" class="mt-2">&nbsp;<span  style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
             <small *ngIf="r['password'].errors && r['password'].touched" class="text-danger">{{handleGetErrorMessageFromChild('password', r['password'].errors)}}</small>
           </div>
 
           <div class="mb-3 mt-2">
-            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du mot de passe</label>
-            <input type="password" formControlName = "confirmPassword" class="form-control bg-secondary" id="confPwd">
-            <input type="checkbox" (change)="showAndHideConfirmPassword()" class="mt-2">&nbsp;<span class="text-warning" style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
+            <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du mot de passe</label>
+            <input type="password" formControlName = "confirmPassword" class="form-control " id="confPwd">
+            <input type="checkbox" (change)="showAndHideConfirmPassword()" class="mt-2">&nbsp;<span style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
             <small *ngIf="r['confirmPassword'].errors && r['confirmPassword'].touched" class="text-danger">{{handleGetErrorMessageFromChild('confirmPassword', r['confirmPassword'].errors)}}</small>
             <small *ngIf="!passwordsMatch()" class="text-danger">Les mots de passe ne correspondent pas</small>
           </div>
 
           <div class="mb-3">
-            <label class="form-label text-warning"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date d'anniversaire</label>
-            <input type="date" formControlName = "birthday" class="form-control bg-secondary">
+            <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date d'anniversaire</label>
+            <input type="date" formControlName = "birthday" class="form-control ">
             <small *ngIf="r['birthday'].errors && r['birthday'].touched" class="text-danger">{{handleGetErrorMessageFromChild('birthday', r['birthday'].errors)}}</small>
 
           </div>
@@ -108,21 +108,21 @@
                  <small *ngIf="r['referralCode'].errors && r['referralCode'].touched" class="text-danger">{{handleGetErrorMessageFromChild('referralCode', r['referralCode'].errors)}}</small>
                </div>-->
 
-          <div class="mb-3 form-check text-light">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>j'ai lu et approuvé les <a href="javascript:void (0);" class="hide-underline-link text-warning" data-bs-toggle="modal" data-bs-target="#terms">termes</a></label>&nbsp;
-            <input type="checkbox" formControlName = "acceptTerms" class="form-check-input bg-secondary">
+          <div class="mb-3 form-check ">
+            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>j'ai lu et approuvé les <a href="javascript:void (0);" class="hide-underline-link " data-bs-toggle="modal" data-bs-target="#terms">termes</a></label>&nbsp;
+            <input type="checkbox" formControlName = "acceptTerms" class="form-check-input ">
             <small *ngIf="r['acceptTerms'].errors && r['acceptTerms'].touched" class="text-danger">{{handleGetErrorMessageFromChild('acceptTerms', r['acceptTerms'].errors)}}</small>
 
           </div>
 
-          <span class="text-secondary" style="font-size: 17px">Déjà un compte ? | <a class="hide-underline-link" routerLink="/login"><span class="text-warning">Connectez vous</span></a></span>
+          <span style="font-size: 17px">Déjà un compte ? | <a class="text-decoration-none" routerLink="/login"><span >Connectez vous</span></a></span>
 
-          <div class="text-center text-white">
-            <button [disabled] = "!registerFormGroup.valid " class="btn btn-warning w-30 mb-xxl-2 mt-lg-1" type="submit">Inscription</button>
+          <div class="text-center ">
+            <button [disabled] = "!registerFormGroup.valid " class="btn btn-primary w-30 mb-xxl-2 mt-lg-1" type="submit">Inscription</button>
           </div>
 
         </form>
-        <span class="text-light text-center"> les champs marqués par <i class="text-danger">*</i> sont obligatoires</span>
+        <span class=" text-center"> les champs marqués par <i class="text-danger">*</i> sont obligatoires</span>
       </div>
     </div>
   </div>

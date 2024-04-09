@@ -21,7 +21,6 @@
             <div class="mb-3 ">
               <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Password</label>
               <input (keydown.space)="$event.preventDefault()" type="password" formControlName="password" class="form-control" id="pwd">
-<!--              <button class="btn" (click)="showAndHidePassword()"><img src="favicon.ico" alt="show/hide password"></button>-->
               <input type="checkbox" (change)="showAndHidePassword()" class="mt-2">&nbsp;<span  style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
               <small *ngIf="loginFormGroup.controls['password'].errors && loginFormGroup.controls['password'].touched" class="text-danger">{{handleGetErrorMessageFromChild('password', loginFormGroup.controls['password'].errors)}}</small>
 
@@ -29,11 +28,11 @@
 
 
 
-            <span  style="font-size: 15px">Pas de compte ? | <a class="hide-underline-link" routerLink="/register"><span>Inscrivez vous</span></a></span>&nbsp;
-<!--            <span class="text-white mb-2"  style="font-size: 15px"> | <a class="hide-underline-link" routerLink="/forgotPassword"><span style="font-size: 15px" class="text-warning">Mot de passe oublié ?</span></a></span><br>-->
+            <span  style="font-size: 15px">Pas de compte ? | <a href="javascript:void (0);"  class="text-decoration-none" routerLink="/register"><span>Inscrivez vous</span></a></span>&nbsp; |
+            <span class=" mb-2"  style="font-size: 15px">Mot de passe oublié ? | <a href="javascript:void (0);"  class="text-decoration-none" routerLink="/forgotPassword"><span style="font-size: 15px" >Cliquez ici</span></a></span><br>
 
             <div class="text-center ">
-              <button [disabled] = "!loginFormGroup.valid" class="btn  w-40 mt-lg-4" type="submit">Connexion</button>
+              <button [disabled] = "!loginFormGroup.valid" class="btn btn-primary w-40 mt-lg-4" type="submit">Connexion</button>
             </div>
 
           </form>
@@ -46,6 +45,7 @@
 
 
   <app-modal-error [errorMessageChild]= "errorMessageParent"></app-modal-error>
+<!--  <app-modal-validation [validationMessageChild]= "errorMessageParent"></app-modal-validation>-->
 
 
 

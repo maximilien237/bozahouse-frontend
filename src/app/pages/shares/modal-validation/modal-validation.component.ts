@@ -32,6 +32,9 @@ export class ModalValidationComponent implements OnInit , OnChanges {
     }
   }
 
+  closeModale() {
+    $("#modalvalidation").modal('hide');
+  }
 
 
 }

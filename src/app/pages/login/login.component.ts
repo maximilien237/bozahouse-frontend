@@ -46,6 +46,11 @@ export class LoginComponent implements OnInit {
       next: response => {
         // ajout du token dans le localstorage
         this.authenticationService.addTokenInLocalstorage(response.value);
+        this.errorMessageParent = "Bienvenue chez Bozahouse, la maison des bozayeur :):";
+
+        setTimeout( () => {
+          console.log("it is time to wait....")
+        }, 10000)
 
         this.router.navigateByUrl("/home");
         /*        if (this.authenticationService.hasAnyAuthority('EDITOR')){
@@ -57,7 +62,7 @@ export class LoginComponent implements OnInit {
       },
       error: (err: HttpErrorResponse) => {
         console.log('jentre bien')
-        this.errorMessageParent = err.error.detail;
+        this.errorMessageParent = err.error.error;
         // appel de la méthode handleError(error) situé dans ModalErrorComponent
         this.childError?.handleError(err);
       }

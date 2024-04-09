@@ -32,5 +32,9 @@ export class ModalConfirmationComponent implements OnInit, OnChanges {
     }
   }
 
+  closeModale() {
+    $("#deleteModal").modal('hide');
+  }
+
 
 }

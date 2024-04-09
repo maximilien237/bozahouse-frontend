@@ -28,13 +28,16 @@ export class ModalErrorComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
     // appel le modal uniquement lorsque errorMessageChild change de valeur
     if (changes['errorMessageChild']?.currentValue) {
+      console.log('errorMessageChild', this.errorMessageChild);
       $("#modalError").modal('show');
     }
   }
 
+  closeModale() {
+    $("#modalError").modal('hide');
+  }
 
   getErrorMessage(fieldName: string, error: ValidationErrors) {
     if (error['required'] && fieldName == "acceptTerms") {
@@ -93,6 +96,7 @@ export class ModalErrorComponent implements OnInit, OnChanges {
     }
     console.log(this.problemDetail);
   }
+
 
 
 }
