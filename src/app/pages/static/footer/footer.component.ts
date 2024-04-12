@@ -10,8 +10,11 @@ export class FooterComponent implements OnInit {
   version: string = "1.0.0";
   email: string = "support@bozahouse.com";
   tel: string = "656832062";
+  year!: number;
   constructor() { }
 
   ngOnInit(): void {
+    const date = new Date();
+    this.year = date.getFullYear();
   }
 }

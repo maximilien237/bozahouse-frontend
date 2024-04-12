@@ -22,6 +22,36 @@
                 <input type="text" class="form-control" formControlName = "title" placeholder="métier du talent, ex: infimier">
               </div>
 
+<!--              secteurs d'activité
+
+              Informatique, SSII,Internet
+              Marketing, communication,médias
+              Services autres
+              Banque,assurance,finances
+              Distribution,vente,commerce de gros
+              Intérim,recrutement
+              Éducation,formation
+              Ingénierie,études développement
+              Services collectifs et sociaux,services ...
+              Transports, logistique,services postaux
+
+              les métiers
+
+              Informatique, nouvelles technologies
+              Commercial, vente
+              Marketing, communication
+              Gestion, comptabilité, finance
+              Secrétariat, assistanat
+              Management, direction générale
+              Transport, logistique
+              RH, formation
+              Métiers de la santé et du social
+              Métiers des services
+
+Soyez vigilant ! N'envoyez pas d'argent à un employeur potentiel. Ne versez aucune somme d'argent en échange d'un contrat de travail potentiel ou pour suivre une formation préalable à l'embauche.
+Merci de signaler toute irrégularité en utilisant le formulaire de contact candidat et en sélectionnant l'objet "Signaler une annonce d'emploi".
+              -->
+
 
               <div class="mb-3 mt-2">
                 <label class="form-label">Contract</label>
@@ -98,15 +128,15 @@
                 <input type="text" class="form-control" formControlName = "domain"  placeholder="Domaine, ex: informatique">
               </div>
 
-      <!--        <div class="mb-3 mt-2">
+              <div class="mb-3 mt-2">
                 <label class="form-label">Date de début</label>
                 <input type="date" class="form-control" formControlName = "startDate" >
               </div>
 
-              <div class="mb-3 mt-2 mb-2">
+              <div class="mb-3 mt-2 ">
                 <label class="form-label">Date de fin</label>
                 <input type="date" class="form-control" formControlName = "endDate" >
-              </div>-->
+              </div>
 
 
 
@@ -121,8 +151,8 @@
     </div> &nbsp;&nbsp;&nbsp;&nbsp;
 
 
-    <ng-container *ngIf="currentUser">
-      <ng-container *ngIf="currentUser.account == 'talent' || isAdmin">
+    <ng-container >
+      <ng-container >
       <span style="font-size: 20px;">
       <a routerLink="/addTalent" class="hide-underline-link btn btn-dark text-warning">
       <i class="bi bi-plus "></i> publier un profil

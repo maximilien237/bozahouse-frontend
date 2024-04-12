@@ -1,5 +1,4 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Images} from "../../../enums/Images";
 import {ValidationErrors} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ProblemDetail} from "../../../models/ProblemDetail";
@@ -13,7 +12,7 @@ declare let $:any;
 
 })
 export class ModalErrorComponent implements OnInit, OnChanges {
-  images = Images;
+
   problemDetail!: ProblemDetail;
 
   /**
@@ -29,10 +28,13 @@ export class ModalErrorComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     // appel le modal uniquement lorsque errorMessageChild change de valeur
-    if (changes['errorMessageChild']?.currentValue) {
+  //  if (changes['errorMessageChild']?.currentValue) {
       console.log('errorMessageChild', this.errorMessageChild);
-      $("#modalError").modal('show');
-    }
+      if (this.errorMessageChild) {
+        $("#modalError").modal('show');
+      }
+
+   // }
   }
 
   closeModale() {

@@ -60,6 +60,9 @@ import {NgxPaginationModule} from "ngx-pagination";
 import { NavBarComponent } from './pages/static/nav-bar/nav-bar.component';
 import { ColorModeComponent } from './pages/static/color-mode/color-mode.component';
 import {FooterComponent} from "./pages/static/footer/footer.component";
+import { ToastComponent } from './pages/shares/toast/toast.component';
+import { CarouselComponent } from './pages/static/carousel/carousel.component';
+
 
 @NgModule({
   declarations: [
@@ -102,27 +105,32 @@ import {FooterComponent} from "./pages/static/footer/footer.component";
     ModalErrorComponent,
     ConfigurationComponent,
     NavBarComponent,
-    ColorModeComponent
+    ColorModeComponent,
+    ToastComponent,
+    CarouselComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        NgxPaginationModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    NgxPaginationModule,
 
+  ],
 
-    ],
-
-  providers: [ {
+  providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
-    multi: true},
+    multi: true
+  },
     {
       provide: LOCALE_ID,
       useValue: 'fr-FR',
     },],
+  exports: [
+    ModalErrorComponent
+  ],
 
 
   bootstrap: [AppComponent]

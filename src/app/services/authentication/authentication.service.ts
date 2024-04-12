@@ -24,12 +24,12 @@ export class AuthenticationService {
 
   //npm i jwt-decode
 
-  forgotPassword(username : string): Observable<any> {
-    return this.http.put(environment.backendAPI + "forgotPassword/" , username);
+  forgotPassword(username : string): Observable<DataResponse> {
+    return this.http.put<DataResponse> (environment.backendAPI + "forgotPassword/" , username);
   }
 
-  public signIn(login: Login): Observable<any> {
-    return this.http.post<any>(environment.backendAPI+ path +"signIn", login);
+  public signIn(login: Login): Observable<DataResponse> {
+    return this.http.post<DataResponse>(environment.backendAPI+ path +"signIn", login);
   }
 
   public signUp(appUser: AppUser): Observable<AppUser> {
@@ -58,6 +58,11 @@ export class AuthenticationService {
   // obtention du username à partir du localstorage
   getUsernameFromToken(): string{
     return this.getClaimOfToken()?.sub;
+  }
+
+  // obtention du type de compte à partir du localstorage
+  getAccountFromToken(): string{
+    return this.getClaimOfToken()?.account;
   }
 
   hasAnyAuthority(authorities: string[] | string): boolean {

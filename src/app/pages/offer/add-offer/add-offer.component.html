@@ -270,24 +270,10 @@
             </div>
 
             <div class="mb-3">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Salaire</label>
-              <select class="form-select bg-secondary" formControlName="salaryChoice" >
-                <option [ngValue]="null" disabled hidden selected>Salaire</option>
-                <option value="Salaire à définir avec l'employeur">Salaire à définir avec l'employeur</option>
-                <option value="amount">Entrer un montant</option>
-              </select>
-              <small *ngIf="r['salaryChoice'].errors && r['salaryChoice'].touched" class="text-danger">{{handleGetErrorMessageFromChild('salaryChoice', r['salaryChoice'].errors)}}</small>
-
-              <span *ngIf="r['salaryChoice'].value=='amount'">
-
-               <div class="mb-3 mt-2">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Montant</label>
-              <input type="text" class="form-control bg-secondary" formControlName="salary"  >
+              <label class="form-label"><i class="text-danger fs-2">*&nbsp;</i>Salaire</label>
+              <input type="text" class="form-control " formControlName="salary" placeholder="Entrez un montant ( optionelle )" >
               <small *ngIf="r['salary'].errors && r['salary'].touched" class="text-danger">{{handleGetErrorMessageFromChild('salary', r['salary'].errors)}}</small>
 
-            </div>
-
-          </span>
             </div>
 
             <div class="mb-3">

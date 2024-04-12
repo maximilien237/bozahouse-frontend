@@ -17,18 +17,18 @@ export class StatisticService {
   }
 
   listSubscriptionStatistics(page: number,size: number): Observable<Array<SubscriptionStatistic>> {
-    return this.http.get<Array<SubscriptionStatistic>>(environment.backendHostAdmin + "subscriptions/stats?page=" +page + "&size=" +size);
+    return this.http.get<Array<SubscriptionStatistic>>(environment.backendAPI + "subscriptions/stats?page=" +page + "&size=" +size);
   }
 
   listTalentStatistics(page: number,size: number): Observable<Array<TalentStatistic>> {
-    return this.http.get<Array<TalentStatistic>>(environment.backendHostAdmin + "talents/stats?page=" +page + "&size=" +size);
+    return this.http.get<Array<TalentStatistic>>(environment.backendAPI + "talents/stats?page=" +page + "&size=" +size);
   }
 
   listOfferStatistics(page: number,size: number): Observable<Array<OfferStatistic>> {
-    return this.http.get<Array<OfferStatistic>>(environment.backendHostAdmin + "offers/stats?page=" +page + "&size=" +size);
+    return this.http.get<Array<OfferStatistic>>(environment.backendAPI + "offers/stats?page=" +page + "&size=" +size);
   }
 
   listAppUserStatistics(page: number,size: number): Observable<Array<AppUserStatistic>> {
-    return this.http.get<Array<AppUserStatistic>>(environment.backendHostAdmin + "users/stats?page=" +page + "&size=" +size);
+    return this.http.get<Array<AppUserStatistic>>(environment.backendAPI + "users/stats?page=" +page + "&size=" +size);
   }
 }

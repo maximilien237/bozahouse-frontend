@@ -1,3 +1,3 @@
-export interface DataResponse<T> {
-  value: T;
+export interface DataResponse {
+  value: any;
 }

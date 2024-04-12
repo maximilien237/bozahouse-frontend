@@ -31,7 +31,7 @@ import {AccountComponent} from "./pages/account/account/account.component";
 import {AdminComponent} from "./dashboard/admin/admin.component";
 
 
-import {UserOffersComponent} from "./pages/about-user/user-offers/user-offers.component";
+
 import {UserTalentsComponent} from "./pages/about-user/user-talents/user-talents.component";
 import {AuthenticationGuard} from "./services/guards/authentication.guard";
 import {IsAdminGuard} from "./services/guards/is-admin.guard";
@@ -41,6 +41,8 @@ import {UserTestimoniesComponent} from "./pages/about-user/user-testimonies/user
 import {ListTestimonyComponent} from "./pages/testimony/list-testimony/list-testimony.component";
 import {UpdateTestimonyComponent} from "./pages/testimony/update-testimony/update-testimony.component";
 import {AddTestimonyComponent} from "./pages/testimony/add-testimony/add-testimony.component";
+import {ConfigurationComponent} from "./pages/configuration/configuration.component";
+
 
 
 
@@ -89,12 +91,18 @@ const routes: Routes = [
   { path: "users", component: ListAppUserComponent, canActivate: [AuthenticationGuard, IsEditorGuard] },
 
 
-  { path: "userOffers/:id", component: UserOffersComponent, canActivate: [AuthenticationGuard]},
+  { path: "configuration", component: ConfigurationComponent, canActivate: [AuthenticationGuard]},
   { path: "userTalents/:id", component: UserTalentsComponent, canActivate: [AuthenticationGuard]},
   { path: "userTestimonies/:id", component: UserTestimoniesComponent, canActivate: [AuthenticationGuard]},
 
+  { path: "", component: LoginComponent },
 
-  { path: "", component: LoginComponent }
+/*  { path: "auth", loadChildren: () =>import('./security/security.module').then(m=>m.SecurityModule)
+  },
+  { path: "conf", loadChildren: () =>import('./configuration/configuration.module').then(m=>m.ConfigurationModule)  }*/
+
+
+
 ];
 
 @NgModule({

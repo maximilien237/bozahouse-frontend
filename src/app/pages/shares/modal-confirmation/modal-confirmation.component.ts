@@ -1,5 +1,8 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {Images} from "../../../enums/Images";
+import {CrudOperationService} from "../../../services/crud-operation/crud-operation.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ModalErrorComponent} from "../modal-error/modal-error.component";
 
 declare let $:any;
 
@@ -18,7 +21,19 @@ export class ModalConfirmationComponent implements OnInit, OnChanges {
   @Input()
   confMessageChild: string = "";
 
-  constructor() { }
+  @Input()
+  idChild!: number ;
+
+  @Input()
+  pathChild: string = "";
+
+  errorMessageParent: string = "";
+
+  @ViewChild(ModalErrorComponent)
+  private childError!: ModalErrorComponent ;
+
+  constructor(private crudOperationService: CrudOperationService) { }
+
 
   ngOnInit(): void {
     console.log("confMessageChild",this.confMessageChild)
@@ -37,4 +52,17 @@ export class ModalConfirmationComponent implements OnInit, OnChanges {
   }
 
 
+  onDeleteOperation() {
+    this.crudOperationService.deleteOperation(this.pathChild, this.idChild).subscribe({
+      next: value => {
+        console.log(value);
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log('jentre bien')
+        this.errorMessageParent = err.error.error;
+        // appel de la méthode handleError(error) situé dans ModalErrorComponent
+        this.childError?.handleError(err);
+      }
+    });
+  }
 }

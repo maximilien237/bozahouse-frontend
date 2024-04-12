@@ -25,7 +25,7 @@ export class AppUserService {
   }
 
   public appUserSpecification(criteria: UtilCriteria): Observable<Page<AppUser>> {
-    return this.http.post<Page<AppUser>>(environment.backendAPI +"/users/criteria", criteria)
+    return this.http.post<Page<AppUser>>(environment.backendAPI +"users/criteria", criteria)
   }
 
   public saveAppUser(user: AppUser):Observable<AppUser>{
