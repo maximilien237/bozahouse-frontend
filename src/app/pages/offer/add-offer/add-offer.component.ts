@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 import {Offer} from "../../../models/offer.models";
 import {ModalErrorComponent} from "../../shares/modal-error/modal-error.component";
 
+
 @Component({
   selector: 'app-add-offer',
   templateUrl: './add-offer.component.html',
@@ -21,6 +22,7 @@ export class AddOfferComponent implements OnInit {
   newOfferFormGroup!: FormGroup;
   @ViewChild(ModalErrorComponent)
   private childError!: ModalErrorComponent ;
+
 
   constructor(private fb: FormBuilder, private offerService: OfferService, private router: Router) { }
 

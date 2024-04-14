@@ -1,5 +1,210 @@
 
 
+<main class="mt-lg-5">
+  <h1 class="visually-hidden">Features examples</h1>
+
+  <div class="container px-4 py-5" id="users">
+    <h2 class="pb-2 border-bottom">Les utilisateurs  &nbsp; [ {{totalElements}} ]  <button type="button" class="btn btn-success position-relative" data-bs-toggle="modal" data-bs-target="#advise" >Ajouter un utilisateur</button> </h2>
+
+    <form [formGroup]="searchFormGroup" (ngSubmit)="handleAppUserSpecification()" class="col-md-6 offset-md-3">
+      <div class="input-group" >
+        <label class="form-label">Email :</label>
+        <input type="text" formControlName = "keyword" class="form-control">
+        <button class="btn btn-warning"><i class="bi bi-search"></i> </button>
+      </div>
+    </form>
+
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+      <div class="col" *ngFor="let user of users| paginate: { itemsPerPage: 6, currentPage: currentPage, totalItems: totalElements }">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">
+
+            <div class="dropdown">
+              <a href="javascript:void (0);" class="d-flex align-items-center text-decoration-none text-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+
+                <h4 > Compte : {{user.account === 'employer'?'Particulier': user.account === 'enterprise'?'Entreprise':'Talent'}}</h4>&nbsp;
+                <strong ><i class="bi bi-three-dots-vertical"></i></strong>
+              </a>
+              <ul class="dropdown-menu  text-small shadow">
+                <li><a class="dropdown-item" (click)="handleDetailAppUser(user.id!)" href="javascript:void (0);"> <i class="bi bi-eye"></i> Consulter</a></li>
+                <li><a class="dropdown-item" href="javascript:void (0);"> <i class="bi bi-stop-fill"></i> Signaler</a></li>
+
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" (click)="handleDisableAppUser(user)" href="javascript:void (0);">  <i class="bi bi-arrow-up"></i> Activer</a></li>
+                <li><a class="dropdown-item" (click)="handleDisableAppUser(user)" href="javascript:void (0);">  <i class="bi bi-arrow-down"></i>  Désactiver</a></li>
+                <li><a class="dropdown-item" (click)="handleUpdateAppUser(user.id!)" href="javascript:void (0);"> <i class="bi bi-pencil"></i> Modifier</a></li>
+                <li><a class="dropdown-item" (click)="handleDeleteUser(user)" href="javascript:void (0);">  <i class="bi bi-trash"></i> Supprimer</a></li>
+
+
+              </ul>
+            </div>
+
+
+          </div>
+          <div class="card-body text-success">
+            <h5 class="card-title">{{user.username}}</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer bg-transparent border-success">
+            <ul class="d-flex list-unstyled mt-auto">
+<!--              <li class="me-auto">
+                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+              </li>-->
+              <li class="d-flex align-items-center me-3">
+                <i class="bi bi-wifi me-2 "></i>
+                <small>{{user.countConnexion}}</small>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi me-2 bi-calendar-check"></i>
+                <small>{{user.createdAt | date: 'd MMMM y HH:mm:ss'}}</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <pagination-controls (pageChange)="goToPage($event)"></pagination-controls>
+    </div>
+  </div>
+
+<!--  <div class="b-example-divider"> </div>
+
+  <div class="container px-4 py-5" id="users">
+    <h2 class="pb-2 border-bottom">Les utilisateurs  &nbsp; [ {{totalElements}} ]  <button style="position: relative; left: 900px;" type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#advise" >Ajouter un utilisateur</button> </h2>
+
+    <ng-container  *ngIf="searchFormGroup">
+      <form [formGroup]="searchFormGroup" (ngSubmit)="handleAppUserSpecification()">
+        <div class="input-group">
+          <label class="form-label">Email :</label>
+          <input type="text" formControlName = "keyword" class="form-control">
+          <button class="btn btn-warning"><i class="bi bi-search"></i> </button>
+        </div>
+      </form>
+    </ng-container>
+
+
+    <table class="table mt-4 table-responsive">
+      <thead class="text-center ">
+      <tr>
+        <th>Email</th>
+        <th>Account</th>
+        <th >Actions</th>
+
+
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let user of users| paginate: { itemsPerPage: 6, currentPage: currentPage, totalItems: totalElements }">
+
+        <td>
+          {{user.username}}
+        </td>
+
+        <td>
+          {{user.account === 'employer'?'Particulier': user.account === 'enterprise'?'Entreprise':'Talent'}}
+        </td>
+
+        <td>
+          <div class="dropdown">
+            <a href="javascript:void (0);" class="d-flex align-items-center text-decoration-none text-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+
+              <h1 class=" me-5" ></h1>
+              <strong ><i class="bi bi-three-dots-vertical"></i></strong>
+            </a>
+            <ul class="dropdown-menu  text-small shadow">
+              <li><a class="dropdown-item" (click)="handleDetailAppUser(user.id!)" href="javascript:void (0);"> <i class="bi bi-eye"></i> Consulter</a></li>
+              <li><a class="dropdown-item" href="javascript:void (0);"> <i class="bi bi-stop-fill"></i> Signaler</a></li>
+
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" (click)="handleDisableAppUser(user)" href="javascript:void (0);">  <i class="bi bi-arrow-up"></i> Activer</a></li>
+              <li><a class="dropdown-item" (click)="handleDisableAppUser(user)" href="javascript:void (0);">  <i class="bi bi-arrow-down"></i>  Désactiver</a></li>
+              <li><a class="dropdown-item" (click)="handleUpdateAppUser(user.id!)" href="javascript:void (0);"> <i class="bi bi-pencil"></i> Modifier</a></li>
+              <li><a class="dropdown-item" (click)="handleDeleteUser(user)" href="javascript:void (0);">  <i class="bi bi-trash"></i> Supprimer</a></li>
+
+
+            </ul>
+          </div>
+
+        </td>
+
+      </tr>
+      </tbody>
+
+    </table>
+
+
+    <div class="d-flex justify-content-center">
+      <pagination-controls (pageChange)="goToPage($event)"></pagination-controls>
+    </div>
+
+
+
+  </div>-->
+
+  <div class="b-example-divider"></div>
+
+
+</main>
+
+
+
+
+<div class="modal fade" id="advise" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter ou retirer un role</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="roleToUserFormGroup" (ngSubmit)="handleAddRoleToUser()">
+
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Email:</label>
+            <input class="form-control" id="message-text" formControlName = "username"  required>
+            <small *ngIf="r['username'].errors && r['username'].touched" class="text-danger">{{getErrorMessage('username', r['username'].errors)}}</small>
+          </div>
+
+
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Role:</label>
+            <select class="form-select" id="recipient-name" formControlName = "roleName"  required>
+              <option [ngValue]="null" selected disabled hidden>Role</option>
+              <option value="MODERATOR">MODERATOR</option>
+              <option value="EDITOR">EDITOR</option>
+              <option value="ADMIN">ADMIN</option>
+            </select>
+            <small *ngIf="r['roleName'].errors && r['roleName'].touched" class="text-danger">{{getErrorMessage('roleName', r['roleName'].errors)}}</small>
+
+          </div>
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button [disabled] = "!roleToUserFormGroup.valid"  type="submit" class="btn btn-primary">Envoyer</button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!--
+
 <div  class="container mt-lg-5 spacer-bottom text-center">
 
   <div class="text-center mt-3" >
@@ -11,7 +216,7 @@
   </div>
   <div class="card bg-secondary border-0">
     <div class="row">
-      <!-- list users -->
+      &lt;!&ndash; list users &ndash;&gt;
       <div class="container col-md-5  mt-3" >
       <ng-container *ngIf="users ; else failureOrLoading">
         <div class="card spacer-top bg-dark">
@@ -32,7 +237,7 @@
 
 
             <table class="table mt-4 table-responsive">
-              <thead class="text-center text-light">
+              <thead class="text-center ">
               <tr>
                 <th>Pseudo</th>
                 <th>Activitée</th>
@@ -43,7 +248,7 @@
               </thead>
 
               <tbody>
-              <tr class="text-light" *ngFor="let user of users| paginate: { itemsPerPage: 6, currentPage: currentPage, totalItems: totalElements }">
+              <tr *ngFor="let user of users| paginate: { itemsPerPage: 6, currentPage: currentPage, totalItems: totalElements }">
 
                 <td>
                   {{user.username}} <br />
@@ -52,7 +257,7 @@
                   <p *ngIf="user.account == 'talent'" style="font-size: 16px; color: lightseagreen">&nbsp;[Tal]</p>
                 </td>
 
-<!--                <td>
+&lt;!&ndash;                <td>
                   <div class="card-body" >
                     <p > <button (click)="handleListAppUserSubscription(user.id)" class="btn btn-secondary">Abonnements</button> <span *ngIf="isAdmin">|</span>
                       <a *ngIf="isAdmin" (click)="handleAppUserDates(user.id)" class="btn btn-warning">
@@ -62,7 +267,7 @@
                       <button (click)="handleListAppUserOffer(user.id)" class="btn btn-secondary">Offres</button> |
                       <button (click)="handleListAppUserTalent(user.id)" class="btn btn-secondary">Talents </button></p>
                   </div>
-                </td>-->
+                </td>&ndash;&gt;
 
 
                 <td>
@@ -122,8 +327,8 @@
 
 
 
-      <!-- add role to user -->
-      <div class="container col-md-5  mt-3" >
+      &lt;!&ndash; add role to user &ndash;&gt;
+    &lt;!&ndash;  <div class="container col-md-5  mt-3" >
       <div  class="card spacer-top bg-dark">
         <h5 class="text-center text-warning spacer">Ajouter un role à un utilisateur</h5>
 
@@ -133,7 +338,7 @@
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Pseudo </label>
               <input class="form-control" formControlName = "username"  required>
-              <small *ngIf="addRoleToUserFormGroup.controls['username'].errors && addRoleToUserFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', addRoleToUserFormGroup.controls['username'].errors)}}</small>
+              <small *ngIf="addr['username'].errors && addr['username'].touched" class="text-danger">{{getErrorMessage('username', addr['username'].errors)}}</small>
 
             </div>
 
@@ -146,7 +351,7 @@
                 <option value="ADMIN">ADMIN</option>
               </select>
 
-              <small *ngIf="addRoleToUserFormGroup.controls['roleName'].errors && addRoleToUserFormGroup.controls['roleName'].touched" class="text-danger">{{getErrorMessage('roleName', addRoleToUserFormGroup.controls['roleName'].errors)}}</small>
+              <small *ngIf="addr['roleName'].errors && addr['roleName'].touched" class="text-danger">{{getErrorMessage('roleName', addr['roleName'].errors)}}</small>
 
             </div>
 
@@ -157,12 +362,12 @@
           </form>
         </div>
       </div>
-      </div>
+      </div>&ndash;&gt;
 
 
 
-      <!-- remove role to user -->
-      <div class="container col-md-5  mt-3" >
+      &lt;!&ndash; remove role to user &ndash;&gt;
+   &lt;!&ndash;   <div class="container col-md-5  mt-3" >
       <div  class="card spacer-top bg-dark">
         <h5 class="text-center text-warning spacer">Retirer un role à un utilisateur</h5>
 
@@ -172,7 +377,7 @@
             <div class="mb-3">
               <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Pseudo </label>
               <input class="form-control" formControlName = "username"  required>
-              <small *ngIf="removeRoleToUserFormGroup.controls['username'].errors && removeRoleToUserFormGroup.controls['username'].touched" class="text-danger">{{getErrorMessage('username', removeRoleToUserFormGroup.controls['username'].errors)}}</small>
+              <small *ngIf="remover['username'].errors && remover['username'].touched" class="text-danger">{{getErrorMessage('username', remover['username'].errors)}}</small>
 
             </div>
 
@@ -185,7 +390,7 @@
                 <option value="EDITOR">EDITOR</option>
                 <option value="ADMIN">ADMIN</option>
               </select>
-              <small *ngIf="removeRoleToUserFormGroup.controls['roleName'].errors && removeRoleToUserFormGroup.controls['roleName'].touched" class="text-danger">{{getErrorMessage('roleName', removeRoleToUserFormGroup.controls['roleName'].errors)}}</small>
+              <small *ngIf="remover['roleName'].errors && remover['roleName'].touched" class="text-danger">{{getErrorMessage('roleName', remover['roleName'].errors)}}</small>
 
             </div>
 
@@ -196,12 +401,13 @@
           </form>
         </div>
   </div>
-      </div>
+      </div>&ndash;&gt;
 </div>
   </div>
 </div>
 
 
+-->
 
 
 

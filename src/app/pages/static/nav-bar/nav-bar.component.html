@@ -1,4 +1,4 @@
-<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg  ">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/home">BOZAHOUSE</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,18 +16,18 @@
         <li class="nav-item"><a routerLink="/testimonies" routerLinkActive="active" class="nav-link">Avis</a></li>
         <li class="nav-item"><a routerLink="/users" routerLinkActive="active" class="nav-link">Users</a></li>
 
-        <li *ngIf="isAdmin" class="nav-item"><a routerLink="/listNews" routerLinkActive="active" class="nav-link">Newsletter</a></li>
+        <li  class="nav-item"><a routerLink="/listNews" routerLinkActive="active" class="nav-link">Newsletter</a></li>
 
         <li class="nav-item"><a routerLink="/configuration" routerLinkActive="active" class="nav-link">Configuration</a></li>
 
-        <li *ngIf="isAdmin" class="nav-item dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Disabled
           </a>
-          <ul class="dropdown-menu bg-secondary text-dark" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item bg-secondary" routerLink="/usersDisabled" >users</a></li>
-            <li><a class="dropdown-item bg-secondary" routerLink="/offersDisabled" >offers</a></li>
-            <li><a class="dropdown-item bg-secondary" routerLink="/talentsDisabled" >talents</a></li>
+          <ul class="dropdown-menu  " aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item " routerLink="/usersDisabled" >users</a></li>
+            <li><a class="dropdown-item " routerLink="/offersDisabled" >offers</a></li>
+            <li><a class="dropdown-item " routerLink="/talentsDisabled" >talents</a></li>
           </ul>
         </li>
 
@@ -36,11 +36,19 @@
 
       <ul class="navbar-nav d-flex">
 
-        <li *ngIf="isEditor" class="nav-item"><a routerLink="/users" routerLinkActive="active" class="nav-link"><i class="bi bi-eye-slash-fill"></i> </a></li>
+        <div class="dropdown">
+          <a href="javascript:void (0);" class="d-flex align-items-center text-decoration-none dropdown-toggle text-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="assets/img/kkm.JPG" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong >{{username}}</strong>
+          </a>
+          <ul class="dropdown-menu  text-small shadow">
+            <li><a class="dropdown-item" routerLink="/account" routerLinkActive="active"><i class="bi bi-person"></i>Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li ><a class="dropdown-item" routerLink="/login" routerLinkActive="active" (click)="logout()" ><i class="bi bi-box-arrow-right"></i> Logout</a></li>
 
-        <li class="nav-item" style="margin-right: 40px;"><a routerLink="/account" routerLinkActive="active"  class="nav-link"><i class="bi bi-person"></i> {{username}}</a></li>
+          </ul>
+        </div>
 
-        <li class="nav-item" style="margin-right: 30px"><a routerLink="/login" routerLinkActive="active" (click)="logout()"  class="nav-link"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
       </ul>
 
     </div>
@@ -48,7 +56,7 @@
   </div>
 
 
-</nav>-->
+</nav>
 
 
 <!-- -&#45;&#45;
@@ -59,7 +67,7 @@ extra_css:
 -&#45;&#45;-->
 
 
-  <nav class="navbar navbar-expand-md  fixed-top ">
+ <!-- <nav class="navbar navbar-expand-md  fixed-top ">
     <div class="container-fluid">
       <a class="navbar-brand" href="javascript:void (0);">Bozahouse</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,7 +105,7 @@ extra_css:
         <div class="dropdown">
           <a href="javascript:void (0);" class="d-flex align-items-center text-decoration-none dropdown-toggle text-secondary" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="assets/img/kkm.JPG" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong >Maximilien</strong>
+            <strong >{{username}}</strong>
           </a>
           <ul class="dropdown-menu  text-small shadow">
             <li><a class="dropdown-item" href="#">New project...</a></li>
@@ -109,6 +117,9 @@ extra_css:
         </div>
       </div>
     </div>
-  </nav>
+  </nav>-->
+
+
+
 
 

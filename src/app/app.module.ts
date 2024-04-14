@@ -62,6 +62,8 @@ import { ColorModeComponent } from './pages/static/color-mode/color-mode.compone
 import {FooterComponent} from "./pages/static/footer/footer.component";
 import { ToastComponent } from './pages/shares/toast/toast.component';
 import { CarouselComponent } from './pages/static/carousel/carousel.component';
+import { StepperComponent } from './pages/stepper/stepper.component';
+import {CdkStepperModule} from "@angular/cdk/stepper";
 
 
 @NgModule({
@@ -107,17 +109,19 @@ import { CarouselComponent } from './pages/static/carousel/carousel.component';
     NavBarComponent,
     ColorModeComponent,
     ToastComponent,
-    CarouselComponent
+    CarouselComponent,
+    StepperComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    NgxPaginationModule,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        NgxPaginationModule,
+        CdkStepperModule,
 
-  ],
+    ],
 
   providers: [{
     provide: HTTP_INTERCEPTORS,
@@ -129,7 +133,7 @@ import { CarouselComponent } from './pages/static/carousel/carousel.component';
       useValue: 'fr-FR',
     },],
   exports: [
-    ModalErrorComponent
+    CdkStepperModule,
   ],
 
 

@@ -9,17 +9,12 @@ import {AuthenticationService} from "../../../services/authentication/authentica
 })
 export class NavBarComponent implements OnInit {
 
-  roles: string[] = [];
-  isLoggedIn = false;
-  isAdmin : boolean =false;
-  isUser : boolean =false;
-  isEditor : boolean =false;
   username?: string;
 
   constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
-
+    this.username = this.authenticationService.getUsernameFromToken();
   }
 
   logout(): void {

@@ -26,16 +26,23 @@ export class ListAppUserComponent implements OnInit {
   currentPage: number = 1;
   totalElements!: number;
   pageSize: number = 6;
+  removeRole!: boolean;
 
   searchFormGroup: FormGroup= this.fb.group({
     keyword: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required])
   });
 
+/*
   addRoleToUserFormGroup: FormGroup= this.fb.group({
     username: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required]),
     roleName: this.fb.control("", [Validators.required])  });
 
   removeRoleToUserFormGroup: FormGroup= this.fb.group({
+    username: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required]),
+    roleName: this.fb.control("", [Validators.required])  });
+*/
+
+  roleToUserFormGroup: FormGroup= this.fb.group({
     username: this.fb.control("", [Validators.pattern("^(?=.*[a-z]).{3,12}$"),Validators.required]),
     roleName: this.fb.control("", [Validators.required])  });
 
@@ -48,13 +55,16 @@ export class ListAppUserComponent implements OnInit {
     this.handleAppUserSpecification();
   }
 
+  get r() {
+    return this.roleToUserFormGroup.controls;
+  }
 
   handleAppUserSpecification() {
     const {
       keyword,
     } = this.searchFormGroup.value;
     const criteria : UtilCriteria={};
-    criteria.keyword = keyword || "";
+    criteria.username = keyword || "";
     criteria.page = Number(this.currentPage - 1);
     criteria.size = Number(this.pageSize);
 
@@ -138,12 +148,12 @@ export class ListAppUserComponent implements OnInit {
 
 
   handleAddRoleToUser() {
-    const { username, roleName } = this.addRoleToUserFormGroup.value;
+    const { username, roleName } = this.roleToUserFormGroup.value;
     this.userService.addRoleToUser(username, roleName).subscribe({
       next: value => {
         console.log(value);
         alert("role ajouté à l\'utilisateur avec succès !");
-        this.addRoleToUserFormGroup.reset();
+        this.roleToUserFormGroup.reset();
       },
       error: err => {
         console.log(err);
@@ -154,12 +164,12 @@ export class ListAppUserComponent implements OnInit {
 
 
   handleRemoveRoleToUser() {
-    const { username, roleName } = this.removeRoleToUserFormGroup.value;
+    const { username, roleName } = this.roleToUserFormGroup.value;
     this.userService.removeRoleToUser(username, roleName).subscribe({
       next: value => {
         console.log(value);
         alert("role retiré à l\'utilisateur avec succès !");
-        this.removeRoleToUserFormGroup.reset();
+        this.roleToUserFormGroup.reset();
       },
       error: err => {
         console.log(err);
