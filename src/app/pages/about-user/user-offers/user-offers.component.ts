@@ -62,7 +62,7 @@ export class UserOffersComponent implements OnInit {
   handleDeleteOffer(offer: Offer) {
     let conf = confirm("Are you sure ?");
     if (!conf) return;
-    this.offerService.deleteOffer(offer.id).subscribe({
+    this.offerService.deleteOffer(offer.id!).subscribe({
       next: value => {
         console.log(value);
         this.userOffers = this.userOffers.pipe(
@@ -88,7 +88,7 @@ export class UserOffersComponent implements OnInit {
   handleGetTotalPageAppUserOffers(){
     this.userOffers1 = this.offerService.listOfferByAppUser(this.id,this.currentPage, this.pageSize).subscribe({
       next: value => {
-        this.totalPages = value[0].totalPages;
+        //this.totalPages = value[0].totalPages;
       },
       error: err => {
         console.log(err);

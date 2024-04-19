@@ -92,7 +92,7 @@ export class ListOfferComponent implements OnInit {
   handleDeleteOffer(offer: Offer) {
     let conf = confirm("Are you sure ?");
     if (!conf) return;
-    this.offerService.deleteOffer(offer.id).subscribe({
+    this.offerService.deleteOffer(offer.id!).subscribe({
       next: value => {
         console.log(value);
 
@@ -108,7 +108,7 @@ export class ListOfferComponent implements OnInit {
   handleEnableOffer(offer: Offer) {
     let conf = confirm("Are you sure ?");
     if (!conf) return;
-    this.offerService.enableOffer(offer.id).subscribe({
+    this.offerService.enableOffer(offer.id!).subscribe({
       next: value => {
         console.log(value);
 
@@ -125,7 +125,7 @@ export class ListOfferComponent implements OnInit {
   handleDisableOffer(offer: Offer) {
     let conf = confirm("Are you sure ?");
     if (!conf) return;
-    this.offerService.disableOffer(offer.id).subscribe({
+    this.offerService.disableOffer(offer.id!).subscribe({
       next: value => {
         console.log(value);
 

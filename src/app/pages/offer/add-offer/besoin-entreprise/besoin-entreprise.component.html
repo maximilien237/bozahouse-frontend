@@ -1,0 +1,194 @@
+<!--<div class="card px-4 py-5 col-md-6 offset-md-3 ">
+  <div class="card-body">
+    <h5 >Besoin de l'employeur</h5>
+    <div class="card-text ">
+
+      <div class="mb-3">
+        <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Domaine</label>
+        <input class="form-control " formControlName="domain" placeholder="ssi,srt,..." type="text">
+        <small *ngIf="r['domain'].errors && r['domain'].touched" class="text-danger">{{handleGetErrorMessageFromChild('domain', r['domain'].errors)}}</small>
+
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Intitulé du poste</label>
+        <input class="form-control " formControlName="title" placeholder="infimier"  type="text">
+        <small *ngIf="r['title'].errors && r['title'].touched" class="text-danger">{{handleGetErrorMessageFromChild('title', r['title'].errors)}}</small>
+
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nombre de poste</label>
+        <input class="form-control " formControlName="needPeople"  type="text">
+        <small *ngIf="r['needPeople'].errors && r['needPeople'].touched" class="text-danger">{{handleGetErrorMessageFromChild('needPeople', r['needPeople'].errors)}}</small>
+
+      </div>
+
+      <div class="mb-3">
+
+        <textarea aria-label="With textarea" class="form-control " formControlName="mission" type="text" style="height: 150px"></textarea>
+        <small *ngIf="r['mission'].errors && r['mission'].touched" class="text-danger">{{handleGetErrorMessageFromChild('mission', r['mission'].errors)}}</small>
+        <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mission du poste</label>
+      </div>
+
+      <div class="mb-3">
+
+        <textarea aria-label="With textarea" class="form-control " formControlName="skills" type="text" style="height: 150px" ></textarea>
+        <small *ngIf="r['skills'].errors && r['skills'].touched" class="text-danger">{{handleGetErrorMessageFromChild('skills', r['skills'].errors)}}</small>
+<label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Compétences réquises</label>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Profil recherché</label>
+        <textarea aria-label="With textarea" class="form-control " formControlName="profile" type="text" style="height: 150px" ></textarea>
+        <small *ngIf="r['profile'].errors && r['profile'].touched" class="text-danger">{{handleGetErrorMessageFromChild('profile', r['profile'].errors)}}</small>
+
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mode de travail</label>
+        <select class="form-select " formControlName="workMode" >
+          <option [ngValue]="null" disabled hidden selected>Mode de travail</option>
+          <option value="Sur site">Sur site</option>
+          <option value="A distance">A distance</option>
+        </select>
+        <small *ngIf="r['workMode'].errors && r['workMode'].touched" class="text-danger">{{handleGetErrorMessageFromChild('workMode', r['workMode'].errors)}}</small>
+
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Experience</label>
+        <select class="form-select " formControlName="experience" >
+          <option [ngValue]="null" disabled hidden selected>Experience</option>
+          <option value="Aucune">Aucune</option>
+          <option value="Jeune diplomé">Jeune diplomé</option>
+          <option value="1-2 ans">1-2 ans</option>
+          <option value="3-5 ans">3-5 ans</option>
+          <option value="6-10 ans">6-10 ans</option>
+          <option value="11-20 ans">11-20 ans</option>
+          <option value="+20 ans">plus de 20 ans</option>
+        </select>
+        <small *ngIf="r['experience'].errors && r['experience'].touched" class="text-danger">{{handleGetErrorMessageFromChild('experience', r['experience'].errors)}}</small>
+
+      </div>
+    </div>
+  </div>
+</div>-->
+
+
+<div class="mt-4">
+  <div class="row">
+<!--    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input  type="text" class="form-control" formControlName="title" placeholder="infimier">
+        <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Intitulé du poste</label>
+        <small *ngIf="r['title'].errors && r['title'].touched" class="text-danger">{{handleGetErrorMessageFromChild('title', r['title'].errors)}}</small>
+      </div>
+      <div class="form-floating mb-3">
+        <input class="form-control " formControlName="domain" placeholder="ssi,srt,..." type="text">
+        <small *ngIf="r['domain'].errors && r['domain'].touched" class="text-danger">{{handleGetErrorMessageFromChild('domain', r['domain'].errors)}}</small>
+        <label  class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Domaine</label>
+      </div>
+    </div>-->
+<!--    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <textarea aria-label="With textarea" class="form-control " formControlName="mission" type="text" style="height: 150px"></textarea>
+        <small *ngIf="r['mission'].errors && r['mission'].touched" class="text-danger">{{handleGetErrorMessageFromChild('mission', r['mission'].errors)}}</small>
+        <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mission du poste</label>
+      </div>
+      <div class="form-floating mb-3">
+        <textarea placeholder="Séparer vos compétence par une virgule. Exemple : java, angular, git" aria-label="With textarea" class="form-control " formControlName="skills" type="text" style="height: 150px" ></textarea>
+        <small *ngIf="r['skills'].errors && r['skills'].touched" class="text-danger">{{handleGetErrorMessageFromChild('skills', r['skills'].errors)}}</small>
+        <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Compétences réquises</label>
+      </div>
+    </div>-->
+
+
+    <div class="form-group">
+      <label class="form-label">Compétences réquises</label>
+      <div class="writing1">
+        <div  contenteditable="true" class="skills" autofocus spellcheck="false">
+
+        </div>
+        <div class="footer1">
+          <div class="text-format">
+            <button  (click)="handleBold()"><i class="bi bi-type-bold"></i></button>
+            <button   (click)="handleItalic()"><i class="bi bi-type-italic"></i></button>
+            <button  (click)="handleUnderline()"><i class="bi bi-type-underline"></i></button>
+            <button  (click)="handleInsertParagraph()"><i class="bi bi-arrow-return-left"></i></button>
+            <button  (click)="handleInsertOrderedList()"><i class="bi bi-list-ol"></i></button>
+            <button  (click)="handleInsertUnOrderedList()"><i class="bi bi-list-ul"></i></button>
+            <button  (click)="handleJustifyCenter()"><i class="bi bi-justify"></i></button>
+            <button  (click)="handleJustifyLeft()"><i class="bi bi-justify-left"></i></button>
+            <button  (click)="handleJustifyRight()"><i class="bi bi-justify-right"></i></button>
+
+          </div>
+          <div class="group-button">
+            <button class="btn" (click)="handleSimulateTextAreaContent()"><i class="bi bi-arrow-up"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Mission du poste</label>
+      <div class="writing1">
+        <div  contenteditable="true" class="mission" autofocus spellcheck="false">
+
+        </div>
+        <div class="footer1">
+          <div class="text-format">
+            <button  (click)="handleBold()"><i class="bi bi-type-bold"></i></button>
+            <button   (click)="handleItalic()"><i class="bi bi-type-italic"></i></button>
+            <button  (click)="handleUnderline()"><i class="bi bi-type-underline"></i></button>
+            <button  (click)="handleInsertParagraph()"><i class="bi bi-arrow-return-left"></i></button>
+            <button  (click)="handleInsertOrderedList()"><i class="bi bi-list-ol"></i></button>
+            <button  (click)="handleInsertUnOrderedList()"><i class="bi bi-list-ul"></i></button>
+            <button  (click)="handleJustifyCenter()"><i class="bi bi-justify"></i></button>
+            <button  (click)="handleJustifyLeft()"><i class="bi bi-justify-left"></i></button>
+            <button  (click)="handleJustifyRight()"><i class="bi bi-justify-right"></i></button>
+
+          </div>
+          <div class="group-button">
+            <button class="btn" (click)="handleSimulateTextAreaContent()"><i class="bi bi-arrow-up"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Profil recherché</label>
+      <div class="writing1">
+        <div  contenteditable="true" class="profil" autofocus spellcheck="false">
+
+        </div>
+        <div class="footer1">
+          <div class="text-format">
+            <button  (click)="handleBold()"><i class="bi bi-type-bold"></i></button>
+            <button   (click)="handleItalic()"><i class="bi bi-type-italic"></i></button>
+            <button  (click)="handleUnderline()"><i class="bi bi-type-underline"></i></button>
+            <button  (click)="handleInsertParagraph()"><i class="bi bi-arrow-return-left"></i></button>
+            <button  (click)="handleInsertOrderedList()"><i class="bi bi-list-ol"></i></button>
+            <button  (click)="handleInsertUnOrderedList()"><i class="bi bi-list-ul"></i></button>
+            <button  (click)="handleJustifyCenter()"><i class="bi bi-justify"></i></button>
+            <button  (click)="handleJustifyLeft()"><i class="bi bi-justify-left"></i></button>
+            <button  (click)="handleJustifyRight()"><i class="bi bi-justify-right"></i></button>
+
+          </div>
+          <div class="group-button">
+            <button class="btn" (click)="handleSimulateTextAreaContent()"><i class="bi bi-arrow-up"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="d-flex justify-content-between flex-row mb-5 mt-4">
+  <button class="btn btn-outline-primary" cdkStepperPrevious>
+    <i class="fa fa-angle-left"></i> Précédent
+  </button>
+  <button class="btn btn-outline-primary" cdkStepperNext>
+    Suivant <i class="fa fa-angle-right"></i>
+  </button>
+</div>

@@ -1,5 +1,5 @@
 
-<!--<div class="container col-md-10 ">
+<div class="container col-md-10 ">
 
   <div class="spacer-left mt-2">
     <span><a routerLink="/jobs" class="hide-underline-link btn btn-dark text-warning">Retour</a> </span>
@@ -60,7 +60,7 @@
       </span>
 
 
-      &lt;!&ndash;        <div class="mb-3 mt-3">
+      <!--        <div class="mb-3 mt-3">
                 <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Pays</label>
                 <select class="form-select" formControlName="countryCode" >
                   <option value="+27" >Afrique du Sud</option>
@@ -119,7 +119,7 @@
                   <option value="+263" >Zimbabwe</option>
                 </select>
                 <small *ngIf="r['countryCode'].errors && r['countryCode'].touched" class="text-danger">{{handleGetErrorMessageFromChild('countryCode', r['countryCode'].errors)}}</small>
-              </div>&ndash;&gt;
+              </div>-->
 
               <div class="mb-3">
                 <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Contact</label>
@@ -127,12 +127,12 @@
                 <small *ngIf="r['tel'].errors && r['tel'].touched" class="text-danger">{{handleGetErrorMessageFromChild('tel', r['tel'].errors)}}</small>
               </div>
 
-&lt;!&ndash;              <div class="mb-3">
+<!--              <div class="mb-3">
                 <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Contact</label>
                 <input class="form-control" formControlName="tel" placeholder="6********" type="text">
                 <small *ngIf="r['tel'].errors && r['tel'].touched" class="text-danger">{{handleGetErrorMessageFromChild('tel', r['tel'].errors)}}</small>
 
-              </div>&ndash;&gt;
+              </div>-->
 
               <div class="mb-3">
                 <label class="form-label">Numéro WhatsApp</label>
@@ -291,599 +291,42 @@
     </form>
   </div>
 
-</div>-->
+</div>
 
 <!--<div class="mb-3 spacer-left mt-3">
   <span><a routerLink="/jobs" class="hide-underline-link btn btn-dark text-warning">Retour</a> </span>
 </div>-->
 
-<!--<ul class="nav nav-tabs px-4 py-5 col-md-6 offset-md-3 mt-lg-5" id="myTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Etape 1</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Etape 2</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Etape 3</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" >Etape 4</button>
-  </li>
-</ul>
-<div class="tab-content " id="myTabContent">
-  <div class="tab-pane fade show active px-4 py-5 " id="home-tab-pane"  role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-    <div class="card  px-4 py-5 col-md-6 offset-md-3">
-      <div class="card-body">
-        <h5 >Informations sur l'employeur</h5>
-        <div class="card-text ">
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type d'employeur</label>
-            <select class="form-select " formControlName="type" >
-              <option [ngValue]="null" disabled hidden selected>choose...</option>
-              <option value="particular">Particulier</option>
-              <option value="enterprise">Entreprise</option>
-            </select>
-            <small *ngIf="r['type'].errors && r['type'].touched" class="text-danger">{{handleGetErrorMessageFromChild('type', r['type'].errors)}}</small>
-
-            <span *ngIf="r['type'].value == 'enterprise'">
-
-    <div class="mb-3">
-      <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom de l'entreprise</label>
-      <input class="form-control " formControlName="name"  type="text">
-          <small *ngIf="r['name'].errors && r['name'].touched" class="text-danger">{{handleGetErrorMessageFromChild('name', r['name'].errors)}}</small>
-
-    </div>
-
-                  <div class="mb-3">
-      <label class="form-label">L'url de votre page facebook</label>
-                      <input class="form-control " formControlName="fcb" placeholder="example : https://www.facebook.com/example/"  type="text">
-           <small *ngIf="r['fcb'].errors && r['fcb'].touched" class="text-danger">{{handleGetErrorMessageFromChild('fcb', r['fcb'].errors)}}</small>
-
-                  </div>
-
-                  <div class="mb-3">
-      <label class="form-label">L'url de votre page linkedin</label>
-                      <input class="form-control " formControlName="linkedin" placeholder="example : https://www.linkedin.com/example/"  type="text">
-    <small *ngIf="r['linkedin'].errors && r['linkedin'].touched" class="text-danger">{{handleGetErrorMessageFromChild('Linkedin', r['linkedin'].errors)}}</small>
-
-                  </div>
-
-                  <div class="mb-3">
-      <label class="form-label">L'url de votre site web</label>
-      <input class="form-control " formControlName="web" placeholder="example : https://www.monsite.com/example/"  type="text">
-     <small *ngIf="r['web'].errors && r['web'].touched" class="text-danger">{{handleGetErrorMessageFromChild('web', r['web'].errors)}}</small>
-
-                  </div>
-
-
-
-      </span>
-
-
-            &lt;!&ndash;        <div class="mb-3 mt-3">
-                      <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Pays</label>
-                      <select class="form-select" formControlName="countryCode" >
-                        <option value="+27" >Afrique du Sud</option>
-                        <option value="+213" >Algérie</option>
-                        <option value="+244" >Angola</option>
-                        <option value="+229" >Bénin</option>
-                        <option value="+267" >Botswana</option>
-                        <option value="+226" >Burkina Faso</option>
-                        <option value="+257" >Burundi</option>
-                        <option value="+237" >Cameroun</option>
-                        <option value="+238" >Cap-Vert</option>
-                        <option value="+236" >République centrafricaine</option>
-                        <option value="+269" >Comores</option>
-                        <option value="+242" >République du Congo</option>
-                        <option value="+243" >République démocratique du Congo</option>
-                        <option value="+225" >Côte d'Ivoire</option>
-                        <option value="+253" >Djibouti</option>
-                        <option value="+20" >Egypte</option>
-                        <option value="+291" >Erythrée</option>
-                        <option value="+251" >Ethiopie</option>
-                        <option value="+241" >Gabon</option>
-                        <option value="+220" >Gambie</option>
-                        <option value="+233" >Ghana</option>
-                        <option value="+224" >Guinée</option>
-                        <option value="+245" >Guinée-Bissau</option>
-                        <option value="+240" >Guinée équatoriale</option>
-                        <option value="+254" >Kenya</option>
-                        <option value="+266" >Lesotho</option>
-                        <option value="+231" >Libéria</option>
-                        <option value="+218" >Libye</option>
-                        <option value="+261" >Madagascar</option>
-                        <option value="+265" >Malawi</option>
-                        <option value="+223" >Mali</option>
-                        <option value="+212" >Maroc</option>
-                        <option value="+230" >Maurice</option>
-                        <option value="+222" >Mauritanie</option>
-                        <option value="+258" >Mozambique</option>
-                        <option value="+264" >Namibie</option>
-                        <option value="+227" >Niger</option>
-                        <option value="+234" >Nigeria</option>
-                        <option value="+256" >Ouganda</option>
-                        <option value="+250" >Rwanda</option>
-                        <option value="+239" >Sao Tomé-et-Principe</option>
-                        <option value="+221" >Sénégal</option>
-                        <option value="+248" >Seychelles</option>
-                        <option value="+232" >Siera Leone</option>
-                        <option value="+252" >Somalie</option>
-                        <option value="+249" >Soudan</option>
-                        <option value="+211" >Soudan du Sud</option>
-                        <option value="+268" >Swaziland</option>
-                        <option value="+255" >Tanzanie</option>
-                        <option value="+235" >Tchad</option>
-                        <option value="+228" >Togo</option>
-                        <option value="+216" >Tunisie</option>
-                        <option value="+260" >Zambie</option>
-                        <option value="+263" >Zimbabwe</option>
-                      </select>
-                      <small *ngIf="r['countryCode'].errors && r['countryCode'].touched" class="text-danger">{{handleGetErrorMessageFromChild('countryCode', r['countryCode'].errors)}}</small>
-                    </div>&ndash;&gt;
-
-            <div class="mb-3">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Contact</label>
-              <input type="text" class="form-control " formControlName="tel" placeholder="6********" >
-              <small *ngIf="r['tel'].errors && r['tel'].touched" class="text-danger">{{handleGetErrorMessageFromChild('tel', r['tel'].errors)}}</small>
-            </div>
-
-            &lt;!&ndash;              <div class="mb-3">
-                            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Contact</label>
-                            <input class="form-control" formControlName="tel" placeholder="6********" type="text">
-                            <small *ngIf="r['tel'].errors && r['tel'].touched" class="text-danger">{{handleGetErrorMessageFromChild('tel', r['tel'].errors)}}</small>
-
-                          </div>&ndash;&gt;
-
-            <div class="mb-3">
-              <label class="form-label">Numéro WhatsApp</label>
-              <input class="form-control " formControlName="whatsAppNumber" placeholder="6********" type="text">
-              <small *ngIf="r['whatsAppNumber'].errors && r['whatsAppNumber'].touched" class="text-danger">{{handleGetErrorMessageFromChild('whatsAppNumber', r['whatsAppNumber'].errors)}}</small>
-
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Email <span class="text-muted"></span></label>
-              <input class="form-control " formControlName="email" placeholder="you@example.com" type="text">
-              <small *ngIf="r['email'].errors && r['email'].touched" class="text-danger">{{handleGetErrorMessageFromChild('email', r['email'].errors)}}</small>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="tab-pane fade px-4 py-5" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-    <div class="card px-4 py-5 col-md-6 offset-md-3 ">
-      <div class="card-body">
-        <h5 >Besoin de l'employeur</h5>
-        <div class="card-text ">
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Domaine</label>
-            <input class="form-control " formControlName="domain" placeholder="ssi,srt,..." type="text">
-            <small *ngIf="r['domain'].errors && r['domain'].touched" class="text-danger">{{handleGetErrorMessageFromChild('domain', r['domain'].errors)}}</small>
-
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Intitulé du poste</label>
-            <input class="form-control " formControlName="title" placeholder="infimier"  type="text">
-            <small *ngIf="r['title'].errors && r['title'].touched" class="text-danger">{{handleGetErrorMessageFromChild('title', r['title'].errors)}}</small>
-
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nombre de poste</label>
-            <input class="form-control " formControlName="needPeople"  type="text">
-            <small *ngIf="r['needPeople'].errors && r['needPeople'].touched" class="text-danger">{{handleGetErrorMessageFromChild('needPeople', r['needPeople'].errors)}}</small>
-
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mission du poste</label>
-            <textarea aria-label="With textarea" class="form-control " formControlName="mission" type="text" style="height: 150px"></textarea>
-            <small *ngIf="r['mission'].errors && r['mission'].touched" class="text-danger">{{handleGetErrorMessageFromChild('mission', r['mission'].errors)}}</small>
-
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Compétences réquises</label>
-            <textarea aria-label="With textarea" class="form-control " formControlName="skills" type="text" style="height: 150px" ></textarea>
-            <small *ngIf="r['skills'].errors && r['skills'].touched" class="text-danger">{{handleGetErrorMessageFromChild('skills', r['skills'].errors)}}</small>
-
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Profil recherché</label>
-            <textarea aria-label="With textarea" class="form-control " formControlName="profile" type="text" style="height: 150px" ></textarea>
-            <small *ngIf="r['profile'].errors && r['profile'].touched" class="text-danger">{{handleGetErrorMessageFromChild('profile', r['profile'].errors)}}</small>
-
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mode de travail</label>
-            <select class="form-select " formControlName="workMode" >
-              <option [ngValue]="null" disabled hidden selected>Mode de travail</option>
-              <option value="Sur site">Sur site</option>
-              <option value="A distance">A distance</option>
-            </select>
-            <small *ngIf="r['workMode'].errors && r['workMode'].touched" class="text-danger">{{handleGetErrorMessageFromChild('workMode', r['workMode'].errors)}}</small>
-
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Experience</label>
-            <select class="form-select " formControlName="experience" >
-              <option [ngValue]="null" disabled hidden selected>Experience</option>
-              <option value="Aucune">Aucune</option>
-              <option value="Jeune diplomé">Jeune diplomé</option>
-              <option value="1-2 ans">1-2 ans</option>
-              <option value="3-5 ans">3-5 ans</option>
-              <option value="6-10 ans">6-10 ans</option>
-              <option value="11-20 ans">11-20 ans</option>
-              <option value="+20 ans">plus de 20 ans</option>
-            </select>
-            <small *ngIf="r['experience'].errors && r['experience'].touched" class="text-danger">{{handleGetErrorMessageFromChild('experience', r['experience'].errors)}}</small>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div class="tab-pane fade px-4 py-5" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-    <div class="card  px-4 py-5 col-md-6 offset-md-3">
-      <div class="card-body">
-        <h5 >Localisation</h5>
-        <div class="card-text ">
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Address</label>
-            <input class="form-control " formControlName="address" placeholder="Simbok,Yaoundé,Cameroun" type="text">
-            <small *ngIf="r['address'].errors && r['address'].touched" class="text-danger">{{handleGetErrorMessageFromChild('address', r['address'].errors)}}</small>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="tab-pane fade px-4 py-5" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
-    <div class="card  px-4 py-5 col-md-6 offset-md-3">
-      <div class="card-body">
-        <h5 >Autres informations</h5>
-        <div class="card-text ">
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Contract</label>
-            <select class="form-select " formControlName="contract" >
-              <option [ngValue]="null" disabled hidden selected>Choose....</option>
-              <option value="CDI">CDI</option>
-              <option value="CDD">CDD</option>
-              <option value="FREELANCE">Freelance</option>
-              <option value="INTERIM">Intérim</option>
-              <option value="ASSOCIE">Associé(e)</option>
-              <option value="ALTERNANCE">Alternance</option>
-              <option value="FRANCHISE">Franchise</option>
-              <option value="STAGE ACADEMIC">Stage academic</option>
-              <option value="STAGE PROFESSIONNELLE">Stage professionnelle</option>
-              <option value="TOUT">Tout</option>
-            </select>
-            <small *ngIf="r['contract'].errors && r['contract'].touched" class="text-danger">{{handleGetErrorMessageFromChild('contract', r['contract'].errors)}}</small>
-
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i class="text-danger fs-2">*&nbsp;</i>Salaire</label>
-            <input type="text" class="form-control " formControlName="salary" placeholder="Entrez un montant ( optionelle )" >
-            <small *ngIf="r['salary'].errors && r['salary'].touched" class="text-danger">{{handleGetErrorMessageFromChild('salary', r['salary'].errors)}}</small>
-
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date D'expiration</label>
-            <input class="form-control " formControlName="endOffer" type="date">
-            <small *ngIf="r['endOffer'].errors && r['endOffer'].touched" class="text-danger">{{handleGetErrorMessageFromChild('endOffer', r['endOffer'].errors)}}</small>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>-->
 
 
 
 
 
-<div class="container px-4 py-5">
+
+<!--<div class="container px-4 py-5">
   <div class="row">
     <h2 class="text-center mt-4">Angular Stepper Tutorials</h2>
     <div class="col-md-9 mx-auto">
       <app-stepper [linearModeSelected]="false" #appStepper>
-        <cdk-step [label]="'Information'">
-          <div class="card  px-4 py-5 col-md-6 offset-md-3">
-            <div class="card-body">
-              <h5 >Informations sur l'employeur</h5>
-              <div class="card-text ">
-                <div class="mb-3">
-                  <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type d'employeur</label>
-                  <select class="form-select " formControlName="type" >
-                    <option [ngValue]="null" disabled hidden selected>choose...</option>
-                    <option value="particular">Particulier</option>
-                    <option value="enterprise">Entreprise</option>
-                  </select>
-                  <small *ngIf="r['type'].errors && r['type'].touched" class="text-danger">{{handleGetErrorMessageFromChild('type', r['type'].errors)}}</small>
-
-                  <span *ngIf="r['type'].value == 'enterprise'">
-
-    <div class="mb-3">
-      <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom de l'entreprise</label>
-      <input class="form-control " formControlName="name"  type="text">
-          <small *ngIf="r['name'].errors && r['name'].touched" class="text-danger">{{handleGetErrorMessageFromChild('name', r['name'].errors)}}</small>
-
-    </div>
-
-                  <div class="mb-3">
-      <label class="form-label">L'url de votre page facebook</label>
-                      <input class="form-control " formControlName="fcb" placeholder="example : https://www.facebook.com/example/"  type="text">
-           <small *ngIf="r['fcb'].errors && r['fcb'].touched" class="text-danger">{{handleGetErrorMessageFromChild('fcb', r['fcb'].errors)}}</small>
-
-                  </div>
-
-                  <div class="mb-3">
-      <label class="form-label">L'url de votre page linkedin</label>
-                      <input class="form-control " formControlName="linkedin" placeholder="example : https://www.linkedin.com/example/"  type="text">
-    <small *ngIf="r['linkedin'].errors && r['linkedin'].touched" class="text-danger">{{handleGetErrorMessageFromChild('Linkedin', r['linkedin'].errors)}}</small>
-
-                  </div>
-
-                  <div class="mb-3">
-      <label class="form-label">L'url de votre site web</label>
-      <input class="form-control " formControlName="web" placeholder="example : https://www.monsite.com/example/"  type="text">
-     <small *ngIf="r['web'].errors && r['web'].touched" class="text-danger">{{handleGetErrorMessageFromChild('web', r['web'].errors)}}</small>
-
-                  </div>
-
-
-
-      </span>
-
-
-                  <!--        <div class="mb-3 mt-3">
-                            <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Pays</label>
-                            <select class="form-select" formControlName="countryCode" >
-                              <option value="+27" >Afrique du Sud</option>
-                              <option value="+213" >Algérie</option>
-                              <option value="+244" >Angola</option>
-                              <option value="+229" >Bénin</option>
-                              <option value="+267" >Botswana</option>
-                              <option value="+226" >Burkina Faso</option>
-                              <option value="+257" >Burundi</option>
-                              <option value="+237" >Cameroun</option>
-                              <option value="+238" >Cap-Vert</option>
-                              <option value="+236" >République centrafricaine</option>
-                              <option value="+269" >Comores</option>
-                              <option value="+242" >République du Congo</option>
-                              <option value="+243" >République démocratique du Congo</option>
-                              <option value="+225" >Côte d'Ivoire</option>
-                              <option value="+253" >Djibouti</option>
-                              <option value="+20" >Egypte</option>
-                              <option value="+291" >Erythrée</option>
-                              <option value="+251" >Ethiopie</option>
-                              <option value="+241" >Gabon</option>
-                              <option value="+220" >Gambie</option>
-                              <option value="+233" >Ghana</option>
-                              <option value="+224" >Guinée</option>
-                              <option value="+245" >Guinée-Bissau</option>
-                              <option value="+240" >Guinée équatoriale</option>
-                              <option value="+254" >Kenya</option>
-                              <option value="+266" >Lesotho</option>
-                              <option value="+231" >Libéria</option>
-                              <option value="+218" >Libye</option>
-                              <option value="+261" >Madagascar</option>
-                              <option value="+265" >Malawi</option>
-                              <option value="+223" >Mali</option>
-                              <option value="+212" >Maroc</option>
-                              <option value="+230" >Maurice</option>
-                              <option value="+222" >Mauritanie</option>
-                              <option value="+258" >Mozambique</option>
-                              <option value="+264" >Namibie</option>
-                              <option value="+227" >Niger</option>
-                              <option value="+234" >Nigeria</option>
-                              <option value="+256" >Ouganda</option>
-                              <option value="+250" >Rwanda</option>
-                              <option value="+239" >Sao Tomé-et-Principe</option>
-                              <option value="+221" >Sénégal</option>
-                              <option value="+248" >Seychelles</option>
-                              <option value="+232" >Siera Leone</option>
-                              <option value="+252" >Somalie</option>
-                              <option value="+249" >Soudan</option>
-                              <option value="+211" >Soudan du Sud</option>
-                              <option value="+268" >Swaziland</option>
-                              <option value="+255" >Tanzanie</option>
-                              <option value="+235" >Tchad</option>
-                              <option value="+228" >Togo</option>
-                              <option value="+216" >Tunisie</option>
-                              <option value="+260" >Zambie</option>
-                              <option value="+263" >Zimbabwe</option>
-                            </select>
-                            <small *ngIf="r['countryCode'].errors && r['countryCode'].touched" class="text-danger">{{handleGetErrorMessageFromChild('countryCode', r['countryCode'].errors)}}</small>
-                          </div>-->
-
-                  <div class="mb-3">
-                    <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Contact</label>
-                    <input type="text" class="form-control " formControlName="tel" placeholder="6********" >
-                    <small *ngIf="r['tel'].errors && r['tel'].touched" class="text-danger">{{handleGetErrorMessageFromChild('tel', r['tel'].errors)}}</small>
-                  </div>
-
-                  <!--              <div class="mb-3">
-                                  <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Contact</label>
-                                  <input class="form-control" formControlName="tel" placeholder="6********" type="text">
-                                  <small *ngIf="r['tel'].errors && r['tel'].touched" class="text-danger">{{handleGetErrorMessageFromChild('tel', r['tel'].errors)}}</small>
-
-                                </div>-->
-
-                  <div class="mb-3">
-                    <label class="form-label">Numéro WhatsApp</label>
-                    <input class="form-control " formControlName="whatsAppNumber" placeholder="6********" type="text">
-                    <small *ngIf="r['whatsAppNumber'].errors && r['whatsAppNumber'].touched" class="text-danger">{{handleGetErrorMessageFromChild('whatsAppNumber', r['whatsAppNumber'].errors)}}</small>
-
-                  </div>
-
-                  <div class="mb-3">
-                    <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Email <span class="text-muted"></span></label>
-                    <input class="form-control " formControlName="email" placeholder="you@example.com" type="text">
-                    <small *ngIf="r['email'].errors && r['email'].touched" class="text-danger">{{handleGetErrorMessageFromChild('email', r['email'].errors)}}</small>
-
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
+        <cdk-step [label]="'Information sur l\'employeur'">
+          <app-info-entreprise></app-info-entreprise>
         </cdk-step>
-        <cdk-step [label]="'Contact'">
-          <div class="card px-4 py-5 col-md-6 offset-md-3 ">
-            <div class="card-body">
-              <h5 >Besoin de l'employeur</h5>
-              <div class="card-text ">
-
-                <div class="mb-3">
-                  <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Domaine</label>
-                  <input class="form-control " formControlName="domain" placeholder="ssi,srt,..." type="text">
-                  <small *ngIf="r['domain'].errors && r['domain'].touched" class="text-danger">{{handleGetErrorMessageFromChild('domain', r['domain'].errors)}}</small>
-
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Intitulé du poste</label>
-                  <input class="form-control " formControlName="title" placeholder="infimier"  type="text">
-                  <small *ngIf="r['title'].errors && r['title'].touched" class="text-danger">{{handleGetErrorMessageFromChild('title', r['title'].errors)}}</small>
-
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nombre de poste</label>
-                  <input class="form-control " formControlName="needPeople"  type="text">
-                  <small *ngIf="r['needPeople'].errors && r['needPeople'].touched" class="text-danger">{{handleGetErrorMessageFromChild('needPeople', r['needPeople'].errors)}}</small>
-
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mission du poste</label>
-                  <textarea aria-label="With textarea" class="form-control " formControlName="mission" type="text" style="height: 150px"></textarea>
-                  <small *ngIf="r['mission'].errors && r['mission'].touched" class="text-danger">{{handleGetErrorMessageFromChild('mission', r['mission'].errors)}}</small>
-
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Compétences réquises</label>
-                  <textarea aria-label="With textarea" class="form-control " formControlName="skills" type="text" style="height: 150px" ></textarea>
-                  <small *ngIf="r['skills'].errors && r['skills'].touched" class="text-danger">{{handleGetErrorMessageFromChild('skills', r['skills'].errors)}}</small>
-
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Profil recherché</label>
-                  <textarea aria-label="With textarea" class="form-control " formControlName="profile" type="text" style="height: 150px" ></textarea>
-                  <small *ngIf="r['profile'].errors && r['profile'].touched" class="text-danger">{{handleGetErrorMessageFromChild('profile', r['profile'].errors)}}</small>
-
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mode de travail</label>
-                  <select class="form-select " formControlName="workMode" >
-                    <option [ngValue]="null" disabled hidden selected>Mode de travail</option>
-                    <option value="Sur site">Sur site</option>
-                    <option value="A distance">A distance</option>
-                  </select>
-                  <small *ngIf="r['workMode'].errors && r['workMode'].touched" class="text-danger">{{handleGetErrorMessageFromChild('workMode', r['workMode'].errors)}}</small>
-
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Experience</label>
-                  <select class="form-select " formControlName="experience" >
-                    <option [ngValue]="null" disabled hidden selected>Experience</option>
-                    <option value="Aucune">Aucune</option>
-                    <option value="Jeune diplomé">Jeune diplomé</option>
-                    <option value="1-2 ans">1-2 ans</option>
-                    <option value="3-5 ans">3-5 ans</option>
-                    <option value="6-10 ans">6-10 ans</option>
-                    <option value="11-20 ans">11-20 ans</option>
-                    <option value="+20 ans">plus de 20 ans</option>
-                  </select>
-                  <small *ngIf="r['experience'].errors && r['experience'].touched" class="text-danger">{{handleGetErrorMessageFromChild('experience', r['experience'].errors)}}</small>
-
-                </div>
-              </div>
-            </div>
-          </div>
+        <cdk-step [label]="'Besoin de l\' employeur'">
+       <app-besoin-entreprise></app-besoin-entreprise>
         </cdk-step>
-        <cdk-step [label]="'Security'">
-          <div class="card  px-4 py-5 col-md-6 offset-md-3">
-            <div class="card-body">
-              <h5 >Localisation</h5>
-              <div class="card-text ">
-
-                <div class="mb-3">
-                  <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Address</label>
-                  <input class="form-control " formControlName="address" placeholder="Simbok,Yaoundé,Cameroun" type="text">
-                  <small *ngIf="r['address'].errors && r['address'].touched" class="text-danger">{{handleGetErrorMessageFromChild('address', r['address'].errors)}}</small>
-
-                </div>
-              </div>
-            </div>
-          </div>
+        <cdk-step [label]="'Localisation'">
+<app-localisation></app-localisation>
         </cdk-step>
-        <cdk-step [label]="'Finish'">
-          <div class="card  px-4 py-5 col-md-6 offset-md-3">
-            <div class="card-body">
-              <h5 >Autres informations</h5>
-              <div class="card-text ">
-
-                <div class="mb-3">
-                  <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Contract</label>
-                  <select class="form-select " formControlName="contract" >
-                    <option [ngValue]="null" disabled hidden selected>Choose....</option>
-                    <option value="CDI">CDI</option>
-                    <option value="CDD">CDD</option>
-                    <option value="FREELANCE">Freelance</option>
-                    <option value="INTERIM">Intérim</option>
-                    <option value="ASSOCIE">Associé(e)</option>
-                    <option value="ALTERNANCE">Alternance</option>
-                    <option value="FRANCHISE">Franchise</option>
-                    <option value="STAGE ACADEMIC">Stage academic</option>
-                    <option value="STAGE PROFESSIONNELLE">Stage professionnelle</option>
-                    <option value="TOUT">Tout</option>
-                  </select>
-                  <small *ngIf="r['contract'].errors && r['contract'].touched" class="text-danger">{{handleGetErrorMessageFromChild('contract', r['contract'].errors)}}</small>
-
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label"><i class="text-danger fs-2">*&nbsp;</i>Salaire</label>
-                  <input type="text" class="form-control " formControlName="salary" placeholder="Entrez un montant ( optionelle )" >
-                  <small *ngIf="r['salary'].errors && r['salary'].touched" class="text-danger">{{handleGetErrorMessageFromChild('salary', r['salary'].errors)}}</small>
-
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Date D'expiration</label>
-                  <input class="form-control " formControlName="endOffer" type="date">
-                  <small *ngIf="r['endOffer'].errors && r['endOffer'].touched" class="text-danger">{{handleGetErrorMessageFromChild('endOffer', r['endOffer'].errors)}}</small>
-
-                </div>
-              </div>
-            </div>
-          </div>
+        <cdk-step [label]="'Autres informations'">
+ <app-other-information></app-other-information>
+        </cdk-step>
+        <cdk-step [label]="'Validation'">
+          <app-other-information></app-other-information>
         </cdk-step>
       </app-stepper>
     </div>
   </div>
-</div>
+</div>-->
 
 <!--
 <div class="container">

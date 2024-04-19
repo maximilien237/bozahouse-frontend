@@ -5,7 +5,7 @@
       <div class="card border-0 bg-dark">
 
         <h5 class="text-center card-title mt-2 text-warning">{{offer.title}}</h5>
-        <span class="text-center text-muted text-success" style="font-size: 14px"><span >Publié par {{offer.firstname + ' ' + offer.lastname}} le </span>
+        <span class="text-center text-muted text-success" style="font-size: 14px"><span >Publié par {{offer.firstname }} le </span>
           {{offer.publishedAt | date: 'd MMMM y'}} à {{offer.publishedAt | date: 'HH:mm:ss'}}</span>
 
 
@@ -57,7 +57,7 @@
               <span class="text-white-50" style="font-size: 15px">Contract : {{offer.contract}}</span><br />
               <span class="text-white-50" style=" font-size: 15px" >Mode de travail : {{offer.workMode}} </span><br />
 
-              <span *ngIf="!offer.salary.endsWith('0'); else other">
+              <span *ngIf="!offer.salary!.endsWith('0'); else other">
         <span > {{offer.salary}} </span><br />
       </span>
 
@@ -77,7 +77,7 @@
         <div class="spacer-margin">
           <h5 class="text-light"  style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Localisation</h5>
           <div class="card-body ">
-            <p class="card-text text-white-50" *ngFor="let item of [].constructor(offer.address.split(','));">
+            <p class="card-text text-white-50" *ngFor="let item of [].constructor(offer.address!.split(','));">
               <i class="bi bi-flag-fill" style="font-size: 20px;"></i>&nbsp; : &nbsp;<span style=" font-size: 15px">{{item[2]}} </span><br />
               <i class="bi bi-building" style="font-size: 20px;"></i>&nbsp; : &nbsp;<span style="font-size: 15px">{{item[1]}} </span><br />
               <span style="font-size: 15px"><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{offer.address}}</span>

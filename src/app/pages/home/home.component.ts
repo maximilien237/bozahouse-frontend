@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit {
   handleDisableOffer(offer: Offer) {
     let conf = confirm("Are you sure ?");
     if (!conf) return;
-    this.offerService.disableOffer(offer.id).subscribe({
+    this.offerService.disableOffer(offer.id!).subscribe({
       next: value => {
         console.log(value);
         this.threeOffers = this.threeOffers.pipe(
@@ -121,7 +121,7 @@ export class HomeComponent implements OnInit {
     handleDeleteOffer(offer: Offer) {
       let conf = confirm("Are you sure ?");
       if (!conf) return;
-      this.offerService.deleteOffer(offer.id).subscribe({
+      this.offerService.deleteOffer(offer.id!).subscribe({
         next: value => {
           console.log(value);
           this.threeOffers = this.threeOffers.pipe(

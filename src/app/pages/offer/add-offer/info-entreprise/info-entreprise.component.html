@@ -1,0 +1,171 @@
+<!--<div class="card  px-4 py-5 col-md-6 offset-md-3">
+  <div class="card-body">
+    <h5 >Informations sur l'employeur</h5>
+    <div class="card-text ">
+      <div class="mb-3">
+        <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Type d'employeur</label>
+        <select class="form-select " formControlName="type" >
+          <option [ngValue]="null" disabled hidden selected>choose...</option>
+          <option value="particular">Particulier</option>
+          <option value="enterprise">Entreprise</option>
+        </select>
+        <small *ngIf="r['type'].errors && r['type'].touched" class="text-danger">{{handleGetErrorMessageFromChild('type', r['type'].errors)}}</small>
+
+        <span *ngIf="r['type'].value == 'enterprise'">
+
+    <div class="mb-3">
+      <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Nom de l'entreprise</label>
+      <input class="form-control " formControlName="name"  type="text">
+          <small *ngIf="r['name'].errors && r['name'].touched" class="text-danger">{{handleGetErrorMessageFromChild('name', r['name'].errors)}}</small>
+
+    </div>
+
+                  <div class="mb-3">
+      <label class="form-label">L'url de votre page facebook</label>
+                      <input class="form-control " formControlName="fcb" placeholder="example : https://www.facebook.com/example/"  type="text">
+           <small *ngIf="r['fcb'].errors && r['fcb'].touched" class="text-danger">{{handleGetErrorMessageFromChild('fcb', r['fcb'].errors)}}</small>
+
+                  </div>
+
+                  <div class="mb-3">
+      <label class="form-label">L'url de votre page linkedin</label>
+                      <input class="form-control " formControlName="linkedin" placeholder="example : https://www.linkedin.com/example/"  type="text">
+    <small *ngIf="r['linkedin'].errors && r['linkedin'].touched" class="text-danger">{{handleGetErrorMessageFromChild('Linkedin', r['linkedin'].errors)}}</small>
+
+                  </div>
+
+                  <div class="mb-3">
+      <label class="form-label">L'url de votre site web</label>
+      <input class="form-control " formControlName="web" placeholder="example : https://www.monsite.com/example/"  type="text">
+     <small *ngIf="r['web'].errors && r['web'].touched" class="text-danger">{{handleGetErrorMessageFromChild('web', r['web'].errors)}}</small>
+
+                  </div>
+
+
+
+      </span>
+
+
+        &lt;!&ndash;        <div class="mb-3 mt-3">
+                  <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Pays</label>
+                  <select class="form-select" formControlName="countryCode" >
+                    <option value="+27" >Afrique du Sud</option>
+                    <option value="+213" >Algérie</option>
+                    <option value="+244" >Angola</option>
+                    <option value="+229" >Bénin</option>
+                    <option value="+267" >Botswana</option>
+                    <option value="+226" >Burkina Faso</option>
+                    <option value="+257" >Burundi</option>
+                    <option value="+237" >Cameroun</option>
+                    <option value="+238" >Cap-Vert</option>
+                    <option value="+236" >République centrafricaine</option>
+                    <option value="+269" >Comores</option>
+                    <option value="+242" >République du Congo</option>
+                    <option value="+243" >République démocratique du Congo</option>
+                    <option value="+225" >Côte d'Ivoire</option>
+                    <option value="+253" >Djibouti</option>
+                    <option value="+20" >Egypte</option>
+                    <option value="+291" >Erythrée</option>
+                    <option value="+251" >Ethiopie</option>
+                    <option value="+241" >Gabon</option>
+                    <option value="+220" >Gambie</option>
+                    <option value="+233" >Ghana</option>
+                    <option value="+224" >Guinée</option>
+                    <option value="+245" >Guinée-Bissau</option>
+                    <option value="+240" >Guinée équatoriale</option>
+                    <option value="+254" >Kenya</option>
+                    <option value="+266" >Lesotho</option>
+                    <option value="+231" >Libéria</option>
+                    <option value="+218" >Libye</option>
+                    <option value="+261" >Madagascar</option>
+                    <option value="+265" >Malawi</option>
+                    <option value="+223" >Mali</option>
+                    <option value="+212" >Maroc</option>
+                    <option value="+230" >Maurice</option>
+                    <option value="+222" >Mauritanie</option>
+                    <option value="+258" >Mozambique</option>
+                    <option value="+264" >Namibie</option>
+                    <option value="+227" >Niger</option>
+                    <option value="+234" >Nigeria</option>
+                    <option value="+256" >Ouganda</option>
+                    <option value="+250" >Rwanda</option>
+                    <option value="+239" >Sao Tomé-et-Principe</option>
+                    <option value="+221" >Sénégal</option>
+                    <option value="+248" >Seychelles</option>
+                    <option value="+232" >Siera Leone</option>
+                    <option value="+252" >Somalie</option>
+                    <option value="+249" >Soudan</option>
+                    <option value="+211" >Soudan du Sud</option>
+                    <option value="+268" >Swaziland</option>
+                    <option value="+255" >Tanzanie</option>
+                    <option value="+235" >Tchad</option>
+                    <option value="+228" >Togo</option>
+                    <option value="+216" >Tunisie</option>
+                    <option value="+260" >Zambie</option>
+                    <option value="+263" >Zimbabwe</option>
+                  </select>
+                  <small *ngIf="r['countryCode'].errors && r['countryCode'].touched" class="text-danger">{{handleGetErrorMessageFromChild('countryCode', r['countryCode'].errors)}}</small>
+                </div>&ndash;&gt;
+
+        <div class="mb-3">
+          <label class="form-label"><i style="font-size: 20px" class="text-danger"> *&nbsp;</i>Contact</label>
+          <input type="text" class="form-control " formControlName="tel" placeholder="6********" >
+          <small *ngIf="r['tel'].errors && r['tel'].touched" class="text-danger">{{handleGetErrorMessageFromChild('tel', r['tel'].errors)}}</small>
+        </div>
+
+        &lt;!&ndash;              <div class="mb-3">
+                        <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Contact</label>
+                        <input class="form-control" formControlName="tel" placeholder="6********" type="text">
+                        <small *ngIf="r['tel'].errors && r['tel'].touched" class="text-danger">{{handleGetErrorMessageFromChild('tel', r['tel'].errors)}}</small>
+
+                      </div>&ndash;&gt;
+
+        <div class="mb-3">
+          <label class="form-label">Numéro WhatsApp</label>
+          <input class="form-control " formControlName="whatsAppNumber" placeholder="6********" type="text">
+          <small *ngIf="r['whatsAppNumber'].errors && r['whatsAppNumber'].touched" class="text-danger">{{handleGetErrorMessageFromChild('whatsAppNumber', r['whatsAppNumber'].errors)}}</small>
+
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Email <span class="text-muted"></span></label>
+          <input class="form-control " formControlName="email" placeholder="you@example.com" type="text">
+          <small *ngIf="r['email'].errors && r['email'].touched" class="text-danger">{{handleGetErrorMessageFromChild('email', r['email'].errors)}}</small>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>-->
+
+
+<div class="mt-4">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" placeholder="FirstName">
+        <label >FirstName</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" placeholder="Lastname">
+        <label >LastName</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" placeholder="Email">
+        <label >Email</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" placeholder="Phone">
+        <label >Phone</label>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-end flex-row mb-5 mt-4">
+  <button class="btn btn-outline-primary" cdkStepperNext>
+    Suivant <i class="fa fa-angle-right"></i>
+  </button>
+</div>

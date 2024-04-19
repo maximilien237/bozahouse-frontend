@@ -114,7 +114,7 @@ export class AccountComponent implements OnInit {
   handleDeleteOffer(offer: Offer) {
     let conf = confirm("Are you sure ?");
     if (!conf) return;
-    this.offerService.deleteOffer(offer.id).subscribe({
+    this.offerService.deleteOffer(offer.id!).subscribe({
       next: value => {
         console.log(value);
 

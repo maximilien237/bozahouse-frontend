@@ -164,7 +164,7 @@
             <i class="bi bi-arrow-down"></i>
           </a>&nbsp;&nbsp;&nbsp;&nbsp;
 
-          <a (click)="handleUpdateOffer(offer.id)" class="btn btn-warning">
+          <a (click)="handleUpdateOffer(offer.id!)" class="btn btn-warning">
             <i class="bi bi-pencil"></i>
           </a> &nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -206,7 +206,7 @@
 
           <ng-container>
 
-              <span><a (click)="handleDetailOffer(offer.id)" class="btn btn-warning rounded-pill">Voir l'offre</a></span><br>
+              <span><a (click)="handleDetailOffer(offer.id!)" class="btn btn-warning rounded-pill">Voir l'offre</a></span><br>
 
           </ng-container>
 

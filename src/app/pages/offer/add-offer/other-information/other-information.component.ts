@@ -1,28 +1,20 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ValidationErrors,
-  Validators
-} from "@angular/forms";
-import {OfferService} from "../../../services/offer/offer.service";
+import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {ModalErrorComponent} from "../../../shares/modal-error/modal-error.component";
+import {OfferService} from "../../../../services/offer/offer.service";
 import {Router} from "@angular/router";
-import {Offer} from "../../../models/offer.models";
-import {ModalErrorComponent} from "../../shares/modal-error/modal-error.component";
-
 
 @Component({
-  selector: 'app-add-offer',
-  templateUrl: './add-offer.component.html',
-  styleUrls: ['./add-offer.component.css']
+  selector: 'app-other-information',
+  templateUrl: './other-information.component.html',
+  styleUrls: ['./other-information.component.css']
 })
-export class AddOfferComponent implements OnInit {
+export class OtherInformationComponent implements OnInit {
 
   errorMessage!:string;
   newOfferFormGroup!: FormGroup;
   @ViewChild(ModalErrorComponent)
   private childError!: ModalErrorComponent ;
-  _offer!: Offer;
 
 
   constructor(private fb: FormBuilder, private offerService: OfferService, private router: Router) { }
@@ -57,58 +49,8 @@ export class AddOfferComponent implements OnInit {
 
   }
 
-  handleSetEnterpriseNeed(value: any) {
-    this._offer = {
-      title: value.title,
-      domain: value.domain,
-      mission: value.mission,
-      skills: value.skills,
-      profile: value.profile,
-      workMode: value.workMode,
-      experience: value.experience
-
-    }
-
-  }
-
-    handleSetEnterpriseInfo(value: any) {
-      this._offer = {
-        web: value.web,
-        linkedin: value.linkedin,
-        name: value.name,
-      }
-
-  }
-
-  handleSetOtherInfo(value: any) {
-    this._offer = {
-      contract: value.contract,
-      endOffer: value.endOffer,
-      salary: value.salary,
-      needPeople: value.needPeople,
-      address: value.address,
-      email: value.email
-    }
-
-  }
-
   get r(){
     return this.newOfferFormGroup.controls;
-  }
-
-  handleSaveOffer() {
-    let offer: Offer = this.newOfferFormGroup.value;
-    this.offerService.saveOffer(offer).subscribe({
-      next: value => {
-        console.log(value);
-        alert("offre d\'emploi publié avec succès !");
-        //this.newUserFormGroup.reset();
-        this.router.navigateByUrl("/jobs");
-      },
-      error: err => {
-        console.log(err);
-      }
-    })
   }
 
   handleGetErrorMessageFromChild(fieldName: string, error: ValidationErrors) {

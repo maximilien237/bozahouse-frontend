@@ -31,7 +31,7 @@
 
               <div class="card-header">
 
-                <a (click)="handleUpdateOffer(offer.id)" class="btn btn-warning">
+                <a (click)="handleUpdateOffer(offer.id!)" class="btn btn-warning">
                   <i class="bi bi-pencil"></i>
                 </a> &nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -60,7 +60,7 @@
                   <span ><i class="bi bi-calendar"></i>&nbsp;<span>{{offer.publishedAt | date : 'd MMM y'}}</span></span>&nbsp;-- <span ><i class="bi bi-lock-fill"></i> <span>{{offer.endOffer | date : 'd MMM y'}}</span></span>
                 </div><br>
 
-                <span><a (click)="handleDetailOffer(offer.id)" class="btn btn-warning rounded-pill">Voir l'offre</a></span><br>
+                <span><a (click)="handleDetailOffer(offer.id!)" class="btn btn-warning rounded-pill">Voir l'offre</a></span><br>
 
               </div>
 <!--              <span class="text-muted card-footer btn" style=" font-size: 18px" (click)="shared()">partager &nbsp;<i class="bi bi-share-fill"></i></span>-->

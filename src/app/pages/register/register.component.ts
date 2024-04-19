@@ -66,12 +66,28 @@ export class RegisterComponent implements OnInit {
     return this.registerFormGroup.get('password');
   }
 
+  get email() {
+    return this.registerFormGroup.get('username');
+  }
+
   get confirmPassword() {
     return this.registerFormGroup.get('confirmPassword');
   }
 
   passwordsMatch() : boolean {
     return this.password?.value === this.confirmPassword?.value;
+  }
+
+  emailIsEmpty(): boolean {
+    return this.email?.value;
+  }
+
+  passwordIsEmpty(): boolean {
+    return this.password?.value;
+  }
+
+  confirmPasswordIsEmpty(): boolean {
+    return this.confirmPassword?.value;
   }
 
   handleGetErrorMessageFromChild(fieldName: string, error: ValidationErrors) {

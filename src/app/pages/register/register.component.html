@@ -1,16 +1,190 @@
 
 
+  <div class="container px-4 py-5 col-md-6 offset-md-3">
 
-<main >
-
-  <div class="container col-md-10">
-
-    <div class="card col-md-7 offset-md-3 mt-xxl-5 mb-xxl-5">
+<!--    <div class="card ">-->
       <h5 class="text-center  spacer">BOZAHOUSE</h5>
       <h5 class="text-center ">la maison des bozayeurs ! </h5>
       <h5 class="text-center " style="font-size: 14px">besoin d'aide ? <a href="javascript:void (0);" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#help">Cliquez ici</a></h5>
 
-      <div class="card-body ">
+
+      <form [formGroup] = "registerFormGroup" (ngSubmit)="handleRegister()"  class="row g-3">
+
+        <div class="col-md-4 form-floating">
+          <input formControlName = "lastname" type="text" class="form-control is-valid"  value="Otto" required>
+          <label  class="form-label">Nom</label>
+          <div class="valid-feedback">
+            <small *ngIf="r['lastname'].errors && r['lastname'].touched" class="text-danger">{{handleGetErrorMessageFromChild('lastname', r['lastname'].errors)}}</small>
+
+            Looks good!
+
+          </div>
+        </div>
+
+        <div class="col-md-4 form-floating">
+          <input formControlName = "firstname" type="text" class="form-control is-valid"  value="Mark" required>
+          <label class="form-label">Prénom</label>
+          <div class="valid-feedback">
+            <small *ngIf="r['firstname'].errors && r['firstname'].touched" class="text-danger">{{handleGetErrorMessageFromChild('firstname', r['firstname'].errors)}}</small>
+
+            Looks good!
+          </div>
+        </div>
+
+        <div class="col-md-4 form-floating">
+          <input formControlName = "birthday" type="date" class="form-control is-invalid"  required>
+          <label class="form-label">Date d'anniversaire</label>
+          <div class="invalid-feedback">
+            <small *ngIf="r['birthday'].errors && r['birthday'].touched" class="text-danger">{{handleGetErrorMessageFromChild('birthday', r['birthday'].errors)}}</small>
+
+            Please choose your birthday.
+          </div>
+
+        </div>
+
+
+
+        <div class="col-md-4 form-floating">
+
+            <input  formControlName = "username" type="email" class="form-control is-invalid" required>
+            <label class="form-label">Email</label>
+            <div class="invalid-feedback">
+              <small *ngIf="r['username'].errors && r['username'].touched" class="text-danger">{{handleGetErrorMessageFromChild('username', r['username'].errors)}}</small>
+              <small *ngIf="!emailIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>
+              Please choose email.
+            </div>
+
+        </div>
+
+        <div class="col-md-4 form-floating">
+
+          <input  formControlName = "password" type="password" class="form-control is-invalid" id="pwd" required>
+          <input type="checkbox" (change)="showAndHidePassword()" class="mt-2">&nbsp;<span  style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
+          <label class="form-label">Mot de passe</label>
+          <div class="invalid-feedback">
+            <small *ngIf="r['password'].errors && r['password'].touched" class="text-danger">{{handleGetErrorMessageFromChild('password', r['password'].errors)}}</small>
+            Please choose a username.
+            <small *ngIf="!passwordIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>
+          </div>
+
+        </div>
+
+        <div class="col-md-4 form-floating">
+
+          <input  formControlName = "confirmPassword" type="password" class="form-control is-invalid"  id="confPwd" required>
+          <input type="checkbox" (change)="showAndHideConfirmPassword()" class="mt-2">&nbsp;<span style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
+          <label class="form-label">Confirmation du mot de passe</label>
+          <div class="invalid-feedback">
+            Please choose a username.
+            <small *ngIf="r['confirmPassword'].errors && r['confirmPassword'].touched" class="text-danger">{{handleGetErrorMessageFromChild('confirmPassword', r['confirmPassword'].errors)}}</small>
+            <small *ngIf="!passwordsMatch()" class="text-danger">Les mots de passe ne correspondent pas</small>
+            <small *ngIf="!confirmPasswordIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>
+          </div>
+
+        </div>
+
+        <div class="col-md-6 form-floating">
+
+          <select class="form-select is-invalid" formControlName = "howKnowUs"   required>
+            <option selected disabled value="">Choisir une option</option>
+            <option value="Amis">Amis</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Whatsapp">Whatsapp</option>
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="Youtube">Youtube</option>
+            <option value="Twitter">Twitter</option>
+            <option value="Autre">Autre</option>
+          </select>
+          <label>Comment avez vous connu Bozahouse ?</label>
+          <div class="invalid-feedback">
+            <small *ngIf="r['howKnowUs'].errors && r['howKnowUs'].touched" class="text-danger">{{handleGetErrorMessageFromChild('howKnowUs', r['howKnowUs'].errors)}}</small>
+          </div>
+        </div>
+
+        <div class="col-md-3 form-floating">
+
+          <select class="form-select is-invalid" formControlName = "account"   required>
+            <option selected disabled value="">Choisir une option</option>
+            <option value="Talent">Talent</option>
+            <option value="Particulier">Particulier</option>
+            <option value="Entreprise">Entreprise</option>
+          </select>
+          <label >Type de compte</label>
+          <div class="invalid-feedback">
+            <small *ngIf="r['account'].errors && r['account'].touched" class="text-danger">{{handleGetErrorMessageFromChild('account', r['account'].errors)}}</small>
+            Please select a valid state.
+          </div>
+        </div>
+
+        <div class="col-md-3 form-floating">
+
+          <select class="form-select is-invalid" formControlName = "sex"   required>
+            <option selected disabled value="">Choisir une option</option>
+            <option value="Homme">Homme</option>
+            <option value="Femme">Femme</option>
+          </select>
+          <label >Sexe</label>
+          <div class="invalid-feedback">
+            Please provide a sex.
+            <small *ngIf="r['sex'].errors && r['sex'].touched" class="text-danger">{{handleGetErrorMessageFromChild('sex', r['sex'].errors)}}</small>
+
+          </div>
+        </div>
+
+        <ng-container *ngIf="r['account'].value === 'Entreprise'">
+
+          <div class="form-floating col-md-4">
+            <input  formControlName = "name" type="text" class="form-control is-invalid" >
+            <label>Nom de l'entreprise</label>
+            <div class="invalid-feedback">
+              <small *ngIf="r['name'].errors && r['name'].touched" class="text-danger">{{handleGetErrorMessageFromChild('name', r['name'].errors)}}</small>
+              Please choose a name.
+            </div>
+          </div>
+          <div class="form-floating col-md-4">
+            <input  formControlName = "web" type="url" class="form-control is-invalid" placeholder="L'url de votre site web">
+            <label >L'url de votre site web</label>
+            <div class="invalid-feedback">
+              <small *ngIf="r['web'].errors && r['web'].touched" class="text-danger">{{handleGetErrorMessageFromChild('web', r['web'].errors)}}</small>
+              Please choose a web.
+            </div>
+          </div>
+
+          <div class="form-floating col-md-4">
+            <input  formControlName = "linkedin" type="url" class="form-control is-invalid"  placeholder="L'url de votre page linkedin">
+            <label>L'url de votre page linkedin</label>
+            <div class="invalid-feedback">
+              <small *ngIf="r['linkedin'].errors && r['linkedin'].touched" class="text-danger">{{handleGetErrorMessageFromChild('linkedin', r['linkedin'].errors)}}</small>
+              Please choose a linkedin.
+            </div>
+          </div>
+
+          <div class="col-12">
+            <input type="file" class="form-control " accept="image/png, image/jpeg, image/svg">
+          </div>
+
+        </ng-container>
+
+        <div class="col-12 form-floating">
+          <div class="form-check">
+            <input formControlName = "acceptTerms" class="form-check-input {{r['acceptTerms'].value === true ?'is-valid':'is-invalid'}} " type="checkbox" value=""  required>
+            <label class="form-check-label">J'ai lu et approuvé les <a href="javascript:void (0);" class="text-decoration-none text-secondary" data-bs-toggle="modal" data-bs-target="#terms">termes</a></label>
+            <div class="{{r['acceptTerms'].value === true ?'valid-feedback':'invalid-feedback'}} ">
+              {{r['acceptTerms'].value === true ?'Looks good!':'Veuillez cocher cette case!'}}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="text-center col-12">
+          <button [disabled] = "!registerFormGroup.valid " class="btn btn-primary w-30 mb-xxl-2 mt-lg-1" type="submit">Inscription</button>
+        </div>
+
+        <span style="font-size: 17px">Déjà un compte ? | <a class="text-decoration-none" routerLink="/login"><span >Connectez vous</span></a></span>
+
+      </form>
+
+<!--      <div class="card-body ">
         <form [formGroup] = "registerFormGroup" (ngSubmit)="handleRegister()">
 
 
@@ -66,12 +240,12 @@
 
           </div>
 
-          <!--            <div class="mb-3">
+          &lt;!&ndash;            <div class="mb-3">
                         <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
                         <input (keydown.space)="$event.preventDefault()" type="email" formControlName = "email" class="form-control bg-secondary" placeholder="ex : youremail@gmail.com">
                         <small *ngIf="r['email'].errors && r['email'].touched" class="text-danger">{{handleGetErrorMessageFromChild('email', r['email'].errors)}}</small>
 
-                      </div>-->
+                      </div>&ndash;&gt;
 
           <div class="mb-3">
             <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Adresse email</label>
@@ -82,14 +256,14 @@
 
           <div class="mb-3 mt-2">
             <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Mot de passe</label>
-            <input type="password" formControlName = "password" class="form-control " id="pwd">
+            <input type="password" formControlName = "password" class="form-control " id="pwd1">
             <input type="checkbox" (change)="showAndHidePassword()" class="mt-2">&nbsp;<span  style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
             <small *ngIf="r['password'].errors && r['password'].touched" class="text-danger">{{handleGetErrorMessageFromChild('password', r['password'].errors)}}</small>
           </div>
 
           <div class="mb-3 mt-2">
             <label class="form-label "><i style="font-size: 20px" class="text-danger">*&nbsp;</i>Confirmation du mot de passe</label>
-            <input type="password" formControlName = "confirmPassword" class="form-control " id="confPwd">
+            <input type="password" formControlName = "confirmPassword" class="form-control " id="confPwd1">
             <input type="checkbox" (change)="showAndHideConfirmPassword()" class="mt-2">&nbsp;<span style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
             <small *ngIf="r['confirmPassword'].errors && r['confirmPassword'].touched" class="text-danger">{{handleGetErrorMessageFromChild('confirmPassword', r['confirmPassword'].errors)}}</small>
             <small *ngIf="!passwordsMatch()" class="text-danger">Les mots de passe ne correspondent pas</small>
@@ -102,11 +276,11 @@
 
           </div>
 
-          <!--     <div class="mb-3">
+          &lt;!&ndash;     <div class="mb-3">
                  <label class="form-label">Code de parrainage</label>
                  <input type="text" formControlName = "referralCode" class="form-control bg-secondary">
                  <small *ngIf="r['referralCode'].errors && r['referralCode'].touched" class="text-danger">{{handleGetErrorMessageFromChild('referralCode', r['referralCode'].errors)}}</small>
-               </div>-->
+               </div>&ndash;&gt;
 
           <div class="mb-3 form-check ">
             <label class="form-label"><i style="font-size: 20px" class="text-danger">*&nbsp;</i>j'ai lu et approuvé les <a href="javascript:void (0);" class="hide-underline-link " data-bs-toggle="modal" data-bs-target="#terms">termes</a></label>&nbsp;
@@ -123,11 +297,11 @@
 
         </form>
         <span class=" text-center"> les champs marqués par <i class="text-danger">*</i> sont obligatoires</span>
-      </div>
-    </div>
+      </div>-->
+<!--    </div>-->
   </div>
 
-</main>
+
 
 
 

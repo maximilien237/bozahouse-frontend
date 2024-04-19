@@ -64,6 +64,10 @@ import { ToastComponent } from './pages/shares/toast/toast.component';
 import { CarouselComponent } from './pages/static/carousel/carousel.component';
 import { StepperComponent } from './pages/stepper/stepper.component';
 import {CdkStepperModule} from "@angular/cdk/stepper";
+import { LocalisationComponent } from './pages/offer/add-offer/localisation/localisation.component';
+import { BesoinEntrepriseComponent } from './pages/offer/add-offer/besoin-entreprise/besoin-entreprise.component';
+import { OtherInformationComponent } from './pages/offer/add-offer/other-information/other-information.component';
+import { InfoEntrepriseComponent } from './pages/offer/add-offer/info-entreprise/info-entreprise.component';
 
 
 @NgModule({
@@ -110,7 +114,11 @@ import {CdkStepperModule} from "@angular/cdk/stepper";
     ColorModeComponent,
     ToastComponent,
     CarouselComponent,
-    StepperComponent
+    StepperComponent,
+    LocalisationComponent,
+    BesoinEntrepriseComponent,
+    OtherInformationComponent,
+    InfoEntrepriseComponent
   ],
     imports: [
         BrowserModule,
@@ -123,15 +131,19 @@ import {CdkStepperModule} from "@angular/cdk/stepper";
 
     ],
 
-  providers: [{
+  providers: [
+    {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
-    multi: true
+    multi: true,
   },
+
     {
       provide: LOCALE_ID,
       useValue: 'fr-FR',
-    },],
+    },
+
+  ],
   exports: [
     CdkStepperModule,
   ],
