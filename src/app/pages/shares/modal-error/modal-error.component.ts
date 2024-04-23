@@ -42,9 +42,7 @@ export class ModalErrorComponent implements OnInit, OnChanges {
   }
 
   getErrorMessage(fieldName: string, error: ValidationErrors) {
-    if (error['required'] && fieldName == "acceptTerms") {
-      return "vous devez cocher cette case !";
-    }
+
     if (error['required'] ){
       return "Vous devez remplir ce champs !";
     }
@@ -60,9 +58,9 @@ export class ModalErrorComponent implements OnInit, OnChanges {
       return "exemple d\'une entrée valide : 100000 ou 2" ;
     }
 
-/*    if (error['pattern'] && fieldName == "email") {
-      return "exemple d\'un mail valide : john@example.com ou john.smith@example.com" ;
-    }*/
+    if (error['pattern'] && fieldName == "email") {
+      return "exemple d\'un mail valide : yoan@example.com ou yoan.svelt@example.com" ;
+    }
 
     if (error['pattern'] && fieldName == "username") {
       return "exemple d\'un mail valide : john@example.com ou john.smith@example.com" ;
@@ -72,9 +70,9 @@ export class ModalErrorComponent implements OnInit, OnChanges {
       return "exemple d\'une url valide : https://www.monsite.com ou https://wwww.facebook.com/username" ;
     }
 
-    if (error['pattern'] && fieldName == "tel" || fieldName == "whatsAppNumber") {
+/*    if (error['pattern'] && fieldName == "tel" || fieldName == "whatsAppNumber") {
       return "exemple d\'un numéro valide : 6511232XX" ;
-    }
+    }*/
     if (error['pattern'] && fieldName == "password") {
       return "ce champs doit comporter soit des majuscules, soit des minuscules, soit des nombres,soit un caractère spécial telque : @ ou un mélange des quatres" ;
     }

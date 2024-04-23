@@ -38,7 +38,25 @@ export class LoginComponent implements OnInit {
     })
 
   }
+  get r() {
+    return this.loginFormGroup.controls;
+  }
 
+  get password() {
+    return this.loginFormGroup.get('password');
+  }
+
+  get email() {
+    return this.loginFormGroup.get('username');
+  }
+
+  emailIsEmpty(): boolean {
+    return this.email?.value;
+  }
+
+  passwordIsEmpty(): boolean {
+    return this.password?.value;
+  }
 
   handleLogin() {
     let login: Login = this.loginFormGroup.value;

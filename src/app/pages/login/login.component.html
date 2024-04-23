@@ -1,7 +1,56 @@
+<div class=" card  col-md-6 offset-md-3 mt-5">
+
+  <div class="container col-12">
+    <h5 class="text-center spacer">BOZAHOUSE</h5>
+    <h5 class="text-center ">la maison des bozayeurs ! </h5>
+
+    <form [formGroup] = "loginFormGroup" (ngSubmit)="handleLogin()"  class="row g-3">
+
+      <div class="col-md-12 form-floating">
+
+        <input  formControlName = "username" type="email" class="form-control is-invalid" required>
+        <label class="form-label">Email</label>
+        <div class="invalid-feedback">
+          <small *ngIf="r['username'].errors && r['username'].touched" class="text-danger">{{handleGetErrorMessageFromChild('username', r['username'].errors)}}</small>
+          <small *ngIf="!emailIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>
+          Please choose email.
+        </div>
+
+      </div>
+
+      <div class="col-md-12 form-floating">
+
+        <input  formControlName = "password" type="password" class="form-control is-invalid" id="pwd" required>
+        <input type="checkbox" (change)="showAndHidePassword()" class="mt-2">&nbsp;<span  style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
+        <label class="form-label">Mot de passe</label>
+        <div class="invalid-feedback">
+          <small *ngIf="r['password'].errors && r['password'].touched" class="text-danger">{{handleGetErrorMessageFromChild('password', r['password'].errors)}}</small>
+          Please choose a username.
+          <small *ngIf="!passwordIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>
+        </div>
+
+      </div>
+
+      <div class="container">
+        <span  style="font-size: 15px">Pas de compte ? | <a href="javascript:void (0);"  class="text-decoration-none text-success" routerLink="/register"><span>Inscrivez vous</span></a></span> |
+        <span  style="font-size: 15px">Mot de passe oublié ? | <a href="javascript:void (0);"  class="text-decoration-none text-success" routerLink="/forgotPassword"><span style="font-size: 15px" >Cliquez ici</span></a></span><br>
+
+      </div>
+
+      <div class="text-center col-12 mb-3">
+        <button [disabled] = "!loginFormGroup.valid" class="btn btn-primary w-40 mt-lg-4" type="submit">Connexion</button>
+      </div>
+
+    </form>
 
 
 
-  <main >
+
+  </div>
+</div>
+
+
+<!--  <main >
     <div class="container">
 
       <div class="card col-md-6 offset-md-3 mt-xxl-5 sp">
@@ -40,7 +89,7 @@
       </div>
 
     </div>
-  </main>
+  </main>-->
 
 
 
