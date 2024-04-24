@@ -6,6 +6,7 @@ import {Offer} from "../../models/offer.models";
 import {Page} from "../../models/Page";
 import {OfferCriteria} from "../../models/criteria/offerCriteria";
 
+const path = "/api/v1/offers";
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,11 @@ export class OfferService {
   constructor(private http: HttpClient) { }
 
   public offerSpecification(criteria: OfferCriteria): Observable<Page<Offer>> {
-    return this.http.post<Page<Offer>>(environment.backendAPI +"/offers/criteria", criteria)
+    return this.http.post<Page<Offer>>(environment.backendAPI +path +"/criteria", criteria)
   }
 
   public lastThreeOffer(): Observable<Array<Offer>> {
-    return this.http.get<Array<Offer>>(environment.backendAPI + "offers/three")
+    return this.http.get<Array<Offer>>(environment.backendAPI + path +"/three")
   }
 
   public listOfferByAppUser(appUserId: number, page: number,size: number): Observable<Array<Offer>> {
@@ -27,11 +28,11 @@ export class OfferService {
   }
 
   public getOffer(id : number): Observable<Offer> {
-    return this.http.get<Offer>(environment.backendAPI  + "offers/"+id)
+    return this.http.get<Offer>(environment.backendAPI +path +id)
   }
 
-  public saveOffer(offer: Offer):Observable<Offer>{
-    return this.http.post<Offer>(environment.backendAPI+"offers/",offer);
+  public saveOffer(offer: FormData):Observable<Offer>{
+    return this.http.post<Offer>(environment.backendAPI +path, offer);
   }
 
   updateOffer(id: number, offer: Offer): Observable<Offer>{
@@ -39,17 +40,17 @@ export class OfferService {
   }
 
   public deleteOffer(id: number){
-    return this.http.delete(environment.backendAPI + "offers/"+id);
+    return this.http.delete(environment.backendAPI + path+id);
   }
 
   public disableOffer(id: number){
 
-    return this.http.delete(environment.backendAPI + "offers/disable/"+id);
+    return this.http.delete(environment.backendAPI +path +"/disable/"+id);
   }
 
   public enableOffer(id: number){
 
-    return this.http.delete(environment.backendAPI + "offers/enable/"+id);
+    return this.http.delete(environment.backendAPI +path +"/enable/"+id);
   }
 
 }

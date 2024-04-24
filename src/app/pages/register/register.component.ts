@@ -124,8 +124,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     formdata.append("linkedin",linkedin)
     formdata.append("logo",this.logo)
 
-
-
 /*    let user: AppUser = {
       acceptTerms: false,
       account: "",

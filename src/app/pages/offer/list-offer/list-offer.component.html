@@ -100,7 +100,6 @@
                 <input type="text" class="form-control" formControlName = "domain"  placeholder="Informatique">
               </div>
 
-<!--
               <div class="mb-3 mt-2">
                 <label class="form-label">Date de début</label>
                 <input type="date" class="form-control" formControlName = "startDate" >
@@ -108,7 +107,7 @@
 
               </div>
 
-              <div class="mb-3 mt-2 mb-2">
+              <div class="mb-3 mt-2 ">
                 <label class="form-label">Date de fin</label>
                 <input type="date" class="form-control" formControlName = "endDate" >
                 <small *ngIf="offerFormGroup.controls['endDate'].errors && offerFormGroup.controls['endDate'].touched" class="text-danger">{{getErrorMessage('endDate', offerFormGroup.controls['endDate'].errors)}}</small>
@@ -117,8 +116,8 @@
 
               <div class="mb-3">
                 <label for="disabledRange" class="form-label">Salaire</label>
-                <input type="range" class="form-range" min="30000" max="1000000" step="0.25" id="disabledRange">
-              </div>-->
+                <input formControlName="salary" type="range" class="form-range" min="30000" max="1000000" step="0.25" id="disabledRange">
+              </div>
 
               <div class="text-center">
                 <button  class="btn btn-outline-light" type="submit">rechercher&nbsp;<i class="bi bi-search"></i> </button>&nbsp;&nbsp;&nbsp;
@@ -147,16 +146,16 @@
 
 
   </div><br>
-  <div class="card bg-secondary border-0">
+  <div class="card  border-0">
 
     <h5 class="text-center mt-2">Vos derniers jobs</h5>
 
     <div class="row">
 
-<ng-container>
-  <ng-container *ngIf="offers ; else failureOrLoading">
+
+  <ng-container *ngIf="offers ; ">
     <div  *ngFor="let offer of offers  | paginate: { itemsPerPage: 6, currentPage: currentPage, totalItems: totalElements }"  class="col-md-4 ">
-      <div class="card  spacer-margin bg-dark">
+      <div class="card  spacer-margin ">
 
         <div *ngIf="isAdmin" class="card-header">
 
@@ -175,32 +174,16 @@
         </div>
         <div class="card-body text-center" >
           <span class="text-warning" style="font-size: 35px;">{{offer.title}}</span><br>
-          <span class="text-light" *ngIf="offer.type=='particular' else ent">Auteur : [ Particulier ]</span><br>
-          <ng-template #ent>
-            <span class="text-light">Auteur : [ Entreprise ]</span>
-          </ng-template>
-          <span class="text-muted" style=" font-size: 15px"><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{offer.address}}</span><br />
-          <span class="text-muted" style="font-size: 15px"><i class="bi bi-book-fill">&nbsp;</i>{{offer.contract}}</span> &nbsp;&nbsp;
-          <ng-container *ngIf="offer.workMode == 'Sur site'">
-            <span class="text-muted" style="font-size: 15px" ><i class="bi bi-house-fill"></i> {{offer.workMode}} </span><br />
-          </ng-container>
+          <span >Auteur : [ {{offer.type}} ]</span><br>
 
-          <ng-container *ngIf="offer.workMode == 'A distance'">
-            <span class="text-muted" style="font-size: 15px" ><i class="bi bi-wifi"></i> {{offer.workMode}} </span><br />
-          </ng-container>
+          <span class="fs-2" ><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{offer.address}}</span><br />
+          <span class="fs-2" ><i class="bi bi-book-fill">&nbsp;</i>{{offer.contract}}</span> &nbsp;&nbsp;
 
+            <span class="fs-2"><i class="{{offer.workMode === 'A distance'?'bi bi-wifi': 'bi bi-house-fill'}}"></i> {{offer.workMode}} </span><br />
 
+          <span *ngIf="offer.salary" class="text-danger fs-2"> {{offer.salary? (offer.salary | number: '1.0-0') +'FCFA' : 'Salaire à définir avec l\'employeur'}} </span><br />
 
-          <span *ngIf="offer.salary == ''; else other">
-        <span style="color: #bb2d3b; font-size: 20px"> Salaire à définir avec l'employeur </span><br />
-      </span>
-
-          <ng-template #other>
-            <span style="color: #bb2d3b; font-size: 20px"> {{offer.salary | number: '1.0-0'}} FCFA</span><br />
-          </ng-template>
-
-
-          <div class="text-muted">
+          <div >
             <span ><i class="bi bi-calendar"></i>&nbsp;<span>{{offer.publishedAt | date : 'd MMM y'}}</span></span>&nbsp;-- <span ><i class="bi bi-lock-fill"></i> <span>{{offer.endOffer | date : 'd MMM y'}}</span></span>
           </div><br>
 
@@ -215,24 +198,8 @@
       </div>
     </div>
   </ng-container>
-  <ng-template #failureOrLoading>
-    <ng-container *ngIf="errorMessageOffer; else Loading">
-      <div class="text-warning text-center spacer-margin">
-        <span>Oups ! pas de données pour le moment</span>
-      </div>
-    </ng-container>
 
-    <ng-template #Loading>
 
-      <div class="d-flex justify-content-center spacer-margin" >
-        <div class=" spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    </ng-template>
-
-  </ng-template>
-</ng-container>
 
     </div>
 

@@ -23,6 +23,7 @@ export class AddOfferComponent implements OnInit {
   @ViewChild(ModalErrorComponent)
   private childError!: ModalErrorComponent ;
   _offer!: Offer;
+  file!:File;
 
 
   constructor(private fb: FormBuilder, private offerService: OfferService, private router: Router) { }
@@ -30,26 +31,19 @@ export class AddOfferComponent implements OnInit {
   ngOnInit(): void {
 
     this.newOfferFormGroup = this.fb.group({
-      type: this.fb.control('', [Validators.required]),
-      title: this.fb.control('', [Validators.pattern("[A-Za-z0-9-çèéàêô' ]+"),Validators.required,Validators.minLength(4),Validators.maxLength(30)]),
+      title: this.fb.control('', [Validators.required,Validators.minLength(4),Validators.maxLength(30)]),
       mission: this.fb.control("", [Validators.required]),
-      domain: this.fb.control('', [Validators.pattern("[A-Za-z-çèéàêô' ]+"),Validators.minLength(6),Validators.maxLength(30)]),
-      // countryCode: this.fb.control("", [Validators.required]),
+      domain: this.fb.control('', [Validators.minLength(6),Validators.maxLength(30)]),
       profile: this.fb.control("", [Validators.required]),
-      address: this.fb.control("", [Validators.required,Validators.pattern("[A-Z][a-z-0-9-çèéàêô'-]+, [A-Z][a-z-çèéàô]+, [A-Z][a-z-çèéàô]{4,30}")]),
-      tel: this.fb.control("", [Validators.pattern("[0-9]+"),Validators.required,Validators.minLength(9),Validators.maxLength(9)]),
-      whatsAppNumber: this.fb.control("", [Validators.pattern("[0-9]+"),Validators.minLength(9),Validators.maxLength(9)]),
-      experience: this.fb.control('', [Validators.required]),
-      salary: this.fb.control("", [Validators.pattern("[0-9]+")]),
+      address: this.fb.control("Bertoua, Est", [Validators.required]),
+      tel: this.fb.control("620178549", [Validators.pattern("[0-9]+"),Validators.required]),
+      experience: this.fb.control('2-5 ans', [Validators.required]),
+      salary: this.fb.control("50000", [Validators.pattern("[0-9]+")]),
       salaryChoice: this.fb.control("", [Validators.required]),
       endOffer: this.fb.control(null, [Validators.required]),
       needPeople: this.fb.control(1, [Validators.required,Validators.pattern("[0-9]+")]),
-      name: this.fb.control("", [Validators.pattern("[A-Za-z0-9-çèéàêô' ]+"),Validators.minLength(4),Validators.maxLength(30)]),
-      skills: this.fb.control("", [Validators.required]),
-      fcb: this.fb.control("", [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
-      web:  this.fb.control("", [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
-      linkedin: this.fb.control("", [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
-      email:  this.fb.control("", [Validators.required, Validators.pattern("^[a-z0-9_+&*-]+(?:\\.[a-z0-9_+&*-]+)*@(?:[a-z0-9-]+\\.)+[a-z]{2,15}$"),Validators.email]),
+      skills: this.fb.control("java, css, html", [Validators.required]),
+      email:  this.fb.control("css@gmail.com", [Validators.required, Validators.pattern("^[a-z0-9_+&*-]+(?:\\.[a-z0-9_+&*-]+)*@(?:[a-z0-9-]+\\.)+[a-z]{2,15}$"),Validators.email]),
       contract:  this.fb.control('CDI', [Validators.required]),
       workMode: this.fb.control('Sur site', [Validators.required])
 
@@ -97,8 +91,45 @@ export class AddOfferComponent implements OnInit {
   }
 
   handleSaveOffer() {
-    let offer: Offer = this.newOfferFormGroup.value;
-    this.offerService.saveOffer(offer).subscribe({
+    //let offer: Offer = this.newOfferFormGroup.value;
+    const {
+      title,
+      mission,
+      domain,
+      profile,
+      address,
+      tel,
+      experience,
+      salary,
+      endOffer,
+      needPeople,
+      skills,
+      email,
+      contract,
+      workMode
+
+    } = this.newOfferFormGroup.value;
+
+    const formdata: FormData = new FormData();
+    formdata.append("title",title)
+    formdata.append("mission",mission)
+    formdata.append("domain",domain)
+    formdata.append("profile",profile)
+    formdata.append("address",address)
+    formdata.append("tel",tel)
+    formdata.append("experience",experience)
+    formdata.append("salary",salary)
+    formdata.append("endOffer",endOffer)
+    formdata.append("needPeople",needPeople)
+    formdata.append("skills",skills)
+    formdata.append("email",email)
+    formdata.append("contract",contract)
+    formdata.append("workMode",workMode)
+    formdata.append("logo",this.file)
+
+    console.log('offer', formdata)
+
+    this.offerService.saveOffer(formdata).subscribe({
       next: value => {
         console.log(value);
         alert("offre d\'emploi publié avec succès !");
@@ -113,6 +144,13 @@ export class AddOfferComponent implements OnInit {
 
   handleGetErrorMessageFromChild(fieldName: string, error: ValidationErrors) {
     return this.childError.getErrorMessage(fieldName, error);
+  }
+
+  /**
+   *  cette fonction permet de récupérer le dernier fichier sélectionné
+   */
+  getFile(event: any): void {
+    this.file = event.target.files[0];
   }
 
 }
