@@ -7,14 +7,21 @@ export interface AppUser {
   lastname: string;
   firstname: string;
   sex: string;
-  username: string ;
+  email: string ;
   password: string ;
   birthday: Date;
   acceptTerms: boolean;
 
+  name?: string;
+  web?: string;
+  linkedin?: string;
+  logo?: any;
+
+  enterpriseId?: number;
+
   createdAt?: Date;
   countConnexion?: number;
-  datesConnexion?: string[];
+  lastConnexion?: Date;
 
 
 

@@ -62,11 +62,11 @@ export class ModalErrorComponent implements OnInit, OnChanges {
       return "exemple d\'un mail valide : yoan@example.com ou yoan.svelt@example.com" ;
     }
 
-    if (error['pattern'] && fieldName == "username") {
-      return "exemple d\'un mail valide : john@example.com ou john.smith@example.com" ;
+    if (error['requiredTrue'] && fieldName == "acceptTerms") {
+      return "Vous devez cocher cette case !" ;
     }
 
-    if (error['pattern'] && fieldName == "fcb" || fieldName == "web" || fieldName == "linkedin") {
+    if (error['pattern'] && fieldName == "web" || fieldName == "linkedin") {
       return "exemple d\'une url valide : https://www.monsite.com ou https://wwww.facebook.com/username" ;
     }
 

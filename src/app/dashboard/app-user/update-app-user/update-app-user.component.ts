@@ -43,7 +43,7 @@ export class UpdateAppUserComponent implements OnInit {
             lastname : this.fb.control(this.appUser.lastname, [Validators.pattern("[A-Za-z-çèéàê' -]+"),Validators.required, Validators.minLength(3),Validators.maxLength(30)]),
             firstname: this.fb.control(this.appUser.firstname,[Validators.pattern("[A-Za-z-çèéàê' -]+"),Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
             sex: this.fb.control(this.appUser.sex,[Validators.required]),
-            username : this.fb.control(this.appUser.username,[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
+            email : this.fb.control(this.appUser.email,[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
             password: this.fb.control(this.appUser.password,[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
             confirmPassword: this.fb.control(this.appUser.password,[Validators.pattern("[A-Za-z0-9]+"),Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
             birthday: this.fb.control(formatDate(this.appUser.birthday, 'yyyy-MM-dd', 'en'),[Validators.required]),

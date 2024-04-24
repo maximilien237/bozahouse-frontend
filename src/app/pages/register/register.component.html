@@ -11,33 +11,28 @@
       <form [formGroup] = "registerFormGroup" (ngSubmit)="handleRegister()"  class="row g-3">
 
         <div class="col-md-4 form-floating">
-          <input formControlName = "lastname" type="text" class="form-control is-valid"  value="Otto" required>
+          <input formControlName = "lastname" type="text" class="form-control {{ (r['lastname'].errors && r['lastname'].touched)?'is-invalid':'is-valid'}}"   required>
           <label  class="form-label">Nom</label>
-          <div class="valid-feedback">
+          <div class="{{r['lastname'].errors && r['lastname'].touched?'invalid-feedback':'valid-feedback'}}">
             <small *ngIf="r['lastname'].errors && r['lastname'].touched" class="text-danger">{{handleGetErrorMessageFromChild('lastname', r['lastname'].errors)}}</small>
-
-            Looks good!
-
           </div>
         </div>
 
         <div class="col-md-4 form-floating">
-          <input formControlName = "firstname" type="text" class="form-control is-valid"  value="Mark" required>
+          <input formControlName = "firstname" type="text" class="form-control {{r['firstname'].errors && r['firstname'].touched?'is-invalid':'is-valid'}}"  value="Mark" required>
           <label class="form-label">Prénom</label>
-          <div class="valid-feedback">
+          <div class="{{r['firstname'].errors && r['firstname'].touched?'invalid-feedback':'valid-feedback'}}">
             <small *ngIf="r['firstname'].errors && r['firstname'].touched" class="text-danger">{{handleGetErrorMessageFromChild('firstname', r['firstname'].errors)}}</small>
 
-            Looks good!
           </div>
         </div>
 
         <div class="col-md-4 form-floating">
-          <input formControlName = "birthday" type="date" class="form-control is-invalid"  required>
+          <input formControlName = "birthday" type="date" class="form-control {{r['birthday'].errors && r['birthday'].touched?'is-invalid':'is-valid'}}"  required>
           <label class="form-label">Date d'anniversaire</label>
-          <div class="invalid-feedback">
+          <div class="{{r['birthday'].errors && r['birthday'].touched?'invalid-feedback':'valid-feedback'}}">
             <small *ngIf="r['birthday'].errors && r['birthday'].touched" class="text-danger">{{handleGetErrorMessageFromChild('birthday', r['birthday'].errors)}}</small>
 
-            Please choose your birthday.
           </div>
 
         </div>
@@ -46,46 +41,45 @@
 
         <div class="col-md-4 form-floating">
 
-            <input  formControlName = "username" type="email" class="form-control is-invalid" required>
+            <input  formControlName = "email" type="email" class="form-control {{r['email'].errors && r['email'].touched?'is-invalid':'is-valid'}}" required>
             <label class="form-label">Email</label>
-            <div class="invalid-feedback">
-              <small *ngIf="r['username'].errors && r['username'].touched" class="text-danger">{{handleGetErrorMessageFromChild('username', r['username'].errors)}}</small>
-              <small *ngIf="!emailIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>
-              Please choose email.
+            <div class="{{r['email'].errors && r['email'].touched?'invalid-feedback':'valid-feedback'}}">
+              <small *ngIf="r['email'].errors && r['email'].touched" class="text-danger">{{handleGetErrorMessageFromChild('email', r['email'].errors)}}</small>
+      <!--        <small *ngIf="!emailIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>
+              Please choose email.-->
             </div>
 
         </div>
 
         <div class="col-md-4 form-floating">
 
-          <input  formControlName = "password" type="password" class="form-control is-invalid" id="pwd" required>
+          <input  formControlName = "password" type="password" class="form-control {{r['password'].errors && r['password'].touched?'is-invalid':'is-valid'}}" id="pwd" required>
           <input type="checkbox" (change)="showAndHidePassword()" class="mt-2">&nbsp;<span  style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
           <label class="form-label">Mot de passe</label>
-          <div class="invalid-feedback">
+          <div class="{{ (r['password'].errors && r['password'].touched)?'invalid-feedback':'valid-feedback'}}">
             <small *ngIf="r['password'].errors && r['password'].touched" class="text-danger">{{handleGetErrorMessageFromChild('password', r['password'].errors)}}</small>
-            Please choose a username.
-            <small *ngIf="!passwordIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>
+           <!-- Please choose a username.
+            <small *ngIf="!passwordIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>-->
           </div>
 
         </div>
 
         <div class="col-md-4 form-floating">
 
-          <input  formControlName = "confirmPassword" type="password" class="form-control is-invalid"  id="confPwd" required>
+          <input  formControlName = "confirmPassword" type="password" class="form-control {{r['confirmPassword'].errors && r['confirmPassword'].touched?'is-invalid':'is-valid'}}"  id="confPwd" required>
           <input type="checkbox" (change)="showAndHideConfirmPassword()" class="mt-2">&nbsp;<span style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
           <label class="form-label">Confirmation du mot de passe</label>
-          <div class="invalid-feedback">
-            Please choose a username.
+          <div class="{{ (r['confirmPassword'].errors && r['confirmPassword'].touched)?'invalid-feedback':'valid-feedback'}}">
             <small *ngIf="r['confirmPassword'].errors && r['confirmPassword'].touched" class="text-danger">{{handleGetErrorMessageFromChild('confirmPassword', r['confirmPassword'].errors)}}</small>
             <small *ngIf="!passwordsMatch()" class="text-danger">Les mots de passe ne correspondent pas</small>
-            <small *ngIf="!confirmPasswordIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>
+<!--            <small *ngIf="!confirmPasswordIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>-->
           </div>
 
         </div>
 
         <div class="col-md-6 form-floating">
 
-          <select class="form-select is-invalid" formControlName = "howKnowUs"   required>
+          <select class="form-select {{(r['howKnowUs'].errors && r['howKnowUs'].touched)?'is-invalid':'is-valid'}} " formControlName = "howKnowUs"   required>
             <option selected disabled value="">Choisir une option</option>
             <option value="Amis">Amis</option>
             <option value="Facebook">Facebook</option>
@@ -96,36 +90,34 @@
             <option value="Autre">Autre</option>
           </select>
           <label>Comment avez vous connu Bozahouse ?</label>
-          <div class="invalid-feedback">
+          <div class="{{(r['howKnowUs'].errors && r['howKnowUs'].touched)?'invalid-feedback':'valid-feedback'}}">
             <small *ngIf="r['howKnowUs'].errors && r['howKnowUs'].touched" class="text-danger">{{handleGetErrorMessageFromChild('howKnowUs', r['howKnowUs'].errors)}}</small>
           </div>
         </div>
 
         <div class="col-md-3 form-floating">
 
-          <select class="form-select is-invalid" formControlName = "account"   required>
+          <select class="form-select  {{(r['account'].errors && r['account'].touched)?'is-invalid':'is-valid'}} " formControlName = "account"   required>
             <option selected disabled value="">Choisir une option</option>
             <option value="Talent">Talent</option>
             <option value="Particulier">Particulier</option>
             <option value="Entreprise">Entreprise</option>
           </select>
           <label >Type de compte</label>
-          <div class="invalid-feedback">
+          <div class="{{(r['account'].errors && r['account'].touched)?'invalid-feedback':'valid-feedback'}}">
             <small *ngIf="r['account'].errors && r['account'].touched" class="text-danger">{{handleGetErrorMessageFromChild('account', r['account'].errors)}}</small>
-            Please select a valid state.
           </div>
         </div>
 
         <div class="col-md-3 form-floating">
 
-          <select class="form-select is-invalid" formControlName = "sex"   required>
+          <select class="form-select {{(r['sex'].errors && r['sex'].touched)?'is-invalid':'is-valid'}}" formControlName = "sex" required>
             <option selected disabled value="">Choisir une option</option>
             <option value="Homme">Homme</option>
             <option value="Femme">Femme</option>
           </select>
           <label >Sexe</label>
-          <div class="invalid-feedback">
-            Please provide a sex.
+          <div class="{{(r['sex'].errors && r['sex'].touched)?'invalid-feedback':'valid-feedback'}}">
             <small *ngIf="r['sex'].errors && r['sex'].touched" class="text-danger">{{handleGetErrorMessageFromChild('sex', r['sex'].errors)}}</small>
 
           </div>
@@ -134,33 +126,35 @@
         <ng-container *ngIf="r['account'].value === 'Entreprise'">
 
           <div class="form-floating col-md-4">
-            <input  formControlName = "name" type="text" class="form-control is-invalid" >
+            <input  formControlName = "name" type="text" class="form-control {{(r['name'].errors && r['name'].touched)?'is-invalid':'is-valid'}}" >
             <label>Nom de l'entreprise</label>
-            <div class="invalid-feedback">
+            <div class="{{(r['name'].errors && r['name'].touched)?'invalid-feedback':'valid-feedback'}}">
               <small *ngIf="r['name'].errors && r['name'].touched" class="text-danger">{{handleGetErrorMessageFromChild('name', r['name'].errors)}}</small>
-              Please choose a name.
+
             </div>
           </div>
           <div class="form-floating col-md-4">
-            <input  formControlName = "web" type="url" class="form-control is-invalid" placeholder="https://www.monsite.com">
+            <input  formControlName = "web" type="url" class="form-control {{(r['web'].errors && r['web'].touched)?'is-invalid':'is-valid'}}" value="https://www.monsite.com">
             <label >L'url de votre site web</label>
-            <div class="invalid-feedback">
+            <div class="{{(r['web'].errors && r['web'].touched)?'invalid-feedback':'valid-feedback'}}">
               <small *ngIf="r['web'].errors && r['web'].touched" class="text-danger">{{handleGetErrorMessageFromChild('web', r['web'].errors)}}</small>
-              Please choose a web.
             </div>
           </div>
 
           <div class="form-floating col-md-4">
-            <input  formControlName = "linkedin" type="url" class="form-control is-invalid"  placeholder="https://www.linkedin.com/example/">
+            <input  formControlName = "linkedin" type="url" class="form-control {{(r['linkedin'].errors && r['linkedin'].touched)?'is-invalid':'is-valid'}}"  value="https://www.linkedin.com/example/">
             <label>L'url de votre page linkedin</label>
-            <div class="invalid-feedback">
+            <div class="{{(r['linkedin'].errors && r['linkedin'].touched)?'invalid-feedback':'valid-feedback'}}">
               <small *ngIf="r['linkedin'].errors && r['linkedin'].touched" class="text-danger">{{handleGetErrorMessageFromChild('linkedin', r['linkedin'].errors)}}</small>
-              Please choose a linkedin.
             </div>
           </div>
 
-          <div class="col-12">
-            <input type="file" class="form-control " accept="image/png, image/jpeg, image/svg">
+          <div class="form-floating col-12">
+            <input (change)="getFile($event)" type="file" class="form-control {{(r['account'].value === 'Entreprise' && !r['logo'].value)?'is-invalid':'is-valid'}}" accept="image/png, image/jpeg, image/svg">
+            <label>Votre  logo</label>
+            <div class="{{ (r['account'].value === 'Entreprise' && !r['logo'].value)?'invalid-feedback':'valid-feedback'}}">
+              <small *ngIf="r['account'].value === 'Entreprise' && !r['logo'].value" class="text-danger">Vous devez choisir une image</small>
+            </div>
           </div>
 
         </ng-container>
@@ -169,8 +163,8 @@
           <div class="form-check">
             <input formControlName = "acceptTerms" class="form-check-input {{r['acceptTerms'].value === true ?'is-valid':'is-invalid'}} " type="checkbox" value=""  required>
             <label class="form-check-label">J'ai lu et approuvé les <a href="javascript:void (0);" class="text-decoration-none text-secondary" data-bs-toggle="modal" data-bs-target="#terms">termes</a></label>
-            <div class="{{r['acceptTerms'].value === true ?'valid-feedback':'invalid-feedback'}} ">
-              {{r['acceptTerms'].value === true ?'Looks good!':'Veuillez cocher cette case!'}}
+            <div class="{{(r['acceptTerms'].errors && r['acceptTerms'].touched)?'invalid-feedback':'valid-feedback'}} ">
+              <small *ngIf="r['acceptTerms'].errors && r['acceptTerms'].touched" class="text-danger">{{handleGetErrorMessageFromChild('acceptTerms', r['acceptTerms'].errors)}}</small>
             </div>
           </div>
         </div>

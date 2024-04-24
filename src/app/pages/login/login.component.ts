@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginFormGroup = this.fb.group({
 
-      username: this.fb.control("",[Validators.required,Validators.pattern("^[a-z0-9_+&*-]+(?:\\.[a-z0-9_+&*-]+)*@(?:[a-z0-9-]+\\.)+[a-z]{2,15}$"),Validators.email]),
+      email: this.fb.control("",[Validators.required,Validators.pattern("^[a-z0-9_+&*-]+(?:\\.[a-z0-9_+&*-]+)*@(?:[a-z0-9-]+\\.)+[a-z]{2,15}$"),Validators.email]),
       password: this.fb.control("",[ Validators.required, Validators.minLength(4), Validators.maxLength(8)])
     })
 
@@ -47,15 +47,15 @@ export class LoginComponent implements OnInit {
   }
 
   get email() {
-    return this.loginFormGroup.get('username');
+    return this.loginFormGroup.get('email');
   }
 
   emailIsEmpty(): boolean {
-    return this.email?.value;
+    return !this.email?.value && this.email?.touched!;
   }
 
   passwordIsEmpty(): boolean {
-    return this.password?.value;
+    return !this.password?.value && this.password?.touched!;
   }
 
   handleLogin() {

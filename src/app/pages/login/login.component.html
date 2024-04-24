@@ -8,25 +8,25 @@
 
       <div class="col-md-12 form-floating">
 
-        <input  formControlName = "username" type="email" class="form-control is-invalid" required>
+        <input  formControlName = "email" type="email" class="form-control {{r['email'].errors && r['email'].touched?'is-invalid':'is-valid'}}" required>
         <label class="form-label">Email</label>
-        <div class="invalid-feedback">
-          <small *ngIf="r['username'].errors && r['username'].touched" class="text-danger">{{handleGetErrorMessageFromChild('username', r['username'].errors)}}</small>
-          <small *ngIf="!emailIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>
-          Please choose email.
+        <div class="{{r['email'].errors && r['email'].touched?'invalid-feedback':'valid-feedback'}}">
+          <small *ngIf="r['email'].errors && r['email'].touched" class="text-danger">{{handleGetErrorMessageFromChild('email', r['email'].errors)}}</small>
+<!--          <small *ngIf="emailIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>-->
+
         </div>
 
       </div>
 
       <div class="col-md-12 form-floating">
 
-        <input  formControlName = "password" type="password" class="form-control is-invalid" id="pwd" required>
+        <input  formControlName = "password" type="password" class="form-control {{r['password'].errors && r['password'].touched?'is-invalid':'is-valid'}}" id="pwd" required>
         <input type="checkbox" (change)="showAndHidePassword()" class="mt-2">&nbsp;<span  style="font-size: 10px;">cliquez ici pour voir</span>&nbsp;
         <label class="form-label">Mot de passe</label>
-        <div class="invalid-feedback">
+        <div class="{{r['password'].errors && r['password'].touched?'invalid-feedback':'valid-feedback'}}">
           <small *ngIf="r['password'].errors && r['password'].touched" class="text-danger">{{handleGetErrorMessageFromChild('password', r['password'].errors)}}</small>
-          Please choose a username.
-          <small *ngIf="!passwordIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>
+
+<!--          <small *ngIf="passwordIsEmpty()" class="text-danger">Veuillez renseignez ce champ</small>-->
         </div>
 
       </div>

@@ -38,7 +38,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   handleResetPassword() {
     let user: AppUser = this.newPasswordFormGroup.value;
-    this.authenticationService.forgotPassword(user.username).subscribe({
+    this.authenticationService.forgotPassword(user.email).subscribe({
       next: value => {
         alert("password has been successfully reset");
         alert("check your new password in your box mail");

@@ -11,7 +11,7 @@ import {DataResponse} from "../../models/DataResponse";
 
 
 const TOKEN_KEY = "token";
-const path = "auth/";
+const path = "/auth/";
 
 
 @Injectable({
@@ -25,14 +25,14 @@ export class AuthenticationService {
   //npm i jwt-decode
 
   forgotPassword(username : string): Observable<DataResponse> {
-    return this.http.put<DataResponse> (environment.backendAPI + "forgotPassword/" , username);
+    return this.http.put<DataResponse> (environment.backendAPI + path +"forgotPassword/" , username);
   }
 
   public signIn(login: Login): Observable<DataResponse> {
     return this.http.post<DataResponse>(environment.backendAPI+ path +"signIn", login);
   }
 
-  public signUp(appUser: AppUser): Observable<AppUser> {
+  public signUp(appUser: FormData): Observable<AppUser> {
     return this.http.post<AppUser>(environment.backendAPI + path +"signUp", appUser);
   }
 
