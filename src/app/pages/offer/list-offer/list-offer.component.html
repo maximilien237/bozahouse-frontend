@@ -1,7 +1,7 @@
 
 <div class="container spacer  ">
-  <div class="text-center">
-    <!-- sidebar left -->
+<!--  <div class="text-center">
+    &lt;!&ndash; sidebar left &ndash;&gt;
     <button  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="bi bi-search"></i>rechercher </button>
 
     <div class="offcanvas offcanvas-start col-md-4 bg-dark" style="background-color: ghostwhite" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -12,7 +12,7 @@
       <div class="offcanvas-body">
 
         <div class="card bg-dark" style="font-size: 15px;">
-<!--          <h5 class="card-header text-warning"><i class="bi bi-search"></i>Rechercher </h5>-->
+&lt;!&ndash;          <h5 class="card-header text-warning"><i class="bi bi-search"></i>Rechercher </h5>&ndash;&gt;
           <div class="card-body bg-dark" >
 
             <form class="text-light" [formGroup] = "offerFormGroup" (ngSubmit)="handleFilterOffers()" >
@@ -54,22 +54,22 @@
                 <input type="text" class="form-control" formControlName = "address" placeholder="Simbok,Yaoundé,Cameroun" >
               </div>
 
-              <!--              <div class="mb-3 mt-2">
+              &lt;!&ndash;              <div class="mb-3 mt-2">
                               <input type="text" class="form-control" formControlName = "countryName"  placeholder="Pays, ex: Cameroun">
                             </div>
 
 
                             <div class="mb-3 mt-2">
                               <input type="text" class="form-control" formControlName = "cityName"  placeholder="Ville, ex: Bertoua">
-                            </div>-->
+                            </div>&ndash;&gt;
 
-              <!--
+              &lt;!&ndash;
 
                <div class="mb-3">
                      <label class="form-label">Salaire</label>
                      <input type="text" class="form-control" formControlName = "salary" value="A définir avec l'employeur" required>
                    </div>
-         -->
+         &ndash;&gt;
 
               <div class="mb-3 mt-2">
                 <label class="form-label">Expérience </label>
@@ -141,23 +141,21 @@
     </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </ng-container>
 
-<!--    <span><a *ngIf="currentUser.hostSubscriptionCounter >= 1 || currentUser.normalSubscriptionCounter >=1" routerLink="/addTestimony" class="hide-underline-link btn btn-dark text-warning">Rédiger un avis</a> </span>-->
+&lt;!&ndash;    <span><a *ngIf="currentUser.hostSubscriptionCounter >= 1 || currentUser.normalSubscriptionCounter >=1" routerLink="/addTestimony" class="hide-underline-link btn btn-dark text-warning">Rédiger un avis</a> </span>&ndash;&gt;
 
 
 
-  </div><br>
+  </div><br>-->
   <div class="card  border-0">
 
     <h5 class="text-center mt-2">Vos derniers jobs</h5>
 
     <div class="row">
 
-
-  <ng-container *ngIf="offers ; ">
-    <div  *ngFor="let offer of offers  | paginate: { itemsPerPage: 6, currentPage: currentPage, totalItems: totalElements }"  class="col-md-4 ">
+    <div  *ngFor="let offer of offers  | paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalElements }"  class="col-md-4 ">
       <div class="card  spacer-margin ">
 
-        <div *ngIf="isAdmin" class="card-header">
+        <div  class="card-header">
 
           <a (click)="handleDisableOffer(offer)" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-down"></i>
@@ -197,7 +195,7 @@
 <!--        <span class="text-muted card-footer btn" style=" font-size: 18px" (click)="shared()">partager &nbsp;<i class="bi bi-share-fill"></i></span>-->
       </div>
     </div>
-  </ng-container>
+
 
 
 

@@ -22,50 +22,32 @@ import {OfferCriteria} from "../../../models/criteria/offerCriteria";
 })
 export class ListOfferComponent implements OnInit {
 
+  offerFormGroup: FormGroup= this.fb.group({
+    title: this.fb.control(""),
+    contract: this.fb.control(""),
+    workMode: this.fb.control(""),
+    address: this.fb.control(""),
+    experience: this.fb.control(""),
+    type: this.fb.control(""),
+    domain: this.fb.control(""),
+    startDate: this.fb.control(""),
+    endDate: this.fb.control("")
+  });
 
   email: string = "contact@bozahouse.com";
   tel: string = "656832062";
-
-
-  roles: string[] = [];
-  isLoggedIn = false;
-  isAdmin : boolean = false;
-  isUser : boolean = false;
-  isEditor : boolean = false;
   username?: string;
   offers!: Offer[];
   errorMessage!:string;
-  errorMessageOffer!:string;
-  offerFormGroup!: FormGroup ;
   currentUser!: AppUser;
   currentPage: number = 1;
   totalElements!: number;
-  pageSize: number = 6;
+  pageSize: number = 12;
 
   constructor(private authenticationService: AuthenticationService, private offerService: OfferService,private userService: AppUserService,
               private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
-    this.handleCurrentAppUser();
-
-
-    //this.listCityByCountry();
-
-    this.offerFormGroup = this.fb.group({
-      title: this.fb.control(""),
-      contract: this.fb.control(""),
-      workMode: this.fb.control(""),
-      address: this.fb.control(""),
-      experience: this.fb.control(""),
-      type: this.fb.control(""),
-      domain: this.fb.control("")
-/*
-      startDate: this.fb.control(moment().subtract(7,'days').format('YYYY-MM-DD'),[Validators.required]),
-      endDate: this.fb.control(moment().format('YYYY-MM-DD'), [Validators.required])
-*/
-
-
-    });
 
     this.handleFilterOffers();
 
@@ -79,10 +61,18 @@ export class ListOfferComponent implements OnInit {
 
 
   handleFilterOffers() {
-    //  let kw = this.searchFormGroup?.value.keyword;
-    let criteria: OfferCriteria = this.offerFormGroup.value;
+
+    const {
+      title,
+
+    } = this.offerFormGroup.value;
+    const criteria:OfferCriteria={};
+
+    criteria.page = Number(this.currentPage - 1);
+    criteria.size = Number(this.pageSize);
      this.offerService.offerSpecification(criteria).subscribe({
       next: value => {
+        console.log(value)
         this.offers = value.content;
         this.totalElements = value.totalElements;
       }

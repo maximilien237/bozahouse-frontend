@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
 import {ModalErrorComponent} from "../shares/modal-error/modal-error.component";
 import {Subscription} from "rxjs";
+import {ToastComponent} from "../shares/toast/toast.component";
 
 
 @Component({
@@ -33,9 +34,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   @ViewChild(ModalErrorComponent)
   private childError!: ModalErrorComponent ;
+  @ViewChild(ToastComponent)
+  private childToast!: ToastComponent;
+  toastMessageParent: string = "";
   // pour les validations dynamiques
   subscriptions: Subscription[] = [];
   logo!:File;
+
   constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private router: Router) { }
 
   /**
@@ -157,9 +162,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.authenticationService.signUp(formdata).subscribe({
       next: value => {
         console.log(value);
-        alert("Compte crée avec succès !");
-        alert("Consultez votre boite mail pour activer votre compte !");
-        this.router.navigateByUrl("/login");
+        this.toastMessageParent = "Compte crée avec succès ! \n" + "Consultez votre boite mail pour activer votre compte !";
+/*        alert("Compte crée avec succès !");
+        alert("Consultez votre boite mail pour activer votre compte !");*/
+        this.router.navigateByUrl("/login").then( () => {
+          this.childToast.handleShowToastMessage();
+        });
         //this.newUserFormGroup.reset();
       },
       error: err => {

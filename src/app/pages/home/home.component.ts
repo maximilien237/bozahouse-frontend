@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {catchError, map, Observable, throwError} from "rxjs";
 
 import {FormBuilder,FormGroup} from "@angular/forms";
@@ -11,6 +11,7 @@ import {OfferService} from "../../services/offer/offer.service";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
 import {AppUserService} from "../../services/app-user/app-user.service";
 import {AppUser} from "../../models/app-user.models";
+import {ToastComponent} from "../shares/toast/toast.component";
 
 @Component({
   selector: 'app-home',
@@ -23,10 +24,7 @@ export class HomeComponent implements OnInit {
   tel: string = "656832062";
 
   roles: string[] = [];
-  isLoggedIn = false;
   isAdmin: boolean = false;
-  isUser: boolean = false;
-  isEditor: boolean = false;
   username?: string;
   errorOfferMessage!: string;
   currentUser!: AppUser;
@@ -39,11 +37,14 @@ export class HomeComponent implements OnInit {
   errorTalentMessage!: string;
   searchFormGroup: FormGroup | undefined;
 
+  @ViewChild(ToastComponent)
+  private childToast!: ToastComponent;
+
   constructor(private authenticationService: AuthenticationService, private userService: AppUserService, private talentService: TalentService, private offerService: OfferService, private fb: FormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {
-
+    this.childToast.handleShowToastMessage();
     this.lastThreeOffer();
     this.lastThreeTalent();
     this.handleCurrentAppUser();

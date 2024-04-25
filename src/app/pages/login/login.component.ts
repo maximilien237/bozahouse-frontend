@@ -11,6 +11,7 @@ import {AuthenticationService} from "../../services/authentication/authenticatio
 import {Router} from "@angular/router";
 import {ModalErrorComponent} from "../shares/modal-error/modal-error.component";
 import {HttpErrorResponse} from "@angular/common/http";
+import {ToastComponent} from "../shares/toast/toast.component";
 
 
 @Component({
@@ -20,11 +21,16 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class LoginComponent implements OnInit {
 
-  errorMessageParent : string = "";
+
   loginFormGroup!: FormGroup;
 
   @ViewChild(ModalErrorComponent)
   private childError!: ModalErrorComponent ;
+  errorMessageParent : string = "";
+
+  @ViewChild(ToastComponent)
+  private childToast!: ToastComponent;
+  toastMessageParent: string = "";
 
   constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private router: Router) {
   }
@@ -66,10 +72,9 @@ export class LoginComponent implements OnInit {
         console.log(response.value)
         // ajout du token dans le localstorage
         this.authenticationService.addTokenInLocalstorage(response.value);
+        this.toastMessageParent = "Bienvenue chez Bozahouse, la maison des bozayeur ): !";
 
-        this.router.navigateByUrl("/home").then(() => {
-          console.log("Bienvenue chez Bozahouse, la maison des bozayeur ): :(");
-        });
+        this.router.navigateByUrl("/home");
 
         setTimeout( () => {
           console.log("it's time to wait....");
