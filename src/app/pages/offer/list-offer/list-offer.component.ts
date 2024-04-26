@@ -24,14 +24,15 @@ export class ListOfferComponent implements OnInit {
 
   offerFormGroup: FormGroup= this.fb.group({
     title: this.fb.control(""),
-    contract: this.fb.control(""),
-    workMode: this.fb.control(""),
-    address: this.fb.control(""),
-    experience: this.fb.control(""),
-    type: this.fb.control(""),
     domain: this.fb.control(""),
-    startDate: this.fb.control(""),
-    endDate: this.fb.control("")
+    skills: this.fb.control(""),
+    workMode: this.fb.control(""),
+    experience: this.fb.control(""),
+    address: this.fb.control(""),
+    contract: this.fb.control(""),
+    salary: this.fb.control(""),
+    startDate: this.fb.control(null),
+    endDate: this.fb.control(null)
   });
 
   email: string = "contact@bozahouse.com";
@@ -48,9 +49,7 @@ export class ListOfferComponent implements OnInit {
               private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
-
     this.handleFilterOffers();
-
   }
 
 
@@ -62,14 +61,25 @@ export class ListOfferComponent implements OnInit {
 
   handleFilterOffers() {
 
-    const {
+/*    const {
       title,
+      domain,
+      skills,
+      workMode,
+      experience,
+      address,
+      contract,
+      salary,
+      startDate,
+      endDate
 
-    } = this.offerFormGroup.value;
-    const criteria:OfferCriteria={};
+    } = this.offerFormGroup.value;*/
+    //const criteria:OfferCriteria={};
+    let criteria:OfferCriteria = this.offerFormGroup.value;
 
     criteria.page = Number(this.currentPage - 1);
     criteria.size = Number(this.pageSize);
+    console.log('OfferCriteria',criteria);
      this.offerService.offerSpecification(criteria).subscribe({
       next: value => {
         console.log(value)
@@ -170,20 +180,6 @@ export class ListOfferComponent implements OnInit {
   }
 
 
-  getErrorMessage(fieldName: string, error: ValidationErrors) {
-    if (error['required']){
-      return fieldName + "  "+ " is required";
-    }else if (error['minlength']){
-      return fieldName + "  "+ "should have at least" + " "+ error['minlength']['requiredLength'] + "  "+ "characters";
-    }else if (error['maxlength']){
-      return fieldName + "  "+ "should have at the most" + "  " + error['maxlength']['requiredLength'] + "  " + "characters";
-    }else if (error['pattern']) {
-      return fieldName + "  "+ "required this pattern" + error['pattern']['requiredPattern'] ;
-    }else if (error['email']) {
-      return fieldName + "  " + "address is not valid "+ "  "+ error['email']['requiredEmail'];
-    }else return "";
-
-  }
 
 }
 

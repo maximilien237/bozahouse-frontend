@@ -1,6 +1,495 @@
 
-<div class="container spacer  ">
-<!--  <div class="text-center">
+
+<main class="mt-lg-5">
+  <h1 class="visually-hidden">Features examples</h1>
+
+
+  <div class=" mt-5">
+
+    <div class="container ">
+      <h5 class="text-center  spacer">Filtrer les offres</h5>
+
+      <form [formGroup] = "offerFormGroup" (ngSubmit)="handleFilterOffers()"  class="row g-3">
+
+        <div class="col-md-4 form-floating">
+          <input  formControlName = "title" type="text" class="form-control"  >
+          <label class="form-label">Profession</label>
+        </div>
+
+        <div class="col-md-4 form-floating">
+          <input formControlName = "domain" type="text" class="form-control" >
+          <label class="form-label">Domaine</label>
+        </div>
+
+
+        <div class="form-floating col-md-4">
+          <input placeholder="séparez les compétences par une virgule. example : java, angular, css"  class="form-control " formControlName="skills" type="text" >
+          <label> Compétences</label>
+        </div>
+
+
+        <div class="col-md-4 form-floating">
+          <select class="form-select " formControlName = "workMode"   >
+            <option selected disabled value="">Choisir une option</option>
+            <option value="Sur site">Sur site</option>
+            <option value="A distance">A distance</option>
+            <option value="Hybride">Hybride</option>
+          </select>
+          <label>Mode de travail</label>
+        </div>
+
+
+        <div class="col-md-4 form-floating">
+          <select class="form-select " formControlName = "experience"   >
+            <option selected disabled value="">Choisir une option</option>
+            <option value="Premier emploi">Premier emploi</option>
+            <option value="1-2 ans">1-2 ans</option>
+            <option value="3-5 ans">3-5 ans</option>
+            <option value="6-10 ans">6-10 ans</option>
+            <option value="11-20 ans">11-20 ans</option>
+            <option value="+20 ans">plus de 20 ans</option>
+          </select>
+          <label>Experience</label>
+        </div>
+
+
+        <div class="form-floating col-md-4">
+          <input placeholder="Yaoundé, Cameroun" class="form-control" formControlName="address" type="text" >
+          <label>Address</label>
+        </div>
+
+
+        <div class="col-md-4 form-floating">
+          <select class="form-select" formControlName = "contract"  >
+            <option selected disabled value="">Choisir une option</option>
+            <option value="CDI">CDI</option>
+            <option value="CDD">CDD</option>
+            <option value="FREELANCE">Freelance</option>
+            <option value="INTERIM">Intérim</option>
+            <option value="ASSOCIE">Associé(e)</option>
+            <option value="ALTERNANCE">Alternance</option>
+            <option value="FRANCHISE">Franchise</option>
+            <option value="STAGE ACADEMIC">Stage academic</option>
+            <option value="STAGE PROFESSIONNELLE">Stage professionnelle</option>
+            <option value="TOUT">Tout</option>
+          </select>
+          <label >Contract</label>
+        </div>
+
+
+        <div class="col-md-4 form-floating">
+          <input formControlName="salary" type="number" class="form-control" min="30000" max="1000000" step="10000" >
+          <label class="form-label">Salaire</label>
+        </div>
+
+        <div class="col-md-4 form-floating">
+          <input formControlName = "startDate" type="date" class="form-control "  >
+          <label class="form-label">Date de début</label>
+        </div>
+
+        <div class="col-md-4 form-floating">
+          <input formControlName = "endDate" type="date" class="form-control "  >
+          <label class="form-label">Date de fin</label>
+        </div>
+
+        <div class="text-center col-12 row mt-3 mb-3">
+
+          <div class=" col-md-4 mb-3">
+            <button  class="btn btn-outline-primary " type="submit" style="width: 100px">Filtrer</button>
+          </div>
+
+          <div class=" col-md-4">
+            <button (click)="handleSetOfferFormGroup()" class="btn btn-outline-danger"  type="button">Réinitialiser</button>
+          </div>
+
+        </div>
+
+
+      </form>
+
+
+    </div>
+  </div>
+
+
+  <div class="container px-4 py-5" id="offers">
+    <h2 class="pb-2 border-bottom">Les offres  &nbsp; [ {{totalElements}} ]  <button type="button" class="btn btn-success position-relative" data-bs-toggle="modal" data-bs-target="#offer" >Publier une offre</button> </h2>
+
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+      <div class="col" *ngFor="let offer of offers| paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalElements }">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">
+
+            <div class="dropdown">
+              <a href="javascript:void (0);" class="d-flex align-items-center text-decoration-none text-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+
+                <h4>Particulier</h4>
+<!--                <h4 > Compte : {{user.account === 'employer'?'Particulier': user.account === 'enterprise'?'Entreprise':'Talent'}}</h4>&nbsp;-->
+                <strong ><i class="bi bi-three-dots-vertical"></i></strong>
+              </a>
+              <ul class="dropdown-menu  text-small shadow">
+                <li><a class="dropdown-item" (click)="handleDetailOffer(offer.id!)" href="javascript:void (0);"> <i class="bi bi-eye text-info"></i> Consulter</a></li>
+                <li><a class="dropdown-item" href="javascript:void (0);"> <i class="bi bi-exclamation-triangle text-warning"></i> Signaler</a></li>
+
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" (click)="handleEnableOffer(offer)" href="javascript:void (0);">  <i class="bi bi-arrow-up"></i> Activer</a></li>
+                <li><a class="dropdown-item" (click)="handleDisableOffer(offer)" href="javascript:void (0);">  <i class="bi bi-arrow-down"></i>  Désactiver</a></li>
+                <li><a class="dropdown-item" (click)="handleUpdateOffer(offer.id!)" href="javascript:void (0);"> <i class="bi bi-pencil text-primary"></i> Modifier</a></li>
+                <li><a class="dropdown-item" (click)="handleDeleteOffer(offer)" href="javascript:void (0);">  <i class="bi bi-trash text-danger"></i> Supprimer</a></li>
+
+
+              </ul>
+            </div>
+
+
+          </div>
+          <div class="card-body text-success">
+            <h5 class="card-title text-warning fw-bold">{{offer.title}}</h5>
+
+            <span >Auteur : [ {{offer.type}} ]</span><br>
+
+            <span class="fs-2" ><i class="bi bi-book-fill">&nbsp;</i>{{offer.contract}}</span> &nbsp;&nbsp;
+
+            <span class="fs-2"><i class="{{offer.workMode === 'A distance'?'bi bi-wifi': 'bi bi-house-fill'}}"></i> {{offer.workMode}} </span><br />
+
+            <span *ngIf="offer.salary" class="text-danger fs-2"> {{offer.salary? (offer.salary | number: '1.0-0') +'FCFA' : 'Salaire à définir avec l\'employeur'}} </span><br />
+
+            <span ><i class="bi bi-calendar"></i>&nbsp;<span>{{offer.publishedAt | date : 'd MMM y'}}</span></span>&nbsp;-- <span ><i class="bi bi-lock-fill"></i> <span>{{offer.endOffer | date : 'd MMM y'}}</span></span>
+
+          </div>
+          <div class="card-footer bg-transparent border-success">
+            <ul class="d-flex list-unstyled mt-auto">
+              <!--              <li class="me-auto">
+                              <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+                            </li>-->
+              <li class="d-flex align-items-center me-3">
+                <i class="bi bi-geo-alt-fill me-2 "></i>
+                <small>{{offer.address}}</small>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi me-2 bi-calendar-check"></i>
+                <small>{{offer.endOffer | date: 'd MMMM y HH:mm:ss'}}</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <pagination-controls (pageChange)="goToPage($event)"></pagination-controls>
+    </div>
+  </div>
+
+
+
+<!--  <div class="container px-4 py-5" id="custom-cards">
+    <h2 class="pb-2 border-bottom">Nos offres récentes</h2>
+
+    <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+      <div class="col">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">
+
+
+            <div class="dropdown">
+              <a href="javascript:void (0);" class="d-flex align-items-center text-decoration-none text-secondary" data-bs-toggle="dropdown" aria-expanded="false">
+
+                <h1 class=" me-5" >[Entreprise]</h1>
+                <strong ><i class="bi bi-three-dots-vertical"></i></strong>
+              </a>
+              <ul class="dropdown-menu  text-small shadow">
+                <li><a class="dropdown-item" href="#">Consulter</a></li>
+                <li><a class="dropdown-item" href="#">Signaler</a></li>
+
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Activer</a></li>
+                <li><a class="dropdown-item" href="#">Désactiver</a></li>
+                <li><a class="dropdown-item" href="#">Modifier</a></li>
+                <li><a class="dropdown-item" href="#">Supprimer</a></li>
+
+
+              </ul>
+            </div>
+
+
+          </div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Success card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer bg-transparent border-success">
+            <ul class="d-flex list-unstyled mt-auto">
+              <li class="me-auto">
+                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+              </li>
+              <li class="d-flex align-items-center me-3">
+                <i class="bi me-2 bi-geo"></i>
+                <small>California</small>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi me-2 bi-calendar-check"></i>
+                <small>5d</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">Header</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Success card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer bg-transparent border-success">
+            <ul class="d-flex list-unstyled mt-auto">
+              <li class="me-auto">
+                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+              </li>
+              <li class="d-flex align-items-center me-3">
+                <i class="bi me-2 bi-geo"></i>
+                <small>California</small>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi me-2 bi-calendar-check"></i>
+                <small>5d</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">Header</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Success card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer bg-transparent border-success">
+            <ul class="d-flex list-unstyled mt-auto">
+              <li class="me-auto">
+                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+                Experience
+              </li>
+              <li class="d-flex align-items-center me-3">
+                <i class="bi me-2 bi-geo"></i>
+                <small>California</small>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi me-2 bi-calendar-check"></i>
+                <small>5d</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">Header</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Success card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer bg-transparent border-success">
+            <ul class="d-flex list-unstyled mt-auto">
+              <li class="me-auto">
+                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+              </li>
+              <li class="d-flex align-items-center me-3">
+                <i class="bi me-2 bi-geo"></i>
+                <small>California</small>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi me-2 bi-calendar-check"></i>
+                <small>5d</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="b-example-divider"></div>
+
+  <div class="container px-4 py-5" id="talents">
+    <h2 class="pb-2 border-bottom">Nos talents récents</h2>
+
+    <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+      <div class="col">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">Header</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Success card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer bg-transparent border-success">
+            <ul class="d-flex list-unstyled mt-auto">
+              <li class="me-auto">
+                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+              </li>
+              <li class="d-flex align-items-center me-3">
+                <i class="bi me-2 bi-geo"></i>
+                <small>California</small>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi me-2 bi-calendar-check"></i>
+                <small>5d</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">Header</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Success card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer bg-transparent border-success">
+            <ul class="d-flex list-unstyled mt-auto">
+              <li class="me-auto">
+                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+              </li>
+              <li class="d-flex align-items-center me-3">
+                <i class="bi me-2 bi-geo"></i>
+                <small>California</small>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi me-2 bi-calendar-check"></i>
+                <small>5d</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">Header</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Success card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer bg-transparent border-success">
+            <ul class="d-flex list-unstyled mt-auto">
+              <li class="me-auto">
+                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+              </li>
+              <li class="d-flex align-items-center me-3">
+                <i class="bi me-2 bi-geo"></i>
+                <small>California</small>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi me-2 bi-calendar-check"></i>
+                <small>5d</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">Header</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Success card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer bg-transparent border-success">
+            <ul class="d-flex list-unstyled mt-auto">
+              <li class="me-auto">
+                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+              </li>
+              <li class="d-flex align-items-center me-3">
+                <i class="bi me-2 bi-geo"></i>
+                <small>California</small>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi me-2 bi-calendar-check"></i>
+                <small>5d</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="b-example-divider"> </div>
+
+  <div class="container px-4 py-5" id="testimonies">
+    <h2 class="pb-2 border-bottom">Les avis   <button style="position: relative; left: 900px;" type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#advise" >Rédiger un avis</button> </h2>
+
+    <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+      <div class="col">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">Maximilien</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Sujet :  Les offres</h5>
+            <p class="card-text">Je trouve que les offres sur ce site sont supper intéressantes. Je vous le recommande vivement, car c'est ici que j'ai décroché mon premier emploi. Merci à toute l'équipe Bozahouse</p>
+          </div>
+          <div class="card-footer bg-transparent border-success"> Jeudi 11 Avril 2024 à 09:25</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">Header</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Success card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer bg-transparent border-success">Footer</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">Header</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Success card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer bg-transparent border-success">Footer</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-success">Header</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Success card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer bg-transparent border-success">Footer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="b-example-divider"></div>-->
+
+
+</main>
+
+
+
+
+
+<!--<div class="container spacer  ">
+&lt;!&ndash;  <div class="text-center">
     &lt;!&ndash; sidebar left &ndash;&gt;
     <button  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="bi bi-search"></i>rechercher </button>
 
@@ -145,7 +634,7 @@
 
 
 
-  </div><br>-->
+  </div><br>&ndash;&gt;
   <div class="card  border-0">
 
     <h5 class="text-center mt-2">Vos derniers jobs</h5>
@@ -182,7 +671,7 @@
           <span *ngIf="offer.salary" class="text-danger fs-2"> {{offer.salary? (offer.salary | number: '1.0-0') +'FCFA' : 'Salaire à définir avec l\'employeur'}} </span><br />
 
           <div >
-            <span ><i class="bi bi-calendar"></i>&nbsp;<span>{{offer.publishedAt | date : 'd MMM y'}}</span></span>&nbsp;-- <span ><i class="bi bi-lock-fill"></i> <span>{{offer.endOffer | date : 'd MMM y'}}</span></span>
+            <span ><i class="bi bi-calendar"></i>&nbsp;<span>{{offer.publishedAt | date : 'd MMM y'}}</span></span>&nbsp;&#45;&#45; <span ><i class="bi bi-lock-fill"></i> <span>{{offer.endOffer | date : 'd MMM y'}}</span></span>
           </div><br>
 
           <ng-container>
@@ -192,7 +681,7 @@
           </ng-container>
 
         </div>
-<!--        <span class="text-muted card-footer btn" style=" font-size: 18px" (click)="shared()">partager &nbsp;<i class="bi bi-share-fill"></i></span>-->
+&lt;!&ndash;        <span class="text-muted card-footer btn" style=" font-size: 18px" (click)="shared()">partager &nbsp;<i class="bi bi-share-fill"></i></span>&ndash;&gt;
       </div>
     </div>
 
@@ -208,7 +697,7 @@
   </div >
 
 
-</div>
+</div>-->
 
 
 <div class="text-end mb-3 spacer-right">

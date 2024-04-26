@@ -26,14 +26,14 @@
                 <strong ><i class="bi bi-three-dots-vertical"></i></strong>
               </a>
               <ul class="dropdown-menu  text-small shadow">
-                <li><a class="dropdown-item" (click)="handleDetailAppUser(user.id!)" href="javascript:void (0);"> <i class="bi bi-eye"></i> Consulter</a></li>
-                <li><a class="dropdown-item" href="javascript:void (0);"> <i class="bi bi-stop-fill"></i> Signaler</a></li>
+                <li><a class="dropdown-item" (click)="handleDetailAppUser(user.id!)" href="javascript:void (0);"> <i class="bi bi-eye text-info"></i> Consulter</a></li>
+                <li><a class="dropdown-item" href="javascript:void (0);"> <i class="bi bi-exclamation-triangle text-warning"></i> Signaler</a></li>
 
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" (click)="handleDisableAppUser(user)" href="javascript:void (0);">  <i class="bi bi-arrow-up"></i> Activer</a></li>
                 <li><a class="dropdown-item" (click)="handleDisableAppUser(user)" href="javascript:void (0);">  <i class="bi bi-arrow-down"></i>  Désactiver</a></li>
-                <li><a class="dropdown-item" (click)="handleUpdateAppUser(user.id!)" href="javascript:void (0);"> <i class="bi bi-pencil"></i> Modifier</a></li>
-                <li><a class="dropdown-item" (click)="handleDeleteUser(user)" href="javascript:void (0);">  <i class="bi bi-trash"></i> Supprimer</a></li>
+                <li><a class="dropdown-item" (click)="handleUpdateAppUser(user.id!)" href="javascript:void (0);"> <i class="bi bi-pencil text-primary"></i> Modifier</a></li>
+                <li><a class="dropdown-item" (click)="handleDeleteUser(user)" href="javascript:void (0);">  <i class="bi bi-trash text-danger"></i> Supprimer</a></li>
 
 
               </ul>
@@ -51,7 +51,7 @@
                 <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
               </li>-->
               <li class="d-flex align-items-center me-3">
-                <i class="bi bi-wifi me-2 "></i>
+                <i class="bi bi-arrow-down-up me-2 "></i>
                 <small>{{user.countConnexion}}</small>
               </li>
               <li class="d-flex align-items-center">

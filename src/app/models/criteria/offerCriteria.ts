@@ -1,16 +1,16 @@
 
 export interface OfferCriteria {
   title?: string;
-  contract?: string;
+  domain?: string;
+  skills?: string;
   workMode?: string;
-  address?: string;
-  countryName?: string;
-  cityName?: string;
   experience?: string;
+  address?: string;
+  contract?: string;
+  salary?: string;
   startDate?: Date;
   endDate?: Date;
-  type?: string;
-  domain?: string;
+
   page?: number;
   size?: number;
   appUserId?: number;

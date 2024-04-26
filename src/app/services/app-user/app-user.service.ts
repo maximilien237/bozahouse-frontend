@@ -7,7 +7,7 @@ import {Page} from "../../models/Page";
 import {UtilCriteria} from "../../models/criteria/utilCriteria";
 
 
-const path = "users/";
+const path = "/api/v1/users";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class AppUserService {
   constructor(private http: HttpClient) { }
 
   public getAppUser(id : number): Observable<AppUser> {
-    return this.http.get<AppUser>(environment.backendAPI  + "users/"+id)
+    return this.http.get<AppUser>(environment.backendAPI  +id)
   }
 
   public getAccount(): Observable<AppUser> {
@@ -25,7 +25,7 @@ export class AppUserService {
   }
 
   public appUserSpecification(criteria: UtilCriteria): Observable<Page<AppUser>> {
-    return this.http.post<Page<AppUser>>(environment.backendAPI +"users/criteria", criteria)
+    return this.http.post<Page<AppUser>>(environment.backendAPI +path +"/criteria", criteria)
   }
 
   public saveAppUser(user: AppUser):Observable<AppUser>{
