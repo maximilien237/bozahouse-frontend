@@ -35,8 +35,8 @@ export class OfferService {
     return this.http.post<Offer>(environment.backendAPI +path, offer);
   }
 
-  updateOffer(id: number, offer: Offer): Observable<Offer>{
-    return this.http.put<Offer>(environment.backendAPI + "offers/"+id, offer);
+  updateOffer(id: number, offer: FormData): Observable<Offer>{
+    return this.http.put<Offer>(environment.backendAPI + path +"/"+id, offer);
   }
 
   public deleteOffer(id: number){

@@ -99,7 +99,7 @@
           </div>
 
           <div class=" col-md-4">
-            <button (click)="handleSetOfferFormGroup()" class="btn btn-outline-danger"  type="button">Réinitialiser</button>
+            <button (click)="handleResetOfferFormGroup()" class="btn btn-outline-danger"  type="button">Réinitialiser</button>
           </div>
 
         </div>
@@ -113,7 +113,7 @@
 
 
   <div class="container px-4 py-5" id="offers">
-    <h2 class="pb-2 border-bottom">Les offres  &nbsp; [ {{totalElements}} ]  <button type="button" class="btn btn-success position-relative" data-bs-toggle="modal" data-bs-target="#offer" >Publier une offre</button> </h2>
+    <h2 class="pb-2 border-bottom">Les offres  &nbsp; [ {{totalElements}} ]  <button type="button" (click)="openNewOfferModal()" class="btn btn-success position-relative"  >Publier une offre</button> </h2>
 
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
       <div class="col" *ngFor="let offer of offers| paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalElements }">
@@ -134,7 +134,7 @@
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" (click)="handleEnableOffer(offer)" href="javascript:void (0);">  <i class="bi bi-arrow-up"></i> Activer</a></li>
                 <li><a class="dropdown-item" (click)="handleDisableOffer(offer)" href="javascript:void (0);">  <i class="bi bi-arrow-down"></i>  Désactiver</a></li>
-                <li><a class="dropdown-item" (click)="handleUpdateOffer(offer.id!)" href="javascript:void (0);"> <i class="bi bi-pencil text-primary"></i> Modifier</a></li>
+                <li><a class="dropdown-item" (click)="openUpdateOfferModal(offer)" href="javascript:void (0);"> <i class="bi bi-pencil text-primary"></i> Modifier</a></li>
                 <li><a class="dropdown-item" (click)="handleDeleteOffer(offer)" href="javascript:void (0);">  <i class="bi bi-trash text-danger"></i> Supprimer</a></li>
 
 
@@ -183,521 +183,198 @@
   </div>
 
 
-
-<!--  <div class="container px-4 py-5" id="custom-cards">
-    <h2 class="pb-2 border-bottom">Nos offres récentes</h2>
-
-    <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
-      <div class="col">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-          <div class="card-header bg-transparent border-success">
-
-
-            <div class="dropdown">
-              <a href="javascript:void (0);" class="d-flex align-items-center text-decoration-none text-secondary" data-bs-toggle="dropdown" aria-expanded="false">
-
-                <h1 class=" me-5" >[Entreprise]</h1>
-                <strong ><i class="bi bi-three-dots-vertical"></i></strong>
-              </a>
-              <ul class="dropdown-menu  text-small shadow">
-                <li><a class="dropdown-item" href="#">Consulter</a></li>
-                <li><a class="dropdown-item" href="#">Signaler</a></li>
-
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Activer</a></li>
-                <li><a class="dropdown-item" href="#">Désactiver</a></li>
-                <li><a class="dropdown-item" href="#">Modifier</a></li>
-                <li><a class="dropdown-item" href="#">Supprimer</a></li>
-
-
-              </ul>
-            </div>
-
-
-          </div>
-          <div class="card-body text-success">
-            <h5 class="card-title">Success card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <div class="card-footer bg-transparent border-success">
-            <ul class="d-flex list-unstyled mt-auto">
-              <li class="me-auto">
-                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <i class="bi me-2 bi-geo"></i>
-                <small>California</small>
-              </li>
-              <li class="d-flex align-items-center">
-                <i class="bi me-2 bi-calendar-check"></i>
-                <small>5d</small>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-          <div class="card-header bg-transparent border-success">Header</div>
-          <div class="card-body text-success">
-            <h5 class="card-title">Success card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <div class="card-footer bg-transparent border-success">
-            <ul class="d-flex list-unstyled mt-auto">
-              <li class="me-auto">
-                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <i class="bi me-2 bi-geo"></i>
-                <small>California</small>
-              </li>
-              <li class="d-flex align-items-center">
-                <i class="bi me-2 bi-calendar-check"></i>
-                <small>5d</small>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-          <div class="card-header bg-transparent border-success">Header</div>
-          <div class="card-body text-success">
-            <h5 class="card-title">Success card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <div class="card-footer bg-transparent border-success">
-            <ul class="d-flex list-unstyled mt-auto">
-              <li class="me-auto">
-                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-                Experience
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <i class="bi me-2 bi-geo"></i>
-                <small>California</small>
-              </li>
-              <li class="d-flex align-items-center">
-                <i class="bi me-2 bi-calendar-check"></i>
-                <small>5d</small>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-          <div class="card-header bg-transparent border-success">Header</div>
-          <div class="card-body text-success">
-            <h5 class="card-title">Success card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <div class="card-footer bg-transparent border-success">
-            <ul class="d-flex list-unstyled mt-auto">
-              <li class="me-auto">
-                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <i class="bi me-2 bi-geo"></i>
-                <small>California</small>
-              </li>
-              <li class="d-flex align-items-center">
-                <i class="bi me-2 bi-calendar-check"></i>
-                <small>5d</small>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
-  </div>
-
-  <div class="b-example-divider"></div>
-
-  <div class="container px-4 py-5" id="talents">
-    <h2 class="pb-2 border-bottom">Nos talents récents</h2>
-
-    <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
-      <div class="col">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-          <div class="card-header bg-transparent border-success">Header</div>
-          <div class="card-body text-success">
-            <h5 class="card-title">Success card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <div class="card-footer bg-transparent border-success">
-            <ul class="d-flex list-unstyled mt-auto">
-              <li class="me-auto">
-                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <i class="bi me-2 bi-geo"></i>
-                <small>California</small>
-              </li>
-              <li class="d-flex align-items-center">
-                <i class="bi me-2 bi-calendar-check"></i>
-                <small>5d</small>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-          <div class="card-header bg-transparent border-success">Header</div>
-          <div class="card-body text-success">
-            <h5 class="card-title">Success card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <div class="card-footer bg-transparent border-success">
-            <ul class="d-flex list-unstyled mt-auto">
-              <li class="me-auto">
-                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <i class="bi me-2 bi-geo"></i>
-                <small>California</small>
-              </li>
-              <li class="d-flex align-items-center">
-                <i class="bi me-2 bi-calendar-check"></i>
-                <small>5d</small>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-          <div class="card-header bg-transparent border-success">Header</div>
-          <div class="card-body text-success">
-            <h5 class="card-title">Success card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <div class="card-footer bg-transparent border-success">
-            <ul class="d-flex list-unstyled mt-auto">
-              <li class="me-auto">
-                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <i class="bi me-2 bi-geo"></i>
-                <small>California</small>
-              </li>
-              <li class="d-flex align-items-center">
-                <i class="bi me-2 bi-calendar-check"></i>
-                <small>5d</small>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-          <div class="card-header bg-transparent border-success">Header</div>
-          <div class="card-body text-success">
-            <h5 class="card-title">Success card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <div class="card-footer bg-transparent border-success">
-            <ul class="d-flex list-unstyled mt-auto">
-              <li class="me-auto">
-                <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <i class="bi me-2 bi-geo"></i>
-                <small>California</small>
-              </li>
-              <li class="d-flex align-items-center">
-                <i class="bi me-2 bi-calendar-check"></i>
-                <small>5d</small>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="b-example-divider"> </div>
-
-  <div class="container px-4 py-5" id="testimonies">
-    <h2 class="pb-2 border-bottom">Les avis   <button style="position: relative; left: 900px;" type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#advise" >Rédiger un avis</button> </h2>
-
-    <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
-      <div class="col">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-          <div class="card-header bg-transparent border-success">Maximilien</div>
-          <div class="card-body text-success">
-            <h5 class="card-title">Sujet :  Les offres</h5>
-            <p class="card-text">Je trouve que les offres sur ce site sont supper intéressantes. Je vous le recommande vivement, car c'est ici que j'ai décroché mon premier emploi. Merci à toute l'équipe Bozahouse</p>
-          </div>
-          <div class="card-footer bg-transparent border-success"> Jeudi 11 Avril 2024 à 09:25</div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-          <div class="card-header bg-transparent border-success">Header</div>
-          <div class="card-body text-success">
-            <h5 class="card-title">Success card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <div class="card-footer bg-transparent border-success">Footer</div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-          <div class="card-header bg-transparent border-success">Header</div>
-          <div class="card-body text-success">
-            <h5 class="card-title">Success card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <div class="card-footer bg-transparent border-success">Footer</div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-          <div class="card-header bg-transparent border-success">Header</div>
-          <div class="card-body text-success">
-            <h5 class="card-title">Success card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <div class="card-footer bg-transparent border-success">Footer</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="b-example-divider"></div>-->
-
-
 </main>
 
-
-
-
-
-<!--<div class="container spacer  ">
-&lt;!&ndash;  <div class="text-center">
-    &lt;!&ndash; sidebar left &ndash;&gt;
-    <button  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="bi bi-search"></i>rechercher </button>
-
-    <div class="offcanvas offcanvas-start col-md-4 bg-dark" style="background-color: ghostwhite" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title text-light" id="offcanvasWithBothOptionsLabel">Filter les offres</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-
-        <div class="card bg-dark" style="font-size: 15px;">
-&lt;!&ndash;          <h5 class="card-header text-warning"><i class="bi bi-search"></i>Rechercher </h5>&ndash;&gt;
-          <div class="card-body bg-dark" >
-
-            <form class="text-light" [formGroup] = "offerFormGroup" (ngSubmit)="handleFilterOffers()" >
-
-              <div class="mb-3 mt-2">
-                <label class="form-label">Métier </label>
-                <input type="text" class="form-control" formControlName = "title" placeholder="Infimier">
-              </div>
-
-
-              <div class="mb-3 mt-2">
-                <label class="form-label">Contract </label>
-                <select class="form-select" formControlName = "contract" >
-                  <option value="" disabled selected>Contract</option>
-                  <option value="CDI">CDI</option>
-                  <option value="CDD">CDD</option>
-                  <option value="FREELANCE">Freelance</option>
-                  <option value="INTERIM">Intérim</option>
-                  <option value="ASSOCIE">Associé(e)</option>
-                  <option value="ALTERNANCE">Alternance</option>
-                  <option value="FRANCHISE">Franchise</option>
-                  <option value="STAGE ACADEMIC">Stage academic</option>
-                  <option value="STAGE PROFESSIONNELLE">Stage professionnelle</option>
-                </select>
-              </div>
-
-
-              <div class="mb-3 mt-2">
-                <label class="form-label">Mode de travail </label>
-                <select class="form-select" formControlName = "workMode">
-                  <option value="" disabled selected >Mode de travail</option>
-                  <option value="Sur site">Sur site</option>
-                  <option value="A distance">A distance</option>
-                </select>
-              </div>
-
-              <div class="mb-3 mt-2">
-                <label class="form-label">Adress </label>
-                <input type="text" class="form-control" formControlName = "address" placeholder="Simbok,Yaoundé,Cameroun" >
-              </div>
-
-              &lt;!&ndash;              <div class="mb-3 mt-2">
-                              <input type="text" class="form-control" formControlName = "countryName"  placeholder="Pays, ex: Cameroun">
-                            </div>
-
-
-                            <div class="mb-3 mt-2">
-                              <input type="text" class="form-control" formControlName = "cityName"  placeholder="Ville, ex: Bertoua">
-                            </div>&ndash;&gt;
-
-              &lt;!&ndash;
-
-               <div class="mb-3">
-                     <label class="form-label">Salaire</label>
-                     <input type="text" class="form-control" formControlName = "salary" value="A définir avec l'employeur" required>
-                   </div>
-         &ndash;&gt;
-
-              <div class="mb-3 mt-2">
-                <label class="form-label">Expérience </label>
-                <select class="form-select" formControlName = "experience" >
-                  <option value="" disabled selected>Experience</option>
-                  <option value="Aucune">Aucune</option>
-                  <option value="Jeune diplomé">Jeune diplomé</option>
-                  <option value="1-2 ans">1-2 ans</option>
-                  <option value="3-5 ans">3-5 ans</option>
-                  <option value="6-10 ans">6-10 ans</option>
-                  <option value="11-20 ans">11-20 ans</option>
-                  <option value="+20 ans">plus de 20 ans</option>
-                </select>
-              </div>
-
-
-              <div class="mb-3">
-                <label class="form-label">Type d'employeur</label>
-                <select class="form-select" formControlName = "type" >
-                  <option value=""  selected disabled>Type d'employeur</option>
-                  <option value="particular">Particulier</option>
-                  <option value="enterprise">Entreprise</option>
-                </select>
-              </div>
-
-              <div class="mb-3 mt-2">
-                <label class="form-label">Domaine </label>
-                <input type="text" class="form-control" formControlName = "domain"  placeholder="Informatique">
-              </div>
-
-              <div class="mb-3 mt-2">
-                <label class="form-label">Date de début</label>
-                <input type="date" class="form-control" formControlName = "startDate" >
-                <small *ngIf="offerFormGroup.controls['startDate'].errors && offerFormGroup.controls['startDate'].touched" class="text-danger">{{getErrorMessage('startDate', offerFormGroup.controls['startDate'].errors)}}</small>
-
-              </div>
-
-              <div class="mb-3 mt-2 ">
-                <label class="form-label">Date de fin</label>
-                <input type="date" class="form-control" formControlName = "endDate" >
-                <small *ngIf="offerFormGroup.controls['endDate'].errors && offerFormGroup.controls['endDate'].touched" class="text-danger">{{getErrorMessage('endDate', offerFormGroup.controls['endDate'].errors)}}</small>
-
-              </div>
-
-              <div class="mb-3">
-                <label for="disabledRange" class="form-label">Salaire</label>
-                <input formControlName="salary" type="range" class="form-range" min="30000" max="1000000" step="0.25" id="disabledRange">
-              </div>
-
-              <div class="text-center">
-                <button  class="btn btn-outline-light" type="submit">rechercher&nbsp;<i class="bi bi-search"></i> </button>&nbsp;&nbsp;&nbsp;
-                <span class="btn btn-outline-danger" (click)="handleSetOfferFormGroup()">reset</span>
-              </div>
-
-            </form>
-
-          </div>
-        </div>
-
+<!-- Modal newOffer or updateOffer -->
+<div class="modal fade " id="newOffer" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true" data-controls-modal="newOffer" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel1">{{offerId?'Modifier':'Ajouter'}} une offre d'emploi</h1>
+        <button (click)="closeOfferModal()"  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: #333;"></button>
 
       </div>
-    </div> &nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="modal-body">
+        <div class="container ">
 
-    <ng-container>
-      <span style="font-size: 20px;">
-      <a routerLink="/addOffer" class="hide-underline-link btn btn-dark text-warning">
-      <i class="bi bi-plus "></i> publier une offre
-      </a>
-    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </ng-container>
+<!--              <h5 class="text-center  spacer">Entrez les informations de votre offre</h5>-->
 
-&lt;!&ndash;    <span><a *ngIf="currentUser.hostSubscriptionCounter >= 1 || currentUser.normalSubscriptionCounter >=1" routerLink="/addTestimony" class="hide-underline-link btn btn-dark text-warning">Rédiger un avis</a> </span>&ndash;&gt;
+              <form [formGroup] = "newOfferFormGroup" (ngSubmit)="handleSaveOrUpdateOffer()"  class="row g-3">
+
+                <div class="col-md-6 form-floating">
+                  <input  formControlName = "title" type="text" class="form-control {{r['title'].errors && r['title'].touched?'is-invalid':'is-valid'}}" required>
+                  <label class="form-label">Intitulé du poste</label>
+                  <div class="{{ (r['title'].errors && r['title'].touched)?'invalid-feedback':'valid-feedback'}}">
+                    <small *ngIf="r['title'].errors && r['title'].touched" class="text-danger">{{handleGetErrorMessageFromChild('title', r['title'].errors)}}</small>
+                  </div>
+                </div>
+
+                <div class="col-md-6 form-floating">
+                  <input formControlName = "domain" type="text" class="form-control {{r['domain'].errors && r['domain'].touched?'is-invalid':'is-valid'}}"  value="Mark" required>
+                  <label class="form-label">Domaine</label>
+                  <div class="{{r['domain'].errors && r['domain'].touched?'invalid-feedback':'valid-feedback'}}">
+                    <small *ngIf="r['domain'].errors && r['domain'].touched" class="text-danger">{{handleGetErrorMessageFromChild('domain', r['domain'].errors)}}</small>
+                  </div>
+                </div>
+
+                <div class="col-md-6 form-floating">
+                  <input  formControlName = "needPeople" type="number" min="1" step="1" class="form-control {{r['needPeople'].errors && r['needPeople'].touched?'is-invalid':'is-valid'}}" required>
+                  <label class="form-label"> Nombre de poste</label>
+                  <div class="{{ (r['needPeople'].errors && r['needPeople'].touched)?'invalid-feedback':'valid-feedback'}}">
+                    <small *ngIf="r['needPeople'].errors && r['needPeople'].touched" class="text-danger">{{handleGetErrorMessageFromChild('needPeople', r['needPeople'].errors)}}</small>
+                  </div>
+                </div>
+
+                <div class="col-md-6 form-floating">
+                  <select class="form-select {{(r['experience'].errors && r['experience'].touched)?'is-invalid':'is-valid'}} " formControlName = "experience"   required>
+                    <option selected disabled value="">Choisir une option</option>
+                    <option value="Premier emploi">Premier emploi</option>
+                    <option value="1-2 ans">1-2 ans</option>
+                    <option value="3-5 ans">3-5 ans</option>
+                    <option value="6-10 ans">6-10 ans</option>
+                    <option value="11-20 ans">11-20 ans</option>
+                    <option value="+20 ans">plus de 20 ans</option>
+                  </select>
+                  <label>Experience</label>
+                  <div class="{{(r['experience'].errors && r['experience'].touched)?'invalid-feedback':'valid-feedback'}}">
+                    <small *ngIf="r['experience'].errors && r['experience'].touched" class="text-danger">{{handleGetErrorMessageFromChild('experience', r['experience'].errors)}}</small>
+                  </div>
+                </div>
+
+                <div class="form-floating col-md-12">
+                  <textarea id="mission"  class="form-control h-100 mission {{(r['mission'].errors && r['mission'].touched)?'is-invalid':'is-valid'}}" formControlName="mission" type="text" ></textarea>
+                  <label>Mission du poste</label>
+                  <div class="{{(r['mission'].errors && r['mission'].touched)?'invalid-feedback':'valid-feedback'}}">
+                    <small *ngIf="r['mission'].errors && r['mission'].touched" class="text-danger">{{handleGetErrorMessageFromChild('mission', r['mission'].errors)}}</small>
+                  </div>
+                </div>
+
+                <div class="form-floating col-md-12">
+                  <textarea id="profile"  class="form-control h-100 profile {{(r['profile'].errors && r['profile'].touched)?'is-invalid':'is-valid'}}" formControlName="profile" type="text" ></textarea>
+                  <label>Profil recherché</label>
+                  <div class="{{(r['profile'].errors && r['profile'].touched)?'invalid-feedback':'valid-feedback'}}">
+                    <small *ngIf="r['profile'].errors && r['profile'].touched" class="text-danger">{{handleGetErrorMessageFromChild('profile', r['profile'].errors)}}</small>
+                  </div>
+                </div>
+
+                <div class="form-floating col-md-6">
+                  <textarea placeholder="séparez les compétences par une virgule. example : java, angular, css" aria-label="with textarea" class="form-control {{(r['skills'].errors && r['skills'].touched)?'is-invalid':'is-valid'}}" formControlName="skills" type="text" ></textarea>
+                  <label> Compétences réquise</label>
+                  <div class="{{(r['skills'].errors && r['skills'].touched)?'invalid-feedback':'valid-feedback'}}">
+                    <small *ngIf="r['skills'].errors && r['skills'].touched" class="text-danger">{{handleGetErrorMessageFromChild('skills', r['skills'].errors)}}</small>
+                  </div>
+                </div>
+
+                <div class="col-md-6 form-floating">
+                  <select class="form-select  {{(r['contract'].errors && r['contract'].touched)?'is-invalid':'is-valid'}} " formControlName = "contract"   required>
+                    <option selected disabled value="">Choisir une option</option>
+                    <option value="CDI">CDI</option>
+                    <option value="CDD">CDD</option>
+                    <option value="FREELANCE">Freelance</option>
+                    <option value="INTERIM">Intérim</option>
+                    <option value="ASSOCIE">Associé(e)</option>
+                    <option value="ALTERNANCE">Alternance</option>
+                    <option value="FRANCHISE">Franchise</option>
+                    <option value="STAGE ACADEMIC">Stage academic</option>
+                    <option value="STAGE PROFESSIONNELLE">Stage professionnelle</option>
+                    <option value="TOUT">Tout</option>
+                  </select>
+                  <label >Contract</label>
+                  <div class="{{(r['contract'].errors && r['contract'].touched)?'invalid-feedback':'valid-feedback'}}">
+                    <small *ngIf="r['contract'].errors && r['contract'].touched" class="text-danger">{{handleGetErrorMessageFromChild('contract', r['contract'].errors)}}</small>
+                  </div>
+                </div>
+
+                <div class="form-floating col-md-12">
+                  <textarea  class="form-control h-100" formControlName="candidatureInstruction" type="text" ></textarea>
+                  <label> Instructions de candidature</label>
+                </div>
 
 
+                <div class="col-md-6 form-floating">
+                  <select class="form-select {{(r['workMode'].errors && r['workMode'].touched)?'is-invalid':'is-valid'}} " formControlName = "workMode"   required>
+                    <option selected disabled value="">Choisir une option</option>
+                    <option value="Sur site">Sur site</option>
+                    <option value="A distance">A distance</option>
+                    <option value="Hybride">Hybride</option>
+                  </select>
+                  <label>Mode de travail</label>
+                  <div class="{{(r['workMode'].errors && r['workMode'].touched)?'invalid-feedback':'valid-feedback'}}">
+                    <small *ngIf="r['workMode'].errors && r['workMode'].touched" class="text-danger">{{handleGetErrorMessageFromChild('workMode', r['workMode'].errors)}}</small>
+                  </div>
+                </div>
 
-  </div><br>&ndash;&gt;
-  <div class="card  border-0">
 
-    <h5 class="text-center mt-2">Vos derniers jobs</h5>
+                <div class="col-md-6 form-floating">
+                  <input formControlName = "tel" type="tel" class="form-control {{ (r['tel'].errors && r['tel'].touched)?'is-invalid':'is-valid'}}"   required>
+                  <label  class="form-label">Téléphone</label>
+                  <div class="{{r['tel'].errors && r['tel'].touched?'invalid-feedback':'valid-feedback'}}">
+                    <small *ngIf="r['tel'].errors && r['tel'].touched" class="text-danger">{{handleGetErrorMessageFromChild('tel', r['tel'].errors)}}</small>
+                  </div>
+                </div>
 
-    <div class="row">
+                <div class="col-md-6 form-floating">
+                  <input  formControlName = "email" type="email" class="form-control {{r['email'].errors && r['email'].touched?'is-invalid':'is-valid'}}" required>
+                  <label class="form-label">Email</label>
+                  <div class="{{r['email'].errors && r['email'].touched?'invalid-feedback':'valid-feedback'}}">
+                    <small *ngIf="r['email'].errors && r['email'].touched" class="text-danger">{{handleGetErrorMessageFromChild('email', r['email'].errors)}}</small>
+                  </div>
+                </div>
 
-    <div  *ngFor="let offer of offers  | paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalElements }"  class="col-md-4 ">
-      <div class="card  spacer-margin ">
+                <div class="form-floating col-md-6">
+                  <input placeholder="Yaoundé, Cameroun" class="form-control {{(r['address'].errors && r['address'].touched)?'is-invalid':'is-valid'}}" formControlName="address" type="text" >
+                  <label>Address</label>
+                  <div class="{{(r['address'].errors && r['address'].touched)?'invalid-feedback':'valid-feedback'}}">
+                    <small *ngIf="r['address'].errors && r['address'].touched" class="text-danger">{{handleGetErrorMessageFromChild('address', r['address'].errors)}}</small>
+                  </div>
+                </div>
 
-        <div  class="card-header">
 
-          <a (click)="handleDisableOffer(offer)" class="btn btn-outline-secondary">
-            <i class="bi bi-arrow-down"></i>
-          </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="form-floating col-md-6">
+                  <input type="text"   formControlName = "salary" placeholder="Entrez un montant ( optionelle )"  class="form-control {{(r['salary'].errors && r['salary'].touched)?'is-invalid':'is-valid'}}" >
+                  <label >Salaire</label>
+                  <div >
+                    <small class="text-secondary">optionnel</small>
+                  </div>
+                </div>
 
-          <a (click)="handleUpdateOffer(offer.id!)" class="btn btn-warning">
-            <i class="bi bi-pencil"></i>
-          </a> &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="col-md-6 form-floating">
+                  <input formControlName = "endOffer" type="date" class="form-control {{r['endOffer'].errors && r['endOffer'].touched?'is-invalid':'is-valid'}}"  required>
+                  <label class="form-label">Date d'expiration</label>
+                  <div class="{{r['endOffer'].errors && r['endOffer'].touched?'invalid-feedback':'valid-feedback'}}">
+                    <small *ngIf="r['endOffer'].errors && r['endOffer'].touched" class="text-danger">{{handleGetErrorMessageFromChild('endOffer', r['endOffer'].errors)}}</small>
+                  </div>
+                </div>
 
-          <a (click)="handleDeleteOffer(offer)" class="btn btn-danger">
-            <i class="bi bi-trash"></i>
-          </a>
+
+                <div class="form-floating col-12">
+                  <input (change)="getFile($event)" type="file" class="form-control" accept=".pdf">
+                  <label>Ajouter un fichier </label>
+                  <div >
+                    <small class="text-secondary">joindre un fichier au format pdf (optionnel)</small>
+                  </div>
+                </div>
+
+
+                <div class="text-center col-12">
+                  <button [disabled] = "!newOfferFormGroup.valid " class="btn btn-primary w-30 mb-xxl-2 mt-lg-1" type="submit">
+                    {{offerId?'Modifier':'Envoyer'}}</button>
+                </div>
+
+              </form>
 
         </div>
-        <div class="card-body text-center" >
-          <span class="text-warning" style="font-size: 35px;">{{offer.title}}</span><br>
-          <span >Auteur : [ {{offer.type}} ]</span><br>
 
-          <span class="fs-2" ><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{offer.address}}</span><br />
-          <span class="fs-2" ><i class="bi bi-book-fill">&nbsp;</i>{{offer.contract}}</span> &nbsp;&nbsp;
-
-            <span class="fs-2"><i class="{{offer.workMode === 'A distance'?'bi bi-wifi': 'bi bi-house-fill'}}"></i> {{offer.workMode}} </span><br />
-
-          <span *ngIf="offer.salary" class="text-danger fs-2"> {{offer.salary? (offer.salary | number: '1.0-0') +'FCFA' : 'Salaire à définir avec l\'employeur'}} </span><br />
-
-          <div >
-            <span ><i class="bi bi-calendar"></i>&nbsp;<span>{{offer.publishedAt | date : 'd MMM y'}}</span></span>&nbsp;&#45;&#45; <span ><i class="bi bi-lock-fill"></i> <span>{{offer.endOffer | date : 'd MMM y'}}</span></span>
-          </div><br>
-
-          <ng-container>
-
-              <span><a (click)="handleDetailOffer(offer.id!)" class="btn btn-warning rounded-pill">Voir l'offre</a></span><br>
-
-          </ng-container>
-
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
-&lt;!&ndash;        <span class="text-muted card-footer btn" style=" font-size: 18px" (click)="shared()">partager &nbsp;<i class="bi bi-share-fill"></i></span>&ndash;&gt;
       </div>
     </div>
+  </div>
+</div>
 
 
 
-
-    </div>
-
-    <div class="d-flex justify-content-center">
-      <pagination-controls (pageChange)="goToPage($event)"></pagination-controls>
-    </div>
-
-  </div >
-
-
-</div>-->
 
 
 <div class="text-end mb-3 spacer-right">

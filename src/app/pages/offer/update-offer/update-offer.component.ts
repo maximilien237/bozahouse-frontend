@@ -64,7 +64,8 @@ export class UpdateOfferComponent implements OnInit {
 
   handleUpdateOffer() {
     let offer: Offer = this.updateOfferFormGroup.value;
-    this.offerService.updateOffer(this.id, offer).subscribe({
+    const formData = new FormData()
+    this.offerService.updateOffer(this.id, formData).subscribe({
       next: value => {
         console.log(value);
         alert("Votre offre d\'emploi a été mise à jour avec succès !");
