@@ -1,37 +1,45 @@
 
 <div class="container col-md-7 mt-2">
-  <div class="card spacer-margin border-0 bg-secondary">
+  <div class="card spacer-margin border-0 ">
 <div class="col">
-      <div class="card border-0 bg-dark">
+      <div class="card border-0 ">
 
         <h5 class="text-center card-title mt-2 text-warning">{{offer.title}}</h5>
-        <span class="text-center text-muted text-success" style="font-size: 14px"><span >Publié par {{offer.firstname }} le </span>
-          {{offer.publishedAt | date: 'd MMMM y'}} à {{offer.publishedAt | date: 'HH:mm:ss'}}</span>
+        <span class="text-center  " style="font-size: 14px"><span >Publié le </span>
+          {{offer.createdAt | date: 'd MMMM y'}} à {{offer.createdAt | date: 'HH:mm:ss'}}</span>
 
 
-        <div class="spacer-margin">
-          <h5 class="text-light" style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Mission</h5>
+        <div *ngIf="offer.mission"  class="spacer-margin">
+          <h5 class="" style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Mission</h5>
           <div class="card-body">
-            <p class="card-text text-white-50" style="font-size: 19px">
-              {{offer.mission}}
+            <p [innerHTML]="offer.mission" class="card-text " style="font-size: 19px">
             </p>
           </div>
         </div>
 
-        <div class="spacer-margin">
-          <h5 class="text-light"  style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Profile</h5>
+        <div *ngIf="offer.profile"  class="spacer-margin">
+          <h5 class=""  style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Profile</h5>
           <div class="card-body">
-            <p class="card-text text-white-50" style="font-size: 19px">
-              {{offer.profile}}
+            <p [innerHTML]="offer.profile" class="card-text " style="font-size: 19px">
+
+            </p>
+          </div>
+        </div>
+
+        <div *ngIf="offer.candidatureInstruction" class="spacer-margin">
+          <h5 class=""  style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Instructions de candidature</h5>
+          <div class="card-body">
+            <p [innerHTML]="offer.candidatureInstruction" class="card-text " style="font-size: 19px">
+
             </p>
           </div>
         </div>
 
 
         <div class="spacer-margin">
-          <h5 class="text-light"  style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Compétences techniques</h5>
+          <h5  style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Compétences techniques</h5>
           <div class="card-body">
-            <p class="card-text text-white-50" style="font-size: 19px">
+            <p  class="card-text " style="font-size: 19px">
               {{offer.skills}}
             </p>
           </div>
@@ -40,9 +48,9 @@
 
 
         <div class="spacer-margin">
-          <h5 class="text-light"  style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Infos complémentaires</h5>
+          <h5  style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Infos complémentaires</h5>
           <div class="card-body">
-            <p class="card-text text-white-50">
+            <p class="card-text">
               <ng-container *ngIf="offer.type == 'particular'; else other0">
                 <span><span>Employeur : </span>Particulier</span><br>
               </ng-container>
@@ -54,8 +62,8 @@
 
               <span>Domaine : {{offer.domain}}</span><br>
 
-              <span class="text-white-50" style="font-size: 15px">Contract : {{offer.contract}}</span><br />
-              <span class="text-white-50" style=" font-size: 15px" >Mode de travail : {{offer.workMode}} </span><br />
+              <span style="font-size: 15px">Contract : {{offer.contract}}</span><br />
+              <span  style=" font-size: 15px" >Mode de travail : {{offer.workMode}} </span><br />
 
               <span *ngIf="!offer.salary!.endsWith('0'); else other">
         <span > {{offer.salary}} </span><br />
@@ -66,7 +74,7 @@
               </ng-template>
               <span>Expérience : {{offer.experience}}</span> <br /> <span>Nombre de poste : &nbsp;{{offer.needPeople}}</span><br>
 
-              <span class="text-white-50">
+              <span >
   <span class="text-center" ><i class="bi bi-lock-fill"></i> <span>Expire le {{offer.endOffer | date : 'd MMM y'}}</span></span>
   </span><br>
 
@@ -75,9 +83,9 @@
         </div>
 
         <div class="spacer-margin">
-          <h5 class="text-light"  style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Localisation</h5>
+          <h5   style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Localisation</h5>
           <div class="card-body ">
-            <p class="card-text text-white-50" *ngFor="let item of [].constructor(offer.address!.split(','));">
+            <p class="card-text " *ngFor="let item of [].constructor(offer.address!.split(','));">
               <i class="bi bi-flag-fill" style="font-size: 20px;"></i>&nbsp; : &nbsp;<span style=" font-size: 15px">{{item[2]}} </span><br />
               <i class="bi bi-building" style="font-size: 20px;"></i>&nbsp; : &nbsp;<span style="font-size: 15px">{{item[1]}} </span><br />
               <span style="font-size: 15px"><i class="bi bi-geo-alt-fill" style="font-size: 20px;"></i> {{offer.address}}</span>
@@ -86,7 +94,7 @@
         </div>
 
         <div class="spacer-margin">
-          <h5 class="text-light"  style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Contactez l'employeur <i class="bi bi-arrow-down"></i> </h5>
+          <h5   style=" font-size: 20px; border-bottom-width: 1px; border-bottom-style: solid">Contactez l'employeur <i class="bi bi-arrow-down"></i> </h5>
           <div class="card-body">
         <span *ngIf="offer.email"><a class="text-warning"  [href]= "'mailto:'+ offer.email" style="font-size: 20px;"><i class="bi bi-envelope-fill"></i> </a></span>&nbsp;&nbsp;
         <span *ngIf="offer.web"><a class="text-warning" [href]= "offer.web" style="font-size: 20px;"><i class="bi bi-globe"></i> </a></span>&nbsp;&nbsp;
@@ -108,7 +116,7 @@
 </div>
 
 <div class="mb-3 spacer-left mt-3">
-  <span><a routerLink="/jobs" class="hide-underline-link btn btn-dark text-warning">Retour</a> </span>
+  <span><a routerLink="/jobs" class="hide-underline-link btn  text-warning">Retour</a> </span>
 </div>
 
 

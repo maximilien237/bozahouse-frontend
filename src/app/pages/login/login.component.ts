@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 import {ModalErrorComponent} from "../shares/modal-error/modal-error.component";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ToastComponent} from "../shares/toast/toast.component";
+import {NotificationService} from "../../services/toastr/notification.service";
 
 
 @Component({
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
   private childToast!: ToastComponent;
   toastMessageParent: string = "";
 
-  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private router: Router) {
+  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private router: Router, private notificationService: NotificationService) {
   }
 
 
@@ -66,6 +67,7 @@ export class LoginComponent implements OnInit {
 
   handleLogin() {
     let login: Login = this.loginFormGroup.value;
+    this.authenticationService.removeTokenInLocalstorage();
 
     this.authenticationService.signIn(login).subscribe({
       next: response => {
@@ -74,7 +76,9 @@ export class LoginComponent implements OnInit {
         this.authenticationService.addTokenInLocalstorage(response.value);
         this.toastMessageParent = "Bienvenue chez Bozahouse, la maison des bozayeur ): !";
 
-        this.router.navigateByUrl("/home");
+        this.router.navigateByUrl("/home").then( (): void => {
+          this.notificationService.showSuccess("Bienvenue chez Bozahouse, \n\n\n la maison des bozayeur !");
+        });
 
         setTimeout( () => {
           console.log("it's time to wait....");
@@ -82,7 +86,11 @@ export class LoginComponent implements OnInit {
 
       },
       error: (err: HttpErrorResponse) => {
-        this.errorMessageParent = err.error.error;
+        if (err.status === 401) {
+          this.notificationService.showError("Connexion impossible !");
+        }
+
+       // this.errorMessageParent = err.error.error;
         // appel de la méthode handleError(error) situé dans ModalErrorComponent
        // this.childError?.handleError(err);
       }

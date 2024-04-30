@@ -1,10 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, NgModule, OnInit, ViewChild} from '@angular/core';
 import {Offer} from "../../../models/offer.models";
-import {
-  FormBuilder,
-  FormGroup,
-  ValidationErrors, Validators,
-} from "@angular/forms";
+import {FormBuilder, FormGroup, ValidationErrors, Validators,} from "@angular/forms";
 import {OfferService} from "../../../services/offer/offer.service";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
@@ -15,6 +11,7 @@ import {AppUserService} from "../../../services/app-user/app-user.service";
 import {OfferCriteria} from "../../../models/criteria/offerCriteria";
 import {ModalErrorComponent} from "../../shares/modal-error/modal-error.component";
 import {formatDate} from "@angular/common";
+import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
 
 declare let $: any;
 
@@ -35,15 +32,18 @@ export class ListOfferComponent implements OnInit {
     contract: this.fb.control(""),
     salary: this.fb.control(""),
     startDate: this.fb.control(null),
-    endDate: this.fb.control(null)
+    endDate: this.fb.control(null),
+    account: this.fb.control(""),
+    valid: this.fb.control(true),
+    reference: this.fb.control(""),
   });
 
   newOfferFormGroup: FormGroup = this.fb.group({
     title: this.fb.control('', [Validators.required,Validators.minLength(4),Validators.maxLength(30)]),
-    mission: this.fb.control("", [Validators.required]),
+    mission: this.fb.control(""),
     domain: this.fb.control('', [Validators.minLength(6),Validators.maxLength(30)]),
-    profile: this.fb.control("", [Validators.required]),
-    address: this.fb.control("Bertoua, Est", [Validators.required]),
+    profile: this.fb.control(""),
+    address: this.fb.control("Bertoua, Est, Cameroun"),
     tel: this.fb.control("620178549", [Validators.pattern("[0-9]+"),Validators.required]),
     experience: this.fb.control('2-5 ans', [Validators.required]),
     salary: this.fb.control("", [Validators.pattern("[0-9]+")]),
@@ -65,6 +65,11 @@ export class ListOfferComponent implements OnInit {
   currentPage: number = 1;
   totalElements!: number;
   pageSize: number = 12;
+  pdfUrl: string = "assets/pdf/CV_KENGNE_KONGNE_MAXIMILIEN.pdf";
+  @ViewChild('content') popupview!: ElementRef;
+  public showWidgets = false;
+
+
 
   email: string = "contact@bozahouse.com";
   tel: string = "656832062";
@@ -74,11 +79,112 @@ export class ListOfferComponent implements OnInit {
 
 
   constructor(private authenticationService: AuthenticationService, private offerService: OfferService,private userService: AppUserService,
-              private fb: FormBuilder, private router: Router) { }
+              private fb: FormBuilder, private router: Router, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.handleFilterOffers();
   }
+
+  handlePreviewPdf(offerId: number) {
+    // call download method in a service
+    this.offerService.downloadDocument(offerId).subscribe({
+      next: value => {
+        // when you return byte array
+       // let blob: Blob = value.body as Blob;
+        this.pdfUrl = window.URL.createObjectURL(value);
+        this.modalService.open(this.popupview, {size: "lg"});
+      }
+    })
+  }
+
+  // transformer un texte en gras
+  handleBold(){
+    //$('#textarea, #textarea-show').toggleClass('bold');
+    document.execCommand('bold');
+    let text = document.getElementById('textareaDiv')?.innerHTML;
+    //$('#textarea-show').html(text);
+  }
+
+  // transformer un texte en italic
+  handleItalic(){
+    //$('#textarea, #textarea-show').toggleClass('italic');
+    document.execCommand('italic');
+    let text = document.getElementById('textareaDiv')?.innerHTML;
+    //$('#textarea-show').html(text);
+  }
+  // transformer un texte en le soulignant
+  handleUnderline() {
+    //$('#textarea, #textarea-show').toggleClass('underline');
+    document.execCommand('underline');
+    let text = document.getElementById('textareaDiv')?.innerHTML;
+    //$('#textarea-show').html(text);}
+  }
+
+
+  // insérer une liste ordoné
+  handleInsertOrderedList() {
+    //$('#textarea, #textarea-show').toggleClass('underline');
+    document.execCommand('insertOrderedList');
+    let text = document.getElementById('textareaDiv')?.innerHTML;
+    //$('#textarea-show').html(text);}
+  }
+
+  // insérer une liste non ordoné
+  handleInsertUnOrderedList() {
+    //$('#textarea, #textarea-show').toggleClass('underline');
+    document.execCommand('insertUnorderedList');
+    let text = document.getElementById('textareaDiv')?.innerHTML;
+    //$('#textarea-show').html(text);}
+  }
+
+  // insérer un paragraphe
+  handleInsertParagraph() {
+    //$('#textarea, #textarea-show').toggleClass('underline');
+    document.execCommand('insertParagraph');
+    let text = document.getElementById('textareaDiv')?.innerHTML;
+    //$('#textarea-show').html(text);}
+  }
+
+  // justifier le texte au centre
+  handleJustifyCenter() {
+    //$('#textarea, #textarea-show').toggleClass('underline');
+    document.execCommand('justifyCenter');
+    let text = document.getElementById('textareaDiv')?.innerHTML;
+    //$('#textarea-show').html(text);}
+  }
+
+  // justifier le texte à gauche
+  handleJustifyLeft() {
+    //$('#textarea, #textarea-show').toggleClass('underline');
+    document.execCommand('justifyLeft');
+    let text = document.getElementById('textareaDiv')?.innerHTML;
+    //$('#textarea-show').html(text);}
+  }
+
+  // justifier le texte à droite
+  handleJustifyRight() {
+    //$('#textarea, #textarea-show').toggleClass('underline');
+    document.execCommand('justifyRight');
+    let text = document.getElementById('textareaDiv')?.innerHTML;
+    //$('#textarea-show').html(text);}
+  }
+
+  // justifier le texte
+  handleJustifyFull() {
+    //$('#textarea, #textarea-show').toggleClass('underline');
+    document.execCommand('justifyFull');
+    let text = document.getElementById('textareaDiv')?.innerHTML;
+    //$('#textarea-show').html(text);}
+  }
+
+// simulateur du contenu du textarea
+  htmlContent = '';
+  handleSimulateTextAreaContent(){
+    let areatext = $('.skills').html();
+
+    alert(areatext);
+  }
+
 
   handleSaveOrUpdateOffer(): void {
     //let offer: Offer = this.newOfferFormGroup.value;
@@ -100,25 +206,27 @@ export class ListOfferComponent implements OnInit {
       candidatureInstruction,
 
     } = this.newOfferFormGroup.value;
-
+    let textareaMission = $('.mission').html();
+    let textareaProfile = $('.profile').html();
+    let textareaCandidatureInstruction = $('.candidatureInstruction').html();
     const formdata: FormData = new FormData();
-    formdata.append("title",title)
-    formdata.append("mission",mission)
-    formdata.append("domain",domain)
-    formdata.append("profile",profile)
-    formdata.append("address",address)
-    formdata.append("tel",tel)
-    formdata.append("experience",experience)
-    formdata.append("salary",salary)
+    formdata.append("title",title?title:"")
+    formdata.append("mission",textareaMission?textareaMission:"")
+    formdata.append("domain",domain?domain:"")
+    formdata.append("profile",textareaProfile?textareaProfile:"")
+    formdata.append("address",address?address:"")
+    formdata.append("tel",tel?tel:"")
+    formdata.append("experience",experience?experience:"")
+    formdata.append("salary",salary?salary:"")
     formdata.append("endOffer",endOffer)
     formdata.append("needPeople",needPeople)
-    formdata.append("skills",skills)
-    formdata.append("email",email)
-    formdata.append("contract",contract)
-    formdata.append("workMode",workMode)
-    formdata.append("candidatureInstruction",candidatureInstruction)
+    formdata.append("skills",skills?skills:"")
+    formdata.append("email",email?email:"")
+    formdata.append("contract",contract?contract:"")
+    formdata.append("workMode",workMode?workMode: "")
+    formdata.append("candidatureInstruction",textareaCandidatureInstruction?textareaCandidatureInstruction:"")
 
-    if (this.file != null) {
+    if (this.file) {
       formdata.append("file",this.file)
     }
 
@@ -131,7 +239,7 @@ export class ListOfferComponent implements OnInit {
           this.handleResetOfferFormGroup();
           this.closeOfferModal();
           console.log(value);
-          alert("offre d\'emploi publié avec succès !");
+        //  alert("offre d\'emploi modifié avec succès !");
           this.router.navigateByUrl("/jobs");
         },
         error: err => {
@@ -146,7 +254,7 @@ export class ListOfferComponent implements OnInit {
           this.handleResetOfferFormGroup();
           this.closeOfferModal();
           console.log(value);
-          alert("offre d\'emploi publié avec succès !");
+          //alert("offre d\'emploi publié avec succès !");
           this.router.navigateByUrl("/jobs");
         },
         error: err => {

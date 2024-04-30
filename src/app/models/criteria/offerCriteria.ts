@@ -10,7 +10,9 @@ export interface OfferCriteria {
   salary?: string;
   startDate?: Date;
   endDate?: Date;
-
+  account?: string;
+  reference?: string;
+  valid?: boolean;
   page?: number;
   size?: number;
   appUserId?: number;

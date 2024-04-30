@@ -18,7 +18,7 @@ export class DocumentService {
 
 
   //enregistrement d'un document
-  createDocument(file: File | any, isTalent = true):Observable<Documents>{
+  createDocument(file: File ):Observable<Documents>{
     //content type devrait être multipart formdata pour le laisser se definir lui-même au niveau du backend
     let formData= new FormData();
     formData.append("file",file);

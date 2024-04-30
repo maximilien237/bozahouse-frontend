@@ -45,6 +45,10 @@ export class AuthenticationService {
     }
   }
 
+  public removeTokenInLocalstorage(): void {
+    localStorage.removeItem(TOKEN_KEY);
+  }
+
   // obtention du token dans le localstorage
   public getToken(): any  {
     return localStorage.getItem(TOKEN_KEY);

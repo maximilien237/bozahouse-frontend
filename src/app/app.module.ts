@@ -68,6 +68,10 @@ import { LocalisationComponent } from './pages/offer/add-offer/localisation/loca
 import { BesoinEntrepriseComponent } from './pages/offer/add-offer/besoin-entreprise/besoin-entreprise.component';
 import { OtherInformationComponent } from './pages/offer/add-offer/other-information/other-information.component';
 import { InfoEntrepriseComponent } from './pages/offer/add-offer/info-entreprise/info-entreprise.component';
+import {NgbModalConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -128,6 +132,10 @@ import { InfoEntrepriseComponent } from './pages/offer/add-offer/info-entreprise
         ReactiveFormsModule,
         NgxPaginationModule,
         CdkStepperModule,
+        NgbModule,
+        NgxExtendedPdfViewerModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot()
 
     ],
 

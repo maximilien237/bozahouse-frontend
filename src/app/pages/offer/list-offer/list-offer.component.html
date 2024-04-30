@@ -3,7 +3,6 @@
 <main class="mt-lg-5">
   <h1 class="visually-hidden">Features examples</h1>
 
-
   <div class=" mt-5">
 
     <div class="container ">
@@ -58,6 +57,19 @@
           <label>Address</label>
         </div>
 
+        <div class="form-floating col-md-4">
+          <input  class="form-control" formControlName="reference" type="text" >
+          <label>Reférence de l'offre</label>
+        </div>
+
+        <div class="col-md-4 form-floating">
+          <select class="form-select" formControlName = "account">
+            <option selected disabled value="">Choisir une option</option>
+            <option value="Particulier">Particulier</option>
+            <option value="Entreprise">Entreprise</option>
+          </select>
+          <label >Type de compte</label>
+        </div>
 
         <div class="col-md-4 form-floating">
           <select class="form-select" formControlName = "contract"  >
@@ -92,6 +104,11 @@
           <label class="form-label">Date de fin</label>
         </div>
 
+        <div class="form-check form-switch col-md-4">
+          <input formControlName="valid" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Valide</label>
+        </div>
+
         <div class="text-center col-12 row mt-3 mb-3">
 
           <div class=" col-md-4 mb-3">
@@ -111,19 +128,23 @@
     </div>
   </div>
 
-
   <div class="container px-4 py-5" id="offers">
     <h2 class="pb-2 border-bottom">Les offres  &nbsp; [ {{totalElements}} ]  <button type="button" (click)="openNewOfferModal()" class="btn btn-success position-relative"  >Publier une offre</button> </h2>
 
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
       <div class="col" *ngFor="let offer of offers| paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalElements }">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-          <div class="card-header bg-transparent border-success">
+
+        <div class="card border-secondary mb-3" style="max-width: 18rem;">
+          <div class="card-header bg-transparent border-secondary">
 
             <div class="dropdown">
+              <h5> ref : {{offer.reference}} </h5>
+              <div >
+                <img src="assets/img/kkm.JPG" class="img-fluid rounded-start" alt="...">
+              </div>
               <a href="javascript:void (0);" class="d-flex align-items-center text-decoration-none text-secondary" data-bs-toggle="dropdown" aria-expanded="false">
 
-                <h4>Particulier</h4>
+
 <!--                <h4 > Compte : {{user.account === 'employer'?'Particulier': user.account === 'enterprise'?'Entreprise':'Talent'}}</h4>&nbsp;-->
                 <strong ><i class="bi bi-three-dots-vertical"></i></strong>
               </a>
@@ -143,22 +164,22 @@
 
 
           </div>
-          <div class="card-body text-success">
-            <h5 class="card-title text-warning fw-bold">{{offer.title}}</h5>
+          <div class="card-body ">
+            <h5 class="card-title text-warning fw-bold text-center">{{offer.title}}</h5>
 
-            <span >Auteur : [ {{offer.type}} ]</span><br>
+<!--            <span >Auteur : [ {{offer.type}} ]</span><br>-->
 
-            <span class="fs-2" ><i class="bi bi-book-fill">&nbsp;</i>{{offer.contract}}</span> &nbsp;&nbsp;
+            <span class="fs-0" ><i class="bi bi-book-fill">&nbsp;</i>{{offer.contract}}</span> &nbsp;&nbsp;
 
-            <span class="fs-2"><i class="{{offer.workMode === 'A distance'?'bi bi-wifi': 'bi bi-house-fill'}}"></i> {{offer.workMode}} </span><br />
+            <span class="fs-0"><i class="{{offer.workMode === 'A distance'?'bi bi-wifi' : offer.workMode === 'Sur site'? 'bi bi-house-fill':'bi bi-paragraph'}}"></i> {{offer.workMode}} </span><br />
 
-            <span *ngIf="offer.salary" class="text-danger fs-2"> {{offer.salary? (offer.salary | number: '1.0-0') +'FCFA' : 'Salaire à définir avec l\'employeur'}} </span><br />
+            <span class="text-danger fs-0"> {{offer.salary? (offer.salary | number: '1.0-0' +'FCFA' ) : 'Salaire à définir avec l\'employeur'}} </span><br />
 
-            <span ><i class="bi bi-calendar"></i>&nbsp;<span>{{offer.publishedAt | date : 'd MMM y'}}</span></span>&nbsp;-- <span ><i class="bi bi-lock-fill"></i> <span>{{offer.endOffer | date : 'd MMM y'}}</span></span>
+            <span ><i class="bi bi-calendar"></i>&nbsp;<span>{{offer.createdAt | date : 'd MMM y'}}</span></span>&nbsp;-- <span ><i class="bi bi-lock-fill"></i> <span>{{offer.endOffer | date : 'd MMM y'}}</span></span>
 
           </div>
-          <div class="card-footer bg-transparent border-success">
-            <ul class="d-flex list-unstyled mt-auto">
+          <div class="card-footer bg-transparent border-secondary">
+            <ul class="d-flex list-unstyled mt-auto ">
               <!--              <li class="me-auto">
                               <img src="assets/icons/bozahouse.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
                             </li>-->
@@ -168,12 +189,14 @@
               </li>
               <li class="d-flex align-items-center">
                 <i class="bi me-2 bi-calendar-check"></i>
-                <small>{{offer.endOffer | date: 'd MMMM y HH:mm:ss'}}</small>
+                <small>  {{offer.timeAgo}}</small>
               </li>
             </ul>
           </div>
         </div>
       </div>
+
+
 
     </div>
 
@@ -181,6 +204,9 @@
       <pagination-controls (pageChange)="goToPage($event)"></pagination-controls>
     </div>
   </div>
+
+
+
 
 
 </main>
@@ -241,24 +267,107 @@
                   </div>
                 </div>
 
-                <div class="form-floating col-md-12">
-                  <textarea id="mission"  class="form-control h-100 mission {{(r['mission'].errors && r['mission'].touched)?'is-invalid':'is-valid'}}" formControlName="mission" type="text" ></textarea>
+                <div class="form-group">
+                  <label class="form-label">Mission du poste</label>
+                  <div class="writing1">
+                    <div  contenteditable="true" class="mission  bg-secondary"  autofocus spellcheck="false">
+
+                    </div>
+                    <div class="footer1">
+                      <div class="text-format">
+                        <button type="button" (click)="handleBold()"><i class="bi bi-type-bold"></i></button>
+                        <button type="button"   (click)="handleItalic()"><i class="bi bi-type-italic"></i></button>
+                        <button type="button"  (click)="handleUnderline()"><i class="bi bi-type-underline"></i></button>
+                        <button type="button" (click)="handleInsertParagraph()"><i class="bi bi-arrow-return-left"></i></button>
+                        <button type="button"  (click)="handleInsertOrderedList()"><i class="bi bi-list-ol"></i></button>
+                        <button type="button"  (click)="handleInsertUnOrderedList()"><i class="bi bi-list-ul"></i></button>
+                        <button type="button"  (click)="handleJustifyCenter()"><i class="bi bi-justify"></i></button>
+                        <button type="button"  (click)="handleJustifyLeft()"><i class="bi bi-justify-left"></i></button>
+                        <button type="button"  (click)="handleJustifyRight()"><i class="bi bi-justify-right"></i></button>
+
+                      </div>
+                      <div class="group-button">
+                        <button type="button"  (click)="handleSimulateTextAreaContent()"><i class="bi bi-arrow-up"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+<!--                <div class="form-floating col-md-12">
+                  <textarea  class="form-control h-100  {{(r['mission'].errors && r['mission'].touched)?'is-invalid':'is-valid'}}" formControlName="mission" type="text" ></textarea>
                   <label>Mission du poste</label>
                   <div class="{{(r['mission'].errors && r['mission'].touched)?'invalid-feedback':'valid-feedback'}}">
                     <small *ngIf="r['mission'].errors && r['mission'].touched" class="text-danger">{{handleGetErrorMessageFromChild('mission', r['mission'].errors)}}</small>
                   </div>
-                </div>
+                </div>-->
 
-                <div class="form-floating col-md-12">
-                  <textarea id="profile"  class="form-control h-100 profile {{(r['profile'].errors && r['profile'].touched)?'is-invalid':'is-valid'}}" formControlName="profile" type="text" ></textarea>
+<!--                <div class="form-floating col-md-12">
+                  <textarea  class="form-control h-100  {{(r['profile'].errors && r['profile'].touched)?'is-invalid':'is-valid'}}" formControlName="profile" type="text" ></textarea>
                   <label>Profil recherché</label>
                   <div class="{{(r['profile'].errors && r['profile'].touched)?'invalid-feedback':'valid-feedback'}}">
                     <small *ngIf="r['profile'].errors && r['profile'].touched" class="text-danger">{{handleGetErrorMessageFromChild('profile', r['profile'].errors)}}</small>
                   </div>
+                </div>-->
+                <div class="form-group">
+                  <label class="form-label">Profil recherché</label>
+                  <div class="writing1">
+                    <div  contenteditable="true" class="profile  bg-secondary"  autofocus spellcheck="false">
+
+                    </div>
+                    <div class="footer1">
+                      <div class="text-format">
+                        <button type="button" (click)="handleBold()"><i class="bi bi-type-bold"></i></button>
+                        <button type="button"   (click)="handleItalic()"><i class="bi bi-type-italic"></i></button>
+                        <button type="button"  (click)="handleUnderline()"><i class="bi bi-type-underline"></i></button>
+                        <button type="button" (click)="handleInsertParagraph()"><i class="bi bi-arrow-return-left"></i></button>
+                        <button type="button"  (click)="handleInsertOrderedList()"><i class="bi bi-list-ol"></i></button>
+                        <button type="button"  (click)="handleInsertUnOrderedList()"><i class="bi bi-list-ul"></i></button>
+                        <button type="button"  (click)="handleJustifyCenter()"><i class="bi bi-justify"></i></button>
+                        <button type="button"  (click)="handleJustifyLeft()"><i class="bi bi-justify-left"></i></button>
+                        <button type="button"  (click)="handleJustifyRight()"><i class="bi bi-justify-right"></i></button>
+
+                      </div>
+                      <div class="group-button">
+                        <button type="button"  (click)="handleSimulateTextAreaContent()"><i class="bi bi-arrow-up"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+  <!--              <div class="form-floating col-md-12">
+                  <textarea  class="form-control h-100" formControlName="candidatureInstruction" type="text" ></textarea>
+                  <label> Instructions de candidature</label>
+                </div>-->
+
+                <div class="form-group">
+                  <label class="form-label">Instructions de candidature</label>
+                  <div class="writing1">
+                    <div  contenteditable="true" class="candidatureInstruction  bg-secondary"  autofocus spellcheck="false">
+
+                    </div>
+                    <div class="footer1">
+                      <div class="text-format">
+                        <button type="button" (click)="handleBold()"><i class="bi bi-type-bold"></i></button>
+                        <button type="button"   (click)="handleItalic()"><i class="bi bi-type-italic"></i></button>
+                        <button type="button"  (click)="handleUnderline()"><i class="bi bi-type-underline"></i></button>
+                        <button type="button" (click)="handleInsertParagraph()"><i class="bi bi-arrow-return-left"></i></button>
+                        <button type="button"  (click)="handleInsertOrderedList()"><i class="bi bi-list-ol"></i></button>
+                        <button type="button"  (click)="handleInsertUnOrderedList()"><i class="bi bi-list-ul"></i></button>
+                        <button type="button"  (click)="handleJustifyCenter()"><i class="bi bi-justify"></i></button>
+                        <button type="button"  (click)="handleJustifyLeft()"><i class="bi bi-justify-left"></i></button>
+                        <button type="button"  (click)="handleJustifyRight()"><i class="bi bi-justify-right"></i></button>
+
+                      </div>
+                      <div class="group-button">
+                        <button type="button"  (click)="handleSimulateTextAreaContent()"><i class="bi bi-arrow-up"></i></button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="form-floating col-md-6">
-                  <textarea placeholder="séparez les compétences par une virgule. example : java, angular, css" aria-label="with textarea" class="form-control {{(r['skills'].errors && r['skills'].touched)?'is-invalid':'is-valid'}}" formControlName="skills" type="text" ></textarea>
+                  <input placeholder="séparez les compétences par une virgule. example : java, angular, css"  class="form-control {{(r['skills'].errors && r['skills'].touched)?'is-invalid':'is-valid'}}" formControlName="skills" type="text" >
                   <label> Compétences réquise</label>
                   <div class="{{(r['skills'].errors && r['skills'].touched)?'invalid-feedback':'valid-feedback'}}">
                     <small *ngIf="r['skills'].errors && r['skills'].touched" class="text-danger">{{handleGetErrorMessageFromChild('skills', r['skills'].errors)}}</small>
@@ -284,12 +393,6 @@
                     <small *ngIf="r['contract'].errors && r['contract'].touched" class="text-danger">{{handleGetErrorMessageFromChild('contract', r['contract'].errors)}}</small>
                   </div>
                 </div>
-
-                <div class="form-floating col-md-12">
-                  <textarea  class="form-control h-100" formControlName="candidatureInstruction" type="text" ></textarea>
-                  <label> Instructions de candidature</label>
-                </div>
-
 
                 <div class="col-md-6 form-floating">
                   <select class="form-select {{(r['workMode'].errors && r['workMode'].touched)?'is-invalid':'is-valid'}} " formControlName = "workMode"   required>
@@ -365,9 +468,57 @@
 
         </div>
 
-        <div class="modal-footer">
+        <div class="modal-footer" >
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <ngx-extended-pdf-viewer  [src]="'assets/pdf/CV_KENGNE_KONGNE_MAXIMILIEN.pdf'" ></ngx-extended-pdf-viewer>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+  </div>
+</ng-template>
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  pdf viewver
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ngx-extended-pdf-viewer  [src]="'assets/pdf/CV_KENGNE_KONGNE_MAXIMILIEN.pdf'"
+
+                                  [mobileFriendlyZoom]="'150%'"
+                                  [showSecondaryToolbarButton]="false"
+                                  [textLayer]="showWidgets"
+                                  [showHandToolButton]="showWidgets"
+                                  [showToolbar]="showWidgets"
+                                  [sidebarVisible]="showWidgets"
+        ></ngx-extended-pdf-viewer>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
       </div>
     </div>
   </div>
@@ -377,11 +528,46 @@
 
 
 
-<div class="text-end mb-3 spacer-right">
-  <span><a routerLink="/addTestimony" class="hide-underline-link btn btn-dark text-warning">Rédiger un avis</a> </span>
+<!--<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <p>Hello, World!</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+  </div>
+</ng-template>
 
-</div>
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
 
 
 
 
+
+ts
+
+@Component({
+	selector: 'ngbd-modal-config',
+	standalone: true,
+	templateUrl: './modal-config.html',
+	// add NgbModalConfig and NgbModal to the component providers
+	providers: [NgbModalConfig, NgbModal],
+})
+export class NgbdModalConfig {
+	constructor(
+		config: NgbModalConfig,
+		private modalService: NgbModal,
+	) {
+		// customize default values of modals used by this component tree
+		config.backdrop = 'static';
+		config.keyboard = false;
+	}
+
+	open(content) {
+		this.modalService.open(content);
+	}
+}
+-->

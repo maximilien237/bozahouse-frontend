@@ -5,7 +5,7 @@ export interface Offer {
   type?: string;
   title?: string;
   mission?: string;
-  skills?: string[];
+  skills?: string;
   needPeople?: number;
   domain?: string;
   address?: string;
@@ -22,13 +22,14 @@ export interface Offer {
   duration?: number;
   reference?: string;
   publishedAt?: Date;
+  createdAt?: Date;
   updatedAt?: Date;
   name?: string;
   fcb?: string;
   web?: string;
   linkedin?: string;
   contract?: string;
-
+  timeAgo?: string
   candidatureInstruction?: string;
   firstname?: string;
 

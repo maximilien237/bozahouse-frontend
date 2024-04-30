@@ -28,7 +28,7 @@ export class OfferService {
   }
 
   public getOffer(id : number): Observable<Offer> {
-    return this.http.get<Offer>(environment.backendAPI +path +id)
+    return this.http.get<Offer>(environment.backendAPI +path +"/"+id)
   }
 
   public saveOffer(offer: FormData):Observable<Offer>{
@@ -51,6 +51,12 @@ export class OfferService {
   public enableOffer(id: number){
 
     return this.http.delete(environment.backendAPI +path +"/enable/"+id);
+  }
+
+
+  // telecharger un document
+  public downloadDocument(id: number)  {
+    return this.http.get(environment.backendAPI  + "download/"+id, {responseType: 'blob'});
   }
 
 }
